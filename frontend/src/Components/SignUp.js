@@ -23,10 +23,10 @@ const SignUp = () => {
       localStorage.setItem("token", JSON.stringify(data.token));
       console.log(data);
     }
-    setUsername("")
-    setEmail("")
-    setPassword("")
-    setPhone("")
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPhone("");
   };
 
   return (
@@ -45,7 +45,7 @@ const SignUp = () => {
       <label>Email : </label>
       <input
         type="text"
-        placeholder="Enter email"
+        placeholder="Enter Email"
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
@@ -73,7 +73,9 @@ const SignUp = () => {
       />
       <div></div>
       <button onClick={clickHandler}>Sign Up</button>
-      <p>Already register ? <Link to={"/login"} >Login here</Link></p>
+      <p>
+        Already register ? <Link to={"/login"}>Login here</Link>
+      </p>
     </div>
   );
 };
