@@ -85,6 +85,24 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/google-check",async (req,res)=>{
+  let result = await guser.findOne(req.body)
+  if(result)
+  {
+    result = result.toObject();
+    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+      if (err) {
+        res.send("Token Expired or something went wrong");
+      } else {
+        res.send({ result, token });
+      }
+    });
+  }
+  else {
+    res.send(false)
+  }
+})
+
 app.post("/google-login", async (req, res) => {
   let data = new guser(req.body);
   let result = await data.save();

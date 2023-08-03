@@ -105,7 +105,7 @@ const Login = () => {
                     console.log(name, gmail);
 
                     let data = await fetch(
-                      "http://localhost:5000/google-login",
+                      "http://localhost:5000/google-check",
                       {
                         method: "post",
                         body: JSON.stringify({
@@ -118,17 +118,32 @@ const Login = () => {
                       }
                     );
 
+                    console.log("result :", data);
                     data = await data.json();
+                    if (!data) {
+                      data = await fetch("http://localhost:5000/google-login", {
+                        method: "post",
+                        body: JSON.stringify({
+                          username: name,
+                          email: gmail,
+                        }),
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                      });
+
+                      data = await data.json();
+                    }
                     console.log(data);
                     if (data.token) {
                       localStorage.setItem("user", JSON.stringify(data.result));
                       localStorage.setItem("token", JSON.stringify(data.token));
-                      navigate("/home")
+                      navigate("/home");
                     }
                   }}
                   onError={() => {
                     console.log("Login Failed");
-                    alert("something went wrong")
+                    alert("something went wrong");
                   }}
                 />
               </div>
