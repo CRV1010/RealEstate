@@ -3,10 +3,12 @@ import "./App.css";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import PrivateComponent from "./Components/PrivateComponent";
+import Navbar from "./Components/Navbar";
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateComponent />}>
