@@ -7,7 +7,13 @@ import jwt_decode from "jwt-decode";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/home");
+    }
+  });
   const clickHandler = async () => {
     let data = await fetch("http://localhost:5000/login", {
       method: "post",
@@ -22,7 +28,11 @@ const Login = () => {
     if (data.token) {
       localStorage.setItem("user", JSON.stringify(data.result));
       localStorage.setItem("token", JSON.stringify(data.token));
+      navigate("/home")
       console.log(data);
+    }
+    else{
+      alert("pls provide correct details")
     }
   };
 
@@ -113,10 +123,12 @@ const Login = () => {
                     if (data.token) {
                       localStorage.setItem("user", JSON.stringify(data.result));
                       localStorage.setItem("token", JSON.stringify(data.token));
+                      navigate("/home")
                     }
                   }}
                   onError={() => {
                     console.log("Login Failed");
+                    alert("something went wrong")
                   }}
                 />
               </div>

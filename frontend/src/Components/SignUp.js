@@ -7,6 +7,13 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/home");
+    }
+  });
   const clickHandler = async () => {
     let data = await fetch("http://localhost:5000/signup", {
       method: "post",
@@ -21,12 +28,14 @@ const SignUp = () => {
     if (data.token) {
       localStorage.setItem("user", JSON.stringify(data.result));
       localStorage.setItem("token", JSON.stringify(data.token));
+      navigate("/home")
       console.log(data);
     }
     setUsername("");
     setEmail("");
     setPassword("");
     setPhone("");
+    
   };
 
   return (
