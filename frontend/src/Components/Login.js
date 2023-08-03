@@ -28,9 +28,9 @@ const Login = () => {
 
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+      <div className="container px-5  md:py-24 sm:py-15 mx-auto flex flex-wrap items-center">
         <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md: mx-auto w-full mt-10 md:mt-0">
-          <h2 className="text-gray-900 text-lg font-medium title-font mb-5 text-center">
+          <h2 className="text-gray-900 text-lg font-medium  text-2xl title-font mb-5 text-center">
             Login
           </h2>
 
@@ -81,32 +81,45 @@ const Login = () => {
           {/*  */}
           <div className="my-5">
             <GoogleOAuthProvider clientId="851512856123-qb0a10uhcbtoemkhq7ma6i34lr79s0r4.apps.googleusercontent.com">
-              <GoogleLogin
-                onSuccess={async (credentialResponse) => {
-                  const decode = jwt_decode(credentialResponse.credential);
-                  let name = decode.name;
-                  let gmail = decode.email;
-                  console.log(name, gmail);
+              <p className="my-5 flex items-center justify-between">
+                <span className=" border-b-2  w-32  text-gray-950 bg-gray-950"></span>
+                OR
+                <span className=" border-b-2 w-32 text-gray-950 bg-gray-950"></span>
+              </p>
+              <div className="mx-auto  text-lg">
+                <GoogleLogin
+                  onSuccess={async (credentialResponse) => {
+                    const decode = jwt_decode(credentialResponse.credential);
+                    let name = decode.name;
+                    let gmail = decode.email;
+                    console.log(name, gmail);
 
-                  let data = await fetch("http://localhost:5000/google-login", {
-                    method: "post",
-                    body: JSON.stringify({ username: name, email: gmail }),
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                  });
+                    let data = await fetch(
+                      "http://localhost:5000/google-login",
+                      {
+                        method: "post",
+                        body: JSON.stringify({
+                          username: name,
+                          email: gmail,
+                        }),
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                      }
+                    );
 
-                  data = await data.json();
-                  console.log(data);
-                  if (data.token) {
-                    localStorage.setItem("user", JSON.stringify(data.result));
-                    localStorage.setItem("token", JSON.stringify(data.token));
-                  }
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
+                    data = await data.json();
+                    console.log(data);
+                    if (data.token) {
+                      localStorage.setItem("user", JSON.stringify(data.result));
+                      localStorage.setItem("token", JSON.stringify(data.token));
+                    }
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+              </div>
             </GoogleOAuthProvider>
           </div>
         </div>
