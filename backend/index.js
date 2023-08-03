@@ -25,9 +25,7 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post("/signup", async (req, res) => {
-  // let u = req.body.username;
-  // let e = req.body.email;
-  // let ph = req.body.phone;
+  
   const salt = await bcrypt.genSalt(10);
   let pa = await bcrypt.hash(req.body.password, salt);
   req.body.password = pa;
@@ -64,12 +62,7 @@ app.post("/login", async (req, res) => {
     em = req.body.email;
     let result = await user.findOne({ email: em });
 
-    // if (!result) {
-    //   return { status: "error", error: "user not found" };
-    // }
-
-    // let result = confirmUser.select("-password");
-    // let result = await user.findOne(req.body).select("-password");
+    
     if (result) {
       var authUser = await bcrypt.compare(req.body.password, result.password);
       console.log(authUser);

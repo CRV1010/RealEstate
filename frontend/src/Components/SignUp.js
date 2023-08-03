@@ -30,51 +30,7 @@ const SignUp = () => {
   };
 
   return (
-    // <div>
-    //   <h1>Sign Up</h1>
-    //   <label>Username : </label>
-    //   <input
-    //     type="text"
-    //     placeholder="Enter Username"
-    //     value={username}
-    //     onChange={(e) => {
-    //       setUsername(e.target.value);
-    //     }}
-    //   />
-    //   <div></div>
-    //   <label className="  text-red-500">Email : </label>
-    //   <input
-    //     type="text"
-    //     placeholder="Enter email"
-    //     value={email}
-    //     onChange={(e) => {
-    //       setEmail(e.target.value);
-    //     }}
-    //   />
-    //   <div></div>
-    //   <label>Phone No. : </label>
-    //   <input
-    //     type="Number"
-    //     placeholder="Enter phone no."
-    //     value={phone}
-    //     onChange={(e) => {
-    //       setPhone(e.target.value);
-    //     }}
-    //   />
-    //   <div></div>
-    //   <label>Password : </label>
-    //   <input
-    //     type="password"
-    //     placeholder="Enter Password"
-    //     value={password}
-    //     onChange={(e) => {
-    //       setPassword(e.target.value);
-    //     }}
-    //   />
-    //   <div></div>
-    //   <button onClick={clickHandler}>Sign Up</button>
-    //   <p>Already register ? <Link to={"/login"} >Login here</Link></p>
-    // </div>
+   
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
         {/* <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
