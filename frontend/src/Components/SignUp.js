@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (auth) {
@@ -31,14 +33,13 @@ const SignUp = () => {
     if (data.token) {
       localStorage.setItem("user", JSON.stringify(data.result));
       localStorage.setItem("token", JSON.stringify(data.token));
-      navigate("/home")
+      navigate("/home");
       console.log(data);
     }
     setUsername("");
     setEmail("");
     setPassword("");
     setPhone("");
-    
   };
 
   return (
@@ -96,6 +97,7 @@ const SignUp = () => {
               }}
             />
           </div>
+
           <div className="relative mb-4">
             <label for="password" className="leading-7 text-sm text-gray-600">
               Password
@@ -117,13 +119,14 @@ const SignUp = () => {
           >
             Sign Up
           </button>
+
           <p className="mt-5 inline-flex  justify-center">
             Already register ?{" "}
             <Link className="text-indigo-500  px-3" to={"/login"}>
               Login here
             </Link>
           </p>
-          {/* <a href={"login"} >Learn More</a> */}
+
           <div className="my-5">
             <GoogleOAuthProvider clientId="851512856123-qb0a10uhcbtoemkhq7ma6i34lr79s0r4.apps.googleusercontent.com">
               <p className="my-5 flex items-center justify-between">
@@ -153,12 +156,10 @@ const SignUp = () => {
                       }
                     );
 
-                    console.log("result :",data)
-                      data = await data.json()
-                    if(!data){
-                    data = await fetch(
-                      "http://localhost:5000/google-login",
-                      {
+                    console.log("result :", data);
+                    data = await data.json();
+                    if (!data) {
+                      data = await fetch("http://localhost:5000/google-login", {
                         method: "post",
                         body: JSON.stringify({
                           username: name,
@@ -167,11 +168,9 @@ const SignUp = () => {
                         headers: {
                           "Content-Type": "application/json",
                         },
-                      }
-                    );
+                      });
 
-
-                    data = await data.json();
+                      data = await data.json();
                     }
                     console.log(data);
                     if (data.token) {
@@ -180,12 +179,10 @@ const SignUp = () => {
                       navigate("/home");
                     }
                   }}
-                
                   onError={() => {
                     console.log("Login Failed");
                     alert("something went wrong");
                   }}
-                
                 />
               </div>
             </GoogleOAuthProvider>
