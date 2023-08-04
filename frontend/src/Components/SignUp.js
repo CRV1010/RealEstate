@@ -13,6 +13,15 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (auth) {
@@ -20,26 +29,30 @@ const SignUp = () => {
     }
   });
   const clickHandler = async () => {
-    let data = await fetch("http://localhost:5000/signup", {
-      method: "post",
-      body: JSON.stringify({ username, email, phone, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (username !== "" && email !== "" && phone !== "" && password !== "") {
+      let data = await fetch("http://localhost:5000/signup", {
+        method: "post",
+        body: JSON.stringify({ username, email, phone, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    data = await data.json();
-    console.log(data);
-    if (data.token) {
-      localStorage.setItem("user", JSON.stringify(data.result));
-      localStorage.setItem("token", JSON.stringify(data.token));
-      navigate("/home");
+      data = await data.json();
       console.log(data);
+      if (data.token) {
+        localStorage.setItem("user", JSON.stringify(data.result));
+        localStorage.setItem("token", JSON.stringify(data.token));
+        navigate("/home");
+        console.log(data);
+      }
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setPhone("");
+    } else {
+      alert("you can`t keep an empty field");
     }
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setPhone("");
   };
 
   return (
@@ -52,74 +65,109 @@ const SignUp = () => {
           <h2 className="text-gray-900 text-lg font-medium title-font text-2xl mb-5 text-center">
             Sign Up
           </h2>
-          <div className="relative mb-4">
-            <label for="name" className="leading-7 text-sm text-gray-600">
-              Username
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-            />
-          </div>
-          <div className="relative mb-4">
-            <label for="email" className="leading-7 text-sm text-gray-600">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-          </div>
-          <div className="relative mb-4">
-            <label for="phone" className="leading-7 text-sm text-gray-600">
-              Phone No.
-            </label>
-            <input
-              type="number"
-              id="phone"
-              name="phone"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-            />
-          </div>
+          <form onSubmit={handleSubmit(clickHandler)}>
+            <div className="relative mb-4">
+              <label for="name" className="leading-7 text-sm text-gray-600">
+                Username
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                value={username}
+                {...register("name", { required: "Username is required" })}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+              />
+              <p className="text-sm text-red-500">{errors.name?.message}</p>
+            </div>
+            <div className="relative mb-4">
+              <label for="email" className="leading-7 text-sm text-gray-600">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                value={email}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                    message: "Email is not valid email",
+                  },
+                })}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <p className="text-sm text-red-500">{errors.email?.message}</p>
+            </div>
+            <div className="relative mb-4">
+              <label for="phone" className="leading-7 text-sm text-gray-600">
+                Phone No.
+              </label>
+              <input
+                type="number"
+                id="phone"
+                name="phone"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                value={phone}
+                {...register("phone", {
+                  required: "Phone number is required",
+                  pattern: {
+                    value: /^[6-9]{1}[0-9]{9}$/,
+                    message: "Phone number is not valid",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "Phone no. cannot exceed more than 10 digit",
+                  },
+                })}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+              />
+              <p className="text-sm text-red-500">{errors.phone?.message}</p>
+            </div>
 
-          <div className="relative mb-4">
-            <label for="password" className="leading-7 text-sm text-gray-600">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </div>
-          <button
-            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            onClick={clickHandler}
-          >
-            Sign Up
-          </button>
-
+            <div className="relative mb-4">
+              <label for="password" className="leading-7 text-sm text-gray-600">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                value={password}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 4,
+                    message: "Password must be more than 4 characters",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "Password cannot exceed more than 10 characters",
+                  },
+                })}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <p class="text-sm text-red-500">{errors.password?.message}</p>
+            </div>
+            <button
+              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              // onClick={clickHandler}
+            >
+              Sign Up
+            </button>
+          </form>
           <p className="mt-5 inline-flex  justify-center">
             Already register ?{" "}
             <Link className="text-indigo-500  px-3" to={"/login"}>

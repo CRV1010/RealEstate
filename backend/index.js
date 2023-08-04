@@ -96,7 +96,7 @@ app.post("/signup", async (req, res) => {
 });
 
 app.put("/update_password/:email", async (req, res) => {
-  console.log(req.params.email)
+  console.log(req.params.email);
   const salt = await bcrypt.genSalt(10);
   let pa = await bcrypt.hash(req.body.password, salt);
   // req.body.password = pa

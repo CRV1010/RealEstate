@@ -3,11 +3,20 @@ import { useNavigate, Link } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  
+
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (auth) {
@@ -15,23 +24,28 @@ const Login = () => {
     }
   });
   const clickHandler = async () => {
-    let data = await fetch("http://localhost:5000/login", {
-      method: "post",
-      body: JSON.stringify({ email, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if(email!=="" && password!==""){
+      let data = await fetch("http://localhost:5000/login", {
+        method: "post",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    data = await data.json();
-    console.log(data);
-    if (data.token) {
-      localStorage.setItem("user", JSON.stringify(data.result));
-      localStorage.setItem("token", JSON.stringify(data.token));
-      navigate("/home");
+      data = await data.json();
       console.log(data);
-    } else {
-      alert("pls provide correct details");
+      if (data.token) {
+        localStorage.setItem("user", JSON.stringify(data.result));
+        localStorage.setItem("token", JSON.stringify(data.token));
+        navigate("/home");
+        console.log(data);
+      } else {
+        alert("pls provide correct details");
+      }
+    }
+    else{
+      alert("can`t left field empty")
     }
   };
 
@@ -42,43 +56,64 @@ const Login = () => {
           <h2 className="text-gray-900 text-lg font-medium  text-2xl title-font mb-5 text-center">
             Login
           </h2>
-
-          <div className="relative mb-4">
-            <label for="email" className="leading-7 text-sm text-gray-600">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-          </div>
-          <div className="relative mb-4">
-            <label for="password" className="leading-7 text-sm text-gray-600">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </div>
-          <button
-            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            onClick={clickHandler}
-          >
-            Login
-          </button>
+          <form onSubmit={handleSubmit(clickHandler)}>
+            <div className="relative mb-4">
+              <label for="email" className="leading-7 text-sm text-gray-600">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                value={email}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    message: "Email is not valid email",
+                  },
+                })}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <p className="text-sm text-red-500">{errors.email?.message}</p>
+            </div>
+            <div className="relative mb-4">
+              <label for="password" className="leading-7 text-sm text-gray-600">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                value={password}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 4,
+                    message: "Password must be more than 4 characters",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "Password cannot exceed more than 10 characters",
+                  },
+                })}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <p class="text-sm text-red-500">{errors.password?.message}</p>
+            </div>
+            <button
+              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              // onClick={clickHandler}
+            >
+              Login
+            </button>
+          </form>
           <p className="mt-3 inline-flex items-center">
             <Link className="text-indigo-500  px-3" to={"/forgotpass/" + email}>
               Forgot Password ?
