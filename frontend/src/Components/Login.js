@@ -28,11 +28,10 @@ const Login = () => {
     if (data.token) {
       localStorage.setItem("user", JSON.stringify(data.result));
       localStorage.setItem("token", JSON.stringify(data.token));
-      navigate("/home")
+      navigate("/home");
       console.log(data);
-    }
-    else{
-      alert("pls provide correct details")
+    } else {
+      alert("pls provide correct details");
     }
   };
 
@@ -80,6 +79,11 @@ const Login = () => {
           >
             Login
           </button>
+          <p className="mt-3 inline-flex items-center">
+            <Link className="text-indigo-500  px-3" to={"/forgotpass/" + email}>
+              Forgot Password ?
+            </Link>
+          </p>
           <p className="mt-3 inline-flex items-center">
             {" "}
             Don`t have account?{" "}

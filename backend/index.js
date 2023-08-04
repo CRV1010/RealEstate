@@ -6,6 +6,19 @@ const jwt = require("jsonwebtoken");
 const guser = require("./db/googleUser");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
+const otpGenerator = require("otp-generator");
+
+let global_otp;
+
+const generateOTP = () => {
+  const otp = otpGenerator.generate(6, {
+    upperCaseAlphabets: false,
+    specialChars: false,
+    lowerCaseAlphabets: false,
+  });
+
+  return otp;
+};
 
 const jwtKey = "luis_martin";
 const app = express();
@@ -24,8 +37,33 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+app.post("/otp_auth", async (req, res) => {
+  let result = await user.findOne(req.body);
+  if (result) {
+    global_otp = generateOTP();
+
+    var mailOptions = {
+      from: "sscrpmsu@gmail.com",
+      to: req.body.email,
+      subject: "Real Estate OTP",
+      text: `Your one time otp is ${global_otp} valid for 5 minutes`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email Sent Succesfully");
+      }
+    });
+
+    res.send(global_otp);
+  } else {
+    res.send(false);
+  }
+});
+
 app.post("/signup", async (req, res) => {
-  
   const salt = await bcrypt.genSalt(10);
   let pa = await bcrypt.hash(req.body.password, salt);
   req.body.password = pa;
@@ -57,17 +95,35 @@ app.post("/signup", async (req, res) => {
   });
 });
 
+app.put("/update_password/:email", async (req, res) => {
+  console.log(req.params.email)
+  const salt = await bcrypt.genSalt(10);
+  let pa = await bcrypt.hash(req.body.password, salt);
+  // req.body.password = pa
+  let result = await user.updateOne(
+    { email: req.params.email },
+    {
+      $set: { password: pa },
+    }
+  );
+  console.log(req.body.password);
+  if (result) {
+    res.send(result);
+  } else {
+    res.send(false);
+  }
+});
+
 app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
     em = req.body.email;
     let result = await user.findOne({ email: em });
 
-    
     if (result) {
       var authUser = await bcrypt.compare(req.body.password, result.password);
       console.log(authUser);
       if (!authUser) {
-        res.send({result : "Wrong Password"});
+        res.send({ result: "Wrong Password" });
       }
       result.password = undefined;
       jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
@@ -85,10 +141,9 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/google-check",async (req,res)=>{
-  let result = await guser.findOne(req.body)
-  if(result)
-  {
+app.post("/google-check", async (req, res) => {
+  let result = await guser.findOne(req.body);
+  if (result) {
     result = result.toObject();
     jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
       if (err) {
@@ -97,11 +152,10 @@ app.post("/google-check",async (req,res)=>{
         res.send({ result, token });
       }
     });
+  } else {
+    res.send(false);
   }
-  else {
-    res.send(false)
-  }
-})
+});
 
 app.post("/google-login", async (req, res) => {
   let data = new guser(req.body);
