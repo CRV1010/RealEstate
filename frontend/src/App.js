@@ -7,6 +7,7 @@ import Navbar from "./Components/Navbar";
 import ForgotPassword from "./Components/ForgotPassword";
 import ConfirmOTP from "./Components/ConfirmOTP";
 import ChangePassword from "./Components/ChangePassword";
+import ChatAdmin from "./Components/ChatAdmin";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
+            <Route path="/chatadmin" element={<ChatAdmin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
           </Route>

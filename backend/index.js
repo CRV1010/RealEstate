@@ -3,10 +3,17 @@ require("./db/config");
 const cors = require("cors");
 const user = require("./db/users");
 const jwt = require("jsonwebtoken");
-const guser = require("./db/googleUser");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const otpGenerator = require("otp-generator");
+const nocache = require("nocache");
+const conversation = require("./db/conversation");
+const messages = require("./db/messages");
+const io = require("socket.io")(5050, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
 
 let global_otp;
 
@@ -25,6 +32,59 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(nocache());
+
+// socket io
+let userslist = [];
+io.on("connection", (socket) => {
+  console.log("User Connected", socket.id);
+
+  socket.on("addUser", userId => {
+    console.log("usd",userId,userslist)
+    const userExists = userslist.find((userli) => userli.userId === userId);
+    console.log("exists:",userExists)
+
+    if (!userExists ) {
+      const userli = { userId, socketId: socket.id };
+      console.log(userli)
+      userslist.push(userli);
+      io.emit("getUsers", userslist);
+    }
+  });
+
+  socket.on(
+    "sendMessages",
+    async ({ senderId, conversationId, receiverId, message }) => {
+      const receiver = userslist.find((user) => user.userId === receiverId);
+      const sender = userslist.find((user) => user.userId === senderId);
+      const senderUser = await user.findById( senderId );
+      console.log(receiver);
+      try {
+        if (receiver) {
+          console.log("chirag bro")
+          io.to(receiver.socketId).to(sender.socketId).emit("getMessage", {
+              senderId,
+              conversationId,
+              message,
+              receiverId,
+              suser: {
+                id: senderUser._id,
+                username: senderUser.username,
+                email: senderUser.email,
+              },
+            });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+
+  socket.on("disconnect", () => {
+    userslist = userslist.filter(userli => userli.socketId !== socket.id);
+    io.emit("getUsers", userslist);
+  });
+});
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -64,6 +124,7 @@ app.post("/otp_auth", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
+  console.log("in singnup")
   const salt = await bcrypt.genSalt(10);
   let pa = await bcrypt.hash(req.body.password, salt);
   req.body.password = pa;
@@ -118,7 +179,7 @@ app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
     em = req.body.email;
     let result = await user.findOne({ email: em });
-
+    console.log(result)
     if (result) {
       var authUser = await bcrypt.compare(req.body.password, result.password);
       console.log(authUser);
@@ -142,8 +203,11 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/google-check", async (req, res) => {
-  let result = await guser.findOne(req.body);
+  let mail = req.body.email;
+  let result = await user.findOne({ email: mail });
+  console.log("gc",result)
   if (result) {
+    console.log("hi")
     result = result.toObject();
     jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
       if (err) {
@@ -158,7 +222,7 @@ app.post("/google-check", async (req, res) => {
 });
 
 app.post("/google-login", async (req, res) => {
-  let data = new guser(req.body);
+  let data = new user(req.body);
   let result = await data.save();
   result = result.toObject();
   jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
@@ -168,6 +232,110 @@ app.post("/google-login", async (req, res) => {
       res.send({ result, token });
     }
   });
+});
+
+app.post("/conversations", async (req, res) => {
+  try {
+    let { senderId, receiverId } = req.body;
+    console.log("ids",senderId,receiverId)
+    const checkAlready = await conversation.find({
+      members: { $all: [senderId,receiverId] }
+    })
+    console.log("ca",checkAlready)
+    if(checkAlready.length===0 || !checkAlready){
+      const newConversation = new conversation({
+        members: [senderId, receiverId],
+      });
+      let result = await newConversation.save();
+      res.send(result);
+    }
+    else{
+      res.send(false)
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/conversations/:userId", async (req, res) => {
+  try {
+    let userId = req.params.userId;
+    const conversations = await conversation.find({
+      members: { $in: [userId] },
+    });
+    const conversationData = Promise.all(
+      conversations.map(async (talk) => {
+        const receiverId = talk.members.find((member) => member !== userId);
+        const userTalked = await user.findById(receiverId);
+
+        return {
+          users: {
+            id: userTalked._id,
+            username: userTalked.username,
+            email: userTalked.email,
+          },
+          conversationId: talk._id,
+        };
+      })
+    );
+    // let conversationUserData = await conversationData;
+    // console.log(await conversationData);
+    res.send(await conversationData);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/messages", async (req, res) => {
+  try {
+    // console.log("body:", req.body);
+    const { conversationId, senderId, message, receiverId = "" } = req.body;
+    if (!senderId || !message) {
+      console.log("sid", senderId);
+      res.send("out all details");
+    }
+    if (!conversationId && receiverId) {
+      const newConversation = new conversation({
+        members: [senderId, receiverId],
+      });
+      await newConversation.save();
+    } else if (!conversationId && !receiverId) {
+      console.log("cid", conversationId, receiverId);
+      res.send("fill all details");
+    }
+    const newMessage = new messages({ conversationId, senderId, message });
+    await newMessage.save();
+    res.status(200).send({ res: "Message sent Successfully" });
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
+app.get("/messages/:conversationId", async (req, res) => {
+  try {
+    let conversationId = req.params.conversationId;
+    const msg = await messages.find({ conversationId });
+    if (!msg) {
+      res.send([]);
+    } else {
+      const msgData = Promise.all(
+        msg.map(async (msgs) => {
+          const usersdata = await user.findById(msgs.senderId);
+          return {
+            users: {
+              id: usersdata._id,
+              username: usersdata.username,
+              email: usersdata.email,
+            },
+            message: msgs.message,
+          };
+        })
+      );
+      res.send(await msgData);
+    }
+  } catch (error) {
+    console.log("Error", error);
+  }
 });
 
 function verfiyToken(req, res, next) {

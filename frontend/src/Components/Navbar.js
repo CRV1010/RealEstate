@@ -26,6 +26,7 @@ const Navbar = () => {
           <Link className="mr-5 hover:text-gray-900 font-semibold" to="/home">
             Home
           </Link>
+
           <Link className="mr-5 hover:text-gray-900 font-semibold" to="/about">
             About Us
           </Link>
@@ -37,13 +38,22 @@ const Navbar = () => {
           </Link>
           {user ? (
             // <Link class="mr-5 hover:text-gray-900 font-semibold" to="/login">Logout</Link>
-            <Link
-              className="mr-5 hover:text-gray-900 font-semibold"
-              onClick={logout}
-              to="/signup"
-            >
-              Logout({JSON.parse(user).username})
-            </Link>
+            <span>
+              {" "}
+              <Link
+                className="mr-5 hover:text-gray-900 font-semibold"
+                to="/chatadmin"
+              >
+                Chat with Admin
+              </Link>
+              <Link
+                className="mr-5 hover:text-gray-900 font-semibold"
+                onClick={logout}
+                to="/signup"
+              >
+                Logout({JSON.parse(user).username})
+              </Link>
+            </span>
           ) : (
             <span>
               <Link
