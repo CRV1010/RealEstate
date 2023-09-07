@@ -30,14 +30,27 @@ const SignUp = () => {
   });
   const clickHandler = async () => {
     if (username !== "" && email !== "" && phone !== "" && password !== "") {
-      let data = await fetch("http://localhost:5000/signup", {
+      let data = await fetch("http://localhost:5000/google-check", {
         method: "post",
-        body: JSON.stringify({ username, email, phone, password }),
+        body: JSON.stringify({
+          username,
+          email,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
       });
-
+      data = await data.json();
+      if(!data){
+        console.log("inside data")
+        data = await fetch("http://localhost:5000/signup", {
+          method: "post",
+          body: JSON.stringify({ username, email, phone, password }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
       data = await data.json();
       console.log(data);
       if (data.token) {
