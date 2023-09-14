@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
+import ContactUs from "./Components/ContactUs";
 import PrivateComponent from "./Components/PrivateComponent";
 import Navbar from "./Components/Navbar";
 import ForgotPassword from "./Components/ForgotPassword";
@@ -18,8 +19,9 @@ function App() {
         <Routes>
           <Route element={<PrivateComponent />}>
             <Route path="/home" element={<h1>Home Page</h1>} />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<h1>Contact Page</h1>} />
+            
             <Route path="/confirmotp" element={<ConfirmOTP />} />
             <Route path="/changepass" element={<ChangePassword />} />
 
