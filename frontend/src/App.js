@@ -9,6 +9,7 @@ import ForgotPassword from "./Components/ForgotPassword";
 import ConfirmOTP from "./Components/ConfirmOTP";
 import ChangePassword from "./Components/ChangePassword";
 import ChatAdmin from "./Components/ChatAdmin";
+import About from "./Components/About"
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <Routes>
           <Route element={<PrivateComponent />}>
             <Route path="/home" element={<h1>Home Page</h1>} />
-            <Route path="/about" element={<h1>About Page</h1>} />
-            <Route path="/contact" element={<ContactUs/>} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/about" element={<About />} />
+            
             <Route path="/confirmotp" element={<ConfirmOTP />} />
             <Route path="/changepass" element={<ChangePassword />} />
 
