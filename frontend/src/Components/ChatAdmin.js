@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import avtar from "../Images/avtar.png";
 import { io } from "socket.io-client";
 
@@ -7,7 +7,7 @@ const ChatAdmin = () => {
   // console.log(user)
   // const uid = user._id
   const createConvo = async () => {
-    if ((user)) {
+    if (user) {
       if (user?._id !== "64f812e20714d7288931039d") {
         let res = await fetch("http://localhost:5000/conversations", {
           method: "POST",
@@ -20,9 +20,8 @@ const ChatAdmin = () => {
           },
         });
         let result = await res.json();
-        console.log(result)
+        console.log(result);
         if (result) {
-          
           console.log("Conversation Created");
           const res = await fetch("http://localhost:5000/messages", {
             method: "POST",
@@ -40,7 +39,7 @@ const ChatAdmin = () => {
         }
       }
     }
-    return ()=>{}
+    return () => {};
   };
   useEffect(() => {
     createConvo();
@@ -53,12 +52,18 @@ const ChatAdmin = () => {
   const [receiver, setReceiver] = useState("");
   const [cid, setCid] = useState("");
   const [socket, setSocket] = useState(null);
+  const messageRef = useRef(null);
+
   console.log(messages, "msgs");
+
   useEffect(() => {
     setSocket(io("http://localhost:5050"));
-    
   }, []);
-  
+
+  useEffect(() => {
+    messageRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages?.messages]);
+
   useEffect(() => {
     console.log("uid:", user?._id);
     socket?.emit("addUser", user?._id);
@@ -160,11 +165,9 @@ const ChatAdmin = () => {
 
   const [conversations, setConversations] = useState([]);
 
-  
-
   return (
     <div className="w-screen flex">
-      <div className="w-[25%] border border-black h-screen  ">
+      <div className="w-[25%] border border-black h-screen  overflow-scroll ">
         <div className="flex justify-center my-8">
           <img src={avtar} width={50} height={50} />
           <div className="ml-4">
@@ -172,7 +175,7 @@ const ChatAdmin = () => {
           </div>
         </div>
         <hr />
-        <div className="ml-10">
+        <div className="ml-10 ">
           <div>Messages</div>
           <div>
             {conversations.length > 0 ? (
@@ -180,7 +183,7 @@ const ChatAdmin = () => {
                 // console.log(users, conversationId);
                 return (
                   <div
-                    className="flex  item-center py-8 border-b border-b-gray-300 cursor-pointer"
+                    className="flex  item-center py-8 border-b border-b-gray-300  cursor-pointer"
                     onClick={() => {
                       fetchMessage(conversationId, users);
                     }}
@@ -219,15 +222,21 @@ const ChatAdmin = () => {
                 // if(users.id===undefined) console.log("uni chirag")
                 if (users?.id === userId?._id) {
                   return (
-                    <div className="max-w-[40%] bg-green-200 rounded-b-xl rounded-tr-xl py-4 ">
-                      {message}
-                    </div>
+                    <>
+                      <div className="max-w-[40%] bg-green-200 rounded-b-xl rounded-tr-xl py-4 ">
+                        {message}
+                      </div>
+                      <div ref={messageRef}></div>
+                    </>
                   );
                 } else {
                   return (
-                    <div className="max-w-[40%] bg-blue-200 rounded-b-xl rounded-tr-xl py-4 ml-auto">
-                      {message}
-                    </div>
+                    <>
+                      <div className="max-w-[40%] bg-blue-200 rounded-b-xl rounded-tr-xl py-4 ml-auto">
+                        {message}
+                      </div>
+                      <div ref={messageRef}></div>
+                    </>
                   );
                 }
               })

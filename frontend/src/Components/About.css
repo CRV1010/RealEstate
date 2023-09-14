@@ -1,0 +1,202 @@
+#poster {
+    background: url('./../Images/Background_About.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    opacity: 1;
+    margin: 0;
+}
+
+#poster-welcome {
+    text-align: center;
+}
+
+#poster-heading {
+    color: rgb(228, 121, 7);
+    text-transform: uppercase;
+    font-size: 3em;
+    font-family: 'Courier New', monospace;
+}
+
+#poster-text {
+    color: rgb(248, 130, 3);
+    font-size: 25px;
+    font-family: monospace;
+    width: 75vw;
+}
+
+#focus {
+    margin: 8% 0%;
+    font-size: 3em;
+    font-family: monospace;
+}
+
+#focusContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+}
+
+#focusImg {
+    height: 25rem;
+}
+
+#focusImg:hover {
+    box-shadow: 0px 0px 16px 6px rgb(50, 124, 173);
+}
+
+#focusText {
+    width: 30vw;
+    font-size: 20px;
+    margin-left: 20em;
+    margin-right: 3em;
+}
+
+#vmSection {
+    background-color: rgb(121, 186, 239);
+    padding-bottom: 3%;
+}
+
+#vm {
+    margin: 4% 0%;
+    font-size: 3em;
+    color: white;
+    padding-top: 4%;
+    font-family: monospace;
+}
+
+.cards {
+    margin-left: 20%;
+    margin-right: 0%;
+}
+
+.card-text {
+    font-size: 18px;
+}
+
+#card {
+    padding: 5%;
+}
+
+#card:hover {
+    background-color: lightgray;
+    transition: all 0.5s ease-in;
+}
+
+#icon {
+    font-size: 3em;
+}
+
+#icon:hover {
+    color: blue;
+}
+
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+#teamSection{
+    margin-bottom: 5%;
+}
+
+#teamContainer,
+#teamContainer::after,
+#teamContainer::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#teamContainer{
+    font-size: 63%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#teamFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#team {
+    margin: 5%;
+    text-align: center;
+    font-family: monospace;
+    font-size: 3em;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+.container .box {
+    position: relative;
+    width: 20rem;
+    height: 20rem;
+    margin: 3rem;
+}
+
+.container .box:hover .imgBox {
+    transform: translate(-2.8rem, -2.8rem);
+}
+
+.container .box:hover .content {
+    transform: translate(2.8rem, 2.8rem);
+}
+
+.imgBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: all 0.5s ease-in-out;
+}
+
+.imgBox img {
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    resize: both;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    z-index: 1;
+    align-items: flex-end;
+    text-align: center;
+    transition: 0.5s ease-in-out;
+}
+
+.content h2 {
+    display: block;
+    font-size: 1.5rem;
+    color: #111;
+    font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.content span {
+    color: #555;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
