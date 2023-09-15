@@ -59,11 +59,11 @@
 
 #vmSection {
     background-color: rgb(121, 186, 239);
-    padding-bottom: 3%;
+    padding-bottom: 6%;
 }
 
 #vm {
-    margin: 4% 0%;
+    margin: 4% 0% 4% 0%;
     font-size: 3em;
     color: white;
     padding-top: 4%;
@@ -80,7 +80,7 @@
 }
 
 #card {
-    padding: 5%;
+    padding: 10%;
 }
 
 #card:hover {
@@ -134,7 +134,7 @@
 }
 
 body {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 .container .box {

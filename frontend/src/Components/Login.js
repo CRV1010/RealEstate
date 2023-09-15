@@ -22,7 +22,7 @@ const Login = () => {
     if (auth) {
       navigate("/home");
     }
-  });
+  },[]);
   const clickHandler = async () => {
     if(email!=="" && password!==""){
       let data = await fetch("http://localhost:5000/login", {
