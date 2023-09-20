@@ -3,10 +3,10 @@ import avtar from "../Images/avtar.png";
 import { io } from "socket.io-client";
 
 const ChatAdmin = () => {
+  
   let user = JSON.parse(localStorage.getItem("user"));
-  // console.log(user)
-  // const uid = user._id
-  const createConvo = async () => {
+
+  const createConvo = async () => { 
     if (user) {
       if (user?._id !== "64f812e20714d7288931039d") {
         let res = await fetch("http://localhost:5000/conversations", {
@@ -23,6 +23,9 @@ const ChatAdmin = () => {
         console.log(result);
         if (result) {
           console.log("Conversation Created");
+          
+          window.location.reload(false);
+          
           const res = await fetch("http://localhost:5000/messages", {
             method: "POST",
             body: JSON.stringify({
@@ -41,10 +44,14 @@ const ChatAdmin = () => {
     }
     return () => {};
   };
+  
+
   useEffect(() => {
     createConvo();
-    return () => {};
+    
+    // return () => {};
   }, []);
+  
 
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState({});
@@ -53,11 +60,12 @@ const ChatAdmin = () => {
   const [cid, setCid] = useState("");
   const [socket, setSocket] = useState(null);
   const messageRef = useRef(null);
-
+  
   console.log(messages, "msgs");
 
   useEffect(() => {
     setSocket(io("http://localhost:5050"));
+    // window.location.reload(false);
   }, []);
 
   useEffect(() => {
@@ -76,7 +84,7 @@ const ChatAdmin = () => {
       console.log("vaghela");
       setMessages(
         (
-          prev // yaha kuch karna padega
+          prev 
         ) => ({
           ...prev,
           messages: [
@@ -89,24 +97,23 @@ const ChatAdmin = () => {
     });
     return () => {};
   }, [socket]);
-
+  const fetchConversations = async () => {
+    const userId = JSON.parse(localStorage.getItem("user"));
+    // const uid = JSON.parse(userId._id)
+    const res = await fetch(
+      `http://localhost:5000/conversations/${userId?._id}`,
+      {
+        method: "GET",
+        header: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const resData = await res.json();
+    // console.log(resData)
+    setConversations(resData);
+  };
   useEffect(() => {
-    const fetchConversations = async () => {
-      const userId = JSON.parse(localStorage.getItem("user"));
-      // const uid = JSON.parse(userId._id)
-      const res = await fetch(
-        `http://localhost:5000/conversations/${userId?._id}`,
-        {
-          method: "GET",
-          header: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const resData = await res.json();
-      // console.log(resData)
-      setConversations(resData);
-    };
     fetchConversations();
   }, []);
 
@@ -125,7 +132,6 @@ const ChatAdmin = () => {
     const resData = await res.json();
     let rid = users?.id;
     setReceiver(rid);
-    // console.log(users, rid);
 
     setMessages({ messages: resData, receiver: users });
   };
@@ -164,6 +170,9 @@ const ChatAdmin = () => {
   };
 
   const [conversations, setConversations] = useState([]);
+  useEffect(() => {
+    fetchConversations();
+  }, [conversations]);
 
   return (
     <div className="w-screen flex">

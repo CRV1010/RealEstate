@@ -24,10 +24,14 @@ const ContactUs = () => {
       data = await data.json(); 
       if(data){
         alert(data.result)
+        setUsername("");
+        setEmail("");
+        setMessage("");
       }
       else{
         alert("error in sending message")
       }
+      
   }
   return (
     <div className=" antialiased bg-white-100 m-5">
@@ -86,7 +90,10 @@ const ContactUs = () => {
             <div className="absolute z-0 w-40 h-40 bg-teal-400 rounded-full -right-28 -top-28"></div>
             <div className="absolute z-0 w-40 h-40 bg-teal-400 rounded-full -left-28 -bottom-16"></div>
             <div className="relative z-10 bg-white rounded-xl shadow-lg p-8 text-gray-600 md:w-64">
-              <form onSubmit={handleSubmit(clickHandler)} className="flex flex-col space-y-4">
+              <form
+                onSubmit={handleSubmit(clickHandler)}
+                className="flex flex-col space-y-4"
+              >
                 <div>
                   <label htmlFor="" className="text-sm">
                     Your Name
@@ -104,7 +111,9 @@ const ContactUs = () => {
                     className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none 
                                         focus:ring-2 focus:ring-teal-300"
                   />
-                  <p className="text-sm text-red-500">{errors.username?.message}</p>
+                  <p className="text-sm text-red-500">
+                    {errors.username?.message}
+                  </p>
                 </div>
                 <div>
                   <label htmlFor="" className="text-sm">
@@ -113,9 +122,6 @@ const ContactUs = () => {
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
                     {...register("email", {
                       required: "Email is required",
                       pattern: {
@@ -123,6 +129,9 @@ const ContactUs = () => {
                         message: "Email is not valid email",
                       },
                     })}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                     placeholder="Your Email Address"
                     className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none 
                                         focus:ring-2 focus:ring-teal-300"
