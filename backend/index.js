@@ -9,7 +9,7 @@ const otpGenerator = require("otp-generator");
 const nocache = require("nocache");
 const conversation = require("./db/conversation");
 const messages = require("./db/messages");
-const userMsg = require("./db/userMessage")
+const userMsg = require("./db/userMessage");
 
 const io = require("socket.io")(5050, {
   cors: {
@@ -342,16 +342,84 @@ app.get("/messages/:conversationId", async (req, res) => {
   }
 });
 
-app.post("/user-contact",async (req,res)=>{
-    let data = new userMsg(req.body)
-    data = await data.save();
-    if(data){
-      res.send({result:"Message sent Successfully"})
-    }
-    else{
-      res.send(false)
-    }
-})
+app.post("/user-contact", async (req, res) => {
+  let data = new userMsg(req.body);
+  data = await data.save();
+  if (data) {
+    res.send({ result: "Message sent Successfully" });
+  } else {
+    res.send(false);
+  }
+});
+
+//   CODE FOR STORING THE IMAGE OF SELLER
+
+//npm i --save multer  before executing this code
+const multer = require("multer");
+
+//image Schema i am importing
+const Image = require("./db/image");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../frontend/src/Images/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+//getting all file(images) information
+//i have to store the file(images) name in database to store that making this array
+//iterating through array temp(file information) and gettig only file names.
+
+app.post("/upload-image", upload.array("image"), async (req, res) => {
+  const temp = req.files;
+
+  const imageName = [];
+
+  temp.map((element) => {
+    imageName.push(element.filename);
+  });
+
+  res.send(imageName);
+});
+
+//code for storing the basix text data for selling the property
+app.post("/upload-database", async (req, res) => {
+  try {
+    await Image.create({
+      propertyFor: req.body.selectedValue,
+      type: req.body.type,
+      State: req.body.State,
+      City: req.body.City,
+      society: req.body.society,
+      zone: req.body.zone,
+      pincode: req.body.pincode,
+      area: req.body.area,
+      price: req.body.price,
+      rooms: req.body.rooms,
+      image: req.body.imageName,
+    });
+    res.json({ status: "ok" });
+  } catch (error) {
+    res.json({ status: error });
+  }
+});
+
+//CODE FOR GETTING THE IMAGES FROM THE DATABASE
+app.get("/get-data", async (req, res) => {
+  try {
+    Image.find({}).then((object) => {
+      res.send(object);
+    });
+  } catch (error) {
+    res.json({ staus: error });
+  }
+});
 
 function verfiyToken(req, res, next) {
   let token = req.headers["authorization"];

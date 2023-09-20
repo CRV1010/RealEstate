@@ -3,10 +3,9 @@ import avtar from "../Images/avtar.png";
 import { io } from "socket.io-client";
 
 const ChatAdmin = () => {
-  
   let user = JSON.parse(localStorage.getItem("user"));
 
-  const createConvo = async () => { 
+  const createConvo = async () => {
     if (user) {
       if (user?._id !== "64f812e20714d7288931039d") {
         let res = await fetch("http://localhost:5000/conversations", {
@@ -23,9 +22,9 @@ const ChatAdmin = () => {
         console.log(result);
         if (result) {
           console.log("Conversation Created");
-          
+
           window.location.reload(false);
-          
+
           const res = await fetch("http://localhost:5000/messages", {
             method: "POST",
             body: JSON.stringify({
@@ -44,14 +43,12 @@ const ChatAdmin = () => {
     }
     return () => {};
   };
-  
 
   useEffect(() => {
     createConvo();
-    
+
     // return () => {};
   }, []);
-  
 
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState({});
@@ -60,7 +57,7 @@ const ChatAdmin = () => {
   const [cid, setCid] = useState("");
   const [socket, setSocket] = useState(null);
   const messageRef = useRef(null);
-  
+
   console.log(messages, "msgs");
 
   useEffect(() => {
@@ -82,17 +79,13 @@ const ChatAdmin = () => {
     socket?.on("getMessage", (data) => {
       console.log("msg", data);
       console.log("vaghela");
-      setMessages(
-        (
-          prev 
-        ) => ({
-          ...prev,
-          messages: [
-            ...prev.messages,
-            { users: data.suser, message: data.message },
-          ],
-        })
-      );
+      setMessages((prev) => ({
+        ...prev,
+        messages: [
+          ...prev.messages,
+          { users: data.suser, message: data.message },
+        ],
+      }));
       console.log("after msg set");
     });
     return () => {};

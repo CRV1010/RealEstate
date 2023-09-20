@@ -10,6 +10,9 @@ import ConfirmOTP from "./Components/ConfirmOTP";
 import ChangePassword from "./Components/ChangePassword";
 import ChatAdmin from "./Components/ChatAdmin";
 import About from "./Components/About"
+import Sell from "./Components/sell";
+import AddProperty from "./Components/addProperty";
+import Explore from "./Components/explore";
 
 function App() {
   return (
@@ -21,9 +24,12 @@ function App() {
             <Route path="/home" element={<h1>Home Page</h1>} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
-            
+
             <Route path="/confirmotp" element={<ConfirmOTP />} />
             <Route path="/changepass" element={<ChangePassword />} />
+            <Route path="/addProperty" element={<AddProperty />} />
+            <Route path="/sell" element={<Sell />} />
+            <Route path="/explore" element={<Explore />} />
 
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
