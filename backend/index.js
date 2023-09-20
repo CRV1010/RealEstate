@@ -264,14 +264,17 @@ app.post("/conversations", async (req, res) => {
 app.get("/conversations/:userId", async (req, res) => {
   try {
     let userId = req.params.userId;
+    // console.log(userId);
     const conversations = await conversation.find({
       members: { $in: [userId] },
     });
     const conversationData = Promise.all(
       conversations.map(async (talk) => {
         const receiverId = talk.members.find((member) => member !== userId);
+        // console.log("userId:",receiverId);
         const userTalked = await user.findById(receiverId);
-
+        // console.log("user my", userTalked);
+        // if(userTalked!=null)
         return {
           users: {
             id: userTalked._id,
