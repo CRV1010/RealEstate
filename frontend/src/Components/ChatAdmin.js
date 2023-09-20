@@ -7,12 +7,12 @@ const ChatAdmin = () => {
 
   const createConvo = async () => {
     if (user) {
-      if (user?._id !== "64f812e20714d7288931039d") {
+      if (user?._id !== "64cd42d6504537795b07b165") {
         let res = await fetch("http://localhost:5000/conversations", {
           method: "POST",
           body: JSON.stringify({
             senderId: user?._id,
-            receiverId: "64f812e20714d7288931039d",
+            receiverId: "64cd42d6504537795b07b165",
           }),
           headers: {
             "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const ChatAdmin = () => {
             method: "POST",
             body: JSON.stringify({
               conversationId: result._id,
-              senderId: "64f812e20714d7288931039d",
+              senderId: "64cd42d6504537795b07b165",
               message: "Hello From Admin",
               receiverId: user?._id,
             }),
