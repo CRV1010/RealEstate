@@ -172,7 +172,7 @@ function About() {
                 <div className="content">
                   <h2>
                     SAHIL DHARAVIYA <br />
-                    <span>MANAGING DIRECTOR</span>
+                    <span>SENIOR DEVELOPER</span>
                   </h2>
                 </div>
               </div>
