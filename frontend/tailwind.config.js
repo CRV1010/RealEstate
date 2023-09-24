@@ -10,7 +10,10 @@ module.exports = {
     extend: {
       colors: {
         'cyan': colors.cyan,
-        'teal': colors.teal
+        'teal': colors.teal,
+        'sellIcon': 'rgb(8, 245, 166)',
+        'imgPropIcon': 'rgb(8, 245, 166)',
+        'imgShadow': 'rgb(81, 210, 238)'
       }
     },
   },
