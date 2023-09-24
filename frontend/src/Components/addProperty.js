@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import './addProperty.css'
+
 //first do this :  npm i axios
 import axios from "axios";
 
@@ -9,10 +11,13 @@ export default function (props) {
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
 
+  const [sellPro, setProp] = useState(true);
+
   const { selectedValue, type, State, City, society, zone, pincode, area, price, rooms } = JSON.parse(localStorage.getItem('PropertyDetails'));
 
   useEffect(() => {
-    if (images.length < 1) return;
+    if (images.length < 1) 
+      return;
     const newImageUrls = [];
     images.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
     setImageURLs(newImageUrls);
@@ -22,6 +27,11 @@ export default function (props) {
   //functions
   const onImageChange = (e) => {
     setImages([...images, e.target.files[0]])
+    console.log('y', images.length)
+    if(images.length >= 0)
+      setProp(false);
+    else
+      setProp(true);
   }
 
   const onaddImages = async (e) => {
@@ -53,33 +63,56 @@ export default function (props) {
       }
     });
     console.log("Data Inserted Successfully...")
-
+    
+    window.location.href = '/explore'; 
   };
 
   const deleteImage = (e) => {
     var del = e.target.id;
     setImages(images.filter((_, index) => index != del));
     setImageURLs(imageURLs.filter((_, index) => index != del));
+    console.log(images.length)
+    if(images.length > 1)
+      setProp(false);
+    else
+      setProp(true);
   }
 
   return (
-    <div>
-
-      {imageURLs.map(
-        (imageSrc, index) =>
-          <div key={imageSrc}>
-            <img src={imageSrc} style={{ 'width': '120px', 'height': '100px' }} alt='Sorry' />
-            <input type='button' value={'Delete'} style={{ 'width': '60px', 'height': '30px', 'backgroundColor': 'red' }} id={index} onClick={deleteImage} />
+    <div id='mainPropImage' style={{'backgroundColor': 'rgb(145, 209, 188)'}}>
+      <div className="mainBlock">
+        <div id='sellImageForm'>
+          <div className="title">
+            <i className="fas fa-photo-film text-imgPropIcon"></i> &ensp;
+            <h2 id='centerHeading'> Property Images </h2>
           </div>
-      )}
-      <br />
-      Let's upload image
-      <input accept="image/*" type='file' onChange={onImageChange} name="image" multiple />
-      <input type="submit" style={{ 'width': '100px', 'height': '50px', 'backgroundColor': 'blue' }} value={'Continue'} onClick={onaddImages} />
-
-      <br /><br /><br />
-
-
-    </div >
+          <br /> <br />
+          <div className="information">
+            <h1 id='markLabel'> --- View Your Images --- </h1> <br /> 
+            <div id='imgList'>
+              {imageURLs.map(
+                (imageSrc, index) =>
+                  <div key={imageSrc} id='innerDiv' >
+                    <img src={imageSrc} className='imgShadow' id='selectedImg' alt='not found' />
+                    <input type='button' className='deleteBtn' value={'Delete'} id={index} onClick={deleteImage} />
+                  </div>
+                )
+              }
+            </div>
+            <br /> <br />
+            <div id='formData'>
+              <label htmlFor="">Upload Images:* &nbsp; </label>  
+              <input accept="image/*" type='file' onChange={onImageChange} name="image" multiple />
+            </div>
+            <br /> <br /> <br />
+            
+            {console.log(sellPro)}
+            <button id="sellPropBtn" className={sellPro ? 'notSell' : 'sell'} disabled={sellPro} onClick={onaddImages} > Sell Property </button>  
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }

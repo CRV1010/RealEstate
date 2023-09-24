@@ -1,0 +1,111 @@
+#mainDiv {
+    @apply min-h-full bg-cover;
+}
+
+#mainDiv, #sellForm, .sellField, #type, #rooms, .sellText {
+    @apply text-base text-[#eee] m-0 p-0;
+    outline: none;
+    font-family: Roboto, Arial, sans-serif;
+}
+
+#mainDiv {
+    background-image: url("./../Images/Background_sell.jpg");
+}
+
+#leftHeading, #rightHeading {
+    @apply uppercase font-black text-[2em];
+}
+
+#rightHeading {
+    @apply ml-2 mr-0 my-0;
+}
+
+#markLabel {
+    @apply text-[1.4em] font-medium;
+}
+
+#radio {
+    @apply inline-block;
+}
+
+.sellText {
+    @apply text-[1.5em];
+}
+
+.main-block {
+    @apply flex flex-col justify-center items-center h-full p-[45px];
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.left-part, #sellForm {
+    @apply p-[25px];
+}
+
+.left-part {
+    @apply text-center;
+}
+
+#sellForm {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.title {
+    @apply flex items-center mb-5;
+}
+
+.information {
+    @apply flex flex-col text-xl;
+}
+
+.sellField, #type, #rooms {
+    @apply mb-[30px] p-[5px] border-b-[#eee] border-[none] border-b border-solid;
+    background: transparent;
+}
+
+.sellField::placeholder {
+    @apply text-[#eee];
+}
+
+#propOpt:focus, #room:focus {
+    @apply border-[none];
+}
+
+#propOpt, #room {
+    @apply border-[none];
+    background: black;
+}
+
+.btn-item, #btn {
+    @apply no-underline text-xl font-medium text-white mt-5 px-5 py-2.5 rounded-[5px] border-[none];
+    background: #26a9e0;
+}
+
+#saveBtn {
+    @apply no-underline text-xl font-medium text-white mt-5 px-5 py-2.5 rounded-[5px] border-[none];
+}
+
+.btn-item, #saveBtn {
+    @apply inline-block mt-5 mb-0;
+}
+
+#btn, #saveBtn {
+    @apply w-full;
+}
+
+.con:hover, .btn-item:hover, #saveBtn:hover {
+    @apply bg-[#70ccb2] transition-all duration-[0.4s] ease-[ease-in];
+}
+
+@media (min-width: 568px) {
+    #mainDiv {
+        @apply h-full;
+    }
+
+    .main-block {
+        @apply flex-row h-[calc(100%_-_50px)];
+    }
+
+    .left-part, #sellForm {
+        @apply flex-1 h-auto;
+    }
+}

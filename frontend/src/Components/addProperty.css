@@ -1,0 +1,82 @@
+#mainPropImage, #sellImageForm {
+    @apply text-base text-[#eee] m-0 p-0;
+    outline: none;
+    font-family: Roboto, Arial, sans-serif;
+}
+
+#centerHeading {
+    @apply uppercase font-black text-[2em] ml-2 mr-0 my-0;
+}
+
+#markLabel {
+    @apply text-[1.4em] font-medium;
+}
+
+.mainBlock {
+    @apply flex flex-col justify-center items-center h-full p-[25px];
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#sellImageForm {
+    @apply w-3/5 p-[5%] mx-auto my-[4%];
+}
+
+#formData {
+    @apply inline-block;
+}
+
+.fa-photo-film {
+    @apply text-[1.8em] ;
+}
+
+#sellImageForm {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#selectedImg {
+    @apply w-[10em] h-40 max-w-full rounded-[20px] ;
+    /* hover:shadow-[0px_0px_8px_8px_rgb(81, 210, 238)]; */
+}
+
+.imgShadow:hover {
+    box-shadow: 0px 0px 8px 8px rgb(81, 210, 238); 
+}
+
+.deleteBtn {
+    @apply w-[10em] h-10 bg-[red] mt-[10%] rounded-[20px];
+}
+
+.title {
+    @apply flex items-center mb-5;
+}
+
+.information {
+    @apply flex flex-col text-xl;
+}
+
+#innerDiv {
+    @apply text-center inline-block m-[2%];
+}
+
+#sellPropBtn {
+    @apply no-underline text-xl font-medium text-white inline-block w-full mx-[5px] my-0 px-5 py-2.5 rounded-[5px] border-[none];
+    background: #26a9e0;
+}
+
+.sell:hover {
+    @apply bg-[#70ccb2] transition-all duration-[0.4s] ease-[ease-in];
+}
+
+@media (min-width: 568px) {
+    #mainPropImage {
+        @apply h-full;
+    }
+
+    .main-block {
+        @apply flex-row h-[calc(100%_-_50px)];
+    }
+
+    #sellForm {
+        @apply flex-1 h-auto;
+    }
+}
