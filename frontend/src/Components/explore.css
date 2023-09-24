@@ -1,0 +1,182 @@
+.mainExplore {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+#headingExplore{
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: brown;
+    text-transform: uppercase;
+    margin: 2% ;
+}
+
+.cardsExplore {
+    display: grid;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: repeat(auto-fill, minmax(calc(33.333% - 2rem), 1fr));
+    gap: 3rem;
+}
+
+.cards_item_explore {
+    display: flex;
+    width: 100%; 
+    box-sizing: border-box;
+    margin: 5% 0%;
+}
+
+.card_image_explore {
+    display: flex;
+    height: 250px;
+    box-shadow: 0 50px 100px 0 #a16ae8;
+}
+
+.card_image_explore img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background-color: #603f8b;
+    border-radius: 5px 25px 5px 50px;
+    transition: transform 0.1s linear;
+}
+
+.card_text_explore:focus, .card:focus {
+    outline: 3px dashed #4a10f9;
+}
+
+.card:focus, .card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.2);
+}
+
+.card_content_explore {
+    padding: 0.5rem 1rem 1rem;
+    color:  #efefef;
+}
+
+.card_title_explore {
+    position: absolute;
+    top: 0px;
+    left: 50px;
+    width: 90%;
+    height: auto;
+    color: #222;
+    padding: 0.5rem;
+    border-radius: 5px 0 0 5px;
+    transform: rotate(-3.3deg);
+    transform-origin: left top;
+    font-family: Georgia, Times, serif;
+    font-weight: 600;
+    font-size: 1.325rem;
+    overflow: hidden;
+    z-index: 1;
+    background-color: rgba(253, 73, 160, 0.75);
+    animation: 0.5s 0.5s fly-in 0 1 both;
+}
+
+@media (min-width: 535px) {
+    .card_title_explore {
+        animation: 0.5s 0.25s fly-out 1 both;
+    }
+}
+
+.card:focus .card_title_explore, .card:hover .card_title_explore {
+    animation: 0.5s ease-in 0s fly-in 1 both;
+}
+
+.card_text_explore {
+    font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica, Helvetica Neue, Arial, sans-serif;
+    line-height: 1.5;
+    text-size-adjust: 0.2px;
+    padding: 0 1rem;
+}
+
+.card_text_explore strong {
+    color: #b4fee7;
+}
+
+.facility_explore {
+    position: relative;
+    font-weight: 600;
+    background-color: #a16ae8;
+    padding: 0.5rem 0.75rem;
+    color: white;
+    border-radius: 0 10px;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.facility_explore::after {
+    content: "+";
+    display: block;
+    line-height: 0;
+    font-size: 3rem;
+    position: absolute;
+    color: #603f8b;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.facility_explore::after {
+    right: 0;
+    bottom: 1.25rem;
+}
+
+@keyframes fly-in {
+    0% {
+        top: 0;
+        right: 0;
+        font-size: 1.325rem;
+    }
+
+    25% {
+        top: 0;
+        right: -200%;
+        font-size: 1.325rem;
+    }
+
+    26% {
+        font-size: 2rem;
+    }
+
+    100% {
+        top: 2rem;
+        right: 0;
+        font-size: 2rem;
+    }
+}
+
+@keyframes fly-out {
+    0% {
+        top: 2rem;
+        right: 0;
+        font-size: 2rem;
+    }
+
+    50% {
+        top: 0;
+        right: -200%;
+        font-size: 1.325rem;
+    }
+
+    100% {
+        top: 0;
+        right: 0;
+        font-size: 1.325rem;
+    }
+}
+
