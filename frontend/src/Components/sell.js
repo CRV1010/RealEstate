@@ -30,8 +30,10 @@ export default function () {
     let area = document.getElementById('area').value;
     let price = document.getElementById('price').value;
     let rooms = document.getElementById('rooms').value;
+    let seller = JSON.parse(localStorage.getItem("user"));
+    let sellerId = seller._id;
 
-    localStorage.setItem( 'PropertyDetails' , JSON.stringify( { selectedValue , type,State,City,society,zone,pincode,area,price,rooms} ) );
+    localStorage.setItem( 'PropertyDetails' , JSON.stringify( { selectedValue , type,State,City,society,zone,pincode,area,price,rooms,sellerId} ) );
     
     var temp = JSON.parse(localStorage.getItem('PropertyDetails'))
 

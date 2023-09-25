@@ -405,6 +405,7 @@ app.post("/upload-database", async (req, res) => {
       area: req.body.area,
       price: req.body.price,
       rooms: req.body.rooms,
+      sellerId : req.body.sellerId,
       image: req.body.imageName,
     });
     res.json({ status: "ok" });
