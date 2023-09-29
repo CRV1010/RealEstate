@@ -11,7 +11,7 @@ const conversation = require("./db/conversation");
 const messages = require("./db/messages");
 const userMsg = require("./db/userMessage");
 
-const io = require("socket.io")(5050, {
+const io = require("socket.io")(5555, {
   cors: {
     origin: "http://localhost:3000",
   },
@@ -63,7 +63,7 @@ io.on("connection", (socket) => {
       console.log(receiver);
       try {
         if (receiver) {
-          console.log("chirag bro");
+          // console.log("chirag bro");
           io.to(receiver.socketId)
             .to(sender.socketId)
             .emit("getMessage", {
@@ -210,9 +210,9 @@ app.post("/login", async (req, res) => {
 app.post("/google-check", async (req, res) => {
   let mail = req.body.email;
   let result = await user.findOne({ email: mail });
-  console.log("gc", result);
+  // console.log("gc", result);
   if (result) {
-    console.log("hi");
+    // console.log("hi");
     result = result.toObject();
     jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
       if (err) {
@@ -405,7 +405,7 @@ app.post("/upload-database", async (req, res) => {
       area: req.body.area,
       price: req.body.price,
       rooms: req.body.rooms,
-      sellerId : req.body.sellerId,
+      sellerId: req.body.sellerId,
       image: req.body.imageName,
     });
     res.json({ status: "ok" });
@@ -422,6 +422,42 @@ app.get("/get-data", async (req, res) => {
     });
   } catch (error) {
     res.json({ staus: error });
+  }
+});
+
+//to get the user information like username , email , phone
+app.post('/getUserDetails',async(req,res) => {
+     let result = await user.findOne(req.body);
+     username = result.username
+     email = result.email
+     phone = result.phone
+     res.send({username,email,phone});
+})
+
+//to get the details of user's property
+app.post('/getPropertyDetails',async(req,res)=> {
+  let propertys = await Image.find(req.body)
+  res.send(propertys)
+})
+
+app.post("/search-property",async (req, res) => {
+  try {
+    const { propertyFor, type, State, City, zone, price } = req.body;
+    let data = await Image.find({
+      propertyFor: propertyFor,
+      type: type,
+      State: State,
+      City: City,
+      zone : zone,
+      price: { $lte: price },
+    });
+    if (data) {
+      res.send(data);
+    } else {
+      res.send({ result: "No Property avialable with given specification" });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

@@ -13,6 +13,7 @@ import About from "./Components/About"
 import Sell from "./Components/sell";
 import AddProperty from "./Components/addProperty";
 import Explore from "./Components/explore";
+
 import Carousel from "./Components/Home/Carousel";
 import SellBuyRent from "./Components/Home/SellBuyRent";
 import PopularProperty from "./Components/Home/PopularProperty";
@@ -20,7 +21,12 @@ import HowWork from "./Components/Home/HowWork";
 import Comment from "./Components/Home/Comment"
 import Footer from "./Components/Footer";
 
+import SearchedProperty from "./Components/SearchedProperty";
+import Profile from "./Components/profile";
+
+
 function App() {
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -45,7 +51,8 @@ function App() {
             <Route path="/addProperty" element={<AddProperty />} />
             <Route path="/sell" element={<Sell />} />
             <Route path="/explore" element={<Explore />} />
-
+            <Route path="/searchProperty" element={<SearchedProperty />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
             <Route path="/chatadmin" element={<ChatAdmin />} />
