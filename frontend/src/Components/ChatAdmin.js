@@ -7,12 +7,12 @@ const ChatAdmin = () => {
 
   const createConvo = async () => {
     if (user) {
-      if (user?._id !== "64cd42d6504537795b07b165") {
+      if (user?._id !== "650b0d9532d958c9727bea89") {
         let res = await fetch("http://localhost:5000/conversations", {
           method: "POST",
           body: JSON.stringify({
             senderId: user?._id,
-            receiverId: "64cd42d6504537795b07b165",
+            receiverId: "650b0d9532d958c9727bea89",
           }),
           headers: {
             "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const ChatAdmin = () => {
             method: "POST",
             body: JSON.stringify({
               conversationId: result._id,
-              senderId: "64cd42d6504537795b07b165",
+              senderId: "650b0d9532d958c9727bea89",
               message: "Hello From Admin",
               receiverId: user?._id,
             }),
@@ -58,7 +58,7 @@ const ChatAdmin = () => {
   const [socket, setSocket] = useState(null);
   const messageRef = useRef(null);
 
-  console.log(messages, "msgs");
+  // console.log(messages, "msgs");
 
   useEffect(() => {
     setSocket(io("http://localhost:5050"));

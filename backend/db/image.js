@@ -4,6 +4,9 @@ const imageDetailsSchema = new mongoose.Schema({
     propertyFor : {
         type : String
     },
+    sellerId : {
+        type : String
+    },
     type : {
         type : String
     },

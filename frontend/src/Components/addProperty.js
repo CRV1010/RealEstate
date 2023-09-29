@@ -13,7 +13,19 @@ export default function (props) {
 
   const [sellPro, setProp] = useState(true);
 
-  const { selectedValue, type, State, City, society, zone, pincode, area, price, rooms } = JSON.parse(localStorage.getItem('PropertyDetails'));
+  const {
+    selectedValue,
+    type,
+    State,
+    City,
+    society,
+    zone,
+    pincode,
+    area,
+    price,
+    rooms,
+    sellerId,
+  } = JSON.parse(localStorage.getItem("PropertyDetails"));
 
   useEffect(() => {
     if (images.length < 1) 
@@ -57,7 +69,7 @@ export default function (props) {
     //inserting information to database
     const data = await fetch("http://localhost:5000/upload-database", {
       method: "post",
-      body: JSON.stringify({ selectedValue, type, State, City, society, zone, pincode, area, price, rooms,imageName}),
+      body: JSON.stringify({ selectedValue, type, State, City, society, zone, pincode, area, price, rooms,sellerId,imageName}),
       headers: {
         "Content-Type": "application/json",
       }
