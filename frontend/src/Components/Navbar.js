@@ -54,6 +54,12 @@ const Navbar = () => {
               </Link>
               <Link
                 className="mr-5 hover:text-gray-900 font-semibold"
+                to="/profile"
+              >
+                Profile
+              </Link>
+              <Link
+                className="mr-5 hover:text-gray-900 font-semibold"
                 to="/chatadmin"
               >
                 Chat with Admin

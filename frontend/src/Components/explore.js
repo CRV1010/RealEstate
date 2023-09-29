@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react'
-
+import { useNavigate, Link } from "react-router-dom";
 import './explore.css'
 
 export default function () {
-
+    const navigate = useNavigate();
+    useEffect(() => {
+      const auth = localStorage.getItem("user");
+      if (!auth) {
+        navigate("/login");
+      }
+    }, []);
     const [database, setdatabase] = useState([]);
 
     useEffect(() => {

@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import React, { useState,useEffect } from 'react'
+import {useNavigate, Link } from "react-router-dom";
+
 import './sell.css'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function () {
-  
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (!auth) {
+      navigate("/login");
+    }
+  }, []);
   // const username = JSON.parse(localStorage.getItem('username'));
   const border = { 'border': '1px solid black' }
   const [cookie,setCookie] = useState({})

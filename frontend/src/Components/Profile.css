@@ -1,0 +1,73 @@
+.mainProfile {
+    @apply flex w-[90%] min-h-[87vh] h-auto mx-[5%] my-[3%];
+}
+
+.left-section {
+    @apply w-[30%] pb-[5%];
+}
+
+.right-section {
+    @apply w-[70%] w-[70%];
+    /* background-color: aquamarine; */
+}
+
+.left-section:hover, .left-section:hover #proField #proEmail {
+    @apply transition-all duration-[0.8s] ease-[ease-in-out];
+}
+
+.lsbackground:hover, .lsbackground:hover #proField #proEmail{
+    background-color: rgb(220, 248, 238);
+}
+
+.roundImg {
+    @apply w-[14em] h-[14em] object-cover my-[10%] m-auto rounded-[50%] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out] hover:p-[5px];
+}
+
+.roundImageHover:hover{
+    box-shadow: 0 0 10px 8px rgba(99, 69, 130);
+}
+
+#proUName {
+    @apply text-[2em] text-center uppercase font-medium mt-[2%] mb-[15%] mx-[2%] hover:font-black;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.proUNameTextColor{
+    color: rgb(119, 61, 176);
+}
+
+#proField {
+    @apply text-[1.3em] overflow-hidden w-[90%] ml-[5%] px-[5%] py-[2%] rounded-[5%]
+}
+
+.proFieldHover:hover{
+    box-shadow: 0px 0px 8px 5px rgb(141, 60, 222);
+}
+
+#proEmail {
+    @apply bg-[white] w-[72%];
+}
+
+#proHeading {
+    @apply text-[2.5em] uppercase font-semibold text-center text-[blueviolet] mb-[8%];
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#proUpdate {
+    @apply text-center text-[1.5em] font-semibold text-[white] flex items-center justify-center mt-[10%];
+}
+
+#proUpdate #proUpdateBtn {
+    @apply w-[30%] bg-[green] px-[5%] py-[2%] rounded-[10%];
+    /* visibility: hidden; */
+}
+
+.profilePropertyBtn {
+    @apply text-[white] text-[1.2em] mt-[5%] px-[8%] py-[2%] rounded-[12%];
+}
+
+#propertyBtn {
+    @apply flex gap-[2em] ml-[10%];
+}

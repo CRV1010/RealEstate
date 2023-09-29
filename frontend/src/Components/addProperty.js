@@ -6,7 +6,7 @@ import './addProperty.css'
 import axios from "axios";
 
 export default function (props) {
-
+  
   //hooks
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
