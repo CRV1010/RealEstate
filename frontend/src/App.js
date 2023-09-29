@@ -13,6 +13,12 @@ import About from "./Components/About"
 import Sell from "./Components/sell";
 import AddProperty from "./Components/addProperty";
 import Explore from "./Components/explore";
+import Carousel from "./Components/Home/Carousel";
+import SellBuyRent from "./Components/Home/SellBuyRent";
+import PopularProperty from "./Components/Home/PopularProperty";
+import HowWork from "./Components/Home/HowWork";
+import Comment from "./Components/Home/Comment"
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -21,7 +27,16 @@ function App() {
         <Navbar />
         <Routes>
           <Route element={<PrivateComponent />}>
-            <Route path="/home" element={<h1>Home Page</h1>} />
+          <Route path="/home" element={
+            <>
+            <Carousel />
+            <SellBuyRent />
+            <PopularProperty />
+            <HowWork />
+            <Comment />
+            </>
+            }/>
+            {/* <Route path="/home" element={<Carousel />} /> */}
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
 
@@ -38,6 +53,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
           </Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
