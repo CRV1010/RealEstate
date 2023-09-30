@@ -1,64 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./explore.css";
-import OtherProperty from "./OtherProperty";
 // import "./Profile.css";
 
 export default function () {
-    const navigate = useNavigate();
-    useEffect(() => {
-      const auth = localStorage.getItem("user");
-      if (!auth) {
-        navigate("/login");
-      }
-    }, []);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (!auth) {
+      navigate("/login");
+    }
+  }, []);
   const [database, setdatabase] = useState([]);
-    var Data;
-    var propertyFor = (localStorage.getItem("propertyFor"));
-    console.log(propertyFor);
-    // var propertyFor = "Sell";
-    var type;
-    var State;
-    var City;
-    var zone;
-    var rooms;
-    var price;
-    if(propertyFor=='Sell'){
-      Data = JSON.parse(localStorage.getItem("CombinedData"));
-      
-      State = Data.state;
-      City = Data.cities;
-      type = Data.property;
-      zone = Data.area;
-      var rtype = Data.type;
-      rooms = parseInt(rtype.substring(0,1));
-      var pri = localStorage.getItem("Budget");
-      price = parseInt(pri.substring(10));
-      console.log(rooms,price);
-    }
-    else{
-      Data = JSON.parse(localStorage.getItem("RentCombinedData"));
-      State = Data.rentState;
-      City = Data.rentCities;
-      type = Data.rentProperty;
-      zone = Data.rentArea;
-      var rtype = Data.rentType;
-      rooms = parseInt(rtype.substring(0, 1));
-      var pri = localStorage.getItem("RentBudget");
-      price = parseInt(pri.substring(7));
-      console.log(rooms, price);
-      // console.log("rent");
-    }
-    
-    
+
   useEffect(() => {
     getData();
   }, []);
-  
+
+  var Data;
+  var propertyFor = localStorage.getItem("propertyFor");
+  console.log(propertyFor);
+  // var propertyFor = "Sell";
+  var type;
+  var State;
+  var City;
+  var zone;
+  var rooms;
+  var price;
+  if (propertyFor == "Sell") {
+    Data = JSON.parse(localStorage.getItem("CombinedData"));
+    State = Data.state;
+    City = Data.cities;
+    type = Data.property;
+    zone = Data.area;
+    var rtype = Data.type;
+    rooms = parseInt(rtype.substring(0, 1));
+    var pri = localStorage.getItem("Budget");
+    price = parseInt(pri.substring(10));
+    console.log(rooms, price);
+  } else {
+    Data = JSON.parse(localStorage.getItem("RentCombinedData"));
+    State = Data.rentState;
+    City = Data.rentCities;
+    type = Data.rentProperty;
+    zone = Data.rentArea;
+    var rtype = Data.rentType;
+    rooms = parseInt(rtype.substring(0, 1));
+    var pri = localStorage.getItem("RentBudget");
+    price = parseInt(pri.substring(7));
+    console.log(rooms, price);
+    // console.log("rent");
+  }
+    
   async function getData() {
-    const result = await fetch("http://localhost:5000/search-property", {
+    const result = await fetch("http://localhost:5000/search-property-two", {
       method: "post",
-      body: JSON.stringify({propertyFor, type, State, City,zone,rooms,price}),
+      body: JSON.stringify({ propertyFor, type, State, City, zone,rooms,price }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -66,26 +63,13 @@ export default function () {
     var data = await result.json();
     setdatabase(data);
   }
-
   const nextPage = async () =>{
-      navigate("/otherproperty")
-      // <OtherProperty
-      //   propertyFor={propertyFor} type={type} State={State} City={City} zone={zone} price={price}
-      // />;
-    // const result = await fetch("http://localhost:5000/search-property-two", {
-    //   method: "post",
-    //   body: JSON.stringify({propertyFor, type, State, City,zone,price}),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // var data = await result.json();
-    // setdatabase(data);
+      navigate("/otherproperty2")
   }
 
   return (
     <>
-      <h1 id="headingExplore"> Properties that matches your requirements </h1>
+      <h1 id="headingExplore"> Properties you may like </h1>
       <div className="mainExplore" style={{ maxWidth: "80%" }}>
         <ul className="cardsExplore">
           {database
@@ -146,7 +130,10 @@ export default function () {
         </ul>
       </div>
       <div className="text-center">
-        <button onClick={nextPage} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <button
+          onClick={nextPage}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        >
           {" "}
           More Properties{" "}
         </button>

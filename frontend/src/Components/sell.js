@@ -71,7 +71,7 @@ export default function () {
     }
     else if(selectedValue2 !== '' && type2 !== '' && State2 !== '' && City2 !== '' && society2 !== '' && zone2 !== '' && pincode2 !== '' && area2 !== '' && price2 !== '' && rooms2 !== ''){
       setDisable(false)
-      toast.success('Congratulations! Information Fetched...', {
+      toast.success('Congratulations! Information Stored...', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
