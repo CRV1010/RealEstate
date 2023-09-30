@@ -12,7 +12,6 @@ export default function (props) {
   const [imageURLs, setImageURLs] = useState([]);
 
   const [sellPro, setProp] = useState(true);
-
   const {
     selectedValue,
     type,
@@ -32,8 +31,10 @@ export default function (props) {
       return;
     const newImageUrls = [];
     images.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
+    console.log("url", newImageUrls);
     setImageURLs(newImageUrls);
   }, [images]);
+  
 
 
   //functions

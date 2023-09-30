@@ -23,7 +23,9 @@ import Footer from "./Components/Footer";
 
 import SearchedProperty from "./Components/SearchedProperty";
 import Profile from "./Components/profile";
-
+import OtherProperty from "./Components/OtherProperty";
+import UpdateProperty1 from "./Components/UpdateProperty1";
+import UpdateProperty2 from "./Components/UpdateProperty2";
 
 function App() {
   
@@ -33,15 +35,18 @@ function App() {
         <Navbar />
         <Routes>
           <Route element={<PrivateComponent />}>
-          <Route path="/home" element={
-            <>
-            <Carousel />
-            <SellBuyRent />
-            <PopularProperty />
-            <HowWork />
-            <Comment />
-            </>
-            }/>
+            <Route
+              path="/home"
+              element={
+                <>
+                  <Carousel />
+                  <SellBuyRent />
+                  <PopularProperty />
+                  <HowWork />
+                  <Comment />
+                </>
+              }
+            />
             {/* <Route path="/home" element={<Carousel />} /> */}
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
@@ -53,6 +58,9 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/searchProperty" element={<SearchedProperty />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/otherproperty" element={<OtherProperty />} />
+            <Route path="/updateProperty1/:id" element={<UpdateProperty1 />} />
+            <Route path="/updateProperty2" element={<UpdateProperty2 />} />
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
             <Route path="/chatadmin" element={<ChatAdmin />} />

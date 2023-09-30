@@ -414,6 +414,36 @@ app.post("/upload-database", async (req, res) => {
   }
 });
 
+app.put("/update-database/:id",async (req,res)=>{
+  console.log(req.params.id);
+  console.log(req.body.imageName);
+  let data = await Image.updateOne(
+    { _id: req.params.id },
+    {
+      $set: {
+        propertyFor: req.body.selectedValue,
+        type: req.body.type,
+        State: req.body.State,
+        City: req.body.City,
+        society: req.body.society,
+        zone: req.body.zone,
+        pincode: req.body.pincode,
+        area: req.body.area,
+        price: req.body.price,
+        rooms: req.body.rooms,
+        sellerId: req.body.sellerId,
+        image: req.body.imageName,
+      },
+    }
+  );
+  if(data){
+    res.send({res:"updated successfully"});
+  }
+  else{
+    res.send(false);
+  }
+});
+
 //CODE FOR GETTING THE IMAGES FROM THE DATABASE
 app.get("/get-data", async (req, res) => {
   try {
@@ -440,7 +470,14 @@ app.post('/getPropertyDetails',async(req,res)=> {
   res.send(propertys)
 })
 
-app.post("/search-property",async (req, res) => {
+
+
+app.delete("/property/:id", async(req,res)=>{
+  let data = await Image.deleteOne({_id : req.params.id});
+  res.send(data);
+});
+
+app.post("/search-property", async (req, res) => {
   try {
     const { propertyFor, type, State, City, zone, price } = req.body;
     let data = await Image.find({
@@ -448,7 +485,7 @@ app.post("/search-property",async (req, res) => {
       type: type,
       State: State,
       City: City,
-      zone : zone,
+      zone: zone,
       price: { $lte: price },
     });
     if (data) {
@@ -461,7 +498,31 @@ app.post("/search-property",async (req, res) => {
   }
 });
 
-function verfiyToken(req, res, next) {
+app.post("/search-property-two", async (req, res) => {
+  try {
+    const { propertyFor, type, State, City, zone, price } = req.body;
+    let data = await Image.find({
+      propertyFor: propertyFor,
+      type: type,
+      State: State,
+      City: City,
+      price: { $lte: price },
+    });
+    if (data) {
+      const newdata = data.filter((property)=>{
+        return property.zone!==zone;
+      });
+      res.send(newdata);
+    } else {
+      res.send({ result: "No Property avialable with given specification" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+function verifyToken(req, res, next) {
   let token = req.headers["authorization"];
   if (token) {
     token = token.split(" ")[1];
