@@ -1,10 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import avtar from "../Images/avtar.png";
 import { io } from "socket.io-client";
 
 const ChatAdmin = () => {
-  let user = JSON.parse(localStorage.getItem("user"));
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (!auth) {
+      navigate("/login");
+    }
+  }, []);
 
+  let user = JSON.parse(localStorage.getItem("user"));
   const createConvo = async () => {
     if (user) {
       if (user?._id !== "650b0d9532d958c9727bea89") {
@@ -61,7 +70,7 @@ const ChatAdmin = () => {
   // console.log(messages, "msgs");
 
   useEffect(() => {
-    setSocket(io("http://localhost:5050"));
+    setSocket(io("http://localhost:5555"));
     // window.location.reload(false);
   }, []);
 
@@ -173,7 +182,7 @@ const ChatAdmin = () => {
         <div className="flex justify-center my-8">
           <img src={avtar} width={50} height={50} />
           <div className="ml-4">
-            <h1 className="text-2xl">{user.username}</h1>
+            <h1 className="text-2xl">{user?.username}</h1>
           </div>
         </div>
         <hr />
