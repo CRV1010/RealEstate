@@ -18,7 +18,7 @@ import Carousel from "./Components/Home/Carousel";
 import SellBuyRent from "./Components/Home/SellBuyRent";
 import PopularProperty from "./Components/Home/PopularProperty";
 import HowWork from "./Components/Home/HowWork";
-import Comment from "./Components/Home/Comment"
+import Comment from "./Components/Home/Comment";
 import Footer from "./Components/Footer";
 
 import SearchedProperty from "./Components/SearchedProperty";
