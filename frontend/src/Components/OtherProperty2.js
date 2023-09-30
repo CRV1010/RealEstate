@@ -51,11 +51,19 @@ export default function () {
     console.log(rooms, price);
     // console.log("rent");
   }
-    
+
   async function getData() {
-    const result = await fetch("http://localhost:5000/search-property-two", {
+    const result = await fetch("http://localhost:5000/search-property-three", {
       method: "post",
-      body: JSON.stringify({ propertyFor, type, State, City, zone,rooms,price }),
+      body: JSON.stringify({
+        propertyFor,
+        type,
+        State,
+        City,
+        zone,
+        rooms,
+        price,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -63,13 +71,13 @@ export default function () {
     var data = await result.json();
     setdatabase(data);
   }
-  const nextPage = async () =>{
-      navigate("/otherproperty2")
-  }
+//   const nextPage = async () => {
+//     navigate("/otherproperty2");
+//   };
 
   return (
     <>
-      <h1 id="headingExplore"> Properties you may like </h1>
+      <h1 id="headingExplore"> Properties you may also like </h1>
       <div className="mainExplore" style={{ maxWidth: "80%" }}>
         <ul className="cardsExplore">
           {database
@@ -129,7 +137,7 @@ export default function () {
             : ""}
         </ul>
       </div>
-      <div className="text-center">
+      {/* <div className="text-center">
         <button
           onClick={nextPage}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
@@ -137,7 +145,7 @@ export default function () {
           {" "}
           More Properties{" "}
         </button>
-      </div>
+      </div> */}
     </>
   );
 }

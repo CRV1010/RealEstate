@@ -75,7 +75,11 @@ const ChatAdmin = () => {
   }, []);
 
   useEffect(() => {
-    messageRef?.current?.scrollIntoView({ behavior: "smooth" });
+    messageRef?.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
   }, [messages?.messages]);
 
   useEffect(() => {

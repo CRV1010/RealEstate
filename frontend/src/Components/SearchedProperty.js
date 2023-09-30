@@ -13,20 +13,52 @@ export default function () {
       }
     }, []);
   const [database, setdatabase] = useState([]);
-
+    var Data;
+    var propertyFor = (localStorage.getItem("propertyFor"));
+    console.log(propertyFor);
+    // var propertyFor = "Sell";
+    var type;
+    var State;
+    var City;
+    var zone;
+    var rooms;
+    var price;
+    if(propertyFor=='Sell'){
+      Data = JSON.parse(localStorage.getItem("CombinedData"));
+      
+      State = Data.state;
+      City = Data.cities;
+      type = Data.property;
+      zone = Data.area;
+      var rtype = Data.type;
+      rooms = parseInt(rtype.substring(0,1));
+      var pri = localStorage.getItem("Budget");
+      price = parseInt(pri.substring(10));
+      console.log(rooms,price);
+    }
+    else{
+      Data = JSON.parse(localStorage.getItem("RentCombinedData"));
+      State = Data.rentState;
+      City = Data.rentCities;
+      type = Data.rentProperty;
+      zone = Data.rentArea;
+      var rtype = Data.rentType;
+      rooms = parseInt(rtype.substring(0, 1));
+      var pri = localStorage.getItem("RentBudget");
+      price = parseInt(pri.substring(7));
+      console.log(rooms, price);
+      // console.log("rent");
+    }
+    
+    
   useEffect(() => {
     getData();
   }, []);
-  var propertyFor = "Sell";
-  var type = "Residential Plot";
-  var State = "Gujarat";
-  var City = "Vadodara";
-  var zone = "Samta";
-  var price = 4000000;
+  
   async function getData() {
     const result = await fetch("http://localhost:5000/search-property", {
       method: "post",
-      body: JSON.stringify({propertyFor, type, State, City,zone,price}),
+      body: JSON.stringify({propertyFor, type, State, City,zone,rooms,price}),
       headers: {
         "Content-Type": "application/json",
       },

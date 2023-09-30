@@ -479,13 +479,14 @@ app.delete("/property/:id", async(req,res)=>{
 
 app.post("/search-property", async (req, res) => {
   try {
-    const { propertyFor, type, State, City, zone, price } = req.body;
+    const { propertyFor, type, State, City, zone,rooms, price } = req.body;
     let data = await Image.find({
       propertyFor: propertyFor,
       type: type,
       State: State,
       City: City,
       zone: zone,
+      rooms: { $gte: rooms},
       price: { $lte: price },
     });
     if (data) {
@@ -500,15 +501,18 @@ app.post("/search-property", async (req, res) => {
 
 app.post("/search-property-two", async (req, res) => {
   try {
-    const { propertyFor, type, State, City, zone, price } = req.body;
+    const { propertyFor, type, State, City, zone,rooms, price } = req.body;
+    console.log(type,rooms,price);
     let data = await Image.find({
       propertyFor: propertyFor,
       type: type,
       State: State,
       City: City,
+      rooms: { $gte: rooms },
       price: { $lte: price },
     });
     if (data) {
+      console.log(data);
       const newdata = data.filter((property)=>{
         return property.zone!==zone;
       });
@@ -521,6 +525,31 @@ app.post("/search-property-two", async (req, res) => {
   }
 });
 
+app.post("/search-property-three", async (req, res) => {
+  try {
+    const { propertyFor, type, State, City, zone, rooms, price } = req.body;
+    console.log(type, rooms, price);
+    let data = await Image.find({
+      propertyFor: propertyFor,
+      // type: type,
+      State: State,
+      City: City,
+      rooms: { $gte: rooms },
+      price: { $lte: price },
+    });
+    if (data) {
+      console.log(data);
+      const newdata = data.filter((property) => {
+        return property.type !== type;
+      });
+      res.send(newdata);
+    } else {
+      res.send({ result: "No Property avialable with given specification" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 function verifyToken(req, res, next) {
   let token = req.headers["authorization"];

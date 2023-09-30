@@ -26,6 +26,7 @@ import Profile from "./Components/profile";
 import OtherProperty from "./Components/OtherProperty";
 import UpdateProperty1 from "./Components/UpdateProperty1";
 import UpdateProperty2 from "./Components/UpdateProperty2";
+import OtherProperty2 from "./Components/OtherProperty2";
 
 function App() {
   
@@ -59,6 +60,7 @@ function App() {
             <Route path="/searchProperty" element={<SearchedProperty />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/otherproperty" element={<OtherProperty />} />
+            <Route path="/otherproperty2" element={<OtherProperty2 />} />
             <Route path="/updateProperty1/:id" element={<UpdateProperty1 />} />
             <Route path="/updateProperty2" element={<UpdateProperty2 />} />
             <Route path="/forgotpass/" element={<ForgotPassword />} />
