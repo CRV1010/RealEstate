@@ -391,6 +391,33 @@ app.post("/upload-image", upload.array("image"), async (req, res) => {
   res.send(imageName);
 });
 
+app.post("/upload-imageProfile", upload.single("image"), async (req, res) => {
+  // const temp = req.files;
+  const image = req.file.filename;
+  res.send(image);
+});
+
+app.put("/updateUser/:id", async (req, res) => {
+  let data = await user.updateOne(
+    { _id: req.params.id },
+    {
+      $set: req.body,
+    }
+  );
+  if (data) {
+    let result = await user.findOne({ _id: req.params.id });
+    delete result.password;
+    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+      if (err) {
+        res.send("Token Expired or something went wrong");
+      } else {
+        res.send({ result, token });
+      }
+    });
+  }
+  //  result = result.toObject();
+});
+
 //code for storing the basix text data for selling the property
 app.post("/upload-database", async (req, res) => {
   try {
@@ -414,7 +441,7 @@ app.post("/upload-database", async (req, res) => {
   }
 });
 
-app.put("/update-database/:id",async (req,res)=>{
+app.put("/update-database/:id", async (req, res) => {
   console.log(req.params.id);
   console.log(req.body.imageName);
   let data = await Image.updateOne(
@@ -436,10 +463,9 @@ app.put("/update-database/:id",async (req,res)=>{
       },
     }
   );
-  if(data){
-    res.send({res:"updated successfully"});
-  }
-  else{
+  if (data) {
+    res.send({ res: "updated successfully" });
+  } else {
     res.send(false);
   }
 });
@@ -456,37 +482,37 @@ app.get("/get-data", async (req, res) => {
 });
 
 //to get the user information like username , email , phone
-app.post('/getUserDetails',async(req,res) => {
-     let result = await user.findOne(req.body);
-     username = result.username
-     email = result.email
-     phone = result.phone
-     res.send({username,email,phone});
-})
+app.post("/getUserDetails", async (req, res) => {
+  let result = await user.findOne(req.body);
+  username = result.username;
+  email = result.email;
+  phone = result.phone;
+  dob = result.dob;
+  image = result.image;
+  res.send({ username, email, phone, dob, image });
+});
 
 //to get the details of user's property
-app.post('/getPropertyDetails',async(req,res)=> {
-  let propertys = await Image.find(req.body)
-  res.send(propertys)
-})
+app.post("/getPropertyDetails", async (req, res) => {
+  let propertys = await Image.find(req.body);
+  res.send(propertys);
+});
 
-
-
-app.delete("/property/:id", async(req,res)=>{
-  let data = await Image.deleteOne({_id : req.params.id});
+app.delete("/property/:id", async (req, res) => {
+  let data = await Image.deleteOne({ _id: req.params.id });
   res.send(data);
 });
 
 app.post("/search-property", async (req, res) => {
   try {
-    const { propertyFor, type, State, City, zone,rooms, price } = req.body;
+    const { propertyFor, type, State, City, zone, rooms, price } = req.body;
     let data = await Image.find({
       propertyFor: propertyFor,
       type: type,
       State: State,
       City: City,
       zone: zone,
-      rooms: { $gte: rooms},
+      rooms: { $gte: rooms },
       price: { $lte: price },
     });
     if (data) {
@@ -501,8 +527,8 @@ app.post("/search-property", async (req, res) => {
 
 app.post("/search-property-two", async (req, res) => {
   try {
-    const { propertyFor, type, State, City, zone,rooms, price } = req.body;
-    console.log(type,rooms,price);
+    const { propertyFor, type, State, City, zone, rooms, price } = req.body;
+    console.log(type, rooms, price);
     let data = await Image.find({
       propertyFor: propertyFor,
       type: type,
@@ -513,8 +539,8 @@ app.post("/search-property-two", async (req, res) => {
     });
     if (data) {
       console.log(data);
-      const newdata = data.filter((property)=>{
-        return property.zone!==zone;
+      const newdata = data.filter((property) => {
+        return property.zone !== zone;
       });
       res.send(newdata);
     } else {
