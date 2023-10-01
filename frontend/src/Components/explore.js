@@ -27,49 +27,96 @@ export default function () {
         setdatabase(data)
     }
 
+    const searchHandle = async (event) => {
+      let key = event.target.value;
+      if (key) {
+        let data = await fetch(`http://localhost:5000/search/${key}`, {
+          headers: {
+            mode: "no-cors",
+          },
+        });
+        if (data) {
+          data = await data.json();
+          setdatabase(data);
+        } else {
+          console.log("I dont no ke");
+        }
+      } else {
+        getData();
+      }
+    };
+
     return (
-        <>
-            <h1 id='headingExplore'> Properties for Explore </h1>
-            <div className="mainExplore" style={{'maxWidth': '80%'}}>
-                <ul className="cardsExplore">
-                    {database ?
-                        database.map(
-                            (ArrayOfObjects, index) => {
-                                const imageNames = ArrayOfObjects.image[0];
-                                return (
-                                    <li className="cards_item_explore" key={ArrayOfObjects._id}>
-                                        <div className="card" tabindex="0">
-                                            <h2 className="card_title_explore"> {ArrayOfObjects.propertyFor} &#x2022; &#8377;{ArrayOfObjects.price} </h2>
-                                            <div className="card_image_explore">
-                                                {
-                                                    ArrayOfObjects.image && ArrayOfObjects.image.length > 0 ? (
-                                                        <img src={require(`../Images/${ArrayOfObjects.image[0]}`)} key={ArrayOfObjects.image[0]} alt='not fetched' />
-                                                    ) : (
-                                                        ""
-                                                    )
-                                                }
-                                                
-                                            </div>
-                                            
-                                            <div className="card_content_explore">
-                                                <div className="card_text_explore">
-                                                    <p> <strong> Property Type: </strong>{ArrayOfObjects.type} </p>
-                                                    <p> <strong>Location: </strong> {ArrayOfObjects.society}, {ArrayOfObjects.zone}, {ArrayOfObjects.City}, {ArrayOfObjects.State}. </p>
-                                                    <p> <strong>Pincode: </strong> {ArrayOfObjects.pincode} </p> <br />
-                                                    <p className="facility_explore"> <strong>Facility: </strong> {ArrayOfObjects.rooms} BHK <br /> <strong>Land Area: </strong> {ArrayOfObjects.area} </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                )
-                            }
-                        )
-                        : ""
-                    }
-                </ul>
-            </div>
-        </>
-    )
+      <>
+        <h1 id="headingExplore"> Properties for Explore </h1>
+        <div className="mainExplore" style={{ maxWidth: "80%" }}>
+          <input
+            type="text"
+            placeholder="Search Property"
+            className="rounded-full border-solid text-center w-1/2 h-10 hover:border-dotted border-4 border-indigo-600"
+            onChange={searchHandle}
+          />
+          <ul className="cardsExplore">
+            {database
+              ? database.map((ArrayOfObjects, index) => {
+                  const imageNames = ArrayOfObjects.image[0];
+                  return (
+                    <li className="cards_item_explore" key={ArrayOfObjects._id}>
+                      <div className="card" tabindex="0">
+                        <h2 className="card_title_explore">
+                          {" "}
+                          {ArrayOfObjects.propertyFor} &#x2022; &#8377;
+                          {ArrayOfObjects.price}{" "}
+                        </h2>
+                        <div className="card_image_explore">
+                          {ArrayOfObjects.image &&
+                          ArrayOfObjects.image.length > 0 ? (
+                            <img
+                              src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                              key={ArrayOfObjects.image[0]}
+                              alt="not fetched"
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </div>
+
+                        <div className="card_content_explore">
+                          <div className="card_text_explore">
+                            <p>
+                              {" "}
+                              <strong> Property Type: </strong>
+                              {ArrayOfObjects.type}{" "}
+                            </p>
+                            <p>
+                              {" "}
+                              <strong>Location: </strong>{" "}
+                              {ArrayOfObjects.society}, {ArrayOfObjects.zone},{" "}
+                              {ArrayOfObjects.City}, {ArrayOfObjects.State}.{" "}
+                            </p>
+                            <p>
+                              {" "}
+                              <strong>Pincode: </strong>{" "}
+                              {ArrayOfObjects.pincode}{" "}
+                            </p>{" "}
+                            <br />
+                            <p className="facility_explore">
+                              {" "}
+                              <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
+                              BHK <br /> <strong>Land Area: </strong>{" "}
+                              {ArrayOfObjects.area}{" "}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })
+              : ""}
+          </ul>
+        </div>
+      </>
+    );
 }
 
 

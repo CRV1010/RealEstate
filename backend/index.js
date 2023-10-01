@@ -577,6 +577,27 @@ app.post("/search-property-three", async (req, res) => {
   }
 });
 
+app.get("/search/:key", async (req, res) => {
+  // console.log("hello");
+  try {
+    let data = await Image.find({
+      $or: [
+        { propertyFor: { $regex: req.params.key } },
+        { type: { $regex: req.params.key } },
+        { State: { $regex: req.params.key } },
+        { City: { $regex: req.params.key } },
+        { society: { $regex: req.params.key } },
+        { zone: { $regex: req.params.key } },
+        // { price: { $regex: req.params.key } },
+      ],
+    });
+
+    res.send(data);
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
 function verifyToken(req, res, next) {
   let token = req.headers["authorization"];
   if (token) {
