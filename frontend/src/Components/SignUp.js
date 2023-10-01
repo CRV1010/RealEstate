@@ -4,13 +4,26 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
 
 const SignUp = () => {
+  let myimg = "focus.jpg";
+  var images = new File(
+    ["../Images/focus.jpg"],
+    myimg,
+    {
+      type: "image/png",
+    }
+  );
+  console.log(images);
+  
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
+    // const [images, setImages] = useState();
   const navigate = useNavigate();
 
   const {
@@ -43,9 +56,24 @@ const SignUp = () => {
       data = await data.json();
       if(!data){
         console.log("inside data")
+        const formData = new FormData();
+        formData.append("image", images);
+
+        //to insert the image in my images folder and get te images names to store in database
+        const result = await axios.post(
+          "http://localhost:5000/upload-imageProfile", //this is api call here
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
+
+        console.log("Image Uploaded...");
+        const image = result.data;
+
         data = await fetch("http://localhost:5000/signup", {
           method: "post",
-          body: JSON.stringify({ username, email, phone, password }),
+          body: JSON.stringify({ username, email, phone, password,image }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -79,6 +107,16 @@ const SignUp = () => {
             Sign Up
           </h2>
           <form onSubmit={handleSubmit(clickHandler)}>
+            {/* <div className="relative mb-4">
+              <input
+                accept="image/*"
+                type="file"
+                value="D:/Practice Program/Real Estate/frontend/src/Images/focus.jpg"
+                onLoad={(e) => setImages(e.target.files[0])}
+                name="image"
+                hidden
+              />
+            </div> */}
             <div className="relative mb-4">
               <label for="name" className="leading-7 text-sm text-gray-600">
                 Username
