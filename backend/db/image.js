@@ -37,6 +37,9 @@ const imageDetailsSchema = new mongoose.Schema({
     image : {
         type : Array,
     },
+    modified : {
+        type : Number
+    }
 });
   
 //Image is a model which has a schema imageSchema

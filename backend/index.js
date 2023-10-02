@@ -460,6 +460,7 @@ app.put("/update-database/:id", async (req, res) => {
         rooms: req.body.rooms,
         sellerId: req.body.sellerId,
         image: req.body.imageName,
+        modified : 1
       },
     }
   );

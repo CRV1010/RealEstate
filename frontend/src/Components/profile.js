@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './Profile.css'
 import ProfileImg from './../Images/focus.jpg';
 import {useNavigate} from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function (props) {
 
@@ -44,6 +46,17 @@ export default function (props) {
   }
 
   const deleteProperty = async (id) =>{
+     toast.warning("You are Deleting Property...", {
+       position: "top-right",
+       autoClose: 2000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       rtl: false,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+     });
     let data = await fetch(`http://localhost:5000/property/${id}`, {
       method: "delete",
       // headers: {
@@ -58,7 +71,34 @@ export default function (props) {
   }
 
   const updateProperty = async(id) => {
-    navigate(`/updateProperty1/${id}`);
+   
+    const result = await fetch(`http://localhost:5000/getPropertyDetails`, {
+      method: "post",
+      body: JSON.stringify({ _id: id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    var data = await result.json();
+    let pd = data[0];
+    console.log("data",data)
+    console.log("md",pd.modified);
+    if (pd.modified==1) {
+      toast.warning("You have Reached max limit of Updation...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    else {
+      navigate(`/updateProperty1/${id}`);
+    }
   }
 
   const userUpdate = () =>{
@@ -214,6 +254,18 @@ export default function (props) {
               </ul>
             </div>
           </div>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </div>
       ) : (
         <div> Sorry ! Data is not Fetched... </div>

@@ -1,45 +1,74 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useState} from "react";
 import "./addProperty.css";
-
 //first do this :  npm i axios
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function () {
   //hooks
-
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
   var prodetail = JSON.parse(localStorage.getItem("propDetails"));
-  useEffect(() => {
+  var imags = [];
+  useEffect(async() => {
     
-    var imgs = prodetail.image;
-    console.log(imgs);
-    var imags=[];
-     imgs.forEach(images=> imags.push(images.substr(13)));
-    console.log("name",imags)
     
-    imgs.forEach((image)=>{
-      // require(`../Images/${image}`) // important
-      
-      var imga = new File(
-        [`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`],
-        image,
-        {
-          type: "image/png",
-        }
-      );
-      const val = imga;
-        console.log("img",val);
-        setImages([...images,val]);
-        
-        console.log("jai ",images);
-        images.forEach((image) => {
-           console.log("kkk", image);
-         });
-    });
-    console.log("jeu");
-   
+      console.log("name")
+       // var imga = new File(
+       //   [`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`],
+       //   image,
+       //   {
+       //     type: "image/png",
+       //   }
+       // );
+
+     await fetchData().then(setInitialImg);
+  //  setInitialImg();
   }, []);
+  
+  const fetchData = async () =>{
+
+    return new Promise((resolve, reject) => {
+      setTimeout(()=>{
+       var imgs = prodetail.image;
+       console.log("my img name", imgs);
+     imgs.forEach(async(image) => {
+      const img = new Image();
+       img.src = require(`D:/Practice Program/Real Estate/frontend/src/Images/${image}`);
+       const canvas = document.createElement("canvas");
+       canvas.width = img.width;
+       canvas.height = img.height;
+        console.log("count",img);
+       const ctx = canvas.getContext("2d");
+
+       ctx.drawImage(img, 0, 0);
+
+       // Convert the canvas content to a Blob
+       canvas.toBlob(function (blob) {
+         var imga = new File([blob], image, {
+           type: "image/png",
+         });
+         console.log(blob);
+         console.log("imga ", imga);
+         imags.push(imga);
+        
+         console.log("aaja",imags);
+        //  setImages([...images,imga]);
+       }, "image/png");
+
+      });
+      // setImages([...images,...imags]);
+      // callback();
+      resolve();
+      // setInitialImg();
+      },1000)
+       
+    });
+  }
+const setInitialImg= ()=>{
+  setImages(imags);  
+}
 
   const [sellPro, setProp] = useState(true);
   const {
@@ -57,6 +86,7 @@ export default function () {
   } = JSON.parse(localStorage.getItem("PropertyDetails"));
 
   useEffect(() => {
+    console.log("ii", images);
     if (images.length < 1) return;
     const newImageUrls = [];
     images.forEach((image) => {
@@ -64,6 +94,7 @@ export default function () {
     const blob = new Blob([image], { type: "image/png" });
     console.log(blob);
     if(blob.size<100){
+      console.log("inside blob ",`${image.name}`)
       newImageUrls.push(
         require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
       );
@@ -74,7 +105,6 @@ export default function () {
       // newImageUrls.pop();
       console.log("url", newImageUrls);
     });
-    
     
     setImageURLs(newImageUrls);
   }, [images]);
@@ -133,10 +163,21 @@ export default function () {
     });
     data = await data.json();
     if(data){
-      alert("Data Updated Successfully");
+      toast.success("Property Updated Successfully...", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     console.log("Data updated Successfully...");
-
+    setImages([]);
+    setImageURLs([]);
     window.location.href = "/profile";
   };
 
@@ -201,6 +242,18 @@ export default function () {
               {" "}
               Update Property{" "}
             </button>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </div>
         </div>
       </div>

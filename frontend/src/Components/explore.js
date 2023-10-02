@@ -53,7 +53,7 @@ export default function () {
           <input
             type="text"
             placeholder="Search Property"
-            className="rounded-full border-solid text-center w-1/2 h-10 hover:border-dotted border-4 border-indigo-600"
+            className="rounded-full border-solid w-1/2 h-10 hover:border-dotted border-4 border-indigo-600"
             onChange={searchHandle}
           />
           <ul className="cardsExplore">

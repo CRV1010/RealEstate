@@ -80,14 +80,13 @@ const [images, setImages] = useState();
           <form onSubmit={handleSubmit(clickHandler)}>
             <div className="relative mb-4">
               <label htmlFor="" className="leading-7 text-sm text-gray-600">
-                Upload Images:* &nbsp;{" "}
+                Upload Images*: &nbsp;{" "}
               </label>
               <input
                 accept="image/*"
                 type="file"
                 onChange={(e)=>setImages(e.target.files[0])}
                 name="image"
-                multiple
               />
             </div>
             <div className="relative mb-4">
