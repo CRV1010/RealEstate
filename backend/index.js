@@ -425,7 +425,6 @@ app.post("/upload-database", async (req, res) => {
     await Image.create({
       propertyFor: req.body.selectedValue,
       type: req.body.type,
-      Country: req.body.Country,
       State: req.body.State,
       City: req.body.City,
       society: req.body.society,
@@ -452,7 +451,6 @@ app.put("/update-database/:id", async (req, res) => {
       $set: {
         propertyFor: req.body.selectedValue,
         type: req.body.type,
-        Country: req.body.Country,
         State: req.body.State,
         City: req.body.City,
         society: req.body.society,
