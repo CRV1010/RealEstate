@@ -1,4 +1,4 @@
-import React, { useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./addProperty.css";
 //first do this :  npm i axios
 import axios from "axios";
@@ -11,64 +11,64 @@ export default function () {
   const [imageURLs, setImageURLs] = useState([]);
   var prodetail = JSON.parse(localStorage.getItem("propDetails"));
   var imags = [];
-  useEffect(async() => {
-    
-    
-      console.log("name")
-       // var imga = new File(
-       //   [`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`],
-       //   image,
-       //   {
-       //     type: "image/png",
-       //   }
-       // );
+  useEffect(async () => {
 
-     await fetchData().then(setInitialImg);
-  //  setInitialImg();
+
+    console.log("name")
+    // var imga = new File(
+    //   [`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`],
+    //   image,
+    //   {
+    //     type: "image/png",
+    //   }
+    // );
+
+    await fetchData().then(setInitialImg);
+    //  setInitialImg();
   }, []);
-  
-  const fetchData = async () =>{
+
+  const fetchData = async () => {
 
     return new Promise((resolve, reject) => {
-      setTimeout(()=>{
-       var imgs = prodetail.image;
-       console.log("my img name", imgs);
-     imgs.forEach(async(image) => {
-      const img = new Image();
-       img.src = require(`D:/Practice Program/Real Estate/frontend/src/Images/${image}`);
-       const canvas = document.createElement("canvas");
-       canvas.width = img.width;
-       canvas.height = img.height;
-        console.log("count",img);
-       const ctx = canvas.getContext("2d");
+      setTimeout(() => {
+        var imgs = prodetail.image;
+        console.log("my img name", imgs);
+        imgs.forEach(async (image) => {
+          const img = new Image();
+          img.src = require(`C:/Users/Sahil Dharaviya/Desktop/RealEstate/frontend/src/Images/${image}`);
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          console.log("count", img);
+          const ctx = canvas.getContext("2d");
 
-       ctx.drawImage(img, 0, 0);
+          ctx.drawImage(img, 0, 0);
 
-       // Convert the canvas content to a Blob
-       canvas.toBlob(function (blob) {
-         var imga = new File([blob], image, {
-           type: "image/png",
-         });
-         console.log(blob);
-         console.log("imga ", imga);
-         imags.push(imga);
-        
-         console.log("aaja",imags);
-        //  setImages([...images,imga]);
-       }, "image/png");
+          // Convert the canvas content to a Blob
+          canvas.toBlob(function (blob) {
+            var imga = new File([blob], image, {
+              type: "image/png",
+            });
+            console.log(blob);
+            console.log("imga ", imga);
+            imags.push(imga);
 
-      });
-      // setImages([...images,...imags]);
-      // callback();
-      resolve();
-      // setInitialImg();
-      },1000)
-       
+            console.log("aaja", imags);
+            //  setImages([...images,imga]);
+          }, "image/png");
+
+        });
+        // setImages([...images,...imags]);
+        // callback();
+        resolve();
+        // setInitialImg();
+      }, 1000)
+
     });
   }
-const setInitialImg= ()=>{
-  setImages(imags);  
-}
+  const setInitialImg = () => {
+    setImages(imags);
+  }
 
   const [sellPro, setProp] = useState(true);
   const {
@@ -90,30 +90,30 @@ const setInitialImg= ()=>{
     if (images.length < 1) return;
     const newImageUrls = [];
     images.forEach((image) => {
-    console.log("check",image);
-    const blob = new Blob([image], { type: "image/png" });
-    console.log(blob);
-    if(blob.size<100){
-      console.log("inside blob ",`${image.name}`)
-      newImageUrls.push(
-        require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
-      );
-    }
-    else{
-      newImageUrls.push(URL.createObjectURL(blob));
-    }
+      console.log("check", image);
+      const blob = new Blob([image], { type: "image/png" });
+      console.log(blob);
+      if (blob.size < 100) {
+        console.log("inside blob ", `${image.name}`)
+        newImageUrls.push(
+          require(`C:/Users/Sahil Dharaviya/Desktop/RealEstate/frontend/src/Images/${image.name}`)
+        );
+      }
+      else {
+        newImageUrls.push(URL.createObjectURL(blob));
+      }
       // newImageUrls.pop();
       console.log("url", newImageUrls);
     });
-    
+
     setImageURLs(newImageUrls);
   }, [images]);
 
   //functions
   const onImageChange = (e) => {
     setImages([...images, e.target.files[0]]);
-    console.log("tar",e.target.files[0]);
-    images.forEach(img=>{console.log("My",img)});
+    console.log("tar", e.target.files[0]);
+    images.forEach(img => { console.log("My", img) });
     console.log("y", images.length);
     if (images.length >= 0) setProp(false);
     else setProp(true);
@@ -139,7 +139,7 @@ const setInitialImg= ()=>{
 
     console.log("Image Uploaded...");
     const imageName = result.data;
-      console.log("img name",imageName);
+    console.log("img name", imageName);
     //Updating information to database
     let data = await fetch(`http://localhost:5000/update-database/${prodetail._id}`, {
       method: "put",
@@ -162,7 +162,7 @@ const setInitialImg= ()=>{
       },
     });
     data = await data.json();
-    if(data){
+    if (data) {
       toast.success("Property Updated Successfully...", {
         position: "top-right",
         autoClose: 2000,

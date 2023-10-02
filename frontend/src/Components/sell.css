@@ -13,7 +13,7 @@
 }
 
 #leftHeading, #rightHeading {
-    @apply uppercase font-black text-[2em];
+    @apply uppercase font-black text-[1.7em];
 }
 
 #rightHeading {
