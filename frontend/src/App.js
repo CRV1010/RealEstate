@@ -2,17 +2,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
-import ContactUs from "./Components/ContactUs";
 import PrivateComponent from "./Components/PrivateComponent";
 import Navbar from "./Components/Navbar";
 import ForgotPassword from "./Components/ForgotPassword";
 import ConfirmOTP from "./Components/ConfirmOTP";
 import ChangePassword from "./Components/ChangePassword";
 import ChatAdmin from "./Components/ChatAdmin";
+import ContactUs from "./Components/ContactUs";
 import About from "./Components/About"
 import Sell from "./Components/sell";
 import AddProperty from "./Components/addProperty";
 import Explore from "./Components/explore";
+import DataSelector from "./Components/DataSelector";
 
 import Carousel from "./Components/Home/Carousel";
 import SellBuyRent from "./Components/Home/SellBuyRent";
@@ -30,7 +31,7 @@ import OtherProperty2 from "./Components/OtherProperty2";
 import UpdateUser from "./Components/UpdateUser";
 
 function App() {
-  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -49,7 +50,7 @@ function App() {
                 </>
               }
             />
-            {/* <Route path="/home" element={<Carousel />} /> */}
+            <Route path="/dataselector" element={<DataSelector />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
 
