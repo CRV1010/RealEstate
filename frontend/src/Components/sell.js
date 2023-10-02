@@ -1,39 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import DataSelector from './DataSelector';
-import { Country, State, City } from "country-state-city";
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState,useEffect } from 'react'
+import {useNavigate, Link } from "react-router-dom";
+
 import './sell.css'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function () {
-
-  let countryData = Country.getAllCountries();
-  const [stateData, setStateData] = useState();
-  const [cityData, setCityData] = useState();
-
-  const [country, setCountry] = useState(countryData[100]);
-  const [state, setState] = useState();
-  const [city, setCity] = useState();
-
-  useEffect(() => {
-    setStateData(State.getStatesOfCountry(country?.isoCode));
-  }, [country]);
-
-  useEffect(() => {
-    setCityData(City.getCitiesOfState(country?.isoCode, state?.isoCode));
-  }, [state]);
-
-  useEffect(() => {
-    stateData && setState(stateData[0]);
-  }, [stateData]);
-
-  useEffect(() => {
-    cityData && setCity(cityData[0]);
-  }, [cityData]);
-
   const navigate = useNavigate();
-
   useEffect(() => {
     const auth = localStorage.getItem("user");
     console.log(auth)
@@ -41,24 +15,21 @@ export default function () {
       navigate("/login");
     }
   }, []);
-
   // const username = JSON.parse(localStorage.getItem('username'));
   const border = { 'border': '1px solid black' }
-  const [cookie, setCookie] = useState({})
+  const [cookie,setCookie] = useState({})
 
   const [disable, setDisable] = useState(true);
 
   const addToLocalStorage = () => {
-
+    
     var propertyFor = document.querySelector('input[name="propertyFor"]:checked');
     var selectedValue = null;
-
     if (propertyFor) {
       selectedValue = propertyFor.value;
     }
 
     let type = document.getElementById('type').value;
-    let Country = document.getElementById('Country').value;
     let State = document.getElementById('State').value;
     let City = document.getElementById('City').value;
     let society = document.getElementById('society').value;
@@ -70,14 +41,13 @@ export default function () {
     let seller = JSON.parse(localStorage.getItem("user"));
     let sellerId = seller._id;
 
-    localStorage.setItem('PropertyDetails', JSON.stringify({ selectedValue, type, Country, State, City, society, zone, pincode, area, price, rooms, sellerId }));
-
+    localStorage.setItem( 'PropertyDetails' , JSON.stringify( { selectedValue , type,State,City,society,zone,pincode,area,price,rooms,sellerId} ) );
+    
     var temp = JSON.parse(localStorage.getItem('PropertyDetails'))
 
     console.log(temp.selectedValue)
     var selectedValue2 = temp.selectedValue;
     var type2 = temp.type;
-    var Country2 = temp.Country;
     var State2 = temp.State;
     var City2 = temp.City;
     var society2 = temp.society;
@@ -87,7 +57,7 @@ export default function () {
     var price2 = temp.price;
     var rooms2 = temp.rooms;
 
-    if (selectedValue2 === '' || type2 === '' || Country2 === '' || State2 === '' || City2 === '' || society2 === '' || zone2 === '' || pincode2 === '' || area2 === '' || price2 === '' || rooms2 === '') {
+    if(selectedValue2 === '' || type2 === '' || State2 === '' || City2 === '' || society2 === '' || zone2 === '' || pincode2 === '' || area2 === '' || price2 === '' || rooms2 === ''){
       toast.warning('Attention! Information not Sufficient...', {
         position: "top-right",
         autoClose: 5000,
@@ -97,10 +67,10 @@ export default function () {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
-      });
+        theme: "light", 
+      }); 
     }
-    else if (selectedValue2 !== '' && type2 !== '' && Country2 !== '' && State2 !== '' && City2 !== '' && society2 !== '' && zone2 !== '' && pincode2 !== '' && area2 !== '' && price2 !== '' && rooms2 !== '') {
+    else if(selectedValue2 !== '' && type2 !== '' && State2 !== '' && City2 !== '' && society2 !== '' && zone2 !== '' && pincode2 !== '' && area2 !== '' && price2 !== '' && rooms2 !== ''){
       setDisable(false)
       toast.success('Congratulations! Information Stored...', {
         position: "top-right",
@@ -111,10 +81,10 @@ export default function () {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "light", 
       });
     }
-    else {
+    else{
       toast.error('Oops! Information Crashed...', {
         position: "top-right",
         autoClose: 5000,
@@ -126,7 +96,7 @@ export default function () {
         progress: undefined,
         theme: "light",
       });
-    }
+    } 
   }
 
   return (
@@ -149,46 +119,16 @@ export default function () {
           <br />
           <div className="information">
             <div>
-              <label id='radio'>Property For:* </label> &emsp;
-              <label id='radio'>
-                <input
-                  type="radio"
-                  id='sellFor'
-                  name="propertyFor"
-                  value="Sell"
-                  className='sellField'
-                  defaultChecked
-                />
-                Sell
-              </label> &emsp;
-              <label id='radio'>
-                <input
-                  type="radio"
-                  id='sellFor'
-                  name="propertyFor"
-                  value="Rent"
-                  className='sellField'
-                  required
-                />
-                Rent
-              </label> &emsp;
-              <label id='radio'>
-                <input
-                  type="radio"
-                  id='sellFor'
-                  name="propertyFor"
-                  value="PG"
-                  className='sellField'
-                  required
-                />
-                PG
-              </label>
+              <label id='radio'>Property For:* </label> &emsp;  
+              <label id='radio'> <input type="radio" id='sellFor' name="propertyFor" value="Sell" required className='sellField' /> Sell </label> &emsp;
+              <label id='radio'> <input type="radio" id='sellFor' name="propertyFor" value="Rent" required className='sellField' /> Rent </label> &emsp;
+              <label id='radio'> <input type="radio" id='sellFor' name="propertyFor" value="PG" required className='sellField' /> PG </label> 
               <br />
             </div>
 
             <div>
-              <label>Property Type:* </label>
-              <select id="type" required>
+              <label>Type of Property:* </label>
+              <select id="type" required> 
                 <option id='propOpt' value="Select Type"> Select Type</option>
                 <option id='propOpt' value="Flats/Apartments">Flats/Apartments</option>
                 <option id='propOpt' value="Residential Plot">Residential Plot</option>
@@ -203,104 +143,35 @@ export default function () {
             </div>
 
             <h1 id='markLabel'> --- Landmark --- </h1> <br />
-            
-            <div className='flex flex-inline'>
-              <label className='inline-block' style={{ width: '100px' }}> Country:* &ensp;
-                {/* <input type="text"  className='sellField' name="Country" id="Country" placeholder='Enter Country' required > */}
-              </label>
-              <DataSelector
-                type="select"
-                className='sellField inline-block'
-                name="Country"
-                id="Country"
-                data={countryData}
-                selected={country}
-                setSelected={setCountry}
-              />
-            </div>
-            <br />
+            <label> State:* &ensp;
+              <input type="text" name="State" className='sellField' id="State" placeholder='Enter State' required /> 
+            </label>
 
-            {state && (
-              <div className='flex flex-inline'>
-                <label className='inline-block' style={{ width: '100px' }}> State:* &ensp;
-                  {/* <input type="text"  className='sellField' name="State" id="State" placeholder='Enter State' required > */}
-                </label>
-                <DataSelector
-                  type="select"
-                  className='sellField inline-block'
-                  name="State"
-                  id="State"
-                  data={stateData}
-                  selected={state}
-                  setSelected={setState} />
-              </div>
-            )}
-            <br />
-
-            {city && (
-              <div className='flex flex-inline'>
-                <label className='inline-block' style={{ width: '100px' }}>City:* &ensp;
-                  {/* <input type="text" name="City" className='sellField' id="City" placeholder='Enter City' required /> */}
-                </label>
-                <DataSelector
-                  type="select"
-                  className='sellField inline-block'
-                  name="City"
-                  id="City"
-                  data={cityData}
-                  selected={city}
-                  setSelected={setCity} />
-              </div>
-            )}
-            <br />
-
-            <label>Area:* &ensp;
-              <input
-                type="text"
-                name="zone"
-                className='sellField'
-                id="zone"
-                placeholder='Enter Area/Landmark'
-                required />
+            <label>City:* &ensp;
+              <input type="text" name="City" className='sellField' id="City" placeholder='Enter City' required /> 
             </label>
 
             <label>Apartment/Society:* &ensp;
-              <input
-                type="text"
-                name="society"
-                className='sellField'
-                id="society"
-                placeholder='Name Of Apartment/Society'
-                style={{ 'width': '40%' }}
-                required />
+              <input type="text" name="society" className='sellField' id="society" placeholder='Name Of Apartment/Society' style={{'width': '40%'}} required /> 
+            </label>  
+
+            <label>Area:* &ensp;
+              <input type="text" name="zone" className='sellField' id="zone" placeholder='Enter Area/Landmark' required/> 
             </label>
 
             <label>Pincode:* &ensp;
-              <input
-                type="number"
-                name='pincode'
-                className='sellField'
-                id="pincode"
-                placeholder='Enter 6 digit Pincode'
-                required />
+              <input type="number" name='pincode' className='sellField' id="pincode" placeholder='Enter 6 digit Pincode' required/> 
             </label>
             <br /><br />
 
             <h1 id='markLabel'> --- Property Feature & Price --- </h1> <br />
             <label>Plot/Land Area (in m<sup>2</sup>):*  &ensp;
-              <input
-                type="number"
-                name='area'
-                className='sellField'
-                id="area"
-                placeholder='Plot/Land Area in Sq.meter'
-                style={{ 'width': '40%' }}
-                required />
-            </label>
+              <input type="number" name='area' className='sellField' id="area" placeholder='Plot/Land Area in Sq.meter' style={{'width': '40%'}} required />
+            </label> 
 
             <div>
               <label>No. of Bedrooms:* &ensp; </label>
-              <select id="rooms" required>
+              <select id="rooms" required>  
                 <option id='room' value="1">1</option>
                 <option id='room' value="2">2</option>
                 <option id='room' value="3">3</option>
@@ -309,27 +180,14 @@ export default function () {
             </div>
 
             <label>Expected Price (&#8377;):* &ensp;
-              <input
-                type="number"
-                name='price'
-                className='sellField'
-                id="price"
-                placeholder='Enter Total Price in INR'
-                style={{ 'width': '40%' }}
-                required />
+              <input type="number" name='price' className='sellField' id="price" placeholder='Enter Total Price in INR' style={{'width':'40%'}} required />
             </label>
             <br />
           </div>
 
           <button id='saveBtn' onClick={addToLocalStorage}> Save </button>
-
-          <Link to="/addProperty">
-            <button
-              id="btn"
-              className={disable ? 'notCon' : 'con'}
-              disabled={disable}>
-              Continue
-            </button>
+          <Link to="/addProperty"> 
+            <button id="btn" className={disable ? 'notCon' : 'con'} disabled={disable}> Continue </button>  
           </Link>
 
           <ToastContainer
@@ -337,7 +195,7 @@ export default function () {
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}
-            closeOnClick
+            closeOnClick 
             rtl={false}
             pauseOnFocusLoss
             draggable
@@ -348,4 +206,4 @@ export default function () {
       </div>
     </div>
   )
-};
+}
