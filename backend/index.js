@@ -278,6 +278,7 @@ app.get("/conversations/:userId", async (req, res) => {
         return {
           users: {
             id: userTalked._id,
+            image:userTalked.image,
             username: userTalked.username,
             email: userTalked.email,
           },
