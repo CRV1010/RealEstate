@@ -4,7 +4,6 @@ import avtar from "../Images/avtar.png";
 import { io } from "socket.io-client";
 
 const ChatAdmin = () => {
-  
   const navigate = useNavigate();
   useEffect(() => {
     const auth = localStorage.getItem("user");
@@ -61,7 +60,7 @@ const ChatAdmin = () => {
 
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState({});
-  const [chatwith, setChatwith] = useState("");
+  const [chatwith, setChatwith] = useState();
   const [receiver, setReceiver] = useState("");
   const [cid, setCid] = useState("");
   const [socket, setSocket] = useState(null);
@@ -124,7 +123,7 @@ const ChatAdmin = () => {
   }, []);
 
   const fetchMessage = async (conversationId, users) => {
-    setChatwith(users.username);
+    setChatwith(users);
     setCid(conversationId);
     const res = await fetch(
       `http://localhost:5000/messages/${conversationId}`,
@@ -184,7 +183,13 @@ const ChatAdmin = () => {
     <div className="w-screen flex">
       <div className="w-[25%] border border-black h-screen  overflow-scroll ">
         <div className="flex justify-center my-8">
-          <img src={avtar} width={50} height={50} />
+          <img
+            src={require(`../Images/${user?.image}`)}
+            alt=""
+            width={50}
+            height={50}
+            className="rounded-full"
+          />
           <div className="ml-4">
             <h1 className="text-2xl">{user?.username}</h1>
           </div>
@@ -203,7 +208,13 @@ const ChatAdmin = () => {
                       fetchMessage(conversationId, users);
                     }}
                   >
-                    <img src={avtar} width={50} height={50} />
+                    <img
+                      src={require(`../Images/${users?.image}`)}
+                      alt=""
+                      width={50}
+                      height={50}
+                      className="rounded-full"
+                    />
                     <div className="ml-4">
                       <h1 className="text-2xl">{users.username}</h1>
                       <p>{users.email}</p>
@@ -222,11 +233,22 @@ const ChatAdmin = () => {
       <div className="w-[50%] border border-black h-screen flex flex-col items-center">
         <div className="w-[75%] h-[80px] bg-cyan-300 mt-3 rounded-full flex items-center px-14">
           <div>
-            <img src={avtar} width={50} height={50} />
+            {chatwith && (
+            <img
+              src={require(`../Images/${chatwith?.image}`)}
+              
+              alt=""
+              width={50}
+              height={50}
+              className="rounded-full"
+            />
+            )}
           </div>
           <div className="ml-6">
-            <h1 className="text-lg ">{chatwith}</h1>
-            <p className="text-sm font-light  text-gray-600">online</p>
+            <h1 className="text-lg ">{chatwith?.username}</h1>
+            <p className="text-sm font-light  text-gray-600">
+              {chatwith?.email}
+            </p>
           </div>
         </div>
         <div className="h-[75%] border w-full overflow-scroll border-b">
