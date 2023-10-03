@@ -275,10 +275,10 @@ app.get("/conversations/:userId", async (req, res) => {
         const userTalked = await user.findById(receiverId);
         // console.log("user my", userTalked);
         // if(userTalked!=null)
-        return {
+        return {  
           users: {
             id: userTalked._id,
-            image:userTalked.image,
+            image: userTalked.image,
             username: userTalked.username,
             email: userTalked.email,
           },
@@ -461,7 +461,7 @@ app.put("/update-database/:id", async (req, res) => {
         rooms: req.body.rooms,
         sellerId: req.body.sellerId,
         image: req.body.imageName,
-        modified : 1
+        modified: 1,
       },
     }
   );
@@ -582,15 +582,18 @@ app.post("/search-property-three", async (req, res) => {
 app.get("/search/:key", async (req, res) => {
   // console.log("hello");
   try {
-    var regex = new RegExp(["^", req.params.key.toLowerCase(), "$"].join(""), "i");
+    var regex = new RegExp(
+      ["^", req.params.key.toLowerCase(), "$"].join(""),
+      "i"
+    );
     let data = await Image.find({
       $or: [
-        { propertyFor: {$regex: req.params.key} },
-        { type: {$regex: req.params.key} },
-        { State: {$regex: req.params.key} },
-        { City: {$regex: req.params.key} },
-        { society: {$regex: req.params.key} },
-        { zone: {$regex: req.params.key} },
+        { propertyFor: { $regex: req.params.key } },
+        { type: { $regex: req.params.key } },
+        { State: { $regex: req.params.key } },
+        { City: { $regex: req.params.key } },
+        { society: { $regex: req.params.key } },
+        { zone: { $regex: req.params.key } },
         // { price: { $regex: req.params.key } },
       ],
     });

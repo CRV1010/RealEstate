@@ -180,147 +180,170 @@ const ChatAdmin = () => {
   }, [conversations]);
 
   return (
-    <div className="w-screen flex">
-      <div className="w-[25%] border border-black h-screen  overflow-scroll ">
-        <div className="flex justify-center my-8">
-          <img
-            src={require(`../Images/${user?.image}`)}
-            alt=""
-            width={50}
-            height={50}
-            className="rounded-full"
-          />
-          <div className="ml-4">
-            <h1 className="text-2xl">{user?.username}</h1>
-          </div>
-        </div>
-        <hr />
-        <div className="ml-10 ">
-          <div>Messages</div>
-          <div>
-            {conversations.length > 0 ? (
-              conversations.map(({ users, conversationId }) => {
-                // console.log(users, conversationId);
-                return (
-                  <div
-                    className="flex  item-center py-8 border-b border-b-gray-300  cursor-pointer"
-                    onClick={() => {
-                      fetchMessage(conversationId, users);
-                    }}
-                  >
-                    <img
-                      src={require(`../Images/${users?.image}`)}
-                      alt=""
-                      width={50}
-                      height={50}
-                      className="rounded-full"
-                    />
-                    <div className="ml-4">
-                      <h1 className="text-2xl">{users.username}</h1>
-                      <p>{users.email}</p>
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <div className="text-center font-semibold text-lg">
-                No Conversation
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="w-[50%] border border-black h-screen flex flex-col items-center">
-        <div className="w-[75%] h-[80px] bg-cyan-300 mt-3 rounded-full flex items-center px-14">
-          <div>
-            {chatwith && (
+    <div
+      className="py-6 px-20 h-[660px] rounded-xl"
+      style={{
+        background: "linear-gradient(to bottom, #5B9A8B 200px, #D8D9DA 0)",
+      }}
+    >
+      <div className=" flex justify-center ">
+        <div className="w-[30%] mb-6 overflow-y-scroll rounded-xl  bg-white ">
+          <div
+            className="flex px-5 py-3 align-middle "
+            style={{ backgroundColor: "#F1EFEF" }}
+          >
             <img
-              src={require(`../Images/${chatwith?.image}`)}
-              
+              src={require(`../Images/${user?.image}`)}
               alt=""
               width={50}
               height={50}
               className="rounded-full"
             />
-            )}
-          </div>
-          <div className="ml-6">
-            <h1 className="text-lg ">{chatwith?.username}</h1>
-            <p className="text-sm font-light  text-gray-600">
-              {chatwith?.email}
-            </p>
-          </div>
-        </div>
-        <div className="h-[75%] border w-full overflow-scroll border-b">
-          <div className="h-[1000px] px-10 py-14">
-            {messages?.messages?.length > 0 ? (
-              messages.messages.map(({ message, users }) => {
-                const userId = JSON.parse(localStorage.getItem("user"));
-                // if(users.id===undefined) console.log("uni chirag")
-                if (users?.id === userId?._id) {
-                  return (
-                    <>
-                      <div className="max-w-[40%] bg-green-200 rounded-b-xl rounded-tr-xl py-4 ">
-                        {message}
-                      </div>
-                      <div ref={messageRef}></div>
-                    </>
-                  );
-                } else {
-                  return (
-                    <>
-                      <div className="max-w-[40%] bg-blue-200 rounded-b-xl rounded-tr-xl py-4 ml-auto">
-                        {message}
-                      </div>
-                      <div ref={messageRef}></div>
-                    </>
-                  );
-                }
-              })
-            ) : (
-              <div className="text-center text-lg font-semibold mt-24">
-                No Messages
-              </div>
-            )}
-          </div>
-        </div>
-        {chatwith && (
-          <div className="h-[25%] flex items-center w-full p-2 px-4 ">
-            <input
-              type="text"
-              className="bg-gray-50 border border-gray-300 text-gray-900 
-            text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              value={msg}
-              placeholder="Type a message..."
-              onChange={(e) => {
-                setMsg(e.target.value);
-              }}
-            />
-            <div
-              className={`ml-4 cursor-pointer ${!msg && "pointer-events-none"}`}
-              onClick={() => sendMessage()}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-send"
-                width="44"
-                height="44"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="#2c3e50"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M10 14l11 -11" />
-                <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
-              </svg>
+            <div className="px-3">
+              <h1 className="text-xl text-center">{user?.username}</h1>
             </div>
           </div>
-        )}
+          {/* <hr /> */}
+          <div className="px-5 bg-white ">
+            {/* <div>Messages</div> */}
+            <div className="py-0 my-0 ">
+              {conversations.length > 0 ? (
+                conversations.map(({ users, conversationId }) => {
+                  // console.log(users, conversationId);
+                  return (
+                    <div
+                      className="flex  item-center py-4  border-b border-b-gray-300  cursor-pointer"
+                      onClick={() => {
+                        fetchMessage(conversationId, users);
+                      }}
+                    >
+                      <img
+                        src={require(`../Images/${users?.image}`)}
+                        alt=""
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                      />
+                      <div className="ml-4">
+                        <h1 className=" text-xl">{users.username}</h1>
+                        <p className=" text-base">{users.email}</p>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center font-semibold text-lg">
+                  No Conversation
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        <div
+          className="w-[70%]  h-[618px] mb-5 flex flex-col rounded-tr-xl "
+          style={{ backgroundColor: "#F1EFEF" }}
+        >
+          <div className="w-[70%] h-[60px]  mt-3 rounded-full flex mx-5 ">
+            <div>
+              {chatwith && (
+                <img
+                  src={require(`../Images/${chatwith?.image}`)}
+                  alt=""
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+              )}
+            </div>
+            <div className="ml-6">
+              <h1 className="text-lg text-black">{chatwith?.username}</h1>
+              <p className="text-sm font-light">{chatwith?.email}</p>
+            </div>
+          </div>
+          <div
+            className="h-[79%] border w-full overflow-y-scroll border-b"
+            style={{ backgroundImage: "url(../chatBg.png)" }}
+          >
+            <div className="h-[1000px] px-10 py-14 my-0">
+              {messages?.messages?.length > 0 ? (
+                messages.messages.map(({ message, users }) => {
+                  const userId = JSON.parse(localStorage.getItem("user"));
+                  // if(users.id===undefined) console.log("uni chirag")
+                  if (users?.id === userId?._id) {
+                    return (
+                      <>
+                        <div
+                          className="max-w-[40%] bg-slate-50 px-3  rounded-b-xl rounded-tr-xl py-2 my-5 "
+                          style={{ backgroundColor: "#AED6F1" }}
+                        >
+                          {message}
+                        </div>
+                        <div ref={messageRef}></div>
+                      </>
+                    );
+                  } else {
+                    return (
+                      <>
+                        <div
+                          className="max-w-[40%]  px-3 rounded-b-xl rounded-tl-xl py-2 my-5 ml-auto"
+                          style={{ backgroundColor: "#B0D9B1" }}
+                        >
+                          {message}
+                        </div>
+                        <div ref={messageRef}></div>
+                      </>
+                    );
+                  }
+                })
+              ) : (
+                <div className="text-center text-lg font-semibold mt-24">
+                  No Messages
+                </div>
+              )}
+            </div>
+          </div>
+          {chatwith && (
+            <div
+              className="flex items-center w-full p-2 rounded-br-xl px-6"
+              style={{ backgroundImage: "url(../chatBg.png)" }}
+            >
+              <input
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900  
+            text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                value={msg}
+                placeholder="Type a message..."
+                onChange={(e) => {
+                  setMsg(e.target.value);
+                }}
+              />
+              <div
+                className={`ml-4 cursor-pointer ${
+                  !msg && "pointer-events-none"
+                }`}
+                onClick={() => sendMessage()}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-send"
+                  width="44"
+                  height="35"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#2c3e50"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M10 14l11 -11" />
+                  <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                </svg>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="w-[25%] border border-black h-screen"></div>
     </div>
   );
 };
