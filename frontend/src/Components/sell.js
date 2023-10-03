@@ -10,7 +10,6 @@ export default function () {
   const navigate = useNavigate();
   useEffect(() => {
     const auth = localStorage.getItem("user");
-    console.log(auth)
     if (!auth) {
       navigate("/login");
     }
@@ -120,7 +119,7 @@ export default function () {
           <div className="information">
             <div>
               <label id='radio'>Property For:* </label> &emsp;  
-              <label id='radio'> <input type="radio" id='sellFor' name="propertyFor" value="Sell" required className='sellField' /> Sell </label> &emsp;
+              <label id='radio'> <input type="radio" id='sellFor' name="propertyFor" value="Sell" required className='sellField' checked /> Sell </label> &emsp;
               <label id='radio'> <input type="radio" id='sellFor' name="propertyFor" value="Rent" required className='sellField' /> Rent </label> &emsp;
               <label id='radio'> <input type="radio" id='sellFor' name="propertyFor" value="PG" required className='sellField' /> PG </label> 
               <br />

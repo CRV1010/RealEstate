@@ -31,8 +31,13 @@ export default function () {
     });
     var data = await result.json();
     let pd = data[0];
-    console.log("prop",pd);
-    document.getElementById('sellFor').checked= pd.propertyFor;
+    console.log("prop",pd.propertyFor);
+    if(pd.propertyFor==='Sell')
+      document.getElementById('sellFor1').checked= pd.propertyFor;
+    else if(pd.propertyFor==='Rent')
+      document.getElementById("sellFor2").checked = pd.propertyFor;
+    else
+      document.getElementById("sellFor3").checked = pd.propertyFor;
     document.getElementById("type").value=pd.type;
     document.getElementById("State").value=pd.State;
     document.getElementById("City").value=pd.City;
@@ -199,7 +204,7 @@ export default function () {
                 {" "}
                 <input
                   type="radio"
-                  id="sellFor"
+                  id="sellFor1"
                   name="propertyFor"
                   value="Sell"
                   required
@@ -212,7 +217,7 @@ export default function () {
                 {" "}
                 <input
                   type="radio"
-                  id="sellFor"
+                  id="sellFor2"
                   name="propertyFor"
                   value="Rent"
                   required
@@ -225,7 +230,7 @@ export default function () {
                 {" "}
                 <input
                   type="radio"
-                  id="sellFor"
+                  id="sellFor3"
                   name="propertyFor"
                   value="PG"
                   required

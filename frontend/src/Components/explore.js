@@ -50,12 +50,22 @@ export default function () {
       <>
         <h1 id="headingExplore"> Properties for Explore </h1>
         <div className="mainExplore" style={{ maxWidth: "80%" }}>
-          <input
-            type="text"
-            placeholder="Search Property"
-            className="rounded-full border-solid w-1/2 h-10 hover:border-dotted border-4 border-indigo-600"
-            onChange={searchHandle}
-          />
+          <div class="flex w-full justify-center my-7 items-end">
+            <div class="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
+              <input
+                type="text"
+                id="hero-field"
+                name="hero-field"
+                placeholder="Search Property"
+                className="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-indigo-200 focus:bg-transparent border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                onChange={searchHandle}
+              />
+            </div>
+            <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+              Button
+            </button>
+          
+          </div>
           <ul className="cardsExplore">
             {database
               ? database.map((ArrayOfObjects, index) => {
