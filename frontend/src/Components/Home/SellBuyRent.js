@@ -234,7 +234,7 @@ localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
               </div>
             </button>
             {modal1Open && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 bg-00000k bg-opacity-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white  rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
@@ -333,7 +333,7 @@ localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
               </div>
             )}
             {modal2Open && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 bg-00000k bg-opacity-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
@@ -415,7 +415,7 @@ localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
               </div>
             )}
             {modal3Open && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 bg-00000k bg-opacity-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white  rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
@@ -492,7 +492,7 @@ localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
               </div>
             </button>
             {rentModal1Open && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 bg-00000k bg-opacity-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white  rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
@@ -593,7 +593,7 @@ localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
               </div>
             )}
             {rentModal2Open && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 bg-00000k bg-opacity-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white  rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
@@ -676,7 +676,7 @@ localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
               </div>
             )}
             {rentModal3Open && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 bg-00000k bg-opacity-50">
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">

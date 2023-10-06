@@ -10,6 +10,7 @@ const nocache = require("nocache");
 const conversation = require("./db/conversation");
 const messages = require("./db/messages");
 const userMsg = require("./db/userMessage");
+const comments = require("./db/comment");
 
 const io = require("socket.io")(5555, {
   cors: {
@@ -275,7 +276,7 @@ app.get("/conversations/:userId", async (req, res) => {
         const userTalked = await user.findById(receiverId);
         // console.log("user my", userTalked);
         // if(userTalked!=null)
-        return {  
+        return {
           users: {
             id: userTalked._id,
             image: userTalked.image,
@@ -485,6 +486,7 @@ app.get("/get-data", async (req, res) => {
 
 //to get the user information like username , email , phone
 app.post("/getUserDetails", async (req, res) => {
+  console.log(req.body);
   let result = await user.findOne(req.body);
   username = result.username;
   email = result.email;
@@ -602,6 +604,17 @@ app.get("/search/:key", async (req, res) => {
   } catch (error) {
     console.log("error", error);
   }
+});
+
+app.post("/comment", async (req, res) => {
+  let data = new comments(req.body);
+  data = await data.save();
+  res.send({ result: "comment saved" });
+});
+
+app.get("/show-comments", async (req, res) => {
+  let data = await comments.find({});
+  res.send(data);
 });
 
 function verifyToken(req, res, next) {
