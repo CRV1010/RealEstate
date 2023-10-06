@@ -617,6 +617,11 @@ app.get("/show-comments", async (req, res) => {
   res.send(data);
 });
 
+app.delete("/commentDelete/:id", async (req, res) => {
+  let data = await comments.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
 function verifyToken(req, res, next) {
   let token = req.headers["authorization"];
   if (token) {
