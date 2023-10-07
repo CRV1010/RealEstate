@@ -50,7 +50,7 @@ const Carousel = () => {
 
               <div className=' flex'>
                 <img src={"Carousel/checked.png"} alt="" className='pt-6 mr-4' width={20} /><span className='title-font sm:text-xl pt-6 font-medium text-xl text-gray-800'>Get Expert Advice on Market Trends </span>
-               
+
               </div>
             </div>
 

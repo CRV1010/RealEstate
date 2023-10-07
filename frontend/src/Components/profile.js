@@ -141,7 +141,7 @@ export default function (props) {
               <strong>Phone: {UserDetails.phone}</strong>
             </h2>
             <h2 id="proField" className="proFieldHover">
-              <strong>DOB: {UserDetails?.dob?.substring(0, 10)}</strong>
+              <strong>Brithdate: {UserDetails?.dob?.substring(0, 10)}</strong>
             </h2>
             <div id="proUpdate">
               <button id="proUpdateBtn" onClick={userUpdate}>

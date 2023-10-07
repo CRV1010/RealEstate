@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
-
 import './addProperty.css'
-
 //first do this :  npm i axios
 import axios from "axios";
 
 export default function (props) {
-  
   //hooks
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
 
   const [sellPro, setProp] = useState(true);
+  const propertyDetails = JSON.parse(localStorage.getItem("PropertyDetails"));
   const {
     selectedValue,
     type,
@@ -24,7 +22,7 @@ export default function (props) {
     price,
     rooms,
     sellerId,
-  } = JSON.parse(localStorage.getItem("PropertyDetails"));
+  } = propertyDetails;
 
   useEffect(() => {
     if (images.length < 1) 
@@ -34,8 +32,6 @@ export default function (props) {
     console.log("url", newImageUrls);
     setImageURLs(newImageUrls);
   }, [images]);
-  
-
 
   //functions
   const onImageChange = (e) => {

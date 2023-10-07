@@ -9,7 +9,7 @@ const SellBuyRent = () => {
   const [modal3Open, setModal3Open] = useState(false);
 
   const openModal = (propertyFor) => {
-    localStorage.setItem("propertyFor",propertyFor);
+    localStorage.setItem("propertyFor", propertyFor);
     setModal1Open(true);
   };
 
@@ -76,118 +76,118 @@ const SellBuyRent = () => {
 
   const handleDropdownChange = (event) => {
     let state = event.target.value;
-      console.log(state)
-      localStorage.setItem('State', JSON.stringify(state ));
+    console.log(state)
+    localStorage.setItem('State', JSON.stringify(state));
   };
 
-  const handleDropdownChange1 = (event) => { 
+  const handleDropdownChange1 = (event) => {
     let cities = event.target.value;
     console.log(cities)
-    localStorage.setItem('Cities', JSON.stringify( cities ));
+    localStorage.setItem('Cities', JSON.stringify(cities));
   };
 
-  const handleDropdownChange2 = (event) => { 
+  const handleDropdownChange2 = (event) => {
     let area = event.target.value;
     console.log(area)
-    localStorage.setItem('Area', JSON.stringify( area ));
+    localStorage.setItem('Area', JSON.stringify(area));
   };
 
 
   const handleDropdownChange3 = (event) => {
     let propertyType = event.target.value;
-      console.log(propertyType)
-      localStorage.setItem('Property', JSON.stringify( propertyType ));
+    console.log(propertyType)
+    localStorage.setItem('Property', JSON.stringify(propertyType));
   };
 
-  const handleDropdownChange4 = (event) => { 
+  const handleDropdownChange4 = (event) => {
     let type = event.target.value;
     console.log(type)
-    localStorage.setItem('Type', JSON.stringify( type ));
+    localStorage.setItem('Type', JSON.stringify(type));
   };
 
-  const handleDropdownChange5 = (event) => { 
+  const handleDropdownChange5 = (event) => {
     let budget = event.target.value;
     console.log(budget)
-    localStorage.setItem('Budget', JSON.stringify(budget ));
+    localStorage.setItem('Budget', JSON.stringify(budget));
   };
 
-const stateData = JSON.parse(localStorage.getItem('State'));
-const citiesData = JSON.parse(localStorage.getItem('Cities'));
-const areaData = JSON.parse(localStorage.getItem('Area'));
-const propertyData = JSON.parse(localStorage.getItem('Property'));
-const typeData = JSON.parse(localStorage.getItem('Type'));
-const budgetData = JSON.parse(localStorage.getItem('Budget'));
+  const stateData = JSON.parse(localStorage.getItem('State'));
+  const citiesData = JSON.parse(localStorage.getItem('Cities'));
+  const areaData = JSON.parse(localStorage.getItem('Area'));
+  const propertyData = JSON.parse(localStorage.getItem('Property'));
+  const typeData = JSON.parse(localStorage.getItem('Type'));
+  const budgetData = JSON.parse(localStorage.getItem('Budget'));
 
-// Combine them into one object
-const combinedObject = {
-  state: stateData,
-  cities: citiesData,
-  area: areaData,
-  property: propertyData,
-  type: typeData,
-  budget: budgetData
-};
+  // Combine them into one object
+  const combinedObject = {
+    state: stateData,
+    cities: citiesData,
+    area: areaData,
+    property: propertyData,
+    type: typeData,
+    budget: budgetData
+  };
 
-// Store the combined object back in localStorage
-localStorage.setItem('CombinedData', JSON.stringify(combinedObject));
+  // Store the combined object back in localStorage
+  localStorage.setItem('CombinedData', JSON.stringify(combinedObject));
 
-const rentHandleDropdownChange = (event) => {
-  let state = event.target.value;
+  const rentHandleDropdownChange = (event) => {
+    let state = event.target.value;
     console.log(state)
-    localStorage.setItem('RentState', JSON.stringify(state ));
-};
+    localStorage.setItem('RentState', JSON.stringify(state));
+  };
 
-const rentHandleDropdownChange1 = (event) => { 
-  let cities = event.target.value;
-  console.log(cities)
-  localStorage.setItem('RentCities', JSON.stringify( cities ));
-};
+  const rentHandleDropdownChange1 = (event) => {
+    let cities = event.target.value;
+    console.log(cities)
+    localStorage.setItem('RentCities', JSON.stringify(cities));
+  };
 
-const rentHandleDropdownChange2 = (event) => { 
-  let area = event.target.value;
-  console.log(area)
-  localStorage.setItem('RentArea', JSON.stringify( area ));
-};
+  const rentHandleDropdownChange2 = (event) => {
+    let area = event.target.value;
+    console.log(area)
+    localStorage.setItem('RentArea', JSON.stringify(area));
+  };
 
 
-const rentHandleDropdownChange3 = (event) => {
-  let propertyType = event.target.value;
+  const rentHandleDropdownChange3 = (event) => {
+    let propertyType = event.target.value;
     console.log(propertyType)
-    localStorage.setItem('RentProperty', JSON.stringify( propertyType ));
-};
+    localStorage.setItem('RentProperty', JSON.stringify(propertyType));
+  };
 
-const rentHandleDropdownChange4 = (event) => { 
-  let type = event.target.value;
-  console.log(type)
-  localStorage.setItem('RentType', JSON.stringify( type ));
-};
+  const rentHandleDropdownChange4 = (event) => {
+    let type = event.target.value;
+    console.log(type)
+    localStorage.setItem('RentType', JSON.stringify(type));
+  };
 
-const rentHandleDropdownChange5 = (event) => { 
-  let budget = event.target.value;
-  console.log(budget)
-  localStorage.setItem('RentBudget', JSON.stringify(budget ));
-};
+  const rentHandleDropdownChange5 = (event) => {
+    let budget = event.target.value;
+    console.log(budget)
+    localStorage.setItem('RentBudget', JSON.stringify(budget));
+  };
 
 
-const rentStateData = JSON.parse(localStorage.getItem('RentState'));
-const rentCitiesData = JSON.parse(localStorage.getItem('RentCities'));
-const rentAreaData = JSON.parse(localStorage.getItem('RentArea'));
-const rentPropertyData = JSON.parse(localStorage.getItem('RentProperty'));
-const rentTypeData = JSON.parse(localStorage.getItem('RentType'));
-const rentBudgetData = JSON.parse(localStorage.getItem('RentBudget'));
+  const rentStateData = JSON.parse(localStorage.getItem('RentState'));
+  const rentCitiesData = JSON.parse(localStorage.getItem('RentCities'));
+  const rentAreaData = JSON.parse(localStorage.getItem('RentArea'));
+  const rentPropertyData = JSON.parse(localStorage.getItem('RentProperty'));
+  const rentTypeData = JSON.parse(localStorage.getItem('RentType'));
+  const rentBudgetData = JSON.parse(localStorage.getItem('RentBudget'));
 
-// Combine them into one object
-const rentCombinedObject = {
-  rentState: rentStateData,
-  rentCities: rentCitiesData,
-  rentArea: rentAreaData,
-  rentProperty: rentPropertyData,
-  rentType: rentTypeData,
-  rentBudget: rentBudgetData
-};
+  // Combine them into one object
+  const rentCombinedObject = {
+    rentState: rentStateData,
+    rentCities: rentCitiesData,
+    rentArea: rentAreaData,
+    rentProperty: rentPropertyData,
+    rentType: rentTypeData,
+    rentBudget: rentBudgetData
+  };
 
-// Store the combined object back in localStorage
-localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
+  // Store the combined object back in localStorage
+  localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
 
 
   return (

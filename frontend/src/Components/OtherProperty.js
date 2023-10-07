@@ -51,11 +51,11 @@ export default function () {
     console.log(rooms, price);
     // console.log("rent");
   }
-    
+
   async function getData() {
     const result = await fetch("http://localhost:5000/search-property-two", {
       method: "post",
-      body: JSON.stringify({ propertyFor, type, State, City, zone,rooms,price }),
+      body: JSON.stringify({ propertyFor, type, State, City, zone, rooms, price }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -63,8 +63,8 @@ export default function () {
     var data = await result.json();
     setdatabase(data);
   }
-  const nextPage = async () =>{
-      navigate("/otherproperty2")
+  const nextPage = async () => {
+    navigate("/otherproperty2")
   }
 
   return (
@@ -74,58 +74,58 @@ export default function () {
         <ul className="cardsExplore">
           {database
             ? database.map((ArrayOfObjects, index) => {
-                const imageNames = ArrayOfObjects.image[0];
-                return (
-                  <li className="cards_item_explore" key={ArrayOfObjects._id}>
-                    <div className="card" tabindex="0">
-                      <h2 className="card_title_explore">
-                        {" "}
-                        {ArrayOfObjects.propertyFor} &#x2022; &#8377;
-                        {ArrayOfObjects.price}{" "}
-                      </h2>
-                      <div className="card_image_explore">
-                        {ArrayOfObjects.image &&
+              const imageNames = ArrayOfObjects.image[0];
+              return (
+                <li className="cards_item_explore" key={ArrayOfObjects._id}>
+                  <div className="card" tabindex="0">
+                    <h2 className="card_title_explore">
+                      {" "}
+                      {ArrayOfObjects.propertyFor} &#x2022; &#8377;
+                      {ArrayOfObjects.price}{" "}
+                    </h2>
+                    <div className="card_image_explore">
+                      {ArrayOfObjects.image &&
                         ArrayOfObjects.image.length > 0 ? (
-                          <img
-                            src={require(`../Images/${ArrayOfObjects.image[0]}`)}
-                            key={ArrayOfObjects.image[0]}
-                            alt="not fetched"
-                          />
-                        ) : (
-                          ""
-                        )}
-                      </div>
+                        <img
+                          src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                          key={ArrayOfObjects.image[0]}
+                          alt="not fetched"
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </div>
 
-                      <div className="card_content_explore">
-                        <div className="card_text_explore">
-                          <p>
-                            {" "}
-                            <strong> Property Type: </strong>
-                            {ArrayOfObjects.type}{" "}
-                          </p>
-                          <p>
-                            {" "}
-                            <strong>Location: </strong> {ArrayOfObjects.society}
-                            , {ArrayOfObjects.zone}, {ArrayOfObjects.City},{" "}
-                            {ArrayOfObjects.State}.{" "}
-                          </p>
-                          <p>
-                            {" "}
-                            <strong>Pincode: </strong> {ArrayOfObjects.pincode}{" "}
-                          </p>{" "}
-                          <br />
-                          <p className="facility_explore">
-                            {" "}
-                            <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
-                            BHK <br /> <strong>Land Area: </strong>{" "}
-                            {ArrayOfObjects.area}{" "}
-                          </p>
-                        </div>
+                    <div className="card_content_explore">
+                      <div className="card_text_explore">
+                        <p>
+                          {" "}
+                          <strong> Property Type: </strong>
+                          {ArrayOfObjects.type}{" "}
+                        </p>
+                        <p>
+                          {" "}
+                          <strong>Location: </strong> {ArrayOfObjects.society}
+                          , {ArrayOfObjects.zone}, {ArrayOfObjects.City},{" "}
+                          {ArrayOfObjects.State}.{" "}
+                        </p>
+                        <p>
+                          {" "}
+                          <strong>Pincode: </strong> {ArrayOfObjects.pincode}{" "}
+                        </p>{" "}
+                        <br />
+                        <p className="facility_explore">
+                          {" "}
+                          <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
+                          BHK <br /> <strong>Land Area: </strong>{" "}
+                          {ArrayOfObjects.area}{" "}
+                        </p>
                       </div>
                     </div>
-                  </li>
-                );
-              })
+                  </div>
+                </li>
+              );
+            })
             : ""}
         </ul>
       </div>
