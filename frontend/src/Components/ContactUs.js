@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const ContactUs = () => {
@@ -12,26 +12,26 @@ const ContactUs = () => {
     formState: { errors },
   } = useForm();
 
-  const clickHandler = async () =>{
+  const clickHandler = async () => {
     let data = await fetch("http://localhost:5000/user-contact", {
-        method: "post",
-        body: JSON.stringify({ username,email,message }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      method: "post",
+      body: JSON.stringify({ username, email, message }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      data = await data.json(); 
-      if(data){
-        alert(data.result)
-        setUsername("");
-        setEmail("");
-        setMessage("");
-      }
-      else{
-        alert("error in sending message")
-      }
-      
+    data = await data.json();
+    if (data) {
+      alert(data.result)
+      setUsername("");
+      setEmail("");
+      setMessage("");
+    }
+    else {
+      alert("error in sending message")
+    }
+
   }
   return (
     <div className=" antialiased bg-white-100 m-5">
@@ -89,7 +89,7 @@ const ContactUs = () => {
           <div className="relative">
             <div className="absolute z-0 w-40 h-40 bg-teal-400 rounded-full -right-28 -top-28"></div>
             <div className="absolute z-0 w-40 h-40 bg-teal-400 rounded-full -left-28 -bottom-16"></div>
-            <div className="relative z-10 bg-white rounded-xl shadow-lg p-8 text-gray-600 md:w-64">
+            <div className="relative z-10 bg-white rounded-xl shadow-lg p-8 text-gray-600 md:w-70">
               <form
                 onSubmit={handleSubmit(clickHandler)}
                 className="flex flex-col space-y-4"
@@ -108,8 +108,7 @@ const ContactUs = () => {
                     onChange={(e) => {
                       setUsername(e.target.value);
                     }}
-                    className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none 
-                                        focus:ring-2 focus:ring-teal-300"
+                    className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-teal-300"
                   />
                   <p className="text-sm text-red-500">
                     {errors.username?.message}
@@ -126,15 +125,14 @@ const ContactUs = () => {
                       required: "Email is required",
                       pattern: {
                         value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                        message: "Email is not valid email",
+                        message: "Email is not valid",
                       },
                     })}
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
                     placeholder="Your Email Address"
-                    className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none 
-                                        focus:ring-2 focus:ring-teal-300"
+                    className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-teal-300"
                   />
                   <p className="text-sm text-red-500">
                     {errors.email?.message}
@@ -149,13 +147,12 @@ const ContactUs = () => {
                     rows="4"
                     value={message}
                     {...register("message", {
-                      required: "Message can`t be empty",
+                      required: "Message can't be empty",
                     })}
                     onChange={(e) => {
                       setMessage(e.target.value);
                     }}
-                    className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none 
-                                        focus:ring-2 focus:ring-teal-300"
+                    className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-teal-300"
                   ></textarea>
                   <p className="text-sm text-red-500">
                     {errors.message?.message}

@@ -1,27 +1,68 @@
 import React, { useState, useEffect } from "react";
-import {useParams, useNavigate, Link } from "react-router-dom";
-
-import "./sell.css";
-
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useForm } from "react-hook-form";
+import stateData from './../json/State_City.json';
+import "./sell.css";
 
 export default function () {
-    const params = useParams();
-    var id = params.id;
-    console.log(id);
-  const navigate = useNavigate();
-//   const [proDetails, setProDetails] = useState()
+  const [stateid, setStateid] = useState("");
+  const [city, setCity] = useState([]);
+  const [cityid, setCityid] = useState("");
 
-  useEffect( () => {
-    const auth = localStorage.getItem("user");
-    if (!auth) {
-      navigate("/login");
+  const params = useParams();
+  var id = params.id;
+
+  const auth = JSON.parse(localStorage.getItem("PropertyDetails"));
+
+  const StateId = stateData.find((state) => state.state_name === auth.State)?.state_id || ''; // return state_id
+  const CityId = city.find((getcity) => getcity.city_name === auth.City)?.city_id || '';
+  console.log(CityId);
+
+  const [society, setSociety] = useState(auth.society);
+  const [zone, setZone] = useState(auth.zone);
+  const [pincode, setPincode] = useState(auth.pincode);
+  const [area, setArea] = useState(auth.area);
+  const [price, setPrice] = useState(auth.price);
+
+  const navigate = useNavigate();
+
+  const handleState = (e) => {
+    const getStateId = e.target.value;
+    setStateid(getStateId);
+    const getCitydata = stateData.find(state => state.state_id === getStateId).cities;
+    setCity(getCitydata);
+  }
+
+  const handleCity = (e) => {
+    const cityid = e.target.value;
+    setCityid(cityid);
+  }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    if (StateId !== '') {
+      const getCitydata = stateData.find((state) => state.state_id === StateId)?.cities || [];
+      setCity(getCitydata);
     }
-    updatingProperty();
+  }, [StateId]);
+
+  useEffect(() => {
+    if (!auth) {
+      navigate("/sell");
+    }
+    getProperty();
   }, []);
 
-  const updatingProperty = async () => {
+  const [disable, setDisable] = useState(true);
+
+  const getProperty = async () => {
     const result = await fetch(`http://localhost:5000/getPropertyDetails`, {
       method: "post",
       body: JSON.stringify({ _id: id }),
@@ -29,135 +70,51 @@ export default function () {
         "Content-Type": "application/json",
       },
     });
+
     var data = await result.json();
     let pd = data[0];
-    console.log("prop",pd.propertyFor);
-    if(pd.propertyFor==='Sell')
-      document.getElementById('sellFor1').checked= pd.propertyFor;
-    else if(pd.propertyFor==='Rent')
+    console.log(pd);
+
+    if (pd.propertyFor === 'Sell')
+      document.getElementById('sellFor1').checked = pd.propertyFor;
+    else if (pd.propertyFor === 'Rent')
       document.getElementById("sellFor2").checked = pd.propertyFor;
     else
       document.getElementById("sellFor3").checked = pd.propertyFor;
-    document.getElementById("type").value=pd.type;
-    document.getElementById("State").value=pd.State;
-    document.getElementById("City").value=pd.City;
-    document.getElementById("society").value=pd.society;
-    document.getElementById("zone").value=pd.zone;
-    document.getElementById("pincode").value=pd.pincode;
-    document.getElementById("area").value=pd.area;
-    document.getElementById("price").value=pd.price;
-    document.getElementById("rooms").value=pd.rooms;
+    document.getElementById("type").value = pd.type;
+    document.getElementById("rooms").value = pd.rooms;
+
     localStorage.setItem("propDetails", JSON.stringify(pd));
-    
   }
 
-  // const username = JSON.parse(localStorage.getItem('username'));
-  const border = { border: "1px solid black" };
-  const [cookie, setCookie] = useState({});
-
-  const [disable, setDisable] = useState(true);
-
-  const addToLocalStorage = () => {
-    var propertyFor = document.querySelector(
-      'input[name="propertyFor"]:checked'
-    );
+  const clickHandler = async (e) => {
+    var propertyFor = document.querySelector('input[name="propertyFor"]:checked');
     var selectedValue = null;
     if (propertyFor) {
       selectedValue = propertyFor.value;
     }
 
-    let type = document.getElementById("type").value;
-    let State = document.getElementById("State").value;
-    let City = document.getElementById("City").value;
-    let society = document.getElementById("society").value;
-    let zone = document.getElementById("zone").value;
-    let pincode = document.getElementById("pincode").value;
-    let area = document.getElementById("area").value;
-    let price = document.getElementById("price").value;
-    let rooms = document.getElementById("rooms").value;
-    let seller = JSON.parse(localStorage.getItem("user"));
+    let State = document.getElementById('State').value; // return id as value
+    let City = document.getElementById('City').value; // return id as value
+    let type = document.getElementById('type').value; // return name as value
+    let rooms = document.getElementById('rooms').value; // return name as value
+    let seller = JSON.parse(localStorage.getItem("user")) || {};
     let sellerId = seller._id;
 
-    localStorage.setItem(
-      "PropertyDetails",
-      JSON.stringify({
-        selectedValue,
-        type,
-        State,
-        City,
-        society,
-        zone,
-        pincode,
-        area,
-        price,
-        rooms,
-        sellerId,
-      })
-    );
+    if (selectedValue !== '' && type !== '' && State !== '' && City !== '' && society !== '' && zone !== '' && pincode !== '' && area !== '' && price !== '' && rooms !== '') {
 
-    var temp = JSON.parse(localStorage.getItem("PropertyDetails"));
+      // we should convert _id's to _name's for storing local storge bcoz we get _id's.
+      const selectedStateName = stateData.find((state) => state.state_id === State)?.state_name || '';
+      const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
 
-    console.log(temp.selectedValue);
-    var selectedValue2 = temp.selectedValue;
-    var type2 = temp.type;
-    var State2 = temp.State;
-    var City2 = temp.City;
-    var society2 = temp.society;
-    var zone2 = temp.zone;
-    var pincode2 = temp.pincode;
-    var area2 = temp.area;
-    var price2 = temp.price;
-    var rooms2 = temp.rooms;
+      localStorage.setItem('PropertyDetails',
+        JSON.stringify({
+          selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId
+        })
+      );
 
-    if (
-      selectedValue2 === "" ||
-      type2 === "" ||
-      State2 === "" ||
-      City2 === "" ||
-      society2 === "" ||
-      zone2 === "" ||
-      pincode2 === "" ||
-      area2 === "" ||
-      price2 === "" ||
-      rooms2 === ""
-    ) {
-      toast.warning("Attention! Information not Sufficient...", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else if (
-      selectedValue2 !== "" &&
-      type2 !== "" &&
-      State2 !== "" &&
-      City2 !== "" &&
-      society2 !== "" &&
-      zone2 !== "" &&
-      pincode2 !== "" &&
-      area2 !== "" &&
-      price2 !== "" &&
-      rooms2 !== ""
-    ) {
-      setDisable(false);
-      toast.success("Congratulations! Information Stored...", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else {
-      toast.error("Oops! Information Crashed...", {
+      setDisable(false)
+      toast.success('Congratulations! Information Stored...', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -169,7 +126,33 @@ export default function () {
         theme: "light",
       });
     }
-  };
+    else if (selectedValue === '' || type === '' || State === '' || City === '' || society === '' || zone === '' || pincode === '' || area === '' || price === '' || rooms === '') {
+      toast.warning('Attention! Information not Sufficient...', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    else {
+      toast.error('Oops! Information Crashed...', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }
 
   return (
     <div id="mainDiv" className="bg-center bg-no-repeat bg-cover">
@@ -190,7 +173,7 @@ export default function () {
           </div>
         </div>
 
-        <div id="sellForm">
+        <form id="sellForm" onSubmit={handleSubmit(clickHandler)}>
           <div className="title">
             <i className="fas fa-pencil-alt text-[1.8em] text-sellIcon"></i>{" "}
             &ensp;
@@ -199,190 +182,336 @@ export default function () {
           <br />
           <div className="information">
             <div>
-              <label id="radio">Property For:* </label> &emsp;
-              <label id="radio">
-                {" "}
-                <input
-                  type="radio"
-                  id="sellFor1"
-                  name="propertyFor"
-                  value="Sell"
-                  required
-                  className="sellField"
-                />{" "}
-                Sell{" "}
-              </label>{" "}
-              &emsp;
-              <label id="radio">
-                {" "}
-                <input
-                  type="radio"
-                  id="sellFor2"
-                  name="propertyFor"
-                  value="Rent"
-                  required
-                  className="sellField"
-                />{" "}
-                Rent{" "}
-              </label>{" "}
-              &emsp;
-              <label id="radio">
-                {" "}
-                <input
-                  type="radio"
-                  id="sellFor3"
-                  name="propertyFor"
-                  value="PG"
-                  required
-                  className="sellField"
-                />{" "}
-                PG{" "}
-              </label>
-              <br />
-            </div>
-            <div>
-              <label>Type of Property:* </label>
-              <select id="type" required>
-                <option id="propOpt" value="Select Type">
+              <div>
+                <label id="radio"> Property For:* </label> &emsp;
+                <label id="radio">
                   {" "}
-                  Select Type
-                </option>
-                <option id="propOpt" value="Flats/Apartments">
-                  Flats/Apartments
-                </option>
-                <option id="propOpt" value="Residential Plot">
-                  Residential Plot
-                </option>
-                <option id="propOpt" value="Office Space">
-                  Office Space
-                </option>
-                <option id="propOpt" value="Farm House">
-                  Farm House
-                </option>
-                <option id="propOpt" value="Agricultural land">
-                  Agricultural land
-                </option>
-                <option id="propOpt" value="Commercial plots">
-                  Commercial plots
-                </option>
-                <option id="propOpt" value="Warehouse & Godown">
-                  Warehouse & Godown
-                </option>
-                <option id="propOpt" value="Factory">
-                  Factory
-                </option>
-              </select>
-              <br /> <br />
+                  <input
+                    type="radio"
+                    id="sellFor1"
+                    name="propertyFor"
+                    value="Sell"
+                    className="sellField"
+                    {...register("propertyFor", {
+                      required: {
+                        value: true,
+                        message: "This field is required"
+                      },
+                    })}
+                  />{" "}
+                  Sell{" "}
+                </label>{" "} &emsp;
+                <label id="radio">
+                  {" "}
+                  <input
+                    type="radio"
+                    id="sellFor2"
+                    name="propertyFor"
+                    value="Rent"
+                    className="sellField"
+                    {...register("propertyFor", {
+                      required: {
+                        value: true,
+                        message: "Property for is required"
+                      },
+                    })}
+                  />{" "}
+                  Rent{" "}
+                </label>{" "} &emsp;
+                <label id="radio">
+                  {" "}
+                  <input
+                    type="radio"
+                    id="sellFor3"
+                    name="propertyFor"
+                    value="PG"
+                    className="sellField"
+                    {...register("propertyFor", {
+                      required: {
+                        value: true,
+                        message: "Property for is required"
+                      },
+                    })}
+                  />{" "}
+                  PG{" "}
+                </label>
+              </div>
+              <p className="text-sm text-red-500">{errors.propertyFor?.message}</p>
             </div>
+
+            <div>
+              <div>
+                <label> Type of Property:* </label>
+                <select
+                  id="type"
+                // {...register("type", {
+                //   required: 'Type of property is required'
+                // })}
+                >
+                  <option id='propOpt' value=''>
+                    Select Type
+                  </option>
+                  <option id='propOpt' value="Flats/Apartments">
+                    Flats/Apartments
+                  </option>
+                  <option id='propOpt' value="Residential Plot">
+                    Residential Plot
+                  </option>
+                  <option id='propOpt' value="Office Space">
+                    Office Space
+                  </option>
+                  <option id='propOpt' value="Farm House">
+                    Farm House
+                  </option>
+                  <option id='propOpt' value="Commercial plots">
+                    Commercial plots
+                  </option>
+                </select>
+              </div>
+              <p className="text-sm text-red-500">{errors.type?.message}</p>
+            </div>
+            <br />
+
             <h1 id="markLabel"> --- Landmark --- </h1> <br />
-            <label>
-              {" "}
-              State:* &ensp;
-              <input
-                type="text"
-                name="State"
-                className="sellField"
-                id="State"
-                placeholder="Enter State"
-                required
-              />
-            </label>
-            <label>
-              City:* &ensp;
-              <input
-                type="text"
-                name="City"
-                className="sellField"
-                id="City"
-                placeholder="Enter City"
-                required
-              />
-            </label>
-            <label>
-              Apartment/Society:* &ensp;
+            <div>
+              <div className='text-dark'>
+                <label className="form-label">
+                  State:* &ensp;
+                </label>
+                <select
+                  name='State'
+                  className='sellField form-control'
+                  id="State"
+                  defaultValue={StateId}
+                  {...register("State", {
+                    required: "State is required"
+                  })}
+                  onChange={(e) => handleState(e)}
+                >
+                  <option
+                    className='propOtp bg-black'
+                    value=""> Select State </option>
+                  {
+                    stateData.map((getstate, index) => (
+                      <option
+                        className='bg-black'
+                        value={getstate.state_id}
+                        key={index}
+                      >
+                        {
+                          getstate.state_name
+                        }
+                      </option>
+                    ))
+                  }
+                </select>
+              </div>
+              <p className="text-sm text-red-500">{errors.State?.message}</p>
+            </div>
+
+            <div>
+              <div className='text-dark'>
+                <label className="form-label">
+                  City:* &ensp;
+                </label>
+                <select
+                  name='City'
+                  className='sellField form-control ml-2'
+                  id='City'
+                  defaultValue={CityId}
+                  {...register("City", {
+                    required: "City is required"
+                  })}
+                  onChange={(e) => handleCity(e)}
+                >
+                  <option
+                    className='propOtp bg-black'
+                    value=""
+                  > Select City </option>
+                  {city &&
+                    city.map((getcity, index) => (
+                      <option
+                        className='bg-black'
+                        value={getcity.city_id}
+                        key={index}
+                      >
+                        {
+                          getcity.city_name
+                        }
+                      </option>
+                    ))
+                  }
+                </select>
+
+              </div>
+              <p className="text-sm text-red-500">{errors.City?.message}</p>
+            </div>
+
+            <div>
+              <label>
+                Apartment/Society:* &ensp;
+              </label>
               <input
                 type="text"
                 name="society"
-                className="sellField"
+                className='sellField'
                 id="society"
-                placeholder="Name Of Apartment/Society"
-                style={{ width: "40%" }}
-                required
+                placeholder='Name Of Apartment/Society'
+                style={{ 'width': '40%' }}
+                value={society}
+                {...register("society", {
+                  required: "Society/Apartment is required"
+                })}
+                onChange={(e) => {
+                  setSociety(e.target.value);
+                }}
               />
-            </label>
-            <label>
-              Area:* &ensp;
+              <p className="text-sm text-red-500">{errors.society?.message}</p>
+            </div>
+
+            <div>
+              <label>
+                Area:* &ensp;
+              </label>
               <input
                 type="text"
                 name="zone"
                 className="sellField"
                 id="zone"
                 placeholder="Enter Area/Landmark"
-                required
+                value={zone}
+                {...register("zone", {
+                  required: "Area/Landmark is required"
+                })}
+                onChange={(e) => {
+                  setZone(e.target.value);
+                }}
               />
-            </label>
-            <label>
-              Pincode:* &ensp;
-              <input
-                type="number"
-                name="pincode"
-                className="sellField"
-                id="pincode"
-                placeholder="Enter 6 digit Pincode"
-                required
-              />
-            </label>
-            <br />
-            <br />
-            <h1 id="markLabel"> --- Property Feature & Price --- </h1> <br />
-            <label>
-              Plot/Land Area (in m<sup>2</sup>):* &ensp;
-              <input
-                type="number"
-                name="area"
-                className="sellField"
-                id="area"
-                placeholder="Plot/Land Area in Sq.meter"
-                style={{ width: "40%" }}
-                required
-              />
-            </label>
-            <div>
-              <label>No. of Bedrooms:* &ensp; </label>
-              <select id="rooms" required>
-                <option id="room" value="1">
-                  1
-                </option>
-                <option id="room" value="2">
-                  2
-                </option>
-                <option id="room" value="3">
-                  3
-                </option>
-                <option id="room" value="4">
-                  More
-                </option>
-              </select>
+              <p className="text-sm text-red-500">{errors.zone?.message}</p>
             </div>
-            <label>
-              Expected Price (&#8377;):* &ensp;
+
+            <div>
+              <label> Pincode:* &ensp; </label>
               <input
-                type="number"
-                name="price"
-                className="sellField"
-                id="price"
-                placeholder="Enter Total Price in INR"
-                style={{ width: "40%" }}
-                required
+                type="text"
+                name='pincode'
+                className='sellField'
+                id="pincode"
+                placeholder='Enter 6 digit Pincode'
+                value={pincode}
+                {...register("pincode", {
+                  required: "Pincode is required",
+                  maxLength: {
+                    value: 6,
+                    message: "Pincode no. exceed only 6 digits"
+                  },
+                  pattern: {
+                    value: /^\d+(?:[.,]\d+)*$/,
+                    message: "Pincode contains digits only",
+                  },
+                  pattern: {
+                    value: /^[1-9]{1}[0-9]{2}\s{0,1}[0-9]{3}$/,
+                    message: "Pincode is not valid"
+                  },
+                })}
+                onChange={(e) => {
+                  setPincode(e.target.value);
+                }}
               />
-            </label>
+              <p className="text-sm text-red-500">{errors.pincode?.message}</p>
+            </div>
+            <br />
+            <br />
+
+            <h1 id="markLabel"> --- Property Feature & Price --- </h1> <br />
+            <div>
+              <label> Plot/Land Area (in m<sup>2</sup>):*  &ensp; </label>
+              <input
+                type="text"
+                name='area'
+                className='sellField'
+                id="area"
+                placeholder='Plot/Land Area in Sq.meter'
+                style={{ 'width': '40%' }}
+                value={area}
+                {...register("area", {
+                  required: "Plot/Land Area is required",
+                  pattern: {
+                    value: /^\d+(?:[.,]\d+)*$/,
+                    message: "Area contains digits only",
+                  },
+                })}
+                onChange={(e) => {
+                  setArea(e.target.value);
+                }}
+              />
+              <p className="text-sm text-red-500">{errors.area?.message}</p>
+            </div>
+
+            <div>
+              <div>
+                <label>
+                  No. of Bedrooms:* &ensp;
+                </label>
+                <select
+                  id="rooms"
+                // {...register("rooms", {
+                //   required: 'No. of rooms is required'
+                // })}
+                >
+                  <option id='room' value=''>
+                    Select
+                  </option>
+                  <option id="room" value="1">
+                    1
+                  </option>
+                  <option id="room" value="2">
+                    2
+                  </option>
+                  <option id="room" value="3">
+                    3
+                  </option>
+                  <option id="room" value="4">
+                    More
+                  </option>
+                </select>
+              </div>
+              <p className="text-sm text-red-500">{errors.rooms?.message}</p>
+            </div>
+
+            <div>
+              <label>
+                Expected Price (&#8377;):* &ensp;
+              </label>
+              <input
+                type="text"
+                name='price'
+                className='sellField'
+                id="price"
+                placeholder='Enter Total Price in INR'
+                style={{ 'width': '40%' }}
+                value={price}
+                {...register("price", {
+                  required: "Expected Price is required",
+                  pattern: {
+                    value: /^\d+(?:[.,]\d+)*$/,
+                    message: "Price contains digits only",
+                  },
+                })}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              />
+              <p className="text-sm text-red-500">{errors.price?.message}</p>
+            </div>
             <br />
           </div>
 
-          <button id="saveBtn" onClick={addToLocalStorage}>
+          <button id="saveBtn">
             {" "}
             Save{" "}
           </button>
+
           <Link to="/updateProperty2">
             <button
               id="btn"
@@ -406,8 +535,8 @@ export default function () {
             pauseOnHover
             theme="light"
           />
-        </div>
+        </form>
       </div>
     </div>
   );
-}
+};
