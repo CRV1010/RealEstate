@@ -507,6 +507,21 @@ app.delete("/property/:id", async (req, res) => {
   res.send(data);
 });
 
+app.delete("/user-property-delete/:id", async (req, res) => {
+  console.log("Deleteing property",req.params.id);
+  
+  let data;
+  try{
+    data = await Image.deleteMany(
+    { sellerId: req.params.id });
+  }
+  catch(e){
+    console.log("error",e);
+  }
+  console.log(data);
+  res.send(data);
+});
+
 app.post("/search-property", async (req, res) => {
   try {
     const { propertyFor, type, State, City, zone, rooms, price } = req.body;
@@ -621,6 +636,28 @@ app.delete("/commentDelete/:id", async (req, res) => {
   let data = await comments.deleteOne({ _id: req.params.id });
   res.send(data);
 });
+
+app.get("/getAllUsers", async (req, res) => {
+  let result = await user.find({});
+  
+  result.forEach(data=>{
+    data.password = undefined;
+  })
+ 
+  res.send(result);
+});
+
+app.delete("/delete-user/:id", async (req, res) => {
+  let data = await user.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
+app.delete("/conversations/:id", async (req, res) => {
+  // var myquery = { _id: { $in: req.params.idArr } };
+  let data = await conversation.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
 
 function verifyToken(req, res, next) {
   let token = req.headers["authorization"];

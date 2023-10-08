@@ -41,7 +41,7 @@ const SignUp = () => {
         },
       });
       data = await data.json();
-
+      var image = "avtar.png";
       if (!data) {
         data = await fetch("http://localhost:5000/signup", {
           method: "post",
@@ -49,7 +49,8 @@ const SignUp = () => {
             username,
             email,
             phone,
-            password
+            password,
+            image
           }),
           headers: {
             "Content-Type": "application/json",

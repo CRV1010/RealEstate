@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
@@ -40,6 +41,20 @@ const Navbar = () => {
             // <Link class="mr-5 hover:text-gray-900 font-semibold" to="/login">Logout</Link>
             <span>
               {" "}
+              {(() => {
+                console.log("uid", user?._id);
+                if (user?._id === "650b0d9532d958c9727bea89") {
+                  console.log("Admin side");
+                  return (
+                    <Link
+                      className="mr-5 hover:text-gray-900 font-semibold"
+                      to="/adminuser"
+                    >
+                      Admin
+                    </Link>
+                  );
+                } 
+              })()}
               <Link
                 className="mr-5 hover:text-gray-900 font-semibold"
                 to="/sell"
@@ -58,18 +73,35 @@ const Navbar = () => {
               >
                 Profile
               </Link>
-              <Link
-                className="mr-5 hover:text-gray-900 font-semibold"
-                to="/chatadmin"
-              >
-                Chat with Admin
-              </Link>
+              {(() => {
+                console.log("uid", user?._id);
+                if (user?._id === "650b0d9532d958c9727bea89") {
+                  console.log("chats admin");
+                  return (
+                    <Link
+                      className="mr-5 hover:text-gray-900 font-semibold"
+                      to="/chatadmin"
+                    >
+                      Chats
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <Link
+                      className="mr-5 hover:text-gray-900 font-semibold"
+                      to="/chatadmin"
+                    >
+                      Chat with Admin
+                    </Link>
+                  );
+                }
+              })()}
               <Link
                 className="mr-5 hover:text-gray-900 font-semibold"
                 onClick={logout}
                 to="/signup"
               >
-                Logout({JSON.parse(user).username})
+                Logout({user?.username})
               </Link>
             </span>
           ) : (

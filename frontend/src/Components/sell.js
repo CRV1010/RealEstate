@@ -40,11 +40,13 @@ export default function () {
 
   useEffect(() => {
     const auth = localStorage.getItem("user");
+    let radBtnDefault = document.getElementById("sellFor1");
+    radBtnDefault.checked = true;
     if (!auth) {
       navigate("/login");
     }
   }, []);
-
+  
   const [disable, setDisable] = useState(true);
 
   const clickHandler = async () => {
@@ -72,11 +74,11 @@ export default function () {
         })
       );
 
-      setSociety("");
-      setZone("");
-      setPincode("");
-      setArea("");
-      setPrice("");
+      // setSociety("");
+      // setZone("");
+      // setPincode("");
+      // setArea("");
+      // setPrice("");
 
       setDisable(false)
       toast.success('Congratulations! Information Stored...', {
@@ -118,7 +120,7 @@ export default function () {
       });
     }
   };
-
+  
   return (
     <div id='mainDiv' className='bg-center bg-no-repeat bg-cover'>
       <div className="main-block">
@@ -144,9 +146,10 @@ export default function () {
                 <label id='radio'>
                   <input
                     type="radio"
-                    id='sellFor'
+                    id='sellFor1'
                     name="propertyFor"
                     value="Sell"
+                    
                     className='sellField'
                     {...register("propertyFor", {
                       required: {
