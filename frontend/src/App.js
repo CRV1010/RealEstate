@@ -29,6 +29,7 @@ import UpdateProperty2 from "./Components/UpdateProperty2";
 import OtherProperty2 from "./Components/OtherProperty2";
 import UpdateUser from "./Components/UpdateUser";
 import AdminUsers from "./Components/AdminUsers";
+import AdminProperty from "./Components/AdminProperty";
 
 function App() {
   
@@ -67,6 +68,8 @@ function App() {
             <Route path="/updateProperty2" element={<UpdateProperty2 />} />
             <Route path="/updateUser/:id" element={<UpdateUser />} />
             <Route path="/adminuser" element={<AdminUsers />} />
+            <Route path="/adminProperty" element={<AdminProperty />} />
+
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
             <Route path="/chatadmin" element={<ChatAdmin />} />

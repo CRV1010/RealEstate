@@ -22,6 +22,7 @@ export default function (props) {
     price,
     rooms,
     sellerId,
+    owner
   } = propertyDetails;
 
   useEffect(() => {
@@ -66,7 +67,7 @@ export default function (props) {
     //inserting information to database
     const data = await fetch("http://localhost:5000/upload-database", {
       method: "post",
-      body: JSON.stringify({ selectedValue, type, State, City, society, zone, pincode, area, price, rooms,sellerId,imageName}),
+      body: JSON.stringify({ selectedValue, type, State, City, society, zone, pincode, area, price, rooms,sellerId,imageName,owner}),
       headers: {
         "Content-Type": "application/json",
       }

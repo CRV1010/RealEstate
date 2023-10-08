@@ -436,6 +436,7 @@ app.post("/upload-database", async (req, res) => {
       rooms: req.body.rooms,
       sellerId: req.body.sellerId,
       image: req.body.imageName,
+      owner : req.body.owner
     });
     res.json({ status: "ok" });
   } catch (error) {
@@ -463,6 +464,7 @@ app.put("/update-database/:id", async (req, res) => {
         sellerId: req.body.sellerId,
         image: req.body.imageName,
         modified: 1,
+        owner : req.body.owner
       },
     }
   );
@@ -503,12 +505,13 @@ app.post("/getPropertyDetails", async (req, res) => {
 });
 
 app.delete("/property/:id", async (req, res) => {
+  console.log(req.params.id,"deleteing with id");
   let data = await Image.deleteOne({ _id: req.params.id });
   res.send(data);
 });
 
 app.delete("/user-property-delete/:id", async (req, res) => {
-  console.log("Deleteing property",req.params.id);
+  console.log("Deleteing property using seller Id",req.params.id);
   
   let data;
   try{

@@ -62,6 +62,7 @@ export default function () {
     let rooms = document.getElementById('rooms').value;
     let seller = JSON.parse(localStorage.getItem("user")) || {};
     let sellerId = seller._id;
+    let owner = seller.username;
 
 
     if (selectedValue !== '' && type !== '' && State !== '' && City !== '' && society !== '' && zone !== '' && pincode !== '' && area !== '' && price !== '' && rooms !== '') {
@@ -70,7 +71,7 @@ export default function () {
 
       localStorage.setItem('PropertyDetails',
         JSON.stringify({
-          selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId
+          selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId,owner
         })
       );
 
