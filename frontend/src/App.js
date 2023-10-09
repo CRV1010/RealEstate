@@ -30,6 +30,8 @@ import OtherProperty2 from "./Components/OtherProperty2";
 import UpdateUser from "./Components/UpdateUser";
 import AdminUsers from "./Components/AdminUsers";
 import AdminProperty from "./Components/AdminProperty";
+import Premium from "./Components/Premium";
+import SellPropInfo from "./Components/sellPropInfo";
 
 function App() {
   
@@ -75,6 +77,8 @@ function App() {
             <Route path="/chatadmin" element={<ChatAdmin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/premium" element={<Premium />} />
+            <Route path="/sellPropInfo" element={<SellPropInfo />} />
           </Route>
         </Routes>
         <Footer />

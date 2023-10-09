@@ -465,7 +465,7 @@ export default function () {
             Save
           </button>
 
-          <Link to="/addProperty">
+          <Link to="/Premium">
             <button
               id="btn"
               className={disable ? 'notCon' : 'con'}

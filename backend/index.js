@@ -650,6 +650,8 @@ app.get("/getAllUsers", async (req, res) => {
   res.send(result);
 });
 
+
+
 app.delete("/delete-user/:id", async (req, res) => {
   let data = await user.deleteOne({ _id: req.params.id });
   res.send(data);
@@ -661,6 +663,79 @@ app.delete("/conversations/:id", async (req, res) => {
   res.send(data);
 });
 
+
+//payment application
+require('dotenv').config()
+
+const path = require("path");
+
+const shortid = require("shortid");
+const Razorpay = require("razorpay");
+
+const razorpay = new Razorpay({
+  key_id: "rzp_test_H0imBRBCGuVydw",
+  key_secret: "QhbO7lXBYIjsoJ8nlF1k9qSO",
+});
+
+app.use(cors());
+
+// Serving company logo
+app.get("/logo.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "logo.png"));
+});
+
+app.post("/razorpay", async (req, res) => {
+
+  const payment_capture = 1;
+  const amount = req.body.amount;
+  const currency = "INR";
+
+  const options = {
+    amount: amount * 100,
+    currency,
+    receipt: shortid.generate(),
+    payment_capture,
+  };
+
+  try {
+    const response = await razorpay.orders.create(options);
+    res.json({
+      id: response.id,
+      currency: response.currency,
+      amount: response.amount,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//for like a post
+app.put('/like', async (req, res) => {
+  try {
+    const result = await Image.findByIdAndUpdate(req.body.imageId, {
+      $push: { likes: req.body.user_id }
+    }, {
+      new: true    //it will return updated record if we don't write then it will return us old record
+    });
+    if (!result) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+    return res.json(result);
+  } catch (err) {
+    return res.status(422).json({ error: err.message });
+  }
+});
+
+// Code for fetching seller in explore details page
+app.get("/get-seller", async (req, res) => {
+  try {
+    user.find({}).then((object) => {
+      res.send(object);
+    });
+  } catch (error) {
+    res.json({ staus: error });
+  }
+});
 
 function verifyToken(req, res, next) {
   let token = req.headers["authorization"];

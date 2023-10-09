@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./addProperty.css";
 //first do this :  npm i axios
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,6 +12,7 @@ export default function () {
   const [imageURLs, setImageURLs] = useState([]);
   var prodetail = JSON.parse(localStorage.getItem("propDetails"));
   var imags = [];
+  const navigate = useNavigate();
   useEffect(async () => {
 
     console.log("name")
@@ -177,7 +179,8 @@ export default function () {
     console.log("Data updated Successfully...");
     setImages([]);
     setImageURLs([]);
-    window.location.href = "/profile";
+    // window.location.href = "/profile";
+    navigate("/profile");
   };
 
   const deleteImage = (e) => {

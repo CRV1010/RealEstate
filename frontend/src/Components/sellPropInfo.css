@@ -1,0 +1,101 @@
+.sellProHead {
+    @apply text-[35px] font-semibold text-[brown];
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.underLine {
+    @apply w-[34%] h-1.5;
+}
+
+.underLineBG {
+    background-color: rgb(85, 85, 224);
+}
+
+.proImg {
+    @apply w-screen;
+}
+
+.proType {
+    @apply text-[25px] fixed px-5 py-[5px] rounded-[10px];
+}
+
+.proAuthdetails {
+    @apply flex pt-[2%];
+}
+
+.proDetail {
+    @apply max-w-[70%] flex-[70%];
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.authDetails {
+    @apply flex-[30%];
+}
+
+.proPrice {
+    @apply text-[3em] font-semibold;
+}
+
+.proAddress {
+    @apply text-[1.6em] max-w-full;
+}
+
+.proPin {
+    @apply text-[1.2em];
+}
+
+.proFacility {
+    @apply inline-block w-full text-[1.2em];
+}
+
+.proFacItem {
+    @apply inline-block w-[28%] m-[2%] px-[4%] py-[2%] hover:bg-[lightgray] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in];
+}
+
+.pfiBg{
+    background-color: rgb(243, 241, 241);
+}
+
+.favicon {
+    @apply text-[blue];
+}
+
+.special {
+    @apply text-[1.1em] indent-[5em] mt-[2%];
+}
+
+.stickyDiv {
+    @apply text-center sticky mt-[15%] mb-[5%] mx-[5%] p-[5%] rounded-xl border-[3px] border-dotted border-[blue] top-[5em] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out];
+}
+
+.stickyHover:hover{
+    background-color: rgb(243, 172, 146);
+}
+
+.contactSeller {
+    @apply text-[1.5em] font-semibold;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.sellerName {
+    @apply text-[1.4em] font-semibold text-center text-[white] w-[90%] uppercase mt-[1.2em] mb-[0.5em] mx-auto px-[1.2em] py-[0.4em] rounded-xl;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background-color: rgb(65, 63, 196);
+}
+
+.chatSeller {
+    @apply text-[1em] font-semibold  w-[90%] uppercase mx-auto my-[1.2em] px-[1.2em] py-[0.4em] rounded-xl border-[3px] border-solid;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    border-color: rgb(8, 129, 8);
+    color: rgb(8, 129, 8);
+}
+
+.chatSeller:hover{
+    background-color: rgb(8, 129, 8);
+    color: white;
+    transition: all 0.5s ease-out
+}
+
+.likes {
+    @apply text-[1.1em];
+}
