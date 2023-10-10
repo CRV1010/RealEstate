@@ -18,7 +18,7 @@ const ConfirmOTP = () => {
         if (otp === otp_user) {
           navigate("/changepass");
         } else {
-          alert("wrong otp");
+          alert("Wrong otp");
         }
       }
       else{
@@ -44,21 +44,22 @@ const ConfirmOTP = () => {
                   type="text"
                   id="otp-user"
                   name="otp-user"
+                  placeholder="Enter OTP"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   value={otp_user}
                   {...register("otp_user", {
-                    required: "otp is required",
+                    required: "Otp is required",
                     minLength: {
                       value: 6,
-                      message: "otp is of 6 digits",
+                      message: "Otp is of 6 digits",
                     },
                     pattern: {
                       value: /^[0-9]{6}$/,
-                      message: "invalid otp",
+                      message: "Invalid otp",
                     },
                     maxLength: {
                       value: 6,
-                      message: "otp is of 6 digits", //^\d+$
+                      message: "Otp is of 6 digits", //^\d+$
                     },
                   })}
                   onChange={(e) => {

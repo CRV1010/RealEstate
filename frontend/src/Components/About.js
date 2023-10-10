@@ -76,6 +76,7 @@ function About() {
                     </div>
                   </div>
                 </div>
+                <br />
                 <div className="col-md-6">
                   <div className="card" id="card">
                     <div className="card-body">
@@ -104,6 +105,7 @@ function About() {
             </div>
           </div>
         </div>
+        <br/>
 
         <div id="teamSection">
           <h1 id="team">

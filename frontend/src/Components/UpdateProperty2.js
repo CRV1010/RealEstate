@@ -1,45 +1,75 @@
 import React, { useEffect, useState } from "react";
 import "./addProperty.css";
-
 //first do this :  npm i axios
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function () {
   //hooks
-
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
   var prodetail = JSON.parse(localStorage.getItem("propDetails"));
-  useEffect(() => {
-    
-    var imgs = prodetail.image;
-    console.log(imgs);
-    var imags=[];
-     imgs.forEach(images=> imags.push(images.substr(13)));
-    console.log("name",imags)
-    
-    imgs.forEach((image)=>{
-      // require(`../Images/${image}`) // important
-      
-      var imga = new File(
-        [`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`],
-        image,
-        {
-          type: "image/png",
-        }
-      );
-      const val = imga;
-        console.log("img",val);
-        setImages([...images,val]);
-        
-        console.log("jai ",images);
-        images.forEach((image) => {
-           console.log("kkk", image);
-         });
-    });
-    console.log("jeu");
-   
+  var imags = [];
+  const navigate = useNavigate();
+  useEffect(async () => {
+
+    console.log("name")
+    // var imga = new File(
+    //   [`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`],
+    //   image,
+    //   {
+    //     type: "image/png",
+    //   }
+    // );
+
+    await fetchData().then(setInitialImg);
+    //  setInitialImg();
   }, []);
+
+  const fetchData = async () => {
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        var imgs = prodetail.image;
+        console.log("my img name", imgs);
+        imgs.forEach(async (image) => {
+          const img = new Image();
+          img.src = require(`D:/Practice Program/Real Estate/frontend/src/Images/${image}`);
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          console.log("count", img);
+          const ctx = canvas.getContext("2d");
+
+          ctx.drawImage(img, 0, 0);
+
+          // Convert the canvas content to a Blob
+          canvas.toBlob(function (blob) {
+            var imga = new File([blob], image, {
+              type: "image/png",
+            });
+            console.log(blob);
+            console.log("imga ", imga);
+            imags.push(imga);
+
+            console.log("aaja", imags);
+            //  setImages([...images,imga]);
+          }, "image/png");
+
+        });
+        // setImages([...images,...imags]);
+        // callback();
+        resolve();
+        // setInitialImg();
+      }, 1000)
+
+    });
+  }
+  const setInitialImg = () => {
+    setImages(imags);
+  }
 
   const [sellPro, setProp] = useState(true);
   const {
@@ -57,33 +87,34 @@ export default function () {
   } = JSON.parse(localStorage.getItem("PropertyDetails"));
 
   useEffect(() => {
+    console.log("ii", images);
     if (images.length < 1) return;
     const newImageUrls = [];
     images.forEach((image) => {
-    console.log("check",image);
-    const blob = new Blob([image], { type: "image/png" });
-    console.log(blob);
-    if(blob.size<100){
-      newImageUrls.push(
-        require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
-      );
-    }
-    else{
-      newImageUrls.push(URL.createObjectURL(blob));
-    }
+      console.log("check", image);
+      const blob = new Blob([image], { type: "image/png" });
+      console.log(blob);
+      if (blob.size < 100) {
+        console.log("inside blob ", `${image.name}`)
+        newImageUrls.push(
+          require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
+        );
+      }
+      else {
+        newImageUrls.push(URL.createObjectURL(blob));
+      }
       // newImageUrls.pop();
       console.log("url", newImageUrls);
     });
-    
-    
+
     setImageURLs(newImageUrls);
   }, [images]);
 
   //functions
   const onImageChange = (e) => {
     setImages([...images, e.target.files[0]]);
-    console.log("tar",e.target.files[0]);
-    images.forEach(img=>{console.log("My",img)});
+    console.log("tar", e.target.files[0]);
+    images.forEach(img => { console.log("My", img) });
     console.log("y", images.length);
     if (images.length >= 0) setProp(false);
     else setProp(true);
@@ -109,7 +140,7 @@ export default function () {
 
     console.log("Image Uploaded...");
     const imageName = result.data;
-      console.log("img name",imageName);
+    console.log("img name", imageName);
     //Updating information to database
     let data = await fetch(`http://localhost:5000/update-database/${prodetail._id}`, {
       method: "put",
@@ -132,12 +163,24 @@ export default function () {
       },
     });
     data = await data.json();
-    if(data){
-      alert("Data Updated Successfully");
+    if (data) {
+      toast.success("Property Updated Successfully...", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     console.log("Data updated Successfully...");
-
-    window.location.href = "/profile";
+    setImages([]);
+    setImageURLs([]);
+    // window.location.href = "/profile";
+    navigate("/profile");
   };
 
   const deleteImage = (e) => {
@@ -201,6 +244,18 @@ export default function () {
               {" "}
               Update Property{" "}
             </button>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </div>
         </div>
       </div>

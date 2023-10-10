@@ -28,6 +28,10 @@ import UpdateProperty1 from "./Components/UpdateProperty1";
 import UpdateProperty2 from "./Components/UpdateProperty2";
 import OtherProperty2 from "./Components/OtherProperty2";
 import UpdateUser from "./Components/UpdateUser";
+import AdminUsers from "./Components/AdminUsers";
+import AdminProperty from "./Components/AdminProperty";
+import Premium from "./Components/Premium";
+import SellPropInfo from "./Components/sellPropInfo";
 
 function App() {
   
@@ -65,12 +69,16 @@ function App() {
             <Route path="/updateProperty1/:id" element={<UpdateProperty1 />} />
             <Route path="/updateProperty2" element={<UpdateProperty2 />} />
             <Route path="/updateUser/:id" element={<UpdateUser />} />
+            <Route path="/adminuser" element={<AdminUsers />} />
+            <Route path="/adminProperty" element={<AdminProperty />} />
 
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
             <Route path="/chatadmin" element={<ChatAdmin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/premium" element={<Premium />} />
+            <Route path="/sellPropInfo" element={<SellPropInfo />} />
           </Route>
         </Routes>
         <Footer />

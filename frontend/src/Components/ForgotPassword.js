@@ -36,10 +36,10 @@ const ForgotPassword = () => {
         localStorage.setItem("email", JSON.stringify(email));
         navigate("/confirmotp");
       } else {
-        alert("pls provide correct email");
+        alert("Please provide correct email");
       }
     } else {
-      console.log("incorrect email");
+      console.log("Incorrect email");
     }
   };
 
@@ -58,6 +58,7 @@ const ForgotPassword = () => {
                   type="email"
                   id="email"
                   name="email"
+                  placeholder="Enter Email to get OTP"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   value={email}
                   {...register("email", {

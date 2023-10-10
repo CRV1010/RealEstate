@@ -10,6 +10,7 @@ const nocache = require("nocache");
 const conversation = require("./db/conversation");
 const messages = require("./db/messages");
 const userMsg = require("./db/userMessage");
+const comments = require("./db/comment");
 
 const io = require("socket.io")(5555, {
   cors: {
@@ -278,6 +279,7 @@ app.get("/conversations/:userId", async (req, res) => {
         return {
           users: {
             id: userTalked._id,
+            image: userTalked.image,
             username: userTalked.username,
             email: userTalked.email,
           },
@@ -434,6 +436,7 @@ app.post("/upload-database", async (req, res) => {
       rooms: req.body.rooms,
       sellerId: req.body.sellerId,
       image: req.body.imageName,
+      owner : req.body.owner
     });
     res.json({ status: "ok" });
   } catch (error) {
@@ -460,6 +463,8 @@ app.put("/update-database/:id", async (req, res) => {
         rooms: req.body.rooms,
         sellerId: req.body.sellerId,
         image: req.body.imageName,
+        modified: 1,
+        owner : req.body.owner
       },
     }
   );
@@ -483,6 +488,7 @@ app.get("/get-data", async (req, res) => {
 
 //to get the user information like username , email , phone
 app.post("/getUserDetails", async (req, res) => {
+  console.log(req.body);
   let result = await user.findOne(req.body);
   username = result.username;
   email = result.email;
@@ -499,7 +505,23 @@ app.post("/getPropertyDetails", async (req, res) => {
 });
 
 app.delete("/property/:id", async (req, res) => {
+  console.log(req.params.id,"deleteing with id");
   let data = await Image.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
+app.delete("/user-property-delete/:id", async (req, res) => {
+  console.log("Deleteing property using seller Id",req.params.id);
+  
+  let data;
+  try{
+    data = await Image.deleteMany(
+    { sellerId: req.params.id });
+  }
+  catch(e){
+    console.log("error",e);
+  }
+  console.log(data);
   res.send(data);
 });
 
@@ -574,6 +596,144 @@ app.post("/search-property-three", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+  }
+});
+
+app.get("/search/:key", async (req, res) => {
+  // console.log("hello");
+  try {
+    var regex = new RegExp(
+      ["^", req.params.key.toLowerCase(), "$"].join(""),
+      "i"
+    );
+    let data = await Image.find({
+      $or: [
+        { propertyFor: { $regex: req.params.key } },
+        { type: { $regex: req.params.key } },
+        { State: { $regex: req.params.key } },
+        { City: { $regex: req.params.key } },
+        { society: { $regex: req.params.key } },
+        { zone: { $regex: req.params.key } },
+        // { price: { $regex: req.params.key } },
+      ],
+    });
+
+    res.send(data);
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
+app.post("/comment", async (req, res) => {
+  let data = new comments(req.body);
+  data = await data.save();
+  res.send({ result: "comment saved" });
+});
+
+app.get("/show-comments", async (req, res) => {
+  let data = await comments.find({});
+  res.send(data);
+});
+
+app.delete("/commentDelete/:id", async (req, res) => {
+  let data = await comments.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
+app.get("/getAllUsers", async (req, res) => {
+  let result = await user.find({});
+  
+  result.forEach(data=>{
+    data.password = undefined;
+  })
+ 
+  res.send(result);
+});
+
+
+
+app.delete("/delete-user/:id", async (req, res) => {
+  let data = await user.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
+app.delete("/conversations/:id", async (req, res) => {
+  // var myquery = { _id: { $in: req.params.idArr } };
+  let data = await conversation.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
+
+//payment application
+require('dotenv').config()
+
+const path = require("path");
+
+const shortid = require("shortid");
+const Razorpay = require("razorpay");
+
+const razorpay = new Razorpay({
+  key_id: "rzp_test_H0imBRBCGuVydw",
+  key_secret: "QhbO7lXBYIjsoJ8nlF1k9qSO",
+});
+
+app.use(cors());
+
+// Serving company logo
+app.get("/logo.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "logo.png"));
+});
+
+app.post("/razorpay", async (req, res) => {
+
+  const payment_capture = 1;
+  const amount = req.body.amount;
+  const currency = "INR";
+
+  const options = {
+    amount: amount * 100,
+    currency,
+    receipt: shortid.generate(),
+    payment_capture,
+  };
+
+  try {
+    const response = await razorpay.orders.create(options);
+    res.json({
+      id: response.id,
+      currency: response.currency,
+      amount: response.amount,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//for like a post
+app.put('/like', async (req, res) => {
+  try {
+    const result = await Image.findByIdAndUpdate(req.body.imageId, {
+      $push: { likes: req.body.user_id }
+    }, {
+      new: true    //it will return updated record if we don't write then it will return us old record
+    });
+    if (!result) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+    return res.json(result);
+  } catch (err) {
+    return res.status(422).json({ error: err.message });
+  }
+});
+
+// Code for fetching seller in explore details page
+app.get("/get-seller", async (req, res) => {
+  try {
+    user.find({}).then((object) => {
+      res.send(object);
+    });
+  } catch (error) {
+    res.json({ staus: error });
   }
 });
 
