@@ -7,6 +7,8 @@ export default function (props) {
   //hooks
   const location = useLocation();
   const totalAmount = location.state ? location.state.totalAmount : null;
+  const premium = (localStorage.getItem("premium"));
+  console.log("prem",premium);
 
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
@@ -88,6 +90,7 @@ export default function (props) {
         sellerId,
         imageName,
         owner,
+        premium
       }),
       headers: {
         "Content-Type": "application/json",

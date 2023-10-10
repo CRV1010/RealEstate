@@ -98,7 +98,9 @@ const imageDetailsSchema = new Schema({
    modified : {
         type : Number
     },
-
+    premium : {
+      type : Number
+    },
   //Set the creation date when the document is created
   createdAt: {
     type: Date,
@@ -107,7 +109,7 @@ const imageDetailsSchema = new Schema({
 });
 
 //to delete the schema after 2 min of creation
-imageDetailsSchema.index({ createdAt: 1 }, { expireAfterSeconds: 120 });
+imageDetailsSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
 
 // Image is a model which has a schema imageDetailsSchema
 module.exports = mongoose.model("imageDetail", imageDetailsSchema);
