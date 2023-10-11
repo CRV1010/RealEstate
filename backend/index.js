@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
       console.log(receiver);
       try {
         if (receiver) {
-          // console.log("chirag bro");
+          console.log("chirag bro");
           io.to(receiver.socketId)
             .to(sender.socketId)
             .emit("getMessage", {
@@ -265,7 +265,7 @@ app.post("/conversations", async (req, res) => {
 app.get("/conversations/:userId", async (req, res) => {
   try {
     let userId = req.params.userId;
-    // console.log(userId);
+    console.log("index", userId);
     const conversations = await conversation.find({
       members: { $in: [userId] },
     });
@@ -278,12 +278,12 @@ app.get("/conversations/:userId", async (req, res) => {
         // if(userTalked!=null)
         return {
           users: {
-            id: userTalked._id,
-            image: userTalked.image,
-            username: userTalked.username,
-            email: userTalked.email,
+            id: userTalked?._id,
+            image: userTalked?.image,
+            username: userTalked?.username,
+            email: userTalked?.email,
           },
-          conversationId: talk._id,
+          conversationId: talk?._id,
         };
       })
     );
@@ -436,7 +436,8 @@ app.post("/upload-database", async (req, res) => {
       rooms: req.body.rooms,
       sellerId: req.body.sellerId,
       image: req.body.imageName,
-      owner : req.body.owner
+      owner: req.body.owner,
+      premium: req.body.premium,
     });
     res.json({ status: "ok" });
   } catch (error) {
@@ -464,7 +465,7 @@ app.put("/update-database/:id", async (req, res) => {
         sellerId: req.body.sellerId,
         image: req.body.imageName,
         modified: 1,
-        owner : req.body.owner
+        owner: req.body.owner,
       },
     }
   );
@@ -505,21 +506,19 @@ app.post("/getPropertyDetails", async (req, res) => {
 });
 
 app.delete("/property/:id", async (req, res) => {
-  console.log(req.params.id,"deleteing with id");
+  console.log(req.params.id, "deleteing with id");
   let data = await Image.deleteOne({ _id: req.params.id });
   res.send(data);
 });
 
 app.delete("/user-property-delete/:id", async (req, res) => {
-  console.log("Deleteing property using seller Id",req.params.id);
-  
+  console.log("Deleteing property using seller Id", req.params.id);
+
   let data;
-  try{
-    data = await Image.deleteMany(
-    { sellerId: req.params.id });
-  }
-  catch(e){
-    console.log("error",e);
+  try {
+    data = await Image.deleteMany({ sellerId: req.params.id });
+  } catch (e) {
+    console.log("error", e);
   }
   console.log(data);
   res.send(data);
@@ -642,15 +641,13 @@ app.delete("/commentDelete/:id", async (req, res) => {
 
 app.get("/getAllUsers", async (req, res) => {
   let result = await user.find({});
-  
-  result.forEach(data=>{
+
+  result.forEach((data) => {
     data.password = undefined;
-  })
- 
+  });
+
   res.send(result);
 });
-
-
 
 app.delete("/delete-user/:id", async (req, res) => {
   let data = await user.deleteOne({ _id: req.params.id });
@@ -663,9 +660,8 @@ app.delete("/conversations/:id", async (req, res) => {
   res.send(data);
 });
 
-
 //payment application
-require('dotenv').config()
+require("dotenv").config();
 
 const path = require("path");
 
@@ -685,7 +681,6 @@ app.get("/logo.png", (req, res) => {
 });
 
 app.post("/razorpay", async (req, res) => {
-
   const payment_capture = 1;
   const amount = req.body.amount;
   const currency = "INR";
@@ -710,15 +705,19 @@ app.post("/razorpay", async (req, res) => {
 });
 
 //for like a post
-app.put('/like', async (req, res) => {
+app.put("/like", async (req, res) => {
   try {
-    const result = await Image.findByIdAndUpdate(req.body.imageId, {
-      $push: { likes: req.body.user_id }
-    }, {
-      new: true    //it will return updated record if we don't write then it will return us old record
-    });
+    const result = await Image.findByIdAndUpdate(
+      req.body.imageId,
+      {
+        $push: { likes: req.body.user_id },
+      },
+      {
+        new: true, //it will return updated record if we don't write then it will return us old record
+      }
+    );
     if (!result) {
-      return res.status(404).json({ error: 'Image not found' });
+      return res.status(404).json({ error: "Image not found" });
     }
     return res.json(result);
   } catch (err) {

@@ -47,9 +47,9 @@ const AdminUsers = () => {
         const resData = await res.json();
         console.log(resData);
         resData.map(async (conversationId)=>{
-            console.log(conversationId.conversationId);
+            console.log("conId",conversationId?.conversationId);
             let data = await fetch(
-              `http://localhost:5000/conversations/${conversationId.conversationId}`,
+              `http://localhost:5000/conversations/${conversationId?.conversationId}`,
               {
                 method: "delete",
                 // headers: {

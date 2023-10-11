@@ -105,8 +105,8 @@ const ChatAdmin = () => {
   const fetchConversations = async () => {
     const userId = JSON.parse(localStorage.getItem("user"));
     // const uid = JSON.parse(userId._id)
-    const res = await fetch(
-      `http://localhost:5000/conversations/${userId?._id}`,
+    console.log("my Uid",userId._id);
+    const res = await fetch(`http://localhost:5000/conversations/${userId?._id}`,
       {
         method: "GET",
         header: {
