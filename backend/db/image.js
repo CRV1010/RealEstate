@@ -44,7 +44,7 @@
 //         type : Number
 //     }
 // });
-  
+
 // //Image is a model which has a schema imageSchema
 // module.exports = new mongoose.model('imageDetail', imageDetailsSchema);
 
@@ -58,9 +58,9 @@ const imageDetailsSchema = new Schema({
   propertyFor: {
     type: String,
   },
-   owner : {
-        type : String
-    },
+  owner: {
+    type: String
+  },
   sellerId: {
     type: String,
   },
@@ -95,21 +95,21 @@ const imageDetailsSchema = new Schema({
   image: {
     type: Array,
   },
-   modified : {
-        type : Number
-    },
-    premium : {
-      type : Number
-    },
-  //Set the creation date when the document is created
-  createdAt: {
-    type: Date,
-    default: () => moment().tz("Asia/Kolkata"), // Set the creation date in IST
+  modified: {
+    type: Number
   },
+  premium: {
+    type: Number
+  },
+  //Set the creation date when the document is created
+  // createdAt: {
+  //   type: Date,
+  //   default: () => moment().tz("Asia/Kolkata"), // Set the creation date in IST
+  // },
 });
 
 //to delete the schema after 2 min of creation
-imageDetailsSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
+// imageDetailsSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
 
 // Image is a model which has a schema imageDetailsSchema
 module.exports = mongoose.model("imageDetail", imageDetailsSchema);

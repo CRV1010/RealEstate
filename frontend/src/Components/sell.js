@@ -46,7 +46,7 @@ export default function () {
       navigate("/login");
     }
   }, []);
-  
+
   const [disable, setDisable] = useState(true);
 
   const clickHandler = async () => {
@@ -71,15 +71,9 @@ export default function () {
 
       localStorage.setItem('PropertyDetails',
         JSON.stringify({
-          selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId,owner
+          selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId, owner
         })
       );
-
-      // setSociety("");
-      // setZone("");
-      // setPincode("");
-      // setArea("");
-      // setPrice("");
 
       setDisable(false)
       toast.success('Congratulations! Information Stored...', {
@@ -121,16 +115,20 @@ export default function () {
       });
     }
   };
-  
+
   return (
     <div id='mainDiv' className='bg-center bg-no-repeat bg-cover'>
       <div className="main-block">
         <div className="left-part">
           <i className="fa fa-house-laptop text-[7em] text-sellIcon"></i> <br /> <br />
           <h1 id="leftHeading"> Sell Your Property</h1> <br /> <br />
-          <p className='sellText'> With this platform you can sell your precious property virtually. Save your time and get high amount of money...</p>
+          <p className='sellText'>
+            With this platform you can sell your precious property virtually.
+            Save your time and get high amount of money...</p>
           <div>
-            <Link className="btn-item" to="/about">Explore Us</Link>
+            <Link className="btn-item" to="/about">
+              Explore Us
+            </Link>
           </div>
         </div>
 
@@ -143,14 +141,13 @@ export default function () {
           <div className="information">
             <div>
               <div>
-                <label id='radio'> Property For:* </label> &emsp;
+                <label id='radio'> Property For :<span className='red'>*</span> </label> &emsp;
                 <label id='radio'>
                   <input
                     type="radio"
                     id='sellFor1'
                     name="propertyFor"
                     value="Sell"
-                    
                     className='sellField'
                     {...register("propertyFor", {
                       required: {
@@ -199,9 +196,10 @@ export default function () {
 
             <div>
               <div>
-                <label> Type of Property:* </label>
+                <label> Type of Property :<span className='red'>*</span> </label>
                 <select
                   id="type"
+                  style={{ 'width': '40%' }}
                   {...register("type", {
                     required: 'Type of property is required'
                   })}
@@ -234,7 +232,7 @@ export default function () {
             <div>
               <div className='text-dark'>
                 <label className="form-label">
-                  State:* &ensp;
+                  State :<span className='red'>*</span> &ensp;
                 </label>
                 <select
                   name='State'
@@ -269,11 +267,12 @@ export default function () {
             <div>
               <div className='text-dark'>
                 <label className="form-label">
-                  City:* &ensp;
+                  City :<span className='red'>*</span> &ensp;
                 </label>
                 <select
                   name='City'
                   className='sellField form-control ml-2'
+                  style={{ 'width': '45%' }}
                   id='City'
                   {...register("City", {
                     required: "City is required"
@@ -283,7 +282,9 @@ export default function () {
                   <option
                     className='propOtp bg-black'
                     value=""
-                  > Select City </option>
+                  >
+                    Select City
+                  </option>
                   {city &&
                     city.map((getcity, index) => (
                       <option
@@ -304,38 +305,16 @@ export default function () {
 
             <div>
               <label>
-                Apartment/Society:* &ensp;
-              </label>
-              <input
-                type="text"
-                name="society"
-                className='sellField'
-                id="society"
-                placeholder='Name Of Apartment/Society'
-                style={{ 'width': '40%' }}
-                value={society}
-                {...register("society", {
-                  required: "Society/Apartment is required"
-                })}
-                onChange={(e) => {
-                  setSociety(e.target.value);
-                }}
-              />
-              <p className="text-sm text-red-500">{errors.society?.message}</p>
-            </div>
-
-            <div>
-              <label>
-                Area:* &ensp;
+                Area/Society :<span className='red'>*</span> &ensp;
               </label>
               <input type="text"
                 name="zone"
                 className='sellField'
                 id="zone"
-                placeholder='Enter Area/Landmark'
+                placeholder='Enter Area & Society'
                 value={zone}
                 {...register("zone", {
-                  required: "Area/Landmark is required"
+                  required: "Area & Society is required"
                 })}
                 onChange={(e) => {
                   setZone(e.target.value);
@@ -345,7 +324,29 @@ export default function () {
             </div>
 
             <div>
-              <label> Pincode:* &ensp; </label>
+              <label>
+                Flat no./Apartment/Street no. :<span className='red'>*</span> &ensp;
+              </label>
+              <input
+                type="text"
+                name="society"
+                className='sellField ml-0'
+                id="society"
+                placeholder='Enter Flat/Apartment/Street'
+                style={{ 'width': '40%' }}
+                value={society}
+                {...register("society", {
+                  required: "Flat/Apartment/Street is required"
+                })}
+                onChange={(e) => {
+                  setSociety(e.target.value);
+                }}
+              />
+              <p className="text-sm text-red-500">{errors.society?.message}</p>
+            </div>
+
+            <div>
+              <label> Pincode :<span className='red'>*</span> &ensp; </label>
               <input
                 type="text"
                 name='pincode'
@@ -379,7 +380,7 @@ export default function () {
 
             <h1 id='markLabel'> --- Property Feature & Price --- </h1> <br />
             <div>
-              <label> Plot/Land Area (in m<sup>2</sup>):*  &ensp; </label>
+              <label> Plot/Land Area (in m<sup>2</sup>) :<span className='red'>*</span>  &ensp; </label>
               <input
                 type="text"
                 name='area'
@@ -405,7 +406,7 @@ export default function () {
             <div>
               <div>
                 <label>
-                  No. of Bedrooms:* &ensp;
+                  No. of Bedrooms :<span className='red'>*</span> &ensp;
                 </label>
                 <select
                   id="rooms"
@@ -435,7 +436,7 @@ export default function () {
 
             <div>
               <label>
-                Expected Price (&#8377;):* &ensp;
+                Expected Price (&#8377;) :<span className='red'>*</span> &ensp;
               </label>
               <input
                 type="text"

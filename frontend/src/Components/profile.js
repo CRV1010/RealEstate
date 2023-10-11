@@ -195,7 +195,7 @@ export default function (props) {
                   style={{
                     "grid-template-columns":
                       "repeat(auto-fill, minmax(calc(50% - 3rem), 1fr))",
-                    gap: "4rem",
+                    gap: "3rem",
                   }}
                 >
                   {propertyDetails

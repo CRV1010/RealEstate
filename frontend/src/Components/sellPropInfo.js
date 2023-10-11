@@ -94,7 +94,7 @@ export default function () {
         //     if (item._id === data._id) return data;
         //     return item;
         // })
-        console.log("sell page like",data);
+        console.log("sell page like", data);
         setDatabase(data)
 
         toast.success('Thank You! For Your Interest...', {
@@ -110,16 +110,16 @@ export default function () {
         });
     }
 
-    const chatwithseller = async (id) =>{
-         let res = await fetch("http://localhost:5000/conversations", {
-          method: "POST",
-          body: JSON.stringify({
-            senderId: user_id,
-            receiverId: id,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
+    const chatwithseller = async (id) => {
+        let res = await fetch("http://localhost:5000/conversations", {
+            method: "POST",
+            body: JSON.stringify({
+                senderId: user_id,
+                receiverId: id,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
         });
         let result = await res.json();
         console.log(result);
@@ -174,8 +174,8 @@ export default function () {
                                                 <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId == user_id)} >
                                                     {
                                                         database.likes && database.likes.some(objectId => objectId == user_id) ?
-                                                        <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
-                                                        : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
+                                                            <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
+                                                            : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
                                                     }
                                                     &nbsp;
                                                     <span style={{ 'color': 'blue', 'font-weight': '600' }}>{database.likes && database.likes.length} </span> Interested
@@ -183,11 +183,11 @@ export default function () {
                                             </div> <br /> <br />
 
                                             <div className="proFacility">
-                                                <p className="proFacItem pfiBg"> <i className="fa fa-house-user favicon"></i> {database.type}  </p>
-                                                <p className="proFacItem pfiBg"> <i className="fa fa-landmark favicon"></i> {database.rooms} BHK </p>
-                                                <p className="proFacItem pfiBg"> <i className="fa fa-chart-area favicon"></i> {database.area} sq. m<sup>2</sup> </p>
+                                                <p className="proFacItem pfiBg"> <i className="fa fa-house-user favicon"></i> &nbsp; {database.type}  </p>
+                                                <p className="proFacItem pfiBg"> <i className="fa fa-landmark favicon"></i> &nbsp; {database.rooms} BHK </p>
+                                                <p className="proFacItem pfiBg"> <i className="fa fa-chart-area favicon"></i> &nbsp; {database.area} sq. m<sup>2</sup> </p>
                                                 <p className="proFacItem pfiBg"> <i className="fa fa-money-bill-trend-up favicon"></i> &nbsp; &#8377;{Math.floor(database.price / database.area)} /sq. m<sup>2</sup> </p>
-                                                <p className="proFacItem pfiBg"> <i className="fa fa-clock favicon"></i>  Built in 2015 </p>
+                                                <p className="proFacItem pfiBg"> <i className="fa fa-clock favicon"></i> &nbsp; Built in 2015 </p>
                                                 <p className="proFacItem pfiBg"> <i className="fa fa-handshake favicon"></i> &nbsp; &#8377;58620 DW PY </p>
                                             </div> <br /> <br /> <br />
 
@@ -233,13 +233,13 @@ export default function () {
                                                                                                         <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId == user_id)} >
                                                                                                             {
                                                                                                                 database.likes && database.likes.some(objectId => objectId == user_id) ?
-                                                                                                                <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
-                                                                                                                : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
+                                                                                                                    <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
+                                                                                                                    : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
                                                                                                             }
                                                                                                             &nbsp;
                                                                                                             <span style={{ 'color': '#b4fee7', 'font-weight': '600' }}>{database.likes && database.likes.length} </span> Interested
                                                                                                         </button>
-                                                                                                    </div> 
+                                                                                                    </div>
                                                                                                     <p> <strong> Property Type: </strong>{ArrayOfObjects.type} </p>
                                                                                                     <p> <strong>Location: </strong> {ArrayOfObjects.society}, {ArrayOfObjects.zone}, {ArrayOfObjects.City}, {ArrayOfObjects.State}. </p>
                                                                                                     <p> <strong>Pincode: </strong> {ArrayOfObjects.pincode} </p> <br />
@@ -295,13 +295,13 @@ export default function () {
                                                                                                         <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId == user_id)} >
                                                                                                             {
                                                                                                                 database.likes && database.likes.some(objectId => objectId == user_id) ?
-                                                                                                                <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
-                                                                                                                : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
+                                                                                                                    <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
+                                                                                                                    : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
                                                                                                             }
                                                                                                             &nbsp;
                                                                                                             <span style={{ 'color': '#b4fee7', 'font-weight': '600' }}>{database.likes && database.likes.length} </span> Interested
                                                                                                         </button>
-                                                                                                    </div> 
+                                                                                                    </div>
                                                                                                     <p> <strong> Property Type: </strong>{ArrayOfObjects.type} </p>
                                                                                                     <p> <strong>Location: </strong> {ArrayOfObjects.society}, {ArrayOfObjects.zone}, {ArrayOfObjects.City}, {ArrayOfObjects.State}. </p>
                                                                                                     <p> <strong>Pincode: </strong> {ArrayOfObjects.pincode} </p> <br />
@@ -327,7 +327,7 @@ export default function () {
                                                 <h1 className="contactSeller" style={{ 'color': 'rgb(234, 26, 7)' }}> KNOW YOUR SELLER </h1>
                                                 <hr style={{ 'backgroundColor': 'green', 'height': '4px' }} />
                                                 <input className="sellerName" onLoad={getSeller()} value={seller} disabled /> <br />
-                                                <button className="chatSeller" onClick={()=>{chatwithseller(database.sellerId)}}> <i className="fa-solid fa-comments"></i> &nbsp; Chat with Seller </button>
+                                                <button className="chatSeller" onClick={() => { chatwithseller(database.sellerId) }}> <i className="fa-solid fa-comments"></i> &nbsp; Chat with Seller </button>
                                             </div>
                                         </div>
                                     </div>
