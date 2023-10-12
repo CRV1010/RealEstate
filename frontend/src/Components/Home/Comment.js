@@ -8,7 +8,8 @@ const Comment = () => {
   const [comment, setComment] = useState([])
   const [modal1Open, setModal1Open] = useState(false);
   let user = JSON.parse(localStorage.getItem("user"))
-  const [userName, setUserName] = useState(user.username);
+  const [userName, setUserName] = useState(user?.username);
+    
   const [userComment, setUserComment] = useState("");
 
   const openModal = (propertyFor) => {
@@ -151,6 +152,7 @@ const Comment = () => {
         )}
       </div>
       <div className="p-2 w-full">
+        {user ? (
         <button
           onClick={() => {
             openModal("Sell");
@@ -159,6 +161,11 @@ const Comment = () => {
         >
           Add Comment
         </button>
+        )
+            : (
+              <div></div>
+            )
+        }
         {modal1Open && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div className="bg-white  rounded-lg w-1/3">

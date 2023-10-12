@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 const PopularProperty = () => {
     const [database, setDatabase] = useState([])
-    var user = localStorage.getItem("user");
-    const user_id = JSON.parse(user)._id;
+    var user = JSON.parse(localStorage.getItem("user"));
+    const user_id = user?._id;
     const advertisment = async () =>{
         const result = await fetch(`http://localhost:5000/getPropertyDetails`, {
         method: "post",
