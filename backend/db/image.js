@@ -48,8 +48,6 @@
 // //Image is a model which has a schema imageSchema
 // module.exports = new mongoose.model('imageDetail', imageDetailsSchema);
 
-
-
 const mongoose = require("mongoose");
 const { Schema, Types } = mongoose;
 const moment = require("moment-timezone");
@@ -99,7 +97,7 @@ const imageDetailsSchema = new Schema({
     type: Number
   },
   premium: {
-    type: Number
+    type: Number,
   },
   //Set the creation date when the document is created
   // createdAt: {
