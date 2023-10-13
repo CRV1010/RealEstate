@@ -14,6 +14,7 @@ const Comment = () => {
   const [modal1Open, setModal1Open] = useState(false);
   let user = JSON.parse(localStorage.getItem("user"))
   const [userName, setUserName] = useState(user?.username);
+
   const [userComment, setUserComment] = useState("");
 
   const openModal = (propertyFor) => {
