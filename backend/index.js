@@ -370,8 +370,8 @@ const storage = multer.diskStorage({
     cb(null, "../frontend/src/Images/");
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + file.originalname);
+    // const uniqueSuffix = Date.now();
+    cb(null, file.originalname);
   },
 });
 
