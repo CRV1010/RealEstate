@@ -1,3 +1,8 @@
+.red{
+    content: '*';
+    color: red
+}
+
 #mainDiv {
     @apply min-h-full bg-cover;
 }
@@ -58,7 +63,7 @@
 }
 
 .sellField, #type, #rooms {
-    @apply m-[20px] p-[5px] border-b-[#eee] border-[none] border-b border-solid;
+    @apply ml-[5px] mr-[20px] mt-[20px] mb-[20px] p-[5px] border-b-[#eee] border-[none] border-b border-solid;
     background: transparent;
 }
 

@@ -57,7 +57,7 @@ const imageDetailsSchema = new Schema({
     type: String,
   },
   owner: {
-    type: String,
+    type: String
   },
   sellerId: {
     type: String,
@@ -94,7 +94,7 @@ const imageDetailsSchema = new Schema({
     type: Array,
   },
   modified: {
-    type: Number,
+    type: Number
   },
   premium: {
     type: Number,
