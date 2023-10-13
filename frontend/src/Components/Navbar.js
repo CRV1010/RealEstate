@@ -48,7 +48,7 @@ const Navbar = () => {
                   return (
                     <Link
                       className="mr-5 hover:text-gray-900 font-semibold"
-                      to="/adminuser"
+                      to="/adminPage"
                     >
                       Admin
                     </Link>
