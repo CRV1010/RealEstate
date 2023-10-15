@@ -57,7 +57,7 @@ const imageDetailsSchema = new Schema({
     type: String,
   },
   owner: {
-    type: String
+    type: String,
   },
   sellerId: {
     type: String,
@@ -94,7 +94,7 @@ const imageDetailsSchema = new Schema({
     type: Array,
   },
   modified: {
-    type: Number
+    type: Number,
   },
   premium: {
     type: Number,
@@ -104,6 +104,13 @@ const imageDetailsSchema = new Schema({
   //   type: Date,
   //   default: () => moment().tz("Asia/Kolkata"), // Set the creation date in IST
   // },
+
+  expirationDate: {
+    type: Date,
+    // Set default value to one month from the current date
+    default: Date.now() + 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+    index: { expires: 60 }, // Create a TTL index that expires documents after 1 day
+  },
 });
 
 //to delete the schema after 2 min of creation

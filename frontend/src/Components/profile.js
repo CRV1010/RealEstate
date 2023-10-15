@@ -99,6 +99,7 @@ export default function (props) {
         theme: "light",
       });
     } else {
+      console.log("chid",id);
       navigate(`/updateProperty1/${id}`);
     }
   };
@@ -216,7 +217,7 @@ export default function (props) {
 
                               <Link
                                 to="/sellPropInfo"
-                                onClick={() => getNewPro(keyId)}
+                                onClick={() => getNewPro(ArrayOfObjects._id)}
                                 key={ArrayOfObjects._id}
                               >
                                 <div className="card_image_explore">
