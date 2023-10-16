@@ -13,6 +13,7 @@ export default function () {
     const [zoneData, setZoneData] = useState();
     const [budgetData, setBudgetData] = useState();
     const [seller, setSeller] = useState();
+    const [isPremium,setIsPremium] = useState();
 
     var sid = "";
 
@@ -40,7 +41,10 @@ export default function () {
         var id = localStorage.getItem('pressCard');
 
         var temp1 = data.filter(item => item?._id == id)
+        console.log("curr",temp1[0]);
         setDatabase(temp1[0])
+        setIsPremium(temp1[0].premium)
+    
 
         var zone = temp1[0].zone;
         var temp2 = data.filter(item => item.zone == zone && item?._id !== id)
@@ -50,6 +54,8 @@ export default function () {
         var budget = temp1[0].price;
         var temp3 = data.filter(item => item.price >= budget - 100000 && item.price <= budget + 100000 && item._id !== id)
         setBudgetData(temp3);
+
+        
     }
 
     const getNewPro = (keyId) => {
@@ -324,7 +330,13 @@ export default function () {
                                                 <h1 className="contactSeller" style={{ 'color': 'rgb(234, 26, 7)' }}> KNOW YOUR SELLER </h1>
                                                 <hr style={{ 'backgroundColor': 'green', 'height': '4px' }} />
                                                 <input className="sellerName" onLoad={getSeller()} value={seller} disabled /> <br />
-                                                <button className="chatSeller" onClick={() => { chatwithseller(database.sellerId) }}> <i className="fa-solid fa-comments"></i> &nbsp; Chat with Seller </button>
+                                                
+                                                {
+                                                    isPremium ?
+                                                    <button className="chatSeller" onClick={() => { chatwithseller(database.sellerId) }}> <i className="fa-solid fa-comments"></i> &nbsp; Chat with Seller </button>
+                                                    : ""
+                                                }
+                                                
                                             </div>
                                         </div>
                                     </div>
