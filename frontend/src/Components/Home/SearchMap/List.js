@@ -166,7 +166,8 @@ const List = ({ data, setSelectedProperty }) => {
                                     style={{ color: "red", fontSize: 13 }}
                                 >
                                 </i>
-                            )}
+                            )
+                        }
                         &nbsp;
                         <span
                             style={{ color: "red", fontWeight: "600", fontSize: 13 }}
@@ -177,7 +178,8 @@ const List = ({ data, setSelectedProperty }) => {
                             {data.likes &&
                                 (data.likes.length === 0 || data.likes.length === 1)
                                 ? "like"
-                                : "likes"}
+                                : "likes"
+                            }
                         </span>
                     </button>
                 </Flex>

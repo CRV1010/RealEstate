@@ -83,7 +83,7 @@ const Header = (props) => {
                                     <Input
                                         type="text"
                                         name="search"
-                                        placeholder="Find the Location"
+                                        placeholder="Search Address, City & Pincode....."
                                         autoComplete="off"
                                         aria-label="Search talk"
                                         className="w-full h-full font-medium md:pl-2 focus:outline-none"
@@ -143,7 +143,7 @@ const Header = (props) => {
                             cursor="pointer"
                             className='border border-indigo-900 hover:border-indigo-900 hover:ring-2 hover:ring-indigo-400 hover:bg-cyan-100'
                             style={{ height: '48px' }}
-                            // hover={{bg: 'yellow.200'}}
+                        // hover={{bg: 'yellow.200'}}
                         >
                             <Menu>
                                 {({ isOpen }) => (

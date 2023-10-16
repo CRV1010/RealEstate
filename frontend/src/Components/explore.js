@@ -71,14 +71,8 @@ export default function () {
         <ul className="cardsExplore">
           {database
             ? database.map((ArrayOfObjects, index) => {
-<<<<<<< HEAD
-              const imageNames = ArrayOfObjects.image[0];
+              const imageNames = ArrayOfObjects?.image[0];
               const keyId = `${ArrayOfObjects._id}`;
-=======
-                const imageNames = ArrayOfObjects?.image[0];
-                const keyId = `${ArrayOfObjects._id}`;
->>>>>>> origin
-
               return (
                 <Link
                   to="/sellPropInfo"
@@ -95,7 +89,6 @@ export default function () {
                       <div className="card_image_explore">
                         {ArrayOfObjects.image &&
                           ArrayOfObjects.image.length > 0 ? (
-<<<<<<< HEAD
                           <img
                             src={require(`../Images/${ArrayOfObjects.image[0]}`)}
                             key={ArrayOfObjects.image[0]}
@@ -105,17 +98,6 @@ export default function () {
                           ""
                         )}
                       </div>
-=======
-                            <img
-                              src={require(`../Images/${ArrayOfObjects?.image[0]}`)}
-                              key={ArrayOfObjects.image[0]}
-                              alt="not fetched"
-                            />
-                          ) : (
-                            <div>Sorry no image</div>
-                          )}
-                        </div>
->>>>>>> origin
 
                       <div className="card_content_explore">
                         <div className="card_text_explore">
@@ -173,20 +155,12 @@ export default function () {
                           </p>
                         </div>
                       </div>
-<<<<<<< HEAD
                     </div>
                   </li>
                 </Link>
               );
             })
             : ""}
-=======
-                    </li>
-                  </Link>
-                );
-              })
-            : "Not found"}
->>>>>>> origin
         </ul>
       </div>
     </>

@@ -37,10 +37,6 @@ import Premium from "./Components/Premium";
 import SellPropInfo from "./Components/sellPropInfo";
 
 function App() {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin
   return (
     <div className="App">
       <BrowserRouter>
@@ -74,12 +70,9 @@ function App() {
                 </>
               }
             />
-<<<<<<< HEAD
             <Route path="/searchmap" element={<SearchMap />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
-
-=======
             {/* <Route path="/home" element={<Carousel />} /> */}
             <Route path="/contact" element={
               <>
@@ -91,7 +84,6 @@ function App() {
                 <About />
                 <Footer />
               </>} />
->>>>>>> origin
             <Route path="/confirmotp" element={<ConfirmOTP />} />
             <Route path="/changepass" element={<ChangePassword />} />
             <Route path="/addProperty" element={

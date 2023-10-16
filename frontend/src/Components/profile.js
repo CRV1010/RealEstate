@@ -84,7 +84,7 @@ export default function (props) {
     });
     var data = await result.json();
     let pd = data[0];
-    
+
     console.log("data", data);
     console.log("md", pd.modified);
 
@@ -101,7 +101,7 @@ export default function (props) {
         theme: "light",
       });
     } else {
-      console.log("chid",id);
+      console.log("chid", id);
       navigate(`/updateProperty1/${id}`);
     }
   };
@@ -216,24 +216,13 @@ export default function (props) {
                               {ArrayOfObjects.propertyFor} &#x2022; &#8377;
                               {ArrayOfObjects.price}{" "}
                             </h2>
-
-<<<<<<< HEAD
                             <Link
                               to="/sellPropInfo"
-                              onClick={() => getNewPro(keyId)}
+                              onClick={() => getNewPro(ArrayOfObjects._id)}
                               key={ArrayOfObjects._id}
                             >
                               <div className="card_image_explore">
                                 {ArrayOfObjects.image &&
-=======
-                              <Link
-                                to="/sellPropInfo"
-                                onClick={() => getNewPro(ArrayOfObjects._id)}
-                                key={ArrayOfObjects._id}
-                              >
-                                <div className="card_image_explore">
-                                  {ArrayOfObjects.image &&
->>>>>>> origin
                                   ArrayOfObjects.image.length > 0 ? (
                                   <img
                                     src={require(`../Images/${ArrayOfObjects.image[0]}`)}

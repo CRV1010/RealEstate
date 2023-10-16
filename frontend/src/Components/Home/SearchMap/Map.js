@@ -297,11 +297,128 @@ const Map = (props) => {
                                             </>
                                         )
                                     }
+                                    {!selectedProperty
+                                        || selectedProperty._id !== data._id && (
+                                            <>
+                                                <Flex
+                                                    width={"330px"}
+                                                    height={'180px'}
+                                                    direction={'column'}
+                                                    position="relative"
+                                                    mt={5}
+                                                >
+                                                    {/* Carousel */}
+                                                    <Carousel
+                                                        autoPlay={true}
+                                                        interval={4000}
+                                                        infiniteLoop={true}
+                                                        width={'305px'}
+                                                        height={'180px'}
+                                                        rounded='lg'
+                                                        showArrows={true}
+                                                        showThumbs={false}>
+                                                        {data.image &&
+                                                            data.image.map((imageName, index) => (
+                                                                <Flex
+                                                                    objectFit={'cover'}
+                                                                    key={index}>
+                                                                    <Image
+                                                                        width={'305px'}
+                                                                        height={'180px'}
+                                                                        rounded='10px'
+                                                                        mt={1}
+                                                                        src={require(`../../../Images/${imageName}`)}
+                                                                        alt={`Image ${index}`} />
+                                                                </Flex>
+                                                            ))}
+                                                    </Carousel>
+                                                </Flex>
+                                                <Link
+                                                    to="/sellPropInfo"
+                                                    onClick={() => localStorage.setItem("pressCard", keyId)}
+                                                    key={data._id}
+                                                >
+                                                    <button
+                                                        value={data._id}
+                                                        disabled
+                                                        className='mt-2'
+                                                    >
+                                                        {data.likes &&
+                                                            data.likes.some((objectId) => objectId === user_id)
+                                                            ? (
+                                                                <i
+                                                                    className="fa-solid fa-heart"
+                                                                    style={{ color: "red", fontSize: 22 }}
+                                                                >
+                                                                </i>
+                                                            )
+                                                            : (
+                                                                <i
+                                                                    className="fa-regular fa-heart"
+                                                                    style={{ color: "red", fontSize: 22 }}
+                                                                >
+                                                                </i>
+                                                            )}
+                                                        &nbsp;
+                                                        <span
+                                                            style={{ color: "red", fontWeight: "600" }}
+                                                            className='font-sans font-medium ml-1'
+                                                        >
+                                                            {data.likes &&
+                                                                data.likes.length}{" "}
+                                                            {data.likes &&
+                                                                (data.likes.length === 0 || data.likes.length === 1)
+                                                                ? "like"
+                                                                : "likes"}
+                                                        </span>
+                                                    </button>
+
+                                                    <div className='text-black'>
+
+                                                        <div
+                                                            className='font-sans font-medium text-lg font-weight:900'
+                                                        >
+                                                            Rs. {data.price}/-
+                                                        </div>
+
+                                                        <div
+                                                            className='font-sans font-medium text-sm'
+                                                        >
+                                                            <strong>{data.rooms}</strong> BHK | <strong>{data.area}</strong> m<sup>2</sup> | <strong>{data.type}</strong> for <strong>{data.propertyFor}</strong>
+                                                        </div>
+
+                                                        <div
+                                                            className='font-sans font-medium text-base'
+                                                        >
+
+                                                        </div>
+
+                                                        <Flex
+                                                            alignItems={"center"}
+                                                            width={"full"}
+                                                            ml={1}
+                                                            mt={2}
+                                                        >
+                                                            <IoLocation
+                                                                fontSize={50}
+                                                                color='blue' />
+                                                            <div
+                                                                className='ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200'
+                                                            >
+                                                                {data.society + ", " + data.zone + ", " + data.City + ", " + data.State + ", " + data.pincode}
+                                                            </div>
+                                                        </Flex>
+                                                    </div>
+                                                </Link>
+                                            </>
+                                        )
+                                    }
                                 </Popup>
                             </Marker>
                         )
                     })
-                    : ""}
+                    : ""
+                }
                 <ResetCenterView coordinates={coordinates} />
                 <LocationMarker />
             </MapContainer>
