@@ -3,7 +3,7 @@
 }
 
 .left-section {
-    @apply w-[30%] pb-[5%];
+    @apply w-[30%] pb-[5%] h-[50%];
 }
 
 .right-section {

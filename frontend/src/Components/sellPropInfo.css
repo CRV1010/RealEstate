@@ -49,7 +49,7 @@
 }
 
 .proFacItem {
-    @apply inline-block w-[28%] m-[2%] px-[4%] py-[2%] hover:bg-[lightgray] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in];
+    @apply inline-block w-[29%] m-[2%] px-[3%] py-[2%] hover:bg-[lightgray] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in];
 }
 
 .pfiBg{

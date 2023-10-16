@@ -19,6 +19,19 @@ export default function () {
 
   const fetchAndCreateImageFile = (imageName) => {
     return new Promise((resolve, reject) => {
+<<<<<<< HEAD
+      setTimeout(() => {
+        var imgs = prodetail.image;
+        console.log("my img name", imgs);
+        imgs.forEach(async (image) => {
+          const img = new Image();
+          img.src = require(`C:/Users/Sahil Dharaviya/Desktop/RealEstatee/frontend/src/Images/${image}`);
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          console.log("count", img);
+          const ctx = canvas.getContext("2d");
+=======
       // Fetch the image using its name or URL
       const img = new Image();
       img.src = require(`D:/Practice Program/Real Estate/frontend/src/Images/${imageName}`);
@@ -27,6 +40,7 @@ export default function () {
       canvas.width = img.width;
       canvas.height = img.height;
       const ctx = canvas.getContext("2d");
+>>>>>>> origin
 
       ctx.drawImage(img, 0, 0);
       console.log("image type", canvas);
@@ -102,9 +116,16 @@ export default function () {
       if (prodetail.image.includes(image.name)) {
 
         newImageUrls.push(
+<<<<<<< HEAD
+          require(`C:/Users/Sahil Dharaviya/Desktop/RealEstatee/frontend/src/Images/${image.name}`)
+        );
+      }
+      else {
+=======
           require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
         ); 
       } else {
+>>>>>>> origin
         newImageUrls.push(URL.createObjectURL(blob));
       }
       console.log("url", newImageUrls);
