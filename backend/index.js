@@ -677,6 +677,7 @@ app.use(cors());
 
 // Serving company logo
 app.get("/logo.png", (req, res) => {
+  console.log(__dirname);
   res.sendFile(path.join(__dirname, "logo.png"));
 });
 

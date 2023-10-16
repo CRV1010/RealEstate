@@ -71,7 +71,7 @@ export default function () {
         <ul className="cardsExplore">
           {database
             ? database.map((ArrayOfObjects, index) => {
-                const imageNames = ArrayOfObjects.image[0];
+                const imageNames = ArrayOfObjects?.image[0];
                 const keyId = `${ArrayOfObjects._id}`;
 
                 return (
@@ -91,12 +91,12 @@ export default function () {
                           {ArrayOfObjects.image &&
                           ArrayOfObjects.image.length > 0 ? (
                             <img
-                              src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                              src={require(`../Images/${ArrayOfObjects?.image[0]}`)}
                               key={ArrayOfObjects.image[0]}
                               alt="not fetched"
                             />
                           ) : (
-                            ""
+                            <div>Sorry no image</div>
                           )}
                         </div>
 
@@ -160,7 +160,7 @@ export default function () {
                   </Link>
                 );
               })
-            : ""}
+            : "Not found"}
         </ul>
       </div>
     </>

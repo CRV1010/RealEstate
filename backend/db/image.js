@@ -99,18 +99,17 @@ const imageDetailsSchema = new Schema({
   premium: {
     type: Number,
   },
-  //Set the creation date when the document is created
-  // createdAt: {
-  //   type: Date,
-  //   default: () => moment().tz("Asia/Kolkata"), // Set the creation date in IST
-  // },
-
   expirationDate: {
     type: Date,
     // Set default value to one month from the current date
     default: Date.now() + 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
     index: { expires: 60 }, // Create a TTL index that expires documents after 1 day
   },
+  //Set the creation date when the document is created
+  // createdAt: {
+  //   type: Date,
+  //   default: () => moment().tz("Asia/Kolkata"), // Set the creation date in IST
+  // },
 });
 
 //to delete the schema after 2 min of creation

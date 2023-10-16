@@ -46,7 +46,7 @@ export default function (props) {
   }
 
   const deleteProperty = async (id) => {
-    toast.warning("You are Deleting Property...", {
+    toast.success("You are Deleting Property...", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,

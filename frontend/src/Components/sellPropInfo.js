@@ -22,15 +22,17 @@ export default function () {
     const navigate = useNavigate();
     useEffect(() => {
         const auth = localStorage.getItem("user");
-
+        console.log("inside use")
         if (!auth) {
             navigate("/login");
         }
+        else
+            getData();
     }, []);
 
-    useEffect(() => {
-        getData();
-    }, [])
+    // useEffect(() => {
+        
+    // }, [])
 
 
     async function getData() {
@@ -43,11 +45,11 @@ export default function () {
 
         var data = await result.json();
         var id = localStorage.getItem('pressCard');
-        var temp1 = data.filter(item => item._id == id)
+        var temp1 = data.filter(item => item?._id == id)
         setDatabase(temp1[0])
 
         var zone = temp1[0].zone;
-        var temp2 = data.filter(item => item.zone == zone && item._id !== id)
+        var temp2 = data.filter(item => item.zone == zone && item?._id !== id)
         setZoneData(temp2);
 
         var budget = temp1[0].price;
@@ -76,7 +78,7 @@ export default function () {
 
     //add like
     var user = localStorage.getItem("user");
-    const user_id = JSON.parse(user)._id;
+    const user_id = JSON.parse(user)?._id;
     async function Increse_Likes() {
 
         var imageId = localStorage.getItem('pressCard');

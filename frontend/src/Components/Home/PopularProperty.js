@@ -41,7 +41,7 @@ const PopularProperty = () => {
                   <Link
                     to="/sellPropInfo"
                     onClick={() => localStorage.setItem("pressCard", keyId)}
-                    key={ArrayOfObjects._id}
+                    key={ArrayOfObjects?._id}
                   >
                     <div className="p-4 flex-none w-96  hover:scale-105 ">
                       <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:border-gray-300">
