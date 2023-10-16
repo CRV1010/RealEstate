@@ -30,18 +30,36 @@ import UpdateProperty1 from "./Components/UpdateProperty1";
 import UpdateProperty2 from "./Components/UpdateProperty2";
 import OtherProperty2 from "./Components/OtherProperty2";
 import UpdateUser from "./Components/UpdateUser";
+import AdminPage from "./Components/AdminPage";
 import AdminUsers from "./Components/AdminUsers";
 import AdminProperty from "./Components/AdminProperty";
 import Premium from "./Components/Premium";
 import SellPropInfo from "./Components/sellPropInfo";
 
 function App() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
         <Routes>
           <Route element={<PrivateComponent />}>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Carousel />
+                  <SellBuyRent />
+                  <PopularProperty />
+                  <HowWork />
+                  <Comment />
+                  <Footer />
+                </>
+              }
+            />
             <Route
               path="/home"
               element={
@@ -52,38 +70,81 @@ function App() {
                   <PopularProperty />
                   <HowWork />
                   <Comment />
+                  <Footer />
                 </>
               }
             />
+<<<<<<< HEAD
             <Route path="/searchmap" element={<SearchMap />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
 
+=======
+            {/* <Route path="/home" element={<Carousel />} /> */}
+            <Route path="/contact" element={
+              <>
+                <ContactUs />
+                <Footer />
+              </>} />
+            <Route path="/about" element={
+              <>
+                <About />
+                <Footer />
+              </>} />
+>>>>>>> origin
             <Route path="/confirmotp" element={<ConfirmOTP />} />
             <Route path="/changepass" element={<ChangePassword />} />
-            <Route path="/addProperty" element={<AddProperty />} />
-            <Route path="/sell" element={<Sell />} />
-            <Route path="/explore" element={<Explore />} />
+            <Route path="/addProperty" element={
+              <>
+                <AddProperty />
+                <Footer />
+              </>} />
+            <Route path="/sell" element={
+              <>
+                <Sell />
+                <Footer />
+              </>} />
+            <Route path="/explore" element={
+              <>
+                <Explore />
+                <Footer />
+              </>} />
             <Route path="/searchProperty" element={<SearchedProperty />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={
+              <>
+                <Profile />
+                <Footer />
+              </>} />
             <Route path="/otherproperty" element={<OtherProperty />} />
             <Route path="/otherproperty2" element={<OtherProperty2 />} />
             <Route path="/updateProperty1/:id" element={<UpdateProperty1 />} />
             <Route path="/updateProperty2" element={<UpdateProperty2 />} />
             <Route path="/updateUser/:id" element={<UpdateUser />} />
-            <Route path="/adminuser" element={<AdminUsers />} />
-            <Route path="/adminProperty" element={<AdminProperty />} />
+            <Route path="/adminpage" element={
+              <>
+                <AdminPage />
+                <Footer />
+              </>} />
+            {/* <Route path="/adminuser" element={<AdminUsers />} />
+            <Route path="/adminProperty" element={<AdminProperty />} /> */}
 
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
             <Route path="/chatadmin" element={<ChatAdmin />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={
+              <>
+                <Login />
+                <Footer />
+              </>} />
+            <Route path="/signup" element={
+              <>
+                <SignUp />
+                <Footer />
+              </>} />
             <Route path="/premium" element={<Premium />} />
             <Route path="/sellPropInfo" element={<SellPropInfo />} />
           </Route>
         </Routes>
-        <Footer />
       </BrowserRouter>
     </div>
   );

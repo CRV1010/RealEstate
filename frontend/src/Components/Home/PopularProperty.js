@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 const PopularProperty = () => {
     const [database, setDatabase] = useState([])
-    var user = localStorage.getItem("user");
-    const user_id = JSON.parse(user)._id;
+    var user = JSON.parse(localStorage.getItem("user"));
+    const user_id = user?._id;
     const advertisment = async () =>{
         const result = await fetch(`http://localhost:5000/getPropertyDetails`, {
         method: "post",
@@ -41,7 +41,7 @@ const PopularProperty = () => {
                   <Link
                     to="/sellPropInfo"
                     onClick={() => localStorage.setItem("pressCard", keyId)}
-                    key={ArrayOfObjects._id}
+                    key={ArrayOfObjects?._id}
                   >
                     <div className="p-4 flex-none w-96  hover:scale-105 ">
                       <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:border-gray-300">

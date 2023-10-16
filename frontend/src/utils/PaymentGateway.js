@@ -50,7 +50,7 @@ export default function PaymentGateway(amount) {
         key: "rzp_test_H0imBRBCGuVydw",
         currency: data.currency,
         amount: data.amount,
-        name: "Learn Code Online",
+        name: "Real Estate",
         description: "Wallet Transaction",
         image: "http://localhost:5000/logo.png",
         order_id: data.id,

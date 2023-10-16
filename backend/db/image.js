@@ -48,8 +48,6 @@
 // //Image is a model which has a schema imageSchema
 // module.exports = new mongoose.model('imageDetail', imageDetailsSchema);
 
-
-
 const mongoose = require("mongoose");
 const { Schema, Types } = mongoose;
 const moment = require("moment-timezone");
@@ -59,7 +57,7 @@ const imageDetailsSchema = new Schema({
     type: String,
   },
   owner: {
-    type: String
+    type: String,
   },
   sellerId: {
     type: String,
@@ -96,10 +94,16 @@ const imageDetailsSchema = new Schema({
     type: Array,
   },
   modified: {
-    type: Number
+    type: Number,
   },
   premium: {
-    type: Number
+    type: Number,
+  },
+  expirationDate: {
+    type: Date,
+    // Set default value to one month from the current date
+    default: Date.now() + 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+    index: { expires: 60 }, // Create a TTL index that expires documents after 1 day
   },
   //Set the creation date when the document is created
   // createdAt: {

@@ -12,25 +12,14 @@ export default function () {
   const [imageURLs, setImageURLs] = useState([]);
   var prodetail = JSON.parse(localStorage.getItem("propDetails"));
   var imags = [];
+
   const navigate = useNavigate();
-  useEffect(async () => {
 
-    console.log("name")
-    // var imga = new File(
-    //   [`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`],
-    //   image,
-    //   {
-    //     type: "image/png",
-    //   }
-    // );
+  const imageFiles = [];
 
-    await fetchData().then(setInitialImg);
-    //  setInitialImg();
-  }, []);
-
-  const fetchData = async () => {
-
+  const fetchAndCreateImageFile = (imageName) => {
     return new Promise((resolve, reject) => {
+<<<<<<< HEAD
       setTimeout(() => {
         var imgs = prodetail.image;
         console.log("my img name", imgs);
@@ -42,34 +31,63 @@ export default function () {
           canvas.height = img.height;
           console.log("count", img);
           const ctx = canvas.getContext("2d");
+=======
+      // Fetch the image using its name or URL
+      const img = new Image();
+      img.src = require(`D:/Practice Program/Real Estate/frontend/src/Images/${imageName}`);
+      
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+>>>>>>> origin
 
-          ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img, 0, 0);
+      console.log("image type", canvas);
 
-          // Convert the canvas content to a Blob
-          canvas.toBlob(function (blob) {
-            var imga = new File([blob], image, {
-              type: "image/png",
-            });
-            console.log(blob);
-            console.log("imga ", imga);
-            imags.push(imga);
+      //  const base64Data = canvas.toDataURL("image/jpeg"); 
+      //  const blob = new Blob([base64Data], { type: "image/jpeg" });
 
-            console.log("aaja", imags);
-            //  setImages([...images,imga]);
-          }, "image/png");
+      //  const imga = new File([blob], imageName, { type: "image/jpeg" });
+      //  imageFiles.push(imga);
+      //  // Check the size of the created image file
+      //  console.log("Image file size:", imga.size, "bytes");
 
-        });
-        // setImages([...images,...imags]);
-        // callback();
-        resolve();
-        // setInitialImg();
-      }, 1000)
-
+      //  resolve(imga)
+      // Convert the canvas content to a Blob
+      canvas.toBlob(
+        (blob) => {
+          var imga = new File([blob], imageName, {
+            type: "image/jpeg", // Adjust the type as needed
+          });
+          console.log("my imga", imga);
+          imageFiles.push(imga);
+          resolve(imga);
+        },
+        "image/jpeg",
+        1.0
+      );
     });
-  }
-  const setInitialImg = () => {
-    setImages(imags);
-  }
+  };
+
+  useEffect(async () => {
+    console.log("name");
+
+    var imageNames = prodetail.image;
+    let promises = imageNames.map((imageName) =>
+      fetchAndCreateImageFile(imageName)
+    );
+
+    Promise.all(promises)
+      .then(() => {
+        setImages(imageFiles);
+        console.log("Image files created:", imageFiles);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+  }, []);
 
   const [sellPro, setProp] = useState(true);
   const {
@@ -91,19 +109,25 @@ export default function () {
     if (images.length < 1) return;
     const newImageUrls = [];
     images.forEach((image) => {
-      console.log("check", image);
+
       const blob = new Blob([image], { type: "image/png" });
       console.log(blob);
-      if (blob.size < 100) {
-        console.log("inside blob ", `${image.name}`)
+
+      if (prodetail.image.includes(image.name)) {
+
         newImageUrls.push(
+<<<<<<< HEAD
           require(`C:/Users/Sahil Dharaviya/Desktop/RealEstatee/frontend/src/Images/${image.name}`)
         );
       }
       else {
+=======
+          require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
+        ); 
+      } else {
+>>>>>>> origin
         newImageUrls.push(URL.createObjectURL(blob));
       }
-      // newImageUrls.pop();
       console.log("url", newImageUrls);
     });
 
@@ -114,7 +138,9 @@ export default function () {
   const onImageChange = (e) => {
     setImages([...images, e.target.files[0]]);
     console.log("tar", e.target.files[0]);
-    images.forEach(img => { console.log("My", img) });
+    images.forEach((img) => {
+      console.log("My", img);
+    });
     console.log("y", images.length);
     if (images.length >= 0) setProp(false);
     else setProp(true);
@@ -142,26 +168,29 @@ export default function () {
     const imageName = result.data;
     console.log("img name", imageName);
     //Updating information to database
-    let data = await fetch(`http://localhost:5000/update-database/${prodetail._id}`, {
-      method: "put",
-      body: JSON.stringify({
-        selectedValue,
-        type,
-        State,
-        City,
-        society,
-        zone,
-        pincode,
-        area,
-        price,
-        rooms,
-        sellerId,
-        imageName,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    let data = await fetch(
+      `http://localhost:5000/update-database/${prodetail._id}`,
+      {
+        method: "put",
+        body: JSON.stringify({
+          selectedValue,
+          type,
+          State,
+          City,
+          society,
+          zone,
+          pincode,
+          area,
+          price,
+          rooms,
+          sellerId,
+          imageName,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     data = await data.json();
     if (data) {
       toast.success("Property Updated Successfully...", {

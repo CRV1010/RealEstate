@@ -2,13 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import Swiper from 'swiper';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
+import '../Home/swiper.css';
+
 
 
 const Comment = () => {
   const [comment, setComment] = useState([])
   const [modal1Open, setModal1Open] = useState(false);
   let user = JSON.parse(localStorage.getItem("user"))
-  const [userName, setUserName] = useState(user.username);
+  const [userName, setUserName] = useState(user?.username);
+
   const [userComment, setUserComment] = useState("");
 
   const openModal = (propertyFor) => {
@@ -50,7 +56,35 @@ const Comment = () => {
 
   useEffect(() => {
     getComments();
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      initialSlide: 1,
+      autoplay: {
+        delay: 5000, // Set the delay between slides in milliseconds
+        disableOnInteraction: false, // Continue autoplay even when user interacts with slides
+      },
+      
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 300,
+        modifier: 1,
+        slideShadows: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+     
+    });
+
+    return () => {
+      swiper.destroy(); // Clean up Swiper when component is unmounted
+    };
   }, []);
+
 
   const saveComment = async () => {
     const result = await fetch("http://localhost:5000/comment", {
@@ -96,34 +130,39 @@ const Comment = () => {
     }
   }
 
+
+
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container px-5 py-12 mx-auto">
+  
+    <section>
+      <div className="container px-5 py-6 mx-auto">
         <div className="lg:w-1/2 w-full mb-6">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
             Review
           </h1>
           <div className="h-1 w-20 bg-indigo-500 rounded"></div>
         </div>
+      </div>
+      <div>
         {comment ? (
-          <div className="flex flex-wrap -m-4">
-            {comment.map((commentDetails) => {
-              // console.log("com", commentDetails);
-              return (
-                <div className="lg:w-1/3 lg:mb-0 mb-6 p-4">
-                  <div className="h-full text-center">
-                    <img
-                      alt="testimonial"
-                      className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                      src={require(`../../Images/${commentDetails[0]}`)}
-                      key={commentDetails[0]}
-                    />
-                    <p className="leading-relaxed">{commentDetails[2]}</p>
-                    <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
-                    <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
-                      {commentDetails[1]}
-                    </h2>
+          <div className="swiper mySwiper" >
+            <div className="swiper-wrapper">
+              {comment.map((commentDetails) => {
+                return (
+                  <div className="card swiper-slide  ">
+                    <div className="card__image">
+                      <img
+                        alt="testimonial"
+                        src={require(`../../Images/${commentDetails[0]}`)}
+                        key={commentDetails[0]}
+                        className=" border-4 p-3 border-indigo-500"
+                      />
+                    </div>
 
+                    <div className="card__content">
+                      <span className="card__title text-indigo-700  font-bold">{commentDetails[1]}</span>
+                      <p className="card__text">{commentDetails[2]}</p>
+                    </div>
                     {(() => {
                       if (
                         user?._id === commentDetails[3] ||
@@ -142,15 +181,18 @@ const Comment = () => {
                       }
                     })()}
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         ) : (
           <div> Sorry ! No Comment </div>
         )}
       </div>
+
+      
       <div className="p-2 w-full">
+      {user ? (
         <button
           onClick={() => {
             openModal("Sell");
@@ -159,6 +201,11 @@ const Comment = () => {
         >
           Add Comment
         </button>
+        )
+            : (
+              <div></div>
+            )
+        }
         {modal1Open && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div className="bg-white  rounded-lg w-1/3">
@@ -236,7 +283,8 @@ const Comment = () => {
         pauseOnHover
         theme="light"
       />
-    </section>
+
+    </section >
   );
 };
 
