@@ -15,6 +15,8 @@ import AddProperty from "./Components/addProperty";
 import Explore from "./Components/explore";
 
 import Carousel from "./Components/Home/Carousel";
+import Searchbar from "./Components/Home/Searchbar";
+import SearchMap from "./Components/Home/SearchMap";
 import SellBuyRent from "./Components/Home/SellBuyRent";
 import PopularProperty from "./Components/Home/PopularProperty";
 import HowWork from "./Components/Home/HowWork";
@@ -34,7 +36,6 @@ import Premium from "./Components/Premium";
 import SellPropInfo from "./Components/sellPropInfo";
 
 function App() {
-  
   return (
     <div className="App">
       <BrowserRouter>
@@ -45,6 +46,7 @@ function App() {
               path="/home"
               element={
                 <>
+                  {/* <Searchbar /> */}
                   <Carousel />
                   <SellBuyRent />
                   <PopularProperty />
@@ -53,7 +55,7 @@ function App() {
                 </>
               }
             />
-            {/* <Route path="/home" element={<Carousel />} /> */}
+            <Route path="/searchmap" element={<SearchMap />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
 

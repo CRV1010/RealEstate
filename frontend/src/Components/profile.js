@@ -42,7 +42,7 @@ export default function (props) {
     });
     var data = await result.json();
     setPropertyDetails(data);
-    console.log(data);
+    // console.log(data);
   }
 
   const deleteProperty = async (id) => {
@@ -84,8 +84,10 @@ export default function (props) {
     });
     var data = await result.json();
     let pd = data[0];
+    
     console.log("data", data);
     console.log("md", pd.modified);
+
     if (pd.modified == 1) {
       toast.warning("You have Reached max limit of Updation...", {
         position: "top-right",
@@ -117,7 +119,7 @@ export default function (props) {
       },
     });
     let data = await result.json();
-    
+
     setDatabase(data);
 
     toast.success("Thank You! For Your Interest...", {
@@ -200,133 +202,134 @@ export default function (props) {
                 >
                   {propertyDetails
                     ? propertyDetails.map((ArrayOfObjects, index) => {
-                        const imageNames = ArrayOfObjects.image[0];
-                        const keyId = `${ArrayOfObjects._id}`;
-                        return (
-                          <li
-                            className="cards_item_explore"
-                            key={ArrayOfObjects._id}
-                          >
-                            <div className="card" tabindex="0">
-                              <h2 className="card_title_explore">
-                                {" "}
-                                {ArrayOfObjects.propertyFor} &#x2022; &#8377;
-                                {ArrayOfObjects.price}{" "}
-                              </h2>
+                      const imageNames = ArrayOfObjects.image[0];
+                      const keyId = `${ArrayOfObjects._id}`;
+                      return (
+                        <li
+                          className="cards_item_explore"
+                          key={ArrayOfObjects._id}
+                        >
+                          <div className="card" tabindex="0">
+                            <h2 className="card_title_explore">
+                              {" "}
+                              {ArrayOfObjects.propertyFor} &#x2022; &#8377;
+                              {ArrayOfObjects.price}{" "}
+                            </h2>
 
-                              <Link
-                                to="/sellPropInfo"
-                                onClick={() => getNewPro(keyId)}
-                                key={ArrayOfObjects._id}
-                              >
-                                <div className="card_image_explore">
-                                  {ArrayOfObjects.image &&
+                            <Link
+                              to="/sellPropInfo"
+                              onClick={() => getNewPro(keyId)}
+                              key={ArrayOfObjects._id}
+                            >
+                              <div className="card_image_explore">
+                                {ArrayOfObjects.image &&
                                   ArrayOfObjects.image.length > 0 ? (
-                                    <img
-                                      src={require(`../Images/${ArrayOfObjects.image[0]}`)}
-                                      key={ArrayOfObjects.image[0]}
-                                      alt="not fetched"
-                                    />
-                                  ) : (
-                                    ""
-                                  )}
-                                </div>
-                              </Link>
-                              <div className="card_content_explore">
-                                <div className="card_text_explore">
-                                  <div className="likes">
-                                    <button
-                                      onClick={Increse_Likes}
-                                      value={ArrayOfObjects._id}
-                                      disabled={
-                                        ArrayOfObjects.likes &&
-                                        ArrayOfObjects.likes.some(
-                                          (objectId) => objectId == user_id
-                                        )
-                                      }
-                                    >
-                                      {ArrayOfObjects.likes &&
+                                  <img
+                                    src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                                    key={ArrayOfObjects.image[0]}
+                                    alt="not fetched"
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            </Link>
+                            <div className="card_content_explore">
+                              <div className="card_text_explore">
+                                <div className="likes">
+                                  <button
+                                    onClick={Increse_Likes}
+                                    value={ArrayOfObjects._id}
+                                    disabled={
+                                      ArrayOfObjects.likes &&
+                                      ArrayOfObjects.likes.some(
+                                        (objectId) => objectId == user_id
+                                      )
+                                    }
+                                  >
+                                    {ArrayOfObjects.likes &&
                                       ArrayOfObjects.likes.some(
                                         (objectId) => objectId == user_id
                                       ) ? (
-                                        <i
-                                          className="fa-solid fa-heart"
-                                          style={{ color: "red" }}
-                                        ></i>
-                                      ) : (
-                                        <i
-                                          className="fa-regular fa-heart"
-                                          style={{ color: "red" }}
-                                        ></i>
-                                      )}
-                                      &nbsp;
-                                      <span
-                                        style={{
-                                          color: "#b4fee7",
-                                          "font-weight": "600",
-                                        }}
-                                      >
-                                        {ArrayOfObjects.likes &&
-                                          ArrayOfObjects.likes.length}{" "}
-                                      </span>{" "}
-                                      Interested
-                                    </button>
-                                  </div>
-                                  <p>
-                                    {" "}
-                                    <strong> Property Type: </strong>
-                                    {ArrayOfObjects.type}{" "}
-                                  </p>
-                                  <p>
-                                    {" "}
-                                    <strong>Location: </strong>{" "}
-                                    {ArrayOfObjects.society},{" "}
-                                    {ArrayOfObjects.zone}, {ArrayOfObjects.City}
-                                    , {ArrayOfObjects.State}.{" "}
-                                  </p>
-                                  <p>
-                                    {" "}
-                                    <strong>Pincode: </strong>{" "}
-                                    {ArrayOfObjects.pincode}{" "}
-                                  </p>{" "}
-                                  <br />
-                                  <p className="facility_explore">
-                                    {" "}
-                                    <strong>Facility: </strong>{" "}
-                                    {ArrayOfObjects.rooms} BHK <br />{" "}
-                                    <strong>Land Area: </strong>{" "}
-                                    {ArrayOfObjects.area}{" "}
-                                  </p>
-                                  <div id="propertyBtn">
-                                    <button
-                                      onClick={() =>
-                                        updateProperty(ArrayOfObjects._id)
-                                      }
-                                      className="profilePropertyBtn"
+                                      <i
+                                        className="fa-solid fa-heart"
+                                        style={{ color: "red" }}
+                                      ></i>
+                                    ) : (
+                                      <i
+                                        className="fa-regular fa-heart"
+                                        style={{ color: "red" }}
+                                      ></i>
+                                    )}
+                                    &nbsp;
+                                    <span
                                       style={{
-                                        backgroundColor: "green",
+                                        color: "#b4fee7",
+                                        "font-weight": "600",
                                       }}
                                     >
-                                      {" "}
-                                      Update{" "}
-                                    </button>
-                                    <button
-                                      onClick={() =>
-                                        deleteProperty(ArrayOfObjects._id)
-                                      }
-                                      className="profilePropertyBtn"
-                                      style={{ backgroundColor: "red" }}
-                                    >
-                                      {" "}
-                                      Delete{" "}
-                                    </button>
-                                  </div>
+                                      {ArrayOfObjects.likes &&
+                                        ArrayOfObjects.likes.length}{" "}
+                                    </span>{" "}
+                                    Interested
+                                  </button>
+                                </div>
+                                <p>
+                                  {" "}
+                                  <strong> Property Type: </strong>
+                                  {ArrayOfObjects.type}{" "}
+                                </p>
+                                <p>
+                                  {" "}
+                                  <strong>Location: </strong>{" "}
+                                  {ArrayOfObjects.society},{" "}
+                                  {ArrayOfObjects.zone}, {ArrayOfObjects.City}
+                                  , {ArrayOfObjects.State}.{" "}
+                                </p>
+                                <p>
+                                  {" "}
+                                  <strong>Pincode: </strong>{" "}
+                                  {ArrayOfObjects.pincode}{" "}
+                                </p>{" "}
+                                <br />
+                                <p className="facility_explore">
+                                  {" "}
+                                  <strong>Facility: </strong>{" "}
+                                  {ArrayOfObjects.rooms} BHK <br />{" "}
+                                  <strong>Land Area: </strong>{" "}
+                                  {ArrayOfObjects.area}
+                                  <span> m<sup>2</sup></span>{" "}
+                                </p>
+                                <div id="propertyBtn">
+                                  <button
+                                    onClick={() =>
+                                      updateProperty(ArrayOfObjects._id)
+                                    }
+                                    className="profilePropertyBtn"
+                                    style={{
+                                      backgroundColor: "green",
+                                    }}
+                                  >
+                                    {" "}
+                                    Update{" "}
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      deleteProperty(ArrayOfObjects._id)
+                                    }
+                                    className="profilePropertyBtn"
+                                    style={{ backgroundColor: "red" }}
+                                  >
+                                    {" "}
+                                    Delete{" "}
+                                  </button>
                                 </div>
                               </div>
                             </div>
-                          </li>
-                        );
-                      })
+                          </div>
+                        </li>
+                      );
+                    })
                     : ""}
                 </ul>
               </div>

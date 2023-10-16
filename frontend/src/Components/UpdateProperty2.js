@@ -36,7 +36,7 @@ export default function () {
         console.log("my img name", imgs);
         imgs.forEach(async (image) => {
           const img = new Image();
-          img.src = require(`D:/Practice Program/Real Estate/frontend/src/Images/${image}`);
+          img.src = require(`C:/Users/Sahil Dharaviya/Desktop/RealEstatee/frontend/src/Images/${image}`);
           const canvas = document.createElement("canvas");
           canvas.width = img.width;
           canvas.height = img.height;
@@ -97,7 +97,7 @@ export default function () {
       if (blob.size < 100) {
         console.log("inside blob ", `${image.name}`)
         newImageUrls.push(
-          require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
+          require(`C:/Users/Sahil Dharaviya/Desktop/RealEstatee/frontend/src/Images/${image.name}`)
         );
       }
       else {

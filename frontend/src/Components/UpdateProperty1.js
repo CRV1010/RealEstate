@@ -7,26 +7,47 @@ import stateData from './../json/State_City.json';
 import "./sell.css";
 
 export default function () {
-  const [stateid, setStateid] = useState("");
-  const [city, setCity] = useState([]);
-  const [cityid, setCityid] = useState("");
-
   const params = useParams();
   var id = params.id;
 
-  const auth = JSON.parse(localStorage.getItem("PropertyDetails"));
+  const [pd, setPd] = useState({});
+  const [city, setCity] = useState([]);
 
-  const StateId = stateData.find((state) => state.state_name === auth.State)?.state_id || ''; // return state_id
-  const CityId = city.find((getcity) => getcity.city_name === auth.City)?.city_id || '';
+  const StateId = stateData.find((state) => state.state_name === pd.State)?.state_id || ''; // return state_id
+  const CityId = city.find((getcity) => getcity.city_name === pd.City)?.city_id || '';
   console.log(CityId);
 
-  const [society, setSociety] = useState(auth.society);
-  const [zone, setZone] = useState(auth.zone);
-  const [pincode, setPincode] = useState(auth.pincode);
-  const [area, setArea] = useState(auth.area);
-  const [price, setPrice] = useState(auth.price);
+  const [stateid, setStateid] = useState("");
+  const [cityid, setCityid] = useState("");
+
+  const [propertyFor, setPropertyFor] = useState("");
+  const [society, setSociety] = useState(pd.society);
+  const [zone, setZone] = useState(pd.zone);
+  const [pincode, setPincode] = useState(pd.pincode);
+  const [area, setArea] = useState(pd.area);
+  const [price, setPrice] = useState(pd.price);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!pd) {
+      navigate("/sell");
+    }
+    getProperty();
+  }, [id]);
+
+  useEffect(() => {
+    if (pd) {
+      setStateid(StateId);
+      setCityid(CityId);
+      setPropertyFor(pd.propertyFor);
+      setSociety(pd.society);
+      setZone(pd.zone);
+      setPincode(pd.pincode);
+      setArea(pd.area);
+      setPrice(pd.price);
+    }
+  }, [pd, StateId, CityId]);
 
   const handleState = (e) => {
     const getStateId = e.target.value;
@@ -53,13 +74,6 @@ export default function () {
     }
   }, [StateId]);
 
-  useEffect(() => {
-    if (!auth) {
-      navigate("/sell");
-    }
-    getProperty();
-  }, []);
-
   const [disable, setDisable] = useState(true);
 
   const getProperty = async () => {
@@ -73,7 +87,7 @@ export default function () {
 
     var data = await result.json();
     let pd = data[0];
-    console.log(pd);
+    setPd(pd);
 
     if (pd.propertyFor === 'Sell')
       document.getElementById('sellFor1').checked = pd.propertyFor;
@@ -81,6 +95,7 @@ export default function () {
       document.getElementById("sellFor2").checked = pd.propertyFor;
     else
       document.getElementById("sellFor3").checked = pd.propertyFor;
+
     document.getElementById("type").value = pd.type;
     document.getElementById("rooms").value = pd.rooms;
 
@@ -126,6 +141,7 @@ export default function () {
         theme: "light",
       });
     }
+
     else if (selectedValue === '' || type === '' || State === '' || City === '' || society === '' || zone === '' || pincode === '' || area === '' || price === '' || rooms === '') {
       toast.warning('Attention! Information not Sufficient...', {
         position: "top-right",
@@ -139,6 +155,7 @@ export default function () {
         theme: "light",
       });
     }
+
     else {
       toast.error('Oops! Information Crashed...', {
         position: "top-right",
@@ -198,6 +215,9 @@ export default function () {
                         message: "Property for is required"
                       },
                     })}
+                    onChange={() =>
+                      setPropertyFor("Sell")
+                    }
                   />{" "}
                   Sell{" "}
                 </label>{" "} &emsp;
@@ -215,6 +235,9 @@ export default function () {
                         message: "Property for is required"
                       },
                     })}
+                    onChange={() =>
+                      setPropertyFor("Rent")
+                    }
                   />{" "}
                   Rent{" "}
                 </label>{" "} &emsp;
@@ -232,6 +255,9 @@ export default function () {
                         message: "Property for is required"
                       },
                     })}
+                    onChange={() =>
+                      setPropertyFor("PG")
+                    }
                   />{" "}
                   PG{" "}
                 </label>
@@ -245,9 +271,10 @@ export default function () {
                 <select
                   id="type"
                   style={{ 'width': '40%' }}
-                // {...register("type", {
-                //   required: 'Type of property is required'
-                // })}
+                  {...register("type", {
+                    value: true,
+                    required: 'Type of property is required'
+                  })}
                 >
                   <option id='propOpt' value=''>
                     Select Type
@@ -283,15 +310,19 @@ export default function () {
                   name='State'
                   className='sellField form-control'
                   id="State"
-                  defaultValue={StateId}
+                  value={stateid}
                   {...register("State", {
+                    value: true,
                     required: "State is required"
                   })}
                   onChange={(e) => handleState(e)}
                 >
                   <option
                     className='propOtp bg-black'
-                    value=""> Select State </option>
+                    value=""
+                  >
+                    Select State
+                  </option>
                   {
                     stateData.map((getstate, index) => (
                       <option
@@ -320,11 +351,12 @@ export default function () {
                   className='sellField form-control ml-2'
                   style={{ 'width': '45%' }}
                   id='City'
-                  defaultValue={CityId}
                   {...register("City", {
+                    value: true,
                     required: "City is required"
                   })}
                   onChange={(e) => handleCity(e)}
+                  value={cityid}
                 >
                   <option
                     className='propOtp bg-black'
@@ -363,6 +395,7 @@ export default function () {
                 placeholder="Enter Area & Society"
                 value={zone}
                 {...register("zone", {
+                  value: true,
                   required: "Area & Society is required"
                 })}
                 onChange={(e) => {
@@ -385,6 +418,7 @@ export default function () {
                 style={{ 'width': '40%' }}
                 value={society}
                 {...register("society", {
+                  value: true,
                   required: "Flat/Apartment/Street is required"
                 })}
                 onChange={(e) => {
@@ -404,6 +438,7 @@ export default function () {
                 placeholder='Enter 6 digit Pincode'
                 value={pincode}
                 {...register("pincode", {
+                  value: true,
                   required: "Pincode is required",
                   maxLength: {
                     value: 6,
@@ -439,10 +474,16 @@ export default function () {
                 style={{ 'width': '40%' }}
                 value={area}
                 {...register("area", {
+                  value: true,
                   required: "Plot/Land Area is required",
                   pattern: {
                     value: /^\d+(?:[.,]\d+)*$/,
                     message: "Area contains digits only",
+                  },
+                  validate: {
+                    notZero: (value) => value !== "0" || "Area is not zero",
+                    // greaterThan50: (value) => parseFloat(value) > 50 || "Area must be greater than 50 sqmtr",
+                    // lessThan10000: (value) => parseFloat(value) < 10000 || "Area must be less than 10000 sqmtr",
                   },
                 })}
                 onChange={(e) => {
@@ -459,9 +500,10 @@ export default function () {
                 </label>
                 <select
                   id="rooms"
-                // {...register("rooms", {
-                //   required: 'No. of rooms is required'
-                // })}
+                  {...register("rooms", {
+                    value: true,
+                    required: 'No. of rooms is required'
+                  })}
                 >
                   <option id='room' value=''>
                     Select
@@ -496,10 +538,36 @@ export default function () {
                 style={{ 'width': '40%' }}
                 value={price}
                 {...register("price", {
+                  value: true,
                   required: "Expected Price is required",
                   pattern: {
                     value: /^\d+(?:[.,]\d+)*$/,
                     message: "Price contains digits only",
+                  },
+                  validate: {
+                    notZero: (value) => value !== "0" || "Price is not zero",
+                    // greaterThan5000: (value) => parseFloat(value) >= 5000 || "Price must be greater than 5000.",
+                    // lessThan10000000: (value) => parseFloat(value) <= 10000000 || "Price must be less than 1,00,00,000.",
+                    priceBasedOnProperty: (value) => {
+
+                      if (propertyFor === "Sell") {
+                        return parseFloat(value) >= 100000 && parseFloat(value) <= 10000000
+                          ? true
+                          : "Price must be greater than 1,00,000 and less than 1,00,00,000 for Selling.";
+                      }
+
+                      else if (propertyFor === "Rent") {
+                        return parseFloat(value) >= 5000 && parseFloat(value) <= 100000
+                          ? true
+                          : "Price must be greater than 5,000 and less than 1,00,000 for Renting.";
+                      }
+
+                      else if (propertyFor === "PG") {
+                        return parseFloat(value) >= 5000 && parseFloat(value) <= 20000
+                          ? true
+                          : "Price must be greater than 5,000 and less than 20,000 for PG.";
+                      }
+                    },
                   },
                 })}
                 onChange={(e) => {

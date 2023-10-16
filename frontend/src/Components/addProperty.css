@@ -13,12 +13,12 @@
 }
 
 .mainBlock {
-    @apply flex flex-col justify-center items-center h-full p-[25px];
+    @apply flex flex-col justify-center items-center w-full h-full p-[20px];
     background: rgba(0, 0, 0, 0.4);
 }
 
 #sellImageForm {
-    @apply w-3/5 p-[5%] mx-auto my-[4%];
+    @apply w-[850px] p-[5%] mx-auto my-[4%];
 }
 
 #formData {

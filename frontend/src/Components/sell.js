@@ -11,6 +11,7 @@ export default function () {
   const [city, setCity] = useState([]);
   const [cityid, setCityid] = useState("");
 
+  const [propertyFor, setPropertyFor] = useState("");
   const [society, setSociety] = useState("");
   const [zone, setZone] = useState("");
   const [pincode, setPincode] = useState("");
@@ -34,14 +35,15 @@ export default function () {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
+    setPropertyFor("Sell");
+    // let radBtnDefault = document.getElementById("sellFor1");
+    // radBtnDefault.checked = true;
+
     const auth = localStorage.getItem("user");
-    let radBtnDefault = document.getElementById("sellFor1");
-    radBtnDefault.checked = true;
     if (!auth) {
       navigate("/login");
     }
@@ -50,11 +52,12 @@ export default function () {
   const [disable, setDisable] = useState(true);
 
   const clickHandler = async () => {
-    var propertyFor = document.querySelector('input[name="propertyFor"]:checked');
+    var selectedPropertyFor = document.querySelector('input[name="propertyFor"]:checked');
     var selectedValue = null;
-    if (propertyFor) {
-      selectedValue = propertyFor.value;
+    if (selectedPropertyFor) {
+      selectedValue = selectedPropertyFor.value;
     }
+    setPropertyFor(selectedValue);
 
     let State = document.getElementById('State').value;
     let City = document.getElementById('City').value;
@@ -124,7 +127,8 @@ export default function () {
           <h1 id="leftHeading"> Sell Your Property</h1> <br /> <br />
           <p className='sellText'>
             With this platform you can sell your precious property virtually.
-            Save your time and get high amount of money...</p>
+            Save your time and get high amount of money...
+          </p>
           <div>
             <Link className="btn-item" to="/about">
               Explore Us
@@ -141,11 +145,13 @@ export default function () {
           <div className="information">
             <div>
               <div>
-                <label id='radio'> Property For :<span className='red'>*</span> </label> &emsp;
+                <label id='radio'>
+                  Property For :<span className='red'>*</span>
+                </label> &emsp;
                 <label id='radio'>
                   <input
                     type="radio"
-                    id='sellFor1'
+                    id='sellFor'
                     name="propertyFor"
                     value="Sell"
                     className='sellField'
@@ -155,6 +161,10 @@ export default function () {
                         message: "Property for is required"
                       },
                     })}
+                    onChange={() =>
+                      setPropertyFor("Sell")
+                    }
+                    defaultChecked
                   />
                   Sell
                 </label> &emsp;
@@ -171,6 +181,9 @@ export default function () {
                         message: "Property for is required"
                       },
                     })}
+                    onChange={() =>
+                      setPropertyFor("Rent")
+                    }
                   />
                   Rent
                 </label> &emsp;
@@ -187,6 +200,9 @@ export default function () {
                         message: "Property for is required"
                       },
                     })}
+                    onChange={() =>
+                      setPropertyFor("PG")
+                    }
                   />
                   PG
                 </label>
@@ -246,7 +262,7 @@ export default function () {
                   <option
                     className='propOtp bg-black'
                     value=""> Select State </option>
-                  {
+                  {stateData && 
                     stateData.map((getstate, index) => (
                       <option
                         className='bg-black'
@@ -395,6 +411,11 @@ export default function () {
                     value: /^\d+(?:[.,]\d+)*$/,
                     message: "Area contains digits only",
                   },
+                  validate: {
+                    notZero: (value) => value !== "0" || "Area is not zero",
+                    greaterThan50: (value) => parseFloat(value) >= 50 || "Area must be greater than 50 sqmtr",
+                    lessThan10000: (value) => parseFloat(value) <= 10000 || "Area must be less than 10000 sqmtr",
+                  },
                 })}
                 onChange={(e) => {
                   setArea(e.target.value);
@@ -452,6 +473,31 @@ export default function () {
                     value: /^\d+(?:[.,]\d+)*$/,
                     message: "Price contains digits only",
                   },
+                  validate: {
+                    notZero: (value) => value !== "0" || "Price is not zero",
+                    // greaterThan5000: (value) => parseFloat(value) >= 5000 || "Price must be greater than 5000.",
+                    lessThan10000000: (value) => parseFloat(value) <= 10000000 || "Price must be less than 1,00,00,000.",
+                    priceBasedOnProperty: (value) => {
+
+                      if (propertyFor === "Sell") {
+                        return parseFloat(value) >= 100000 && parseFloat(value) <= 10000000
+                          ? true
+                          : "Price must be greater than 1,00,000 and less than 1,00,00,000 for Selling.";
+                      }
+
+                      else if (propertyFor === "Rent") {
+                        return parseFloat(value) >= 5000 && parseFloat(value) <= 100000
+                          ? true
+                          : "Price must be greater than 5,000 and less than 1,00,000 for Renting.";
+                      }
+
+                      else if (propertyFor === "PG") {
+                        return parseFloat(value) >= 5000 && parseFloat(value) <= 20000
+                          ? true
+                          : "Price must be greater than 5,000 and less than 20,000 for PG.";
+                      }
+                    },
+                  },
                 })}
                 onChange={(e) => {
                   setPrice(e.target.value);
@@ -459,6 +505,7 @@ export default function () {
               />
               <p className="text-sm text-red-500">{errors.price?.message}</p>
             </div>
+
             <br />
           </div>
 

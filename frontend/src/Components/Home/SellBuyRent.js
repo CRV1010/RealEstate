@@ -214,6 +214,7 @@ const SellBuyRent = () => {
               </div>
             </Link>
           </div>
+          
           <div className="p-4 lg:w-1/3 box">
             <button
               value="Sell"
@@ -233,6 +234,7 @@ const SellBuyRent = () => {
                 <h2>Buy Properties</h2>
               </div>
             </button>
+            
             {modal1Open && (
               <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white  rounded-lg w-1/3">
@@ -247,6 +249,7 @@ const SellBuyRent = () => {
                       ✕
                     </button>
                   </div>
+
                   <div className="justify-center px-20 py-6">
                     <div className="mb-4">
                       <div className="sm:col-span-3">
@@ -257,12 +260,12 @@ const SellBuyRent = () => {
                           State
                         </label>
                         <div className="mt-2">
-                          <select
+                          <select 
                             id="state"
                             name="state"
                             autoComplete="state-name"
                             onChange={handleDropdownChange}
-                            className="block w-full rounded-md  border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select State</option>
                             <option>Gujarat</option>
@@ -272,6 +275,7 @@ const SellBuyRent = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="mb-4">
                       <div className="sm:col-span-3">
                         <label
@@ -286,7 +290,7 @@ const SellBuyRent = () => {
                             name="cities"
                             autoComplete="cities-name"
                             onChange={handleDropdownChange1}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select City</option>
                             <option>Vadodara</option>
@@ -296,6 +300,7 @@ const SellBuyRent = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="mb-4">
                       <div className="sm:col-span-3">
                         <label
@@ -310,7 +315,7 @@ const SellBuyRent = () => {
                             name="area"
                             autoComplete="area-name"
                             onChange={handleDropdownChange2}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Area</option>
                             <option>Samta</option>
@@ -324,7 +329,7 @@ const SellBuyRent = () => {
                   <div className="px-20 pb-6">
                     <button
                       onClick={closeModal1}
-                      className="bg-indigo-500 text-white font-semibold px-5 mr-6 py-2 rounded hover:bg-indigo-700"
+                      className="bg-indigo-500 text-white font-semibold px-5 px-2 mr-6 py-2 rounded hover:bg-indigo-700"
                     >
                       Next
                     </button>
@@ -332,6 +337,7 @@ const SellBuyRent = () => {
                 </div>
               </div>
             )}
+
             {modal2Open && (
               <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white rounded-lg w-1/3">
@@ -361,7 +367,7 @@ const SellBuyRent = () => {
                             name="propertyType"
                             autoComplete="propertyType-name"
                             onChange={handleDropdownChange3}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option> Select Type</option>
                             <option>Flats/Apartments</option>
@@ -388,7 +394,7 @@ const SellBuyRent = () => {
                             name="types"
                             autoComplete="types-name"
                             onChange={handleDropdownChange4}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Rooms</option>
                             <option>1 BHK</option>
@@ -443,7 +449,7 @@ const SellBuyRent = () => {
                             name="budget"
                             autoComplete="budget-name"
                             onChange={handleDropdownChange5}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             {/* <option>500000</option> */}
                             <option>Select Budget</option>
@@ -521,7 +527,7 @@ const SellBuyRent = () => {
                             name="rentState"
                             autoComplete="rentState-name"
                             onChange={rentHandleDropdownChange}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select State</option>
                             <option>Gujarat</option>
@@ -545,7 +551,7 @@ const SellBuyRent = () => {
                             name="rentCities"
                             autoComplete="rentCities-name"
                             onChange={rentHandleDropdownChange1}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select City</option>
                             <option>Vadodara</option>
@@ -569,7 +575,7 @@ const SellBuyRent = () => {
                             name="rentArea"
                             autoComplete="rentArea-name"
                             onChange={rentHandleDropdownChange2}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Area</option>
                             <option>Samta</option>
@@ -622,7 +628,7 @@ const SellBuyRent = () => {
                             name="rentPropertyType"
                             autoComplete="rentPropertyType-name"
                             onChange={rentHandleDropdownChange3}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option> Select Type</option>
                             <option>Flats/Apartments</option>
@@ -649,7 +655,7 @@ const SellBuyRent = () => {
                             name="rentTypes"
                             autoComplete="rentTypes-name"
                             onChange={rentHandleDropdownChange4}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Rooms</option>
                             <option>1 BHK</option>
@@ -667,7 +673,7 @@ const SellBuyRent = () => {
                   <div className="px-20 pb-6">
                     <button
                       onClick={rentCloseModal2}
-                      className="bg-indigo-500 text-white font-semibold px-5 mr-6 py-2 rounded hover:bg-indigo-700"
+                      className="bg-indigo-500 text-white font-semibold px-5 px-2 mr-6 py-2 rounded hover:bg-indigo-700"
                     >
                       Next
                     </button>
@@ -704,7 +710,7 @@ const SellBuyRent = () => {
                             name="rentBudget"
                             autoComplete="rentBudget-name"
                             onChange={rentHandleDropdownChange5}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Budget</option>
                             <option>3000-5000</option>
@@ -725,7 +731,7 @@ const SellBuyRent = () => {
                   <div className="px-20 pb-6">
                     <Link
                       to={"/searchProperty"}
-                      className="bg-indigo-500 text-white px-4 mr-6 py-2 rounded hover:bg-indigo-700"
+                      className="bg-indigo-500 text-white px-4 mr-6 py-2 px-2 rounded hover:bg-indigo-700"
                     >
                       submit
                     </Link>

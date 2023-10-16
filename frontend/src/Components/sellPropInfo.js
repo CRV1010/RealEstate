@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
 import './sellPropInfo.css';
-
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -20,6 +17,7 @@ export default function () {
     var sid = "";
 
     const navigate = useNavigate();
+    
     useEffect(() => {
         const auth = localStorage.getItem("user");
 
@@ -43,11 +41,11 @@ export default function () {
 
         var data = await result.json();
         var id = localStorage.getItem('pressCard');
-        var temp1 = data.filter(item => item._id == id)
+        var temp1 = data.filter(item => item._id === id)
         setDatabase(temp1[0])
 
         var zone = temp1[0].zone;
-        var temp2 = data.filter(item => item.zone == zone && item._id !== id)
+        var temp2 = data.filter(item => item.zone === zone && item._id !== id)
         setZoneData(temp2);
 
         var budget = temp1[0].price;
@@ -70,7 +68,7 @@ export default function () {
 
         var data = await result.json();
         console.log(data)
-        var temp1 = data.filter(item => item._id == sid)
+        var temp1 = data.filter(item => item._id === sid)
         setSeller(temp1[0].username)
     }
 
@@ -154,7 +152,7 @@ export default function () {
                                             database.image && database.image.length > 0 ? (
                                                 database.image.map((imageName) => {
                                                     return (
-                                                        <div className="w-full h-96">
+                                                        <div className="w-full h-screen">
                                                             <h3 className="proType" style={{ 'backgroundColor': 'rgb(181, 220, 142)' }}> <span style={{ 'color': 'green' }}> &#x2022; </span>{database.propertyFor} </h3>
                                                             <img src={require(`../Images/${imageName}`)} key={imageName} alt='Sorry' className="proImg  w-full h-full rounded-lg" />
                                                         </div>
@@ -171,9 +169,9 @@ export default function () {
                                             <p className="proPin"> {database.State} - {database.pincode} </p> <br />
 
                                             <div className="likes">
-                                                <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId == user_id)} >
+                                                <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId === user_id)} >
                                                     {
-                                                        database.likes && database.likes.some(objectId => objectId == user_id) ?
+                                                        database.likes && database.likes.some(objectId => objectId === user_id) ?
                                                             <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
                                                             : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
                                                     }
@@ -185,20 +183,20 @@ export default function () {
                                             <div className="proFacility">
                                                 <p className="proFacItem pfiBg"> <i className="fa fa-house-user favicon"></i> &nbsp; {database.type}  </p>
                                                 <p className="proFacItem pfiBg"> <i className="fa fa-landmark favicon"></i> &nbsp; {database.rooms} BHK </p>
-                                                <p className="proFacItem pfiBg"> <i className="fa fa-chart-area favicon"></i> &nbsp; {database.area} sq. m<sup>2</sup> </p>
-                                                <p className="proFacItem pfiBg"> <i className="fa fa-money-bill-trend-up favicon"></i> &nbsp; &#8377;{Math.floor(database.price / database.area)} /sq. m<sup>2</sup> </p>
+                                                <p className="proFacItem pfiBg"> <i className="fa fa-chart-area favicon"></i> &nbsp; {database.area} m<sup>2</sup> </p>
+                                                <p className="proFacItem pfiBg"> <i className="fa fa-money-bill-trend-up favicon"></i> &nbsp; &#8377; {Math.floor(database.price / database.area)}/m<sup>2</sup> </p>
                                                 <p className="proFacItem pfiBg"> <i className="fa fa-clock favicon"></i> &nbsp; Built in 2015 </p>
-                                                <p className="proFacItem pfiBg"> <i className="fa fa-handshake favicon"></i> &nbsp; &#8377;58620 DW PY </p>
+                                                <p className="proFacItem pfiBg"> <i className="fa fa-handshake favicon"></i> &nbsp; &#8377; 58620 DW PY </p>
                                             </div> <br /> <br /> <br />
 
                                             <div>
                                                 <h1 className="sellProHead"> Properties Make Best: </h1>
                                                 <hr className="underLine underLineBG" />
-                                                <p className="special"> Gorgeous 3 bedroom townhome loaded with updates in the heart of Saint Louis Park. The foyer welcomes you with soaring ceilings, tons of natural light & a floor to ceiling stone surround electric fireplace in the living room. Hard surface flooring throughout the living spaces and all new carpet upstairs. Enjoy a fully remodeled kitchen with all new cabinets offering ample storage, granite countertops & high-end appliances. Gather in the large formal dining room that overlooks the living room. Upstairs you will find 3 spacious bedrooms including a primary bedroom with private bath and a massive walk-in closet with custom organizers. All 3 bathrooms have been updated. Step outside to your private patio overlooking the park. Enjoy a game of tennis, an in-ground pool, relaxing in the sauna, & a private party room - all included with your HOA membership. Schedule your private showing today! </p>
+                                                <p className="special"> Gorgeous {database.rooms} bedroom townhome loaded with updates in the heart of Saint Louis Park. The foyer welcomes you with soaring ceilings, tons of natural light & a floor to ceiling stone surround electric fireplace in the living room. Hard surface flooring throughout the living spaces and all new carpet upstairs. Enjoy a fully remodeled kitchen with all new cabinets offering ample storage, granite countertops & high-end appliances. Gather in the large formal dining room that overlooks the living room. Upstairs you will find {database.rooms} spacious bedrooms including a primary bedroom with private bath and a massive walk-in closet with custom organizers. All {database.rooms} bathrooms have been updated. Step outside to your private patio overlooking the park. Enjoy a game of tennis, an in-ground pool, relaxing in the sauna, & a private party room - all included with your HOA membership. Schedule your private showing today! </p>
                                             </div> <br /> <br /> <br />
 
                                             {zoneData ?
-                                                zoneData.length == 0 ? "" :
+                                                zoneData.length === 0 ? "" :
                                                     <>
                                                         <div className="lg:w-1/2 w-full mb-6">
                                                             <h1 className="sellProHead"> Visit Nearest House: </h1>
@@ -209,7 +207,7 @@ export default function () {
                                                             {
                                                                 zoneData.map(
                                                                     (ArrayOfObjects, index) => {
-                                                                        const imageNames = ArrayOfObjects.image[0];
+                                                                        // const imageNames = ArrayOfObjects.image[0];
                                                                         const keyId = `${ArrayOfObjects._id}`;
                                                                         return (
                                                                             <div className="p-4 flex-none w-96 ">
@@ -230,9 +228,9 @@ export default function () {
                                                                                             <div className="card_content_explore">
                                                                                                 <div className="card_text_explore">
                                                                                                     <div className="likes">
-                                                                                                        <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId == user_id)} >
+                                                                                                        <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId === user_id)} >
                                                                                                             {
-                                                                                                                database.likes && database.likes.some(objectId => objectId == user_id) ?
+                                                                                                                database.likes && database.likes.some(objectId => objectId === user_id) ?
                                                                                                                     <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
                                                                                                                     : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
                                                                                                             }
@@ -260,18 +258,18 @@ export default function () {
                                             }
 
                                             {budgetData ?
-                                                budgetData.length == 0 ? "" :
+                                                budgetData.length === 0 ? "" :
                                                     <>
-                                                        <div className="lg:w-1/2 w-full mb-6">
+                                                        <div className="w-full mb-6">
                                                             <h1 className="sellProHead"> Get House On Your Budget: </h1>
-                                                            <hr className="underLine underLineBG" style={{ 'width': '70%' }} />
+                                                            <hr className="underLine underLineBG" style={{ 'width': '30%' }} />
                                                         </div>
 
                                                         <div className="flex flex-nowrap overflow-x-scroll overflow-y-hidden" >
                                                             {
                                                                 budgetData.map(
                                                                     (ArrayOfObjects, index) => {
-                                                                        const imageNames = ArrayOfObjects.image[0];
+                                                                        // const imageNames = ArrayOfObjects.image[0];
                                                                         const keyId = `${ArrayOfObjects._id}`;
                                                                         return (
                                                                             <div className="p-4 flex-none w-96 ">
@@ -292,9 +290,9 @@ export default function () {
                                                                                             <div className="card_content_explore">
                                                                                                 <div className="card_text_explore">
                                                                                                     <div className="likes">
-                                                                                                        <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId == user_id)} >
+                                                                                                        <button onClick={Increse_Likes} value={database && database._id} disabled={database.likes && database.likes.some(objectId => objectId === user_id)} >
                                                                                                             {
-                                                                                                                database.likes && database.likes.some(objectId => objectId == user_id) ?
+                                                                                                                database.likes && database.likes.some(objectId => objectId === user_id) ?
                                                                                                                     <i className="fa-solid fa-heart" style={{ 'color': 'red' }}></i>
                                                                                                                     : <i className="fa-regular fa-heart" style={{ 'color': 'red' }}></i>
                                                                                                             }
