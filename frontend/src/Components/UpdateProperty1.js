@@ -13,15 +13,10 @@ export default function () {
   const [pd, setPd] = useState({});
   const [city, setCity] = useState([]);
 
-<<<<<<< HEAD
-  const StateId = stateData.find((state) => state.state_name === pd.State)?.state_id || ''; // return state_id
-  const CityId = city.find((getcity) => getcity.city_name === pd.City)?.city_id || '';
-=======
   const StateId =
     stateData.find((state) => state.state_name === pd.State)?.state_id || ""; // return state_id
   const CityId =
     city.find((getcity) => getcity.city_name === pd.City)?.city_id || "";
->>>>>>> origin
   console.log(CityId);
 
   const [stateid, setStateid] = useState("");
@@ -103,12 +98,7 @@ export default function () {
       document.getElementById("sellFor1").checked = pd.propertyFor;
     else if (pd.propertyFor === "Rent")
       document.getElementById("sellFor2").checked = pd.propertyFor;
-<<<<<<< HEAD
-    else
-      document.getElementById("sellFor3").checked = pd.propertyFor;
-=======
     else document.getElementById("sellFor3").checked = pd.propertyFor;
->>>>>>> origin
 
     document.getElementById("type").value = pd.type;
     document.getElementById("rooms").value = pd.rooms;
@@ -215,39 +205,7 @@ export default function () {
         theme: "light",
       });
     }
-<<<<<<< HEAD
-
-    else if (selectedValue === '' || type === '' || State === '' || City === '' || society === '' || zone === '' || pincode === '' || area === '' || price === '' || rooms === '') {
-      toast.warning('Attention! Information not Sufficient...', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-
-    else {
-      toast.error('Oops! Information Crashed...', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  }
-=======
   };
->>>>>>> origin
 
   return (
     <div id="mainDiv" className="bg-center bg-no-repeat bg-cover">
@@ -297,13 +255,7 @@ export default function () {
                         message: "Property for is required",
                       },
                     })}
-<<<<<<< HEAD
-                    onChange={() =>
-                      setPropertyFor("Sell")
-                    }
-=======
                     onChange={() => setPropertyFor("Sell")}
->>>>>>> origin
                   />{" "}
                   Sell{" "}
                 </label>{" "}
@@ -322,13 +274,7 @@ export default function () {
                         message: "Property for is required",
                       },
                     })}
-<<<<<<< HEAD
-                    onChange={() =>
-                      setPropertyFor("Rent")
-                    }
-=======
                     onChange={() => setPropertyFor("Rent")}
->>>>>>> origin
                   />{" "}
                   Rent{" "}
                 </label>{" "}
@@ -347,13 +293,7 @@ export default function () {
                         message: "Property for is required",
                       },
                     })}
-<<<<<<< HEAD
-                    onChange={() =>
-                      setPropertyFor("PG")
-                    }
-=======
                     onChange={() => setPropertyFor("PG")}
->>>>>>> origin
                   />{" "}
                   PG{" "}
                 </label>
@@ -370,17 +310,10 @@ export default function () {
                 </label>
                 <select
                   id="type"
-<<<<<<< HEAD
-                  style={{ 'width': '40%' }}
-                  {...register("type", {
-                    value: true,
-                    required: 'Type of property is required'
-=======
                   style={{ width: "40%" }}
                   {...register("type", {
                     value: true,
                     required: "Type of property is required",
->>>>>>> origin
                   })}
                 >
                   <option id="propOpt" value="">
@@ -419,31 +352,6 @@ export default function () {
                   value={stateid}
                   {...register("State", {
                     value: true,
-<<<<<<< HEAD
-                    required: "State is required"
-                  })}
-                  onChange={(e) => handleState(e)}
-                >
-                  <option
-                    className='propOtp bg-black'
-                    value=""
-                  >
-                    Select State
-                  </option>
-                  {
-                    stateData.map((getstate, index) => (
-                      <option
-                        className='bg-black'
-                        value={getstate.state_id}
-                        key={index}
-                      >
-                        {
-                          getstate.state_name
-                        }
-                      </option>
-                    ))
-                  }
-=======
                     required: "State is required",
                   })}
                   onChange={(e) => handleState(e)}
@@ -460,7 +368,6 @@ export default function () {
                       {getstate.state_name}
                     </option>
                   ))}
->>>>>>> origin
                 </select>
               </div>
               <p className="text-sm text-red-500">{errors.State?.message}</p>
@@ -471,15 +378,6 @@ export default function () {
                   City :<span className="red">*</span> &ensp;
                 </label>
                 <select
-<<<<<<< HEAD
-                  name='City'
-                  className='sellField form-control ml-2'
-                  style={{ 'width': '45%' }}
-                  id='City'
-                  {...register("City", {
-                    value: true,
-                    required: "City is required"
-=======
                   name="City"
                   className="sellField form-control ml-2"
                   style={{ width: "45%" }}
@@ -487,7 +385,6 @@ export default function () {
                   {...register("City", {
                     value: true,
                     required: "City is required",
->>>>>>> origin
                   })}
                   onChange={(e) => handleCity(e)}
                   value={cityid}
@@ -522,11 +419,7 @@ export default function () {
                 value={zone}
                 {...register("zone", {
                   value: true,
-<<<<<<< HEAD
-                  required: "Area & Society is required"
-=======
                   required: "Area & Society is required",
->>>>>>> origin
                 })}
                 onChange={(e) => {
                   setZone(e.target.value);
@@ -549,11 +442,7 @@ export default function () {
                 value={society}
                 {...register("society", {
                   value: true,
-<<<<<<< HEAD
-                  required: "Flat/Apartment/Street is required"
-=======
                   required: "Flat/Apartment/Street is required",
->>>>>>> origin
                 })}
                 onChange={(e) => {
                   setSociety(e.target.value);
@@ -640,11 +529,7 @@ export default function () {
                   id="rooms"
                   {...register("rooms", {
                     value: true,
-<<<<<<< HEAD
-                    required: 'No. of rooms is required'
-=======
                     required: "No. of rooms is required",
->>>>>>> origin
                   })}
                 >
                   <option id="room" value="">
@@ -690,23 +575,6 @@ export default function () {
                     // greaterThan5000: (value) => parseFloat(value) >= 5000 || "Price must be greater than 5000.",
                     // lessThan10000000: (value) => parseFloat(value) <= 10000000 || "Price must be less than 1,00,00,000.",
                     priceBasedOnProperty: (value) => {
-<<<<<<< HEAD
-
-                      if (propertyFor === "Sell") {
-                        return parseFloat(value) >= 100000 && parseFloat(value) <= 10000000
-                          ? true
-                          : "Price must be greater than 1,00,000 and less than 1,00,00,000 for Selling.";
-                      }
-
-                      else if (propertyFor === "Rent") {
-                        return parseFloat(value) >= 5000 && parseFloat(value) <= 100000
-                          ? true
-                          : "Price must be greater than 5,000 and less than 1,00,000 for Renting.";
-                      }
-
-                      else if (propertyFor === "PG") {
-                        return parseFloat(value) >= 5000 && parseFloat(value) <= 20000
-=======
                       if (propertyFor === "Sell") {
                         return parseFloat(value) >= 100000 &&
                           parseFloat(value) <= 10000000
@@ -720,7 +588,6 @@ export default function () {
                       } else if (propertyFor === "PG") {
                         return parseFloat(value) >= 5000 &&
                           parseFloat(value) <= 20000
->>>>>>> origin
                           ? true
                           : "Price must be greater than 5,000 and less than 20,000 for PG.";
                       }

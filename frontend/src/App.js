@@ -9,7 +9,7 @@ import ForgotPassword from "./Components/ForgotPassword";
 import ConfirmOTP from "./Components/ConfirmOTP";
 import ChangePassword from "./Components/ChangePassword";
 import ChatAdmin from "./Components/ChatAdmin";
-import About from "./Components/About"
+import About from "./Components/About";
 import Sell from "./Components/sell";
 import AddProperty from "./Components/addProperty";
 import Explore from "./Components/explore";
@@ -37,10 +37,6 @@ import Premium from "./Components/Premium";
 import SellPropInfo from "./Components/sellPropInfo";
 
 function App() {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin
   return (
     <div className="App">
       <BrowserRouter>
@@ -74,73 +70,105 @@ function App() {
                 </>
               }
             />
-<<<<<<< HEAD
             <Route path="/searchmap" element={<SearchMap />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
-
-=======
             {/* <Route path="/home" element={<Carousel />} /> */}
-            <Route path="/contact" element={
-              <>
-                <ContactUs />
-                <Footer />
-              </>} />
-            <Route path="/about" element={
-              <>
-                <About />
-                <Footer />
-              </>} />
->>>>>>> origin
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <ContactUs />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <>
+                  <About />
+                  <Footer />
+                </>
+              }
+            />
             <Route path="/confirmotp" element={<ConfirmOTP />} />
             <Route path="/changepass" element={<ChangePassword />} />
-            <Route path="/addProperty" element={
-              <>
-                <AddProperty />
-                <Footer />
-              </>} />
-            <Route path="/sell" element={
-              <>
-                <Sell />
-                <Footer />
-              </>} />
-            <Route path="/explore" element={
-              <>
-                <Explore />
-                <Footer />
-              </>} />
+            <Route
+              path="/addProperty"
+              element={
+                <>
+                  <AddProperty />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/sell"
+              element={
+                <>
+                  <Sell />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/explore"
+              element={
+                <>
+                  <Explore />
+                  <Footer />
+                </>
+              }
+            />
             <Route path="/searchProperty" element={<SearchedProperty />} />
-            <Route path="/profile" element={
-              <>
-                <Profile />
-                <Footer />
-              </>} />
+            <Route
+              path="/profile"
+              element={
+                <>
+                  <Profile />
+                  <Footer />
+                </>
+              }
+            />
             <Route path="/otherproperty" element={<OtherProperty />} />
             <Route path="/otherproperty2" element={<OtherProperty2 />} />
             <Route path="/updateProperty1/:id" element={<UpdateProperty1 />} />
             <Route path="/updateProperty2" element={<UpdateProperty2 />} />
             <Route path="/updateUser/:id" element={<UpdateUser />} />
-            <Route path="/adminpage" element={
-              <>
-                <AdminPage />
-                <Footer />
-              </>} />
+            <Route
+              path="/adminpage"
+              element={
+                <>
+                  <AdminPage />
+                  <Footer />
+                </>
+              }
+            />
             {/* <Route path="/adminuser" element={<AdminUsers />} />
             <Route path="/adminProperty" element={<AdminProperty />} /> */}
 
             <Route path="/forgotpass/" element={<ForgotPassword />} />
             <Route path="/forgotpass/:email" element={<ForgotPassword />} />
             <Route path="/chatadmin" element={<ChatAdmin />} />
-            <Route path="/login" element={
-              <>
-                <Login />
-                <Footer />
-              </>} />
-            <Route path="/signup" element={
-              <>
-                <SignUp />
-                <Footer />
-              </>} />
+            <Route
+              path="/login"
+              element={
+                <>
+                  <Login />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <>
+                  <SignUp />
+                  <Footer />
+                </>
+              }
+            />
             <Route path="/premium" element={<Premium />} />
             <Route path="/sellPropInfo" element={<SellPropInfo />} />
           </Route>

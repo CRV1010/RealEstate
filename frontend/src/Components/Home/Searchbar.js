@@ -6,11 +6,11 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
-const params = {
-    q: '',
-    format: 'json',
-    addressdetails: 'addressdetails'
-}
+// const params = {
+//     q: '',
+//     format: 'json',
+//     addressdetails: 'addressdetails'
+// }
 
 const Searchbar = () => {
 

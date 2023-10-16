@@ -217,15 +217,6 @@ export default function (props) {
                               {ArrayOfObjects.price}{" "}
                             </h2>
 
-<<<<<<< HEAD
-                            <Link
-                              to="/sellPropInfo"
-                              onClick={() => getNewPro(keyId)}
-                              key={ArrayOfObjects._id}
-                            >
-                              <div className="card_image_explore">
-                                {ArrayOfObjects.image &&
-=======
                               <Link
                                 to="/sellPropInfo"
                                 onClick={() => getNewPro(ArrayOfObjects._id)}
@@ -233,7 +224,7 @@ export default function (props) {
                               >
                                 <div className="card_image_explore">
                                   {ArrayOfObjects.image &&
->>>>>>> origin
+
                                   ArrayOfObjects.image.length > 0 ? (
                                   <img
                                     src={require(`../Images/${ArrayOfObjects.image[0]}`)}
