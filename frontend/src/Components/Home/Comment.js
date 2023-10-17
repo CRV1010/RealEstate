@@ -149,7 +149,7 @@ const Comment = () => {
             <div className="swiper-wrapper">
               {comment.map((commentDetails) => {
                 return (
-                  <div className="card swiper-slide  ">
+                  <div className="cardComment swiper-slide  ">
                     <div className="card__image">
                       <img
                         alt="testimonial"
@@ -160,7 +160,9 @@ const Comment = () => {
                     </div>
 
                     <div className="card__content">
-                      <span className="card__title text-indigo-700  font-bold">{commentDetails[1]}</span>
+                      <span className="card__title text-indigo-700  font-bold">
+                        {commentDetails[1]}
+                      </span>
                       <p className="card__text">{commentDetails[2]}</p>
                     </div>
                     {(() => {
