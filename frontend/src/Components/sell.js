@@ -448,7 +448,7 @@ export default function () {
                     3
                   </option>
                   <option id="room" value="4">
-                    More
+                    4
                   </option>
                 </select>
               </div>

@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import StateData from '../../json/State_City.json';
 import { useState } from 'react';
 
 const SellBuyRent = () => {
@@ -17,7 +18,6 @@ const SellBuyRent = () => {
     setModal1Open(false);
     setModal3Open(false);
     setModal2Open(true);
-
   };
 
   const onlycloseModal1 = () => {
@@ -73,25 +73,43 @@ const SellBuyRent = () => {
     setRentModal3Open(false);
   };
 
+  // const handleDropdownChange = (event) => {
+  //   let state = event.target.value;
+  //   console.log(state)
+  //   localStorage.setItem('State', JSON.stringify(state));
+  // };
 
-  const handleDropdownChange = (event) => {
-    let state = event.target.value;
-    console.log(state)
-    localStorage.setItem('State', JSON.stringify(state));
-  };
+  // const handleDropdownChange1 = (event) => {
+  //   let cities = event.target.value;
+  //   console.log(cities)
+  //   localStorage.setItem('Cities', JSON.stringify(cities));
+  // };
 
-  const handleDropdownChange1 = (event) => {
-    let cities = event.target.value;
-    console.log(cities)
-    localStorage.setItem('Cities', JSON.stringify(cities));
-  };
+  const [city, setCity] = useState([]);
+
+  const handleState = (e) => {
+    const getStateId = e.target.value;
+    const getCitydata = StateData.find(state => state.state_id === getStateId).cities;
+    setCity(getCitydata);
+
+    let State = document.getElementById('state').value;
+    const selectedStateName = StateData.find((state) => state.state_id === State)?.state_name || '';
+    localStorage.setItem('State', JSON.stringify(selectedStateName));
+  }
+
+  const handleCity = (e) => {
+    // const cityid = e.target.value;
+
+    let City = document.getElementById('cities').value;
+    const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
+    localStorage.setItem('Cities', JSON.stringify(selectedCityName));
+  }
 
   const handleDropdownChange2 = (event) => {
     let area = event.target.value;
     console.log(area)
     localStorage.setItem('Area', JSON.stringify(area));
   };
-
 
   const handleDropdownChange3 = (event) => {
     let propertyType = event.target.value;
@@ -131,17 +149,35 @@ const SellBuyRent = () => {
   // Store the combined object back in localStorage
   localStorage.setItem('CombinedData', JSON.stringify(combinedObject));
 
-  const rentHandleDropdownChange = (event) => {
-    let state = event.target.value;
-    console.log(state)
-    localStorage.setItem('RentState', JSON.stringify(state));
-  };
+  // const rentHandleDropdownChange = (event) => {
+  //   let state = event.target.value;
+  //   console.log(state)
+  //   localStorage.setItem('RentState', JSON.stringify(state));
+  // };
 
-  const rentHandleDropdownChange1 = (event) => {
-    let cities = event.target.value;
-    console.log(cities)
-    localStorage.setItem('RentCities', JSON.stringify(cities));
-  };
+  // const rentHandleDropdownChange1 = (event) => {
+  //   let cities = event.target.value;
+  //   console.log(cities)
+  //   localStorage.setItem('RentCities', JSON.stringify(cities));
+  // };
+
+  const handleRentState = (e) => {
+    const getStateId = e.target.value;
+    const getCitydata = StateData.find(state => state.state_id === getStateId).cities;
+    setCity(getCitydata);
+
+    let State = document.getElementById('rentState').value;
+    const selectedStateName = StateData.find((state) => state.state_id === State)?.state_name || '';
+    localStorage.setItem('State', JSON.stringify(selectedStateName));
+  }
+
+  const handleRentCity = (e) => {
+    // const cityid = e.target.value;
+
+    let City = document.getElementById('rentCities').value;
+    const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
+    localStorage.setItem('Cities', JSON.stringify(selectedCityName));
+  }
 
   const rentHandleDropdownChange2 = (event) => {
     let area = event.target.value;
@@ -214,7 +250,7 @@ const SellBuyRent = () => {
               </div>
             </Link>
           </div>
-          
+
           <div className="p-4 lg:w-1/3 box">
             <button
               value="Sell"
@@ -234,13 +270,13 @@ const SellBuyRent = () => {
                 <h2>Buy Properties</h2>
               </div>
             </button>
-            
+
             {modal1Open && (
               <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white  rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
-                      Select State And Cities
+                      Select State And City
                     </span>
                     <button
                       onClick={onlycloseModal1}
@@ -257,20 +293,35 @@ const SellBuyRent = () => {
                           htmlFor="state"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          State
+                          State :
                         </label>
                         <div className="mt-2">
-                          <select 
+                          <select
                             id="state"
                             name="state"
                             autoComplete="state-name"
-                            onChange={handleDropdownChange}
+                            onChange={(e) => handleState(e)}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-                            <option>Select State</option>
-                            <option>Gujarat</option>
-                            <option>Delhi</option>
-                            <option>Goa</option>
+                            <option
+                              value=""
+                              className='bg-white'
+                            >
+                              Select State
+                            </option>
+                            {StateData &&
+                              StateData.map((getstate, index) => (
+                                <option
+                                  className='bg-white'
+                                  value={getstate.state_id}
+                                  key={index}
+                                >
+                                  {
+                                    getstate.state_name
+                                  }
+                                </option>
+                              ))
+                            }
                           </select>
                         </div>
                       </div>
@@ -282,20 +333,35 @@ const SellBuyRent = () => {
                           htmlFor="cities"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Cities
+                          City :
                         </label>
                         <div className="mt-2">
                           <select
                             id="cities"
                             name="cities"
                             autoComplete="cities-name"
-                            onChange={handleDropdownChange1}
+                            onChange={(e) => handleCity(e)}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-                            <option>Select City</option>
-                            <option>Vadodara</option>
-                            <option>Surat</option>
-                            <option>Rajkot</option>
+                            <option
+                              className='bg-white'
+                              value=""
+                            >
+                              Select City
+                            </option>
+                            {city &&
+                              city.map((getcity, index) => (
+                                <option
+                                  className='bg-white'
+                                  value={getcity.city_id}
+                                  key={index}
+                                >
+                                  {
+                                    getcity.city_name
+                                  }
+                                </option>
+                              ))
+                            }
                           </select>
                         </div>
                       </div>
@@ -307,7 +373,7 @@ const SellBuyRent = () => {
                           htmlFor="area"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Area
+                          Area :
                         </label>
                         <div className="mt-2">
                           <select
@@ -326,6 +392,7 @@ const SellBuyRent = () => {
                       </div>
                     </div>
                   </div>
+
                   <div className="px-20 pb-6">
                     <button
                       onClick={closeModal1}
@@ -352,6 +419,7 @@ const SellBuyRent = () => {
                       ✕
                     </button>
                   </div>
+
                   <div className="align-middle justify-center px-20 py-6">
                     <div className="mb-4">
                       <div className="sm:col-span-3">
@@ -359,7 +427,7 @@ const SellBuyRent = () => {
                           htmlFor="propertyType"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Property Types
+                          Property Type :
                         </label>
                         <div className="mt-2">
                           <select
@@ -369,7 +437,7 @@ const SellBuyRent = () => {
                             onChange={handleDropdownChange3}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-                            <option> Select Type</option>
+                            <option>Select Type</option>
                             <option>Flats/Apartments</option>
                             <option>Residential Plot</option>
                             <option>Office Space</option>
@@ -380,13 +448,14 @@ const SellBuyRent = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="mb-4">
                       <div className="sm:col-span-3">
                         <label
                           htmlFor="types"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          select Type
+                          House Type :
                         </label>
                         <div className="mt-2">
                           <select
@@ -396,13 +465,11 @@ const SellBuyRent = () => {
                             onChange={handleDropdownChange4}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-                            <option>Select Rooms</option>
+                            <option>Select Type</option>
                             <option>1 BHK</option>
                             <option>2 BHK</option>
                             <option>3 BHK</option>
                             <option>4 BHK</option>
-                            <option>5 BHK</option>
-                            {/* <option>5+ BHK</option> */}
                           </select>
                         </div>
                       </div>
@@ -420,6 +487,7 @@ const SellBuyRent = () => {
                 </div>
               </div>
             )}
+
             {modal3Open && (
               <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                 <div className="bg-white  rounded-lg w-1/3">
@@ -441,7 +509,7 @@ const SellBuyRent = () => {
                           htmlFor="budget"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Budget
+                          Budget :
                         </label>
                         <div className="mt-2">
                           <select
@@ -472,7 +540,7 @@ const SellBuyRent = () => {
                       to={"/searchProperty"}
                       className="bg-indigo-500 text-white px-4 mr-6 py-2 rounded hover:bg-indigo-700"
                     >
-                      submit
+                      Submit
                     </Link>
                   </div>
                 </div>
@@ -502,7 +570,7 @@ const SellBuyRent = () => {
                 <div className="bg-white  rounded-lg w-1/3">
                   <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                     <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
-                      Select State And Cities
+                      Select State And City
                     </span>
                     <button
                       onClick={rentOnlycloseModal1}
@@ -519,20 +587,35 @@ const SellBuyRent = () => {
                           htmlFor="rentState"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          State
+                          State :
                         </label>
                         <div className="mt-2">
                           <select
                             id="rentState"
                             name="rentState"
                             autoComplete="rentState-name"
-                            onChange={rentHandleDropdownChange}
+                            onChange={handleRentState}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-                            <option>Select State</option>
-                            <option>Gujarat</option>
-                            <option>Delhi</option>
-                            <option>Goa</option>
+                            <option
+                              value=""
+                              className='bg-white'
+                            >
+                              Select State
+                            </option>
+                            {StateData &&
+                              StateData.map((getstate, index) => (
+                                <option
+                                  className='bg-white'
+                                  value={getstate.state_id}
+                                  key={index}
+                                >
+                                  {
+                                    getstate.state_name
+                                  }
+                                </option>
+                              ))
+                            }
                           </select>
                         </div>
                       </div>
@@ -543,20 +626,35 @@ const SellBuyRent = () => {
                           htmlFor="rentCities"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Cities
+                          City :
                         </label>
                         <div className="mt-2">
                           <select
                             id="rentCities"
                             name="rentCities"
                             autoComplete="rentCities-name"
-                            onChange={rentHandleDropdownChange1}
+                            onChange={handleRentCity}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-                            <option>Select City</option>
-                            <option>Vadodara</option>
-                            <option>Surat</option>
-                            <option>Rajkot</option>
+                            <option
+                              className='bg-white'
+                              value=""
+                            >
+                              Select City
+                            </option>
+                            {city &&
+                              city.map((getcity, index) => (
+                                <option
+                                  className='bg-white'
+                                  value={getcity.city_id}
+                                  key={index}
+                                >
+                                  {
+                                    getcity.city_name
+                                  }
+                                </option>
+                              ))
+                            }
                           </select>
                         </div>
                       </div>
@@ -567,7 +665,7 @@ const SellBuyRent = () => {
                           htmlFor="rentArea"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Area
+                          Area :
                         </label>
                         <div className="mt-2">
                           <select
@@ -620,7 +718,7 @@ const SellBuyRent = () => {
                           htmlFor="rentPropertyType"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Property Types
+                          Property Type :
                         </label>
                         <div className="mt-2">
                           <select
@@ -647,7 +745,7 @@ const SellBuyRent = () => {
                           htmlFor="rentTypes"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          select Type
+                          House Type :
                         </label>
                         <div className="mt-2">
                           <select
@@ -662,8 +760,6 @@ const SellBuyRent = () => {
                             <option>2 BHK</option>
                             <option>3 BHK</option>
                             <option>4 BHK</option>
-                            <option>5 BHK</option>
-                            {/* <option>5+ BHK</option> */}
                           </select>
                         </div>
                       </div>
@@ -702,7 +798,7 @@ const SellBuyRent = () => {
                           htmlFor="rentBudget"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Budget
+                          Budget :
                         </label>
                         <div className="mt-2">
                           <select
@@ -733,7 +829,7 @@ const SellBuyRent = () => {
                       to={"/searchProperty"}
                       className="bg-indigo-500 text-white px-4 mr-6 py-2 px-2 rounded hover:bg-indigo-700"
                     >
-                      submit
+                      Submit
                     </Link>
                   </div>
                 </div>

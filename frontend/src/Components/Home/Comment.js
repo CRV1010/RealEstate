@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import Swiper from 'swiper';
@@ -66,7 +66,7 @@ const Comment = () => {
         delay: 5000, // Set the delay between slides in milliseconds
         disableOnInteraction: false, // Continue autoplay even when user interacts with slides
       },
-      
+
       coverflowEffect: {
         rotate: 0,
         stretch: 0,
@@ -77,7 +77,7 @@ const Comment = () => {
       pagination: {
         el: ".swiper-pagination",
       },
-     
+
     });
 
     return () => {
@@ -94,6 +94,7 @@ const Comment = () => {
         "Content-Type": "application/json",
       },
     });
+    
     toast.success("Your Comment is added...", {
       position: "top-right",
       autoClose: 2000,
@@ -133,7 +134,7 @@ const Comment = () => {
 
 
   return (
-  
+
     <section>
       <div className="container px-5 py-6 mx-auto">
         <div className="lg:w-1/2 w-full mb-6">
@@ -149,7 +150,7 @@ const Comment = () => {
             <div className="swiper-wrapper">
               {comment.map((commentDetails) => {
                 return (
-                  <div className="card swiper-slide  ">
+                  <div className="cardComment swiper-slide">
                     <div className="card__image">
                       <img
                         alt="testimonial"
@@ -190,21 +191,21 @@ const Comment = () => {
         )}
       </div>
 
-      
+
       <div className="p-2 w-full">
-      {user ? (
-        <button
-          onClick={() => {
-            openModal("Sell");
-          }}
-          className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-        >
-          Add Comment
-        </button>
+        {user ? (
+          <button
+            onClick={() => {
+              openModal("Sell");
+            }}
+            className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+          >
+            Add Comment
+          </button>
         )
-            : (
-              <div></div>
-            )
+          : (
+            <div></div>
+          )
         }
         {modal1Open && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">

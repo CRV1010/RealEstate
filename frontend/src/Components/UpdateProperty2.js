@@ -21,7 +21,7 @@ export default function () {
     return new Promise((resolve, reject) => {
       // Fetch the image using its name or URL
       const img = new Image();
-      img.src = require(`D:/Practice Program/Real Estate/frontend/src/Images/${imageName}`);
+      img.src = require(`C:/Users/Sahil Dharaviya/Desktop/RealEstate/frontend/src/Images/${imageName}`);
 
       const canvas = document.createElement("canvas");
       canvas.width = img.width;
@@ -99,7 +99,7 @@ export default function () {
 
       if (prodetail.image.includes(image.name)) {
         newImageUrls.push(
-          require(`D:/Practice Program/Real Estate/frontend/src/Images/${image.name}`)
+          require(`C:/Users/Sahil Dharaviya/Desktop/RealEstate/frontend/src/Images/${image.name}`)
         );
       } else {
         newImageUrls.push(URL.createObjectURL(blob));

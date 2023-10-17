@@ -55,7 +55,7 @@ const Searchbar = () => {
                     <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border-solid border-2 hover:border-blue-600 rounded-3xl">
                         <section className="w-full h-7 flex items-center">
                             <span className="w-10 h-full flex items-center">
-                                <i class="fa-solid fa-magnifying-glass ml-4 text-blue-800" aria-hidden="true"></i>
+                                <i class="fa-solid fa-magnifying-glass ml-2.5 text-blue-800" aria-hidden="true"></i>
                             </span>
                             <input
                                 type="text"
@@ -63,13 +63,13 @@ const Searchbar = () => {
                                 placeholder="Search Address, City & Pincode....."
                                 autoComplete="off"
                                 aria-label="Serch talk"
-                                className="w-full h-full ml-3 font-medium md:pl-2 focus:outline-none"
+                                className="w-full h-full ml-1 font-medium md:pl-2 focus:outline-none"
                                 onChange={(e) => {
                                     setSearchText(e.target.value);
                                 }}
                             />
                             <button
-                                className="w-28 p-3 h-full bg-blue-800 flex justify-center items-center rounded-2xl text-white font-medium"
+                                className="w-27 p-2 h-full bg-blue-800 flex justify-center items-center rounded-2xl text-white font-medium"
                                 onClick={buttonClick}
                             >
                                 Search
