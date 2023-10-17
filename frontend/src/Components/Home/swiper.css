@@ -10,7 +10,11 @@
   align-items: center;
 }
 
+<<<<<<< HEAD
 .cardComment {
+=======
+.cardComment{
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
   width: 28em;
   height: 85%;
   background-color: rgb(248, 248, 248);

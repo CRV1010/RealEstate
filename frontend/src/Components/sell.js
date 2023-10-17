@@ -120,12 +120,13 @@ export default function () {
   };
 
   return (
-    <div id='mainDiv' className='bg-center bg-no-repeat bg-cover'>
+    <div id="mainDiv" className="bg-center bg-no-repeat bg-cover">
       <div className="main-block">
         <div className="left-part">
-          <i className="fa fa-house-laptop text-[7em] text-sellIcon"></i> <br /> <br />
+          <i className="fa fa-house-laptop text-[7em] text-sellIcon"></i> <br />{" "}
+          <br />
           <h1 id="leftHeading"> Sell Your Property</h1> <br /> <br />
-          <p className='sellText'>
+          <p className="sellText">
             With this platform you can sell your precious property virtually.
             Save your time and get high amount of money...
           </p>
@@ -136,106 +137,108 @@ export default function () {
           </div>
         </div>
 
-        <form id='sellForm' onSubmit={handleSubmit(clickHandler)}>
+        <form id="sellForm" onSubmit={handleSubmit(clickHandler)}>
           <div className="title">
-            <i className="fas fa-pencil-alt text-[1.8em] text-sellIcon"></i>  &ensp;
-            <h2 id='rightHeading'>Property Info And Location</h2>
+            <i className="fas fa-pencil-alt text-[1.8em] text-sellIcon"></i>{" "}
+            &ensp;
+            <h2 id="rightHeading">Property Info And Location</h2>
           </div>
           <br />
           <div className="information">
             <div>
               <div>
-                <label id='radio'>
-                  Property For :<span className='red'>*</span>
-                </label> &emsp;
-                <label id='radio'>
+                <label id="radio">
+                  Property For :<span className="red">*</span>
+                </label>{" "}
+                &emsp;
+                <label id="radio">
                   <input
                     type="radio"
-                    id='sellFor'
+                    id="sellFor"
                     name="propertyFor"
                     value="Sell"
-                    className='sellField'
+                    className="sellField"
                     {...register("propertyFor", {
                       required: {
                         value: true,
-                        message: "Property for is required"
+                        message: "Property for is required",
                       },
                     })}
-                    onChange={() =>
-                      setPropertyFor("Sell")
-                    }
+                    onChange={() => setPropertyFor("Sell")}
                     defaultChecked
                   />
                   Sell
-                </label> &emsp;
-                <label id='radio'>
+                </label>{" "}
+                &emsp;
+                <label id="radio">
                   <input
                     type="radio"
-                    id='sellFor'
+                    id="sellFor"
                     name="propertyFor"
                     value="Rent"
-                    className='sellField'
+                    className="sellField"
                     {...register("propertyFor", {
                       required: {
                         value: true,
-                        message: "Property for is required"
+                        message: "Property for is required",
                       },
                     })}
-                    onChange={() =>
-                      setPropertyFor("Rent")
-                    }
+                    onChange={() => setPropertyFor("Rent")}
                   />
                   Rent
-                </label> &emsp;
-                <label id='radio'>
+                </label>{" "}
+                &emsp;
+                <label id="radio">
                   <input
                     type="radio"
-                    id='sellFor'
+                    id="sellFor"
                     name="propertyFor"
                     value="PG"
-                    className='sellField'
+                    className="sellField"
                     {...register("propertyFor", {
                       required: {
                         value: true,
-                        message: "Property for is required"
+                        message: "Property for is required",
                       },
                     })}
-                    onChange={() =>
-                      setPropertyFor("PG")
-                    }
+                    onChange={() => setPropertyFor("PG")}
                   />
                   PG
                 </label>
               </div>
-              <p className="text-sm text-red-500">{errors.propertyFor?.message}</p>
+              <p className="text-sm text-red-500">
+                {errors.propertyFor?.message}
+              </p>
             </div>
-
             <div>
               <div>
-                <label> Type of Property :<span className='red'>*</span> </label>
+                <label>
+                  {" "}
+                  Type of Property :<span className="red">*</span>{" "}
+                </label>
                 <select
                   id="type"
-                  style={{ 'width': '40%' }}
+                  style={{ width: "40%" }}
                   {...register("type", {
-                    required: 'Type of property is required'
+                    required: "Type of property is required",
                   })}
                 >
-                  <option id='propOpt' value=''>
+                  <option id="propOpt" value="">
                     Select Type
                   </option>
-                  <option id='propOpt' value="Flats/Apartments">
+                  <option id="propOpt" value="Flats/Apartments">
                     Flats/Apartments
                   </option>
-                  <option id='propOpt' value="Residential Plot">
+                  <option id="propOpt" value="Residential Plot">
                     Residential Plot
                   </option>
-                  <option id='propOpt' value="Office Space">
+                  <option id="propOpt" value="Office Space">
                     Office Space
                   </option>
-                  <option id='propOpt' value="Farm House">
+                  <option id="propOpt" value="Farm House">
                     Farm House
                   </option>
-                  <option id='propOpt' value="Commercial plots">
+                  <option id="propOpt" value="Commercial plots">
                     Commercial plots
                   </option>
                 </select>
@@ -243,94 +246,84 @@ export default function () {
               <p className="text-sm text-red-500">{errors.type?.message}</p>
             </div>
             <br />
-
-            <h1 id='markLabel'> --- Landmark --- </h1> <br />
+            <h1 id="markLabel"> --- Landmark --- </h1> <br />
             <div>
-              <div className='text-dark'>
+              <div className="text-dark">
                 <label className="form-label">
-                  State :<span className='red'>*</span> &ensp;
+                  State :<span className="red">*</span> &ensp;
                 </label>
                 <select
-                  name='State'
-                  className='sellField form-control'
+                  name="State"
+                  className="sellField form-control"
                   id="State"
                   {...register("State", {
-                    required: "State is required"
+                    required: "State is required",
                   })}
                   onChange={(e) => handleState(e)}
                 >
-                  <option
-                    className='propOtp bg-black'
-                    value=""> Select State </option>
-                  {stateData && 
+                  <option className="propOtp bg-black" value="">
+                    {" "}
+                    Select State{" "}
+                  </option>
+                  {stateData &&
                     stateData.map((getstate, index) => (
                       <option
-                        className='bg-black'
+                        className="bg-black"
                         value={getstate.state_id}
                         key={index}
                       >
-                        {
-                          getstate.state_name
-                        }
+                        {getstate.state_name}
                       </option>
-                    ))
-                  }
+                    ))}
                 </select>
               </div>
               <p className="text-sm text-red-500">{errors.State?.message}</p>
             </div>
-
             <div>
-              <div className='text-dark'>
+              <div className="text-dark">
                 <label className="form-label">
-                  City :<span className='red'>*</span> &ensp;
+                  City :<span className="red">*</span> &ensp;
                 </label>
                 <select
-                  name='City'
-                  className='sellField form-control ml-2'
-                  style={{ 'width': '45%' }}
-                  id='City'
+                  name="City"
+                  className="sellField form-control ml-2"
+                  style={{ width: "45%" }}
+                  id="City"
                   {...register("City", {
-                    required: "City is required"
+                    required: "City is required",
                   })}
                   onChange={(e) => handleCity(e)}
                 >
-                  <option
-                    className='propOtp bg-black'
-                    value=""
-                  >
+                  <option className="propOtp bg-black" value="">
                     Select City
                   </option>
                   {city &&
                     city.map((getcity, index) => (
                       <option
-                        className='bg-black'
+                        className="bg-black"
                         value={getcity.city_id}
                         key={index}
                       >
-                        {
-                          getcity.city_name
-                        }
+                        {getcity.city_name}
                       </option>
-                    ))
-                  }
+                    ))}
                 </select>
               </div>
               <p className="text-sm text-red-500">{errors.City?.message}</p>
             </div>
-
             <div>
               <label>
-                Area/Society :<span className='red'>*</span> &ensp;
+                Area/Street No. :<span className="red">*</span> &ensp;
               </label>
-              <input type="text"
+              <input
+                type="text"
                 name="zone"
-                className='sellField'
+                className="sellField"
                 id="zone"
-                placeholder='Enter Area & Society'
+                placeholder="Enter Area & Street No."
                 value={zone}
                 {...register("zone", {
-                  required: "Area & Society is required"
+                  required: "Area & Street No. is required",
                 })}
                 onChange={(e) => {
                   setZone(e.target.value);
@@ -338,21 +331,21 @@ export default function () {
               />
               <p className="text-sm text-red-500">{errors.zone?.message}</p>
             </div>
-
             <div>
               <label>
-                Flat no./Apartment/Street no. :<span className='red'>*</span> &ensp;
+                Flat no./Apartment/Society :<span className="red">*</span>{" "}
+                &ensp;
               </label>
               <input
                 type="text"
                 name="society"
-                className='sellField ml-0'
+                className="sellField ml-0"
                 id="society"
-                placeholder='Enter Flat/Apartment/Street'
-                style={{ 'width': '40%' }}
+                placeholder="Enter Flat/Apartment/Society"
+                style={{ width: "40%" }}
                 value={society}
                 {...register("society", {
-                  required: "Flat/Apartment/Street is required"
+                  required: "Flat/Apartment/Society is required",
                 })}
                 onChange={(e) => {
                   setSociety(e.target.value);
@@ -360,15 +353,17 @@ export default function () {
               />
               <p className="text-sm text-red-500">{errors.society?.message}</p>
             </div>
-
             <div>
-              <label> Pincode :<span className='red'>*</span> &ensp; </label>
+              <label>
+                {" "}
+                Pincode :<span className="red">*</span> &ensp;{" "}
+              </label>
               <input
                 type="text"
-                name='pincode'
-                className='sellField'
+                name="pincode"
+                className="sellField"
                 id="pincode"
-                placeholder='Enter 6 digit Pincode'
+                placeholder="Enter 6 digit Pincode"
                 value={pincode}
                 {...register("pincode", {
                   required: "Pincode is required",
@@ -382,7 +377,7 @@ export default function () {
                   },
                   pattern: {
                     value: /^[1-9]{1}[0-9]{2}\s{0,1}[0-9]{3}$/,
-                    message: "Pincode is not valid"
+                    message: "Pincode is not valid",
                   },
                 })}
                 onChange={(e) => {
@@ -393,17 +388,20 @@ export default function () {
             </div>
             <br />
             <br />
-
-            <h1 id='markLabel'> --- Property Feature & Price --- </h1> <br />
+            <h1 id="markLabel"> --- Property Feature & Price --- </h1> <br />
             <div>
-              <label> Plot/Land Area (in m<sup>2</sup>) :<span className='red'>*</span>  &ensp; </label>
+              <label>
+                {" "}
+                Plot/Land Area (in m<sup>2</sup>) :
+                <span className="red">*</span> &ensp;{" "}
+              </label>
               <input
                 type="text"
-                name='area'
-                className='sellField'
+                name="area"
+                className="sellField"
                 id="area"
-                placeholder='Plot/Land Area in Sq.meter'
-                style={{ 'width': '40%' }}
+                placeholder="Plot/Land Area in Sq.meter"
+                style={{ width: "40%" }}
                 value={area}
                 {...register("area", {
                   required: "Plot/Land Area is required",
@@ -413,8 +411,12 @@ export default function () {
                   },
                   validate: {
                     notZero: (value) => value !== "0" || "Area is not zero",
-                    greaterThan50: (value) => parseFloat(value) >= 50 || "Area must be greater than 50 sqmtr",
-                    lessThan10000: (value) => parseFloat(value) <= 10000 || "Area must be less than 10000 sqmtr",
+                    greaterThan50: (value) =>
+                      parseFloat(value) >= 50 ||
+                      "Area must be greater than 50 sqmtr",
+                    lessThan10000: (value) =>
+                      parseFloat(value) <= 10000 ||
+                      "Area must be less than 10000 sqmtr",
                   },
                 })}
                 onChange={(e) => {
@@ -423,20 +425,19 @@ export default function () {
               />
               <p className="text-sm text-red-500">{errors.area?.message}</p>
             </div>
-
             <div>
               <div>
                 <label>
-                  No. of Bedrooms :<span className='red'>*</span> &ensp;
+                  No. of Bedrooms(BHK) :<span className="red">*</span> &ensp;
                 </label>
                 <select
                   id="rooms"
                   {...register("rooms", {
-                    required: 'No. of rooms is required'
+                    required: "No. of rooms is required",
                   })}
                 >
-                  <option id='room' value=''>
-                    Select
+                  <option id="room" value="">
+                    Select BHK
                   </option>
                   <option id="room" value="1">
                     1
@@ -454,18 +455,17 @@ export default function () {
               </div>
               <p className="text-sm text-red-500">{errors.rooms?.message}</p>
             </div>
-
             <div>
               <label>
-                Expected Price (&#8377;) :<span className='red'>*</span> &ensp;
+                Expected Price (&#8377;) :<span className="red">*</span> &ensp;
               </label>
               <input
                 type="text"
-                name='price'
-                className='sellField'
+                name="price"
+                className="sellField"
                 id="price"
-                placeholder='Enter Total Price in INR'
-                style={{ 'width': '40%' }}
+                placeholder="Enter Total Price in INR"
+                style={{ width: "40%" }}
                 value={price}
                 {...register("price", {
                   required: "Expected Price is required",
@@ -476,23 +476,23 @@ export default function () {
                   validate: {
                     notZero: (value) => value !== "0" || "Price is not zero",
                     // greaterThan5000: (value) => parseFloat(value) >= 5000 || "Price must be greater than 5000.",
-                    lessThan10000000: (value) => parseFloat(value) <= 10000000 || "Price must be less than 1,00,00,000.",
+                    lessThan10000000: (value) =>
+                      parseFloat(value) <= 10000000 ||
+                      "Price must be less than 1,00,00,000.",
                     priceBasedOnProperty: (value) => {
-
                       if (propertyFor === "Sell") {
-                        return parseFloat(value) >= 100000 && parseFloat(value) <= 10000000
+                        return parseFloat(value) >= 100000 &&
+                          parseFloat(value) <= 10000000
                           ? true
                           : "Price must be greater than 1,00,000 and less than 1,00,00,000 for Selling.";
-                      }
-
-                      else if (propertyFor === "Rent") {
-                        return parseFloat(value) >= 5000 && parseFloat(value) <= 100000
+                      } else if (propertyFor === "Rent") {
+                        return parseFloat(value) >= 5000 &&
+                          parseFloat(value) <= 100000
                           ? true
                           : "Price must be greater than 5,000 and less than 1,00,000 for Renting.";
-                      }
-
-                      else if (propertyFor === "PG") {
-                        return parseFloat(value) >= 5000 && parseFloat(value) <= 20000
+                      } else if (propertyFor === "PG") {
+                        return parseFloat(value) >= 5000 &&
+                          parseFloat(value) <= 20000
                           ? true
                           : "Price must be greater than 5,000 and less than 20,000 for PG.";
                       }
@@ -505,19 +505,17 @@ export default function () {
               />
               <p className="text-sm text-red-500">{errors.price?.message}</p>
             </div>
-
             <br />
           </div>
 
-          <button id='saveBtn'>
-            Save
-          </button>
+          <button id="saveBtn">Save</button>
 
           <Link to="/Premium">
             <button
               id="btn"
-              className={disable ? 'notCon' : 'con'}
-              disabled={disable}>
+              className={disable ? "notCon" : "con"}
+              disabled={disable}
+            >
               Continue
             </button>
           </Link>

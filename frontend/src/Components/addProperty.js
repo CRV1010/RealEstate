@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./addProperty.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function (props) {
   //hooks
@@ -42,9 +44,31 @@ export default function (props) {
   //functions
   const onImageChange = (e) => {
     if (totalAmount == 999 && images.length == 3) {
-      alert("Sorry You Have Max Limit of images is 3");
+      toast.warning("Sorry You Have Max Limit of images is 3", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // alert("Sorry You Have Max Limit of images is 3");
     } else if (totalAmount == 1999 && images.length == 5) {
-      alert("Sorry You Have Max Limit of images is 5");
+      toast.warning("Sorry You Have Max Limit of images is 5", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // alert("Sorry You Have Max Limit of images is 5");
     } else {
       setImages([...images, e.target.files[0]]);
       console.log("y", images.length);
@@ -97,7 +121,17 @@ export default function (props) {
       },
     });
     console.log("Data Inserted Successfully...");
-
+    toast.success("Your Property is added for Sell", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      rtl: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     navigate("/explore")
   };
 
@@ -165,6 +199,18 @@ export default function (props) {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

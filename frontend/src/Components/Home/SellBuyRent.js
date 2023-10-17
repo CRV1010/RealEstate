@@ -1,13 +1,34 @@
 import React from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import StateData from '../../json/State_City.json';
 import { useState } from 'react';
+=======
+import { Link, useNavigate } from "react-router-dom";
+import StateData from "../../json/State_City.json";
+import { useState,useEffect } from "react";
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
 
 const SellBuyRent = () => {
   //Buy Properties
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
+  const [database, setdatabase] = useState([]);
+  useEffect(()=>{ 
+    getData()
+  },[]) 
+  
+  async function getData() {
+    const result = await fetch("http://localhost:5000/get-data", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    var data = await result.json();
+    setdatabase(data);
+  }
 
   const openModal = (propertyFor) => {
     localStorage.setItem("propertyFor", propertyFor);
@@ -52,7 +73,6 @@ const SellBuyRent = () => {
     setRentModal1Open(false);
     setRentModal3Open(false);
     setRentModal2Open(true);
-
   };
 
   const rentOnlycloseModal1 = () => {
@@ -84,6 +104,7 @@ const SellBuyRent = () => {
   //   console.log(cities)
   //   localStorage.setItem('Cities', JSON.stringify(cities));
   // };
+<<<<<<< HEAD
 
   const [city, setCity] = useState([]);
 
@@ -104,37 +125,65 @@ const SellBuyRent = () => {
     const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
     localStorage.setItem('Cities', JSON.stringify(selectedCityName));
   }
+=======
+
+  const [city, setCity] = useState([]);
+  const [cd,setcd] = useState();
+
+  const handleState = (e) => {
+    const getStateId = e.target.value;
+    const getCitydata = StateData.find(
+      (state) => state.state_id === getStateId
+    ).cities;
+    setCity(getCitydata);
+
+    let State = document.getElementById("state").value;
+    const selectedStateName =
+      StateData.find((state) => state.state_id === State)?.state_name || "";
+    localStorage.setItem("State", JSON.stringify(selectedStateName));
+  };
+
+  const handleCity = (e) => {
+    // const cityid = e.target.value;
+
+    let City = document.getElementById("cities").value;
+    const selectedCityName =
+      city.find((getcity) => getcity.city_id === City)?.city_name || "";
+    localStorage.setItem("Cities", JSON.stringify(selectedCityName));
+    setcd(selectedCityName);
+  };
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
 
   const handleDropdownChange2 = (event) => {
     let area = event.target.value;
-    console.log(area)
-    localStorage.setItem('Area', JSON.stringify(area));
+    console.log(area);
+    localStorage.setItem("Area", JSON.stringify(area));
   };
 
   const handleDropdownChange3 = (event) => {
     let propertyType = event.target.value;
-    console.log(propertyType)
-    localStorage.setItem('Property', JSON.stringify(propertyType));
+    console.log(propertyType);
+    localStorage.setItem("Property", JSON.stringify(propertyType));
   };
 
   const handleDropdownChange4 = (event) => {
     let type = event.target.value;
-    console.log(type)
-    localStorage.setItem('Type', JSON.stringify(type));
+    console.log(type);
+    localStorage.setItem("Type", JSON.stringify(type));
   };
 
   const handleDropdownChange5 = (event) => {
     let budget = event.target.value;
-    console.log(budget)
-    localStorage.setItem('Budget', JSON.stringify(budget));
+    console.log(budget);
+    localStorage.setItem("Budget", JSON.stringify(budget));
   };
 
-  const stateData = JSON.parse(localStorage.getItem('State'));
-  const citiesData = JSON.parse(localStorage.getItem('Cities'));
-  const areaData = JSON.parse(localStorage.getItem('Area'));
-  const propertyData = JSON.parse(localStorage.getItem('Property'));
-  const typeData = JSON.parse(localStorage.getItem('Type'));
-  const budgetData = JSON.parse(localStorage.getItem('Budget'));
+  const stateData = JSON.parse(localStorage.getItem("State"));
+  const citiesData = JSON.parse(localStorage.getItem("Cities"));
+  const areaData = JSON.parse(localStorage.getItem("Area"));
+  const propertyData = JSON.parse(localStorage.getItem("Property"));
+  const typeData = JSON.parse(localStorage.getItem("Type"));
+  const budgetData = JSON.parse(localStorage.getItem("Budget"));
 
   // Combine them into one object
   const combinedObject = {
@@ -143,17 +192,18 @@ const SellBuyRent = () => {
     area: areaData,
     property: propertyData,
     type: typeData,
-    budget: budgetData
+    budget: budgetData,
   };
 
   // Store the combined object back in localStorage
-  localStorage.setItem('CombinedData', JSON.stringify(combinedObject));
+  localStorage.setItem("CombinedData", JSON.stringify(combinedObject));
 
   // const rentHandleDropdownChange = (event) => {
   //   let state = event.target.value;
   //   console.log(state)
   //   localStorage.setItem('RentState', JSON.stringify(state));
   // };
+<<<<<<< HEAD
 
   // const rentHandleDropdownChange1 = (event) => {
   //   let cities = event.target.value;
@@ -178,39 +228,69 @@ const SellBuyRent = () => {
     const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
     localStorage.setItem('Cities', JSON.stringify(selectedCityName));
   }
+=======
+
+  // const rentHandleDropdownChange1 = (event) => {
+  //   let cities = event.target.value;
+  //   console.log(cities)
+  //   localStorage.setItem('RentCities', JSON.stringify(cities));
+  // };
+
+  const handleRentState = (e) => {
+    const getStateId = e.target.value;
+    const getCitydata = StateData.find(
+      (state) => state.state_id === getStateId
+    ).cities;
+    setCity(getCitydata);
+
+    let State = document.getElementById("rentState").value;
+    const selectedStateName =
+      StateData.find((state) => state.state_id === State)?.state_name || "";
+    localStorage.setItem("RentState", JSON.stringify(selectedStateName));
+  };
+  const [rcd,setrcd] = useState();
+
+  const handleRentCity = (e) => {
+    // const cityid = e.target.value;
+
+    let City = document.getElementById("rentCities").value;
+    const selectedCityName =
+      city.find((getcity) => getcity.city_id === City)?.city_name || "";
+    localStorage.setItem("RentCities", JSON.stringify(selectedCityName));
+    setrcd(selectedCityName);
+  };
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
 
   const rentHandleDropdownChange2 = (event) => {
     let area = event.target.value;
-    console.log(area)
-    localStorage.setItem('RentArea', JSON.stringify(area));
+    console.log(area);
+    localStorage.setItem("RentArea", JSON.stringify(area));
   };
-
 
   const rentHandleDropdownChange3 = (event) => {
     let propertyType = event.target.value;
-    console.log(propertyType)
-    localStorage.setItem('RentProperty', JSON.stringify(propertyType));
+    console.log(propertyType);
+    localStorage.setItem("RentProperty", JSON.stringify(propertyType));
   };
 
   const rentHandleDropdownChange4 = (event) => {
     let type = event.target.value;
-    console.log(type)
-    localStorage.setItem('RentType', JSON.stringify(type));
+    console.log(type);
+    localStorage.setItem("RentType", JSON.stringify(type));
   };
 
   const rentHandleDropdownChange5 = (event) => {
     let budget = event.target.value;
-    console.log(budget)
-    localStorage.setItem('RentBudget', JSON.stringify(budget));
+    console.log(budget);
+    localStorage.setItem("RentBudget", JSON.stringify(budget));
   };
 
-
-  const rentStateData = JSON.parse(localStorage.getItem('RentState'));
-  const rentCitiesData = JSON.parse(localStorage.getItem('RentCities'));
-  const rentAreaData = JSON.parse(localStorage.getItem('RentArea'));
-  const rentPropertyData = JSON.parse(localStorage.getItem('RentProperty'));
-  const rentTypeData = JSON.parse(localStorage.getItem('RentType'));
-  const rentBudgetData = JSON.parse(localStorage.getItem('RentBudget'));
+  const rentStateData = JSON.parse(localStorage.getItem("RentState"));
+  const rentCitiesData = JSON.parse(localStorage.getItem("RentCities"));
+  const rentAreaData = JSON.parse(localStorage.getItem("RentArea"));
+  const rentPropertyData = JSON.parse(localStorage.getItem("RentProperty"));
+  const rentTypeData = JSON.parse(localStorage.getItem("RentType"));
+  const rentBudgetData = JSON.parse(localStorage.getItem("RentBudget"));
 
   // Combine them into one object
   const rentCombinedObject = {
@@ -219,12 +299,11 @@ const SellBuyRent = () => {
     rentArea: rentAreaData,
     rentProperty: rentPropertyData,
     rentType: rentTypeData,
-    rentBudget: rentBudgetData
+    rentBudget: rentBudgetData,
   };
 
   // Store the combined object back in localStorage
-  localStorage.setItem('RentCombinedData', JSON.stringify(rentCombinedObject));
-
+  localStorage.setItem("RentCombinedData", JSON.stringify(rentCombinedObject));
 
   return (
     <section className="text-gray-600 body-font">
@@ -303,15 +382,20 @@ const SellBuyRent = () => {
                             onChange={(e) => handleState(e)}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
+<<<<<<< HEAD
                             <option
                               value=""
                               className='bg-white'
                             >
+=======
+                            <option value="" className="bg-white">
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                               Select State
                             </option>
                             {StateData &&
                               StateData.map((getstate, index) => (
                                 <option
+<<<<<<< HEAD
                                   className='bg-white'
                                   value={getstate.state_id}
                                   key={index}
@@ -322,6 +406,15 @@ const SellBuyRent = () => {
                                 </option>
                               ))
                             }
+=======
+                                  className="bg-white"
+                                  value={getstate.state_id}
+                                  key={index}
+                                >
+                                  {getstate.state_name}
+                                </option>
+                              ))}
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
@@ -343,15 +436,20 @@ const SellBuyRent = () => {
                             onChange={(e) => handleCity(e)}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
+<<<<<<< HEAD
                             <option
                               className='bg-white'
                               value=""
                             >
+=======
+                            <option className="bg-white" value="">
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                               Select City
                             </option>
                             {city &&
                               city.map((getcity, index) => (
                                 <option
+<<<<<<< HEAD
                                   className='bg-white'
                                   value={getcity.city_id}
                                   key={index}
@@ -362,6 +460,15 @@ const SellBuyRent = () => {
                                 </option>
                               ))
                             }
+=======
+                                  className="bg-white"
+                                  value={getcity.city_id}
+                                  key={index}
+                                >
+                                  {getcity.city_name}
+                                </option>
+                              ))}
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
@@ -384,9 +491,22 @@ const SellBuyRent = () => {
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Area</option>
-                            <option>Samta</option>
+                            {database
+                              ? database.map((propertyAreaDetail, index) => {
+                                  // const cd = JSON.parse(
+                                  //   localStorage.getItem("Cities")
+                                  // );
+                                  // console.log("selected City",cd)
+                                  if (propertyAreaDetail.City === cd) {
+                                    return (
+                                      <option>{propertyAreaDetail.zone}</option>
+                                    );
+                                  }
+                                })
+                              : "No Areas"}
+                            {/* <option>Samta</option>
                             <option>Laxmipura</option>
-                            <option>Akota</option>
+                            <option>Akota</option> */}
                           </select>
                         </div>
                       </div>
@@ -441,9 +561,9 @@ const SellBuyRent = () => {
                             <option>Flats/Apartments</option>
                             <option>Residential Plot</option>
                             <option>Office Space</option>
-                            <option>Farm House</option>
+                            {/* <option>Farm House</option>
                             <option>Agricultural land</option>
-                            <option>Commercial plots</option>
+                            <option>Commercial plots</option> */}
                           </select>
                         </div>
                       </div>
@@ -597,15 +717,20 @@ const SellBuyRent = () => {
                             onChange={handleRentState}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
+<<<<<<< HEAD
                             <option
                               value=""
                               className='bg-white'
                             >
+=======
+                            <option value="" className="bg-white">
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                               Select State
                             </option>
                             {StateData &&
                               StateData.map((getstate, index) => (
                                 <option
+<<<<<<< HEAD
                                   className='bg-white'
                                   value={getstate.state_id}
                                   key={index}
@@ -616,6 +741,15 @@ const SellBuyRent = () => {
                                 </option>
                               ))
                             }
+=======
+                                  className="bg-white"
+                                  value={getstate.state_id}
+                                  key={index}
+                                >
+                                  {getstate.state_name}
+                                </option>
+                              ))}
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
@@ -636,15 +770,20 @@ const SellBuyRent = () => {
                             onChange={handleRentCity}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
+<<<<<<< HEAD
                             <option
                               className='bg-white'
                               value=""
                             >
+=======
+                            <option className="bg-white" value="">
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                               Select City
                             </option>
                             {city &&
                               city.map((getcity, index) => (
                                 <option
+<<<<<<< HEAD
                                   className='bg-white'
                                   value={getcity.city_id}
                                   key={index}
@@ -655,6 +794,15 @@ const SellBuyRent = () => {
                                 </option>
                               ))
                             }
+=======
+                                  className="bg-white"
+                                  value={getcity.city_id}
+                                  key={index}
+                                >
+                                  {getcity.city_name}
+                                </option>
+                              ))}
+>>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
@@ -676,9 +824,16 @@ const SellBuyRent = () => {
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Area</option>
-                            <option>Samta</option>
-                            <option>Laxmipura</option>
-                            <option>Akota</option>
+                            {database
+                              ? database.map((propertyAreaDetail, index) => {
+                                  
+                                  if (propertyAreaDetail.City === rcd) {
+                                    return (
+                                      <option>{propertyAreaDetail.zone}</option>
+                                    );
+                                  }
+                                })
+                              : "No Areas"}
                           </select>
                         </div>
                       </div>
@@ -732,9 +887,7 @@ const SellBuyRent = () => {
                             <option>Flats/Apartments</option>
                             <option>Residential Plot</option>
                             <option>Office Space</option>
-                            <option>Farm House</option>
-                            <option>Agricultural land</option>
-                            <option>Commercial plots</option>
+                            
                           </select>
                         </div>
                       </div>
@@ -809,7 +962,7 @@ const SellBuyRent = () => {
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option>Select Budget</option>
-                            <option>3000-5000</option>
+                            <option>3000 - 5000</option>
                             <option>5000 - 10000 </option>
                             <option>10000 - 15000 </option>
                             <option>20000 - 25000 </option>
@@ -817,7 +970,6 @@ const SellBuyRent = () => {
                             <option>40000 - 50000</option>
                             <option>50000 - 70000</option>
                             <option>70000 - 100000</option>
-                            <option>100000</option>
                           </select>
                         </div>
                       </div>
@@ -843,4 +995,3 @@ const SellBuyRent = () => {
 };
 
 export default SellBuyRent;
-
