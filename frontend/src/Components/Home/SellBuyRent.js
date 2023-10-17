@@ -1,13 +1,7 @@
 import React from "react";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-import StateData from '../../json/State_City.json';
-import { useState } from 'react';
-=======
 import { Link, useNavigate } from "react-router-dom";
 import StateData from "../../json/State_City.json";
 import { useState,useEffect } from "react";
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
 
 const SellBuyRent = () => {
   //Buy Properties
@@ -104,28 +98,6 @@ const SellBuyRent = () => {
   //   console.log(cities)
   //   localStorage.setItem('Cities', JSON.stringify(cities));
   // };
-<<<<<<< HEAD
-
-  const [city, setCity] = useState([]);
-
-  const handleState = (e) => {
-    const getStateId = e.target.value;
-    const getCitydata = StateData.find(state => state.state_id === getStateId).cities;
-    setCity(getCitydata);
-
-    let State = document.getElementById('state').value;
-    const selectedStateName = StateData.find((state) => state.state_id === State)?.state_name || '';
-    localStorage.setItem('State', JSON.stringify(selectedStateName));
-  }
-
-  const handleCity = (e) => {
-    // const cityid = e.target.value;
-
-    let City = document.getElementById('cities').value;
-    const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
-    localStorage.setItem('Cities', JSON.stringify(selectedCityName));
-  }
-=======
 
   const [city, setCity] = useState([]);
   const [cd,setcd] = useState();
@@ -152,7 +124,6 @@ const SellBuyRent = () => {
     localStorage.setItem("Cities", JSON.stringify(selectedCityName));
     setcd(selectedCityName);
   };
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
 
   const handleDropdownChange2 = (event) => {
     let area = event.target.value;
@@ -203,32 +174,6 @@ const SellBuyRent = () => {
   //   console.log(state)
   //   localStorage.setItem('RentState', JSON.stringify(state));
   // };
-<<<<<<< HEAD
-
-  // const rentHandleDropdownChange1 = (event) => {
-  //   let cities = event.target.value;
-  //   console.log(cities)
-  //   localStorage.setItem('RentCities', JSON.stringify(cities));
-  // };
-
-  const handleRentState = (e) => {
-    const getStateId = e.target.value;
-    const getCitydata = StateData.find(state => state.state_id === getStateId).cities;
-    setCity(getCitydata);
-
-    let State = document.getElementById('rentState').value;
-    const selectedStateName = StateData.find((state) => state.state_id === State)?.state_name || '';
-    localStorage.setItem('State', JSON.stringify(selectedStateName));
-  }
-
-  const handleRentCity = (e) => {
-    // const cityid = e.target.value;
-
-    let City = document.getElementById('rentCities').value;
-    const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
-    localStorage.setItem('Cities', JSON.stringify(selectedCityName));
-  }
-=======
 
   // const rentHandleDropdownChange1 = (event) => {
   //   let cities = event.target.value;
@@ -259,7 +204,6 @@ const SellBuyRent = () => {
     localStorage.setItem("RentCities", JSON.stringify(selectedCityName));
     setrcd(selectedCityName);
   };
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
 
   const rentHandleDropdownChange2 = (event) => {
     let area = event.target.value;
@@ -382,31 +326,14 @@ const SellBuyRent = () => {
                             onChange={(e) => handleState(e)}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-<<<<<<< HEAD
-                            <option
-                              value=""
-                              className='bg-white'
-                            >
-=======
+
                             <option value="" className="bg-white">
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                               Select State
                             </option>
                             {StateData &&
                               StateData.map((getstate, index) => (
                                 <option
-<<<<<<< HEAD
-                                  className='bg-white'
-                                  value={getstate.state_id}
-                                  key={index}
-                                >
-                                  {
-                                    getstate.state_name
-                                  }
-                                </option>
-                              ))
-                            }
-=======
+
                                   className="bg-white"
                                   value={getstate.state_id}
                                   key={index}
@@ -414,7 +341,6 @@ const SellBuyRent = () => {
                                   {getstate.state_name}
                                 </option>
                               ))}
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
@@ -436,31 +362,13 @@ const SellBuyRent = () => {
                             onChange={(e) => handleCity(e)}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-<<<<<<< HEAD
-                            <option
-                              className='bg-white'
-                              value=""
-                            >
-=======
                             <option className="bg-white" value="">
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
+
                               Select City
                             </option>
                             {city &&
                               city.map((getcity, index) => (
                                 <option
-<<<<<<< HEAD
-                                  className='bg-white'
-                                  value={getcity.city_id}
-                                  key={index}
-                                >
-                                  {
-                                    getcity.city_name
-                                  }
-                                </option>
-                              ))
-                            }
-=======
                                   className="bg-white"
                                   value={getcity.city_id}
                                   key={index}
@@ -468,7 +376,6 @@ const SellBuyRent = () => {
                                   {getcity.city_name}
                                 </option>
                               ))}
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
@@ -493,10 +400,6 @@ const SellBuyRent = () => {
                             <option>Select Area</option>
                             {database
                               ? database.map((propertyAreaDetail, index) => {
-                                  // const cd = JSON.parse(
-                                  //   localStorage.getItem("Cities")
-                                  // );
-                                  // console.log("selected City",cd)
                                   if (propertyAreaDetail.City === cd) {
                                     return (
                                       <option>{propertyAreaDetail.zone}</option>
@@ -504,9 +407,6 @@ const SellBuyRent = () => {
                                   }
                                 })
                               : "No Areas"}
-                            {/* <option>Samta</option>
-                            <option>Laxmipura</option>
-                            <option>Akota</option> */}
                           </select>
                         </div>
                       </div>
@@ -561,9 +461,7 @@ const SellBuyRent = () => {
                             <option>Flats/Apartments</option>
                             <option>Residential Plot</option>
                             <option>Office Space</option>
-                            {/* <option>Farm House</option>
-                            <option>Agricultural land</option>
-                            <option>Commercial plots</option> */}
+                   
                           </select>
                         </div>
                       </div>
@@ -717,31 +615,14 @@ const SellBuyRent = () => {
                             onChange={handleRentState}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-<<<<<<< HEAD
-                            <option
-                              value=""
-                              className='bg-white'
-                            >
-=======
                             <option value="" className="bg-white">
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
+
                               Select State
                             </option>
                             {StateData &&
                               StateData.map((getstate, index) => (
                                 <option
-<<<<<<< HEAD
-                                  className='bg-white'
-                                  value={getstate.state_id}
-                                  key={index}
-                                >
-                                  {
-                                    getstate.state_name
-                                  }
-                                </option>
-                              ))
-                            }
-=======
+
                                   className="bg-white"
                                   value={getstate.state_id}
                                   key={index}
@@ -749,7 +630,6 @@ const SellBuyRent = () => {
                                   {getstate.state_name}
                                 </option>
                               ))}
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
@@ -770,31 +650,12 @@ const SellBuyRent = () => {
                             onChange={handleRentCity}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-<<<<<<< HEAD
-                            <option
-                              className='bg-white'
-                              value=""
-                            >
-=======
                             <option className="bg-white" value="">
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                               Select City
                             </option>
                             {city &&
                               city.map((getcity, index) => (
                                 <option
-<<<<<<< HEAD
-                                  className='bg-white'
-                                  value={getcity.city_id}
-                                  key={index}
-                                >
-                                  {
-                                    getcity.city_name
-                                  }
-                                </option>
-                              ))
-                            }
-=======
                                   className="bg-white"
                                   value={getcity.city_id}
                                   key={index}
@@ -802,7 +663,6 @@ const SellBuyRent = () => {
                                   {getcity.city_name}
                                 </option>
                               ))}
->>>>>>> 755695103c3774bac786fc2556bb57de89c71791
                           </select>
                         </div>
                       </div>
