@@ -13,17 +13,17 @@ const PropertyList = (props) => {
                 direction={"column"}
                 bg={"whiteAlpha.900"}
                 width={"37vw"}
-                height="100vh"
+                height="full"
                 left={0}
-                top={0}
-                zIndex={1}
+                mt={20}
+                zIndex={20}
                 overflow="Hidden"
                 px={2}
             >
                 <Flex
                     flex={1}
                     overflowY={'scroll'}
-                    mt={16}
+                    mt={5}
                     direction={'column'}>
                     {propertiesToDisplay.length === 0
                         ? (
