@@ -5,33 +5,33 @@ const Footer = () => {
   return (
     <footer className="text-gray-600 body-font mt-10">
 
-      <hr />
+      <hr class="border-1 border-gray-400 bg-gray-400" />
 
       <div class="container px-5 py-10 mx-auto md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div class="container mx-auto flex flex-wrap flex-col md:flex-row justify-center items-center">
-          <div class="flex flex-wrap flex-row align-center list-none">
-            <li class="ml-4">
+          <div class="flex flex-wrap text-xl flex-row align-center list-none">
+            <li class="ml-5">
               <a href="./about" class="text-gray-600 hover:text-blue-800">About</a>
             </li>
-            <li class="ml-4">
+            <li class="ml-5">
               <a href="./contact" class="text-gray-600 hover:text-blue-800">Contact</a>
             </li>
-            <li class="ml-4">
+            <li class="ml-5">
               <a href="#" class="text-gray-600 hover:text-blue-800">Research</a>
             </li>
-            <li class="ml-4">
+            <li class="ml-5">
               <a href="#" class="text-gray-600 hover:text-blue-800">Help</a>
             </li>
-            <li class="ml-4">
+            <li class="ml-5">
               <a href="./searchbar" class="text-gray-600 hover:text-blue-800">Map</a>
             </li>
-            <li class="ml-4">
+            <li class="ml-5">
               <a href="./sell" class="text-gray-600 hover:text-blue-800">Sell</a>
             </li>
-            <li class="ml-4">
+            <li class="ml-5">
               <a href="./explore" class="text-gray-600 hover:text-blue-800">Explore</a>
             </li>
-            <li class="ml-4">
+            <li class="ml-5">
               <a href="#" class="text-gray-600 hover:text-blue-800">Help</a>
             </li>
           </div>
@@ -39,7 +39,7 @@ const Footer = () => {
       </div>
 
 
-      <hr />
+      <hr class="border-1 border-gray-400 bg-gray-400" />
 
       <div className="items-center justify-center flex flex-wrap flex-row sm:flex-row mx-32 my-5">
         <p lassName="text-center text-black-100 text-sm">Our Group is committed to ensuring digital accessibility for individuals with disabilities. We are
@@ -49,15 +49,15 @@ const Footer = () => {
         </p>
       </div>
 
-      <hr />
+      <hr class="border-1 border-gray-400 bg-gray-400" />
 
       <div className="mt-4 bg-white-100">
         <div className="container mx-auto items-center justify-center flex flex-wrap flex-col sm:flex-row">
           <span className="inline-flex sm:mt-0 mt-2 ml-4 justify-center sm:justify-start">
             <img
-              src="logo.png"
+              src="deal.gif"
               alt=""
-              className="ml-4 w-12 h-12 text-indigo-900 bg-white-500"
+              className="ml-4 w-12 h-12 bg-white-500"
             />
             <Link to="/home">
               <span className="ml-2 w-12 h-12 py-4 text-2xl">Real Estate</span>
