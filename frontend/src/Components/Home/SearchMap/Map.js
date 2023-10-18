@@ -134,9 +134,9 @@ const Map = (props) => {
   }, [selectedProperty, markerPosition]);
 
   return (
-    <Box className="h-screen w-2/3 z-50 mt-20 relative align">
+    <Box className="h-screen w-2/3 z-20 mt-20 relative align">
       <MapContainer
-        className="h-screen w-full absolute mt-2"
+        className="h-screen w-full absolute mt-3"
         center={position}
         zoom={13}
         scrollWheelZoom={false}

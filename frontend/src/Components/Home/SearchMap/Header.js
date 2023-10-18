@@ -67,8 +67,8 @@ const Header = (props) => {
             left={0}
             width="full"
             px={4}
-            py={2}
-            zIndex={100}
+            py={0}
+            zIndex={30}
             style={{ height: '50px' }}
         >
             <Flex className="container flex flex-wrap flex-col md:flex-row items-center">
