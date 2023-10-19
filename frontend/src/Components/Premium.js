@@ -43,7 +43,6 @@ const Premium = () => {
             </p>
           </div>
           <div className="flex flex-wrap -m-4 justify-center">
-            <div className="p-4 xl:w-1/4 md:w-1/2 w-full">{/*  */}</div>
             <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
               <div className="h-full p-6 rounded-lg hover:border-indigo-500 hover:scale-105 border-2 border-gray-300 flex flex-col relative overflow-hidden">
                 <span className="bg-indigo-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">

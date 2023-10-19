@@ -1,9 +1,9 @@
 .mainProfile {
-    @apply flex w-[90%] min-h-[87vh] h-auto mx-[5%] my-[3%];
+    @apply flex w-[95%] min-h-[87vh] h-auto mx-[5%] my-[3%];
 }
 
 .left-section {
-    @apply w-[30%] pb-[5%];
+    @apply w-[30%] pb-[5%] h-[50%];
 }
 
 .right-section {

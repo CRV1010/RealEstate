@@ -71,9 +71,8 @@ export default function () {
         <ul className="cardsExplore">
           {database
             ? database.map((ArrayOfObjects, index) => {
-                const imageNames = ArrayOfObjects.image[0];
+                const imageNames = ArrayOfObjects?.image[0];
                 const keyId = `${ArrayOfObjects._id}`;
-
                 return (
                   <Link
                     to="/sellPropInfo"
@@ -151,7 +150,11 @@ export default function () {
                               {" "}
                               <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
                               BHK <br /> <strong>Land Area: </strong>{" "}
-                              {ArrayOfObjects.area}{" "}
+                              {ArrayOfObjects.area}
+                              <span>
+                                {" "}
+                                m<sup>2</sup>
+                              </span>{" "}
                             </p>
                           </div>
                         </div>

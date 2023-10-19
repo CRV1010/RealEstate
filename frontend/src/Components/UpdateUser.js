@@ -6,7 +6,9 @@ import axios from "axios";
 const UpdateUser = () => {
   const params = useParams();
   var id = params.id;
+
   const auth = JSON.parse(localStorage.getItem("user"));
+
   const [username, setUsername] = useState(auth.username);
   const [email, setEmail] = useState(auth.email);
   const [phone, setPhone] = useState(auth.phone);
