@@ -88,7 +88,7 @@ const SignUp = () => {
           <form onSubmit={handleSubmit(clickHandler)}>
             <div className="relative mb-4">
               <label for="name" className="leading-7 text-sm text-gray-600">
-                Username
+                Username :<span className="red text-lg">*</span>
               </label>
               <input
                 type="text"
@@ -107,7 +107,7 @@ const SignUp = () => {
 
             <div className="relative mb-4">
               <label for="email" className="leading-7 text-sm text-gray-600">
-                Email
+                Email :<span className="red text-lg">*</span>
               </label>
               <input
                 type="email"
@@ -132,7 +132,7 @@ const SignUp = () => {
 
             <div className="relative mb-4">
               <label for="phone" className="leading-7 text-sm text-gray-600">
-                Phone No.
+                Phone No. :<span className="red text-lg">*</span>
               </label>
               <input
                 type="text"
@@ -165,7 +165,7 @@ const SignUp = () => {
 
             <div className="relative mb-4">
               <label htmlFor="password" className="flex leading-7 text-sm text-gray-600">
-                Password
+                Password :<span className="red text-lg">*</span>
               </label>
               <div className="flex w-full bg-white rounded border border-gray-300 hover:border-indigo-500 hover:ring-2 hover:ring-indigo-200 outline-none px-3 transition-colors duration-200">
                 <input

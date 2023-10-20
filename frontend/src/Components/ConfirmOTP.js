@@ -38,7 +38,7 @@ const ConfirmOTP = () => {
                   for="otp_user"
                   className="leading-7 text-sm text-gray-600"
                 >
-                  Enter OTP
+                  Enter OTP :<span className="red text-lg">*</span>
                 </label>
                 <input
                   type="text"

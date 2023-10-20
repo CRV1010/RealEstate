@@ -52,7 +52,7 @@ const ForgotPassword = () => {
             <form onSubmit={handleSubmit(clickHandler)}>
               <div className="relative mb-4">
                 <label for="email" className="leading-7 text-sm text-gray-600">
-                  Enter Email to get OTP
+                  Enter Email to get OTP :<span className="red text-lg">*</span>
                 </label>
                 <input
                   type="email"

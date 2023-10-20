@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import StateData from "../../json/State_City.json";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const SellBuyRent = () => {
   //Buy Properties
@@ -9,10 +9,11 @@ const SellBuyRent = () => {
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
   const [database, setdatabase] = useState([]);
-  useEffect(()=>{ 
-    getData()
-  },[]) 
-  
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   async function getData() {
     const result = await fetch("http://localhost:5000/get-data", {
       method: "get",
@@ -100,7 +101,7 @@ const SellBuyRent = () => {
   // };
 
   const [city, setCity] = useState([]);
-  const [cd,setcd] = useState();
+  const [cd, setcd] = useState();
 
   const handleState = (e) => {
     const getStateId = e.target.value;
@@ -193,7 +194,7 @@ const SellBuyRent = () => {
       StateData.find((state) => state.state_id === State)?.state_name || "";
     localStorage.setItem("RentState", JSON.stringify(selectedStateName));
   };
-  const [rcd,setrcd] = useState();
+  const [rcd, setrcd] = useState();
 
   const handleRentCity = (e) => {
     // const cityid = e.target.value;
@@ -326,14 +327,12 @@ const SellBuyRent = () => {
                             onChange={(e) => handleState(e)}
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
-
                             <option value="" className="bg-white">
                               Select State
                             </option>
                             {StateData &&
                               StateData.map((getstate, index) => (
                                 <option
-
                                   className="bg-white"
                                   value={getstate.state_id}
                                   key={index}
@@ -363,7 +362,6 @@ const SellBuyRent = () => {
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option className="bg-white" value="">
-
                               Select City
                             </option>
                             {city &&
@@ -461,7 +459,6 @@ const SellBuyRent = () => {
                             <option>Flats/Apartments</option>
                             <option>Residential Plot</option>
                             <option>Office Space</option>
-                   
                           </select>
                         </div>
                       </div>
@@ -616,13 +613,11 @@ const SellBuyRent = () => {
                             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                           >
                             <option value="" className="bg-white">
-
                               Select State
                             </option>
                             {StateData &&
                               StateData.map((getstate, index) => (
                                 <option
-
                                   className="bg-white"
                                   value={getstate.state_id}
                                   key={index}
@@ -686,7 +681,6 @@ const SellBuyRent = () => {
                             <option>Select Area</option>
                             {database
                               ? database.map((propertyAreaDetail, index) => {
-                                  
                                   if (propertyAreaDetail.City === rcd) {
                                     return (
                                       <option>{propertyAreaDetail.zone}</option>
@@ -747,7 +741,6 @@ const SellBuyRent = () => {
                             <option>Flats/Apartments</option>
                             <option>Residential Plot</option>
                             <option>Office Space</option>
-                            
                           </select>
                         </div>
                       </div>
