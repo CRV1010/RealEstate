@@ -70,9 +70,33 @@ function App() {
                 </>
               }
             />
-            <Route path="/searchmap" element={<SearchMap />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/about" element={<About />} />
+            <Route
+              path="/searchmap"
+              element={
+                <>
+                  <SearchMap />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <ContactUs />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <>
+                  <About />
+                  <Footer />
+                </>
+              }
+            />
             {/* <Route path="/home" element={<Carousel />} /> */}
             <Route
               path="/contact"
@@ -92,8 +116,24 @@ function App() {
                 </>
               }
             />
-            <Route path="/confirmotp" element={<ConfirmOTP />} />
-            <Route path="/changepass" element={<ChangePassword />} />
+            <Route
+              path="/confirmotp"
+              element={
+                <>
+                  <ConfirmOTP />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/changepass"
+              element={
+                <>
+                  <ChangePassword />
+                  <Footer />
+                </>
+              }
+            />
             <Route
               path="/addProperty"
               element={
@@ -131,11 +171,51 @@ function App() {
                 </>
               }
             />
-            <Route path="/otherproperty" element={<OtherProperty />} />
-            <Route path="/otherproperty2" element={<OtherProperty2 />} />
-            <Route path="/updateProperty1/:id" element={<UpdateProperty1 />} />
-            <Route path="/updateProperty2" element={<UpdateProperty2 />} />
-            <Route path="/updateUser/:id" element={<UpdateUser />} />
+            <Route
+              path="/otherproperty"
+              element={
+                <>
+                  <OtherProperty />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/otherproperty2"
+              element={
+                <>
+                  <OtherProperty2 />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/updateProperty1/:id"
+              element={
+                <>
+                  <UpdateProperty1 />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/updateProperty2"
+              element={
+                <>
+                  <UpdateProperty2 />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/updateUser/:id"
+              element={
+                <>
+                  <UpdateUser />
+                  <Footer />
+                </>
+              }
+            />
             <Route
               path="/adminpage"
               element={
@@ -148,9 +228,33 @@ function App() {
             {/* <Route path="/adminuser" element={<AdminUsers />} />
             <Route path="/adminProperty" element={<AdminProperty />} /> */}
 
-            <Route path="/forgotpass/" element={<ForgotPassword />} />
-            <Route path="/forgotpass/:email" element={<ForgotPassword />} />
-            <Route path="/chatadmin" element={<ChatAdmin />} />
+            <Route
+              path="/forgotpass/"
+              element={
+                <>
+                  <ForgotPassword />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/forgotpass/:email"
+              element={
+                <>
+                  <ForgotPassword />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/chatadmin"
+              element={
+                <>
+                  <ChatAdmin />
+                  <Footer />
+                </>
+              }
+            />
             <Route
               path="/login"
               element={
@@ -169,8 +273,24 @@ function App() {
                 </>
               }
             />
-            <Route path="/premium" element={<Premium />} />
-            <Route path="/sellPropInfo" element={<SellPropInfo />} />
+            <Route
+              path="/premium"
+              element={
+                <>
+                  <Premium />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/sellPropInfo"
+              element={
+                <>
+                  <SellPropInfo />
+                  <Footer />
+                </>
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

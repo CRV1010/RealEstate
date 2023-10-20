@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
-import stateData from '../json/State_City.json';
-import './sell.css'
+import stateData from "../json/State_City.json";
+import "./sell.css";
 
 export default function () {
   const [stateid, setStateid] = useState("");
@@ -22,14 +22,16 @@ export default function () {
   const handleState = (e) => {
     const getStateId = e.target.value;
     setStateid(getStateId);
-    const getCitydata = stateData.find(state => state.state_id === getStateId).cities;
+    const getCitydata = stateData.find(
+      (state) => state.state_id === getStateId
+    ).cities;
     setCity(getCitydata);
-  }
+  };
 
   const handleCity = (e) => {
     const cityid = e.target.value;
     setCityid(cityid);
-  }
+  };
 
   const navigate = useNavigate();
 
@@ -53,32 +55,24 @@ export default function () {
   const [disable, setDisable] = useState(true);
 
   const clickHandler = async () => {
-    var selectedPropertyFor = document.querySelector('input[name="propertyFor"]:checked');
+    var selectedPropertyFor = document.querySelector(
+      'input[name="propertyFor"]:checked'
+    );
     var selectedValue = null;
     if (selectedPropertyFor) {
       selectedValue = selectedPropertyFor.value;
     }
     setPropertyFor(selectedValue);
 
-    let State = document.getElementById('State').value;
-    let City = document.getElementById('City').value;
-    let type = document.getElementById('type').value;
-    let rooms = document.getElementById('rooms').value;
+    let State = document.getElementById("State").value;
+    let City = document.getElementById("City").value;
+    let type = document.getElementById("type").value;
+    let rooms = document.getElementById("rooms").value;
     let seller = JSON.parse(localStorage.getItem("user")) || {};
     let sellerId = seller._id;
     let owner = seller.username;
     let build = document.getElementById("build").value;
 
-
-    // if (selectedValue !== '' && type !== '' && State !== '' && City !== '' && society !== '' && zone !== '' && pincode !== '' && area !== '' && price !== '' && rooms !== '') {
-    //   const selectedStateName = stateData.find((state) => state.state_id === State)?.state_name || '';
-    //   const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
-
-    //   localStorage.setItem('PropertyDetails',
-    //     JSON.stringify({
-    //       selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId, owner,bu
-    //     })
-    //   );
     if (
       selectedValue !== "" &&
       type !== "" &&
@@ -413,17 +407,10 @@ export default function () {
                 value={pincode}
                 {...register("pincode", {
                   required: "Pincode is required",
-                  maxLength: {
-                    value: 6,
-                    message: "Pincode no. exceed only 6 digits",
-                  },
                   pattern: {
-                    value: /^\d+(?:[.,]\d+)*$/,
-                    message: "Pincode contains digits only",
-                  },
-                  pattern: {
-                    value: /^[1-9]{1}[0-9]{2}\s{0,1}[0-9]{3}$/,
-                    message: "Pincode is not valid",
+                    value: /^(^\d{6}$)|(^[1-9][0-9]{2}\s?[0-9]{3}$)/,
+                    message:
+                      "Pincode must be 6 digits or follow the 3-3 format (e.g., 123456 or 123 456).",
                   },
                 })}
                 onChange={(e) => {
@@ -503,7 +490,9 @@ export default function () {
             </div>
             <div>
               <div>
-                <label>Build In (Year):* &ensp;</label>
+                <label>
+                  Build In (Year):<span className="red">*</span> &ensp;
+                </label>
                 <input
                   className="sellField"
                   id="build"
@@ -515,16 +504,13 @@ export default function () {
                   {...register("build", {
                     required: "Build In year is required",
                     pattern: {
-                      value: /^\d{4}$/,
-                      message: "Year in 4 digit only as format specified",
-                    },
-                    validate: (value) => {
-                      const year = parseInt(value, 10);
-                      const ctyear = new Date().getFullYear();
-                      if (year <= ctyear) {
-                        return true;
-                      }
-                      return "Built in year must be less then the current year.";
+                      value: new RegExp(
+                        `^(19[5-9]\\d|20[0-2]\\d|202[0-3]|20[0-${new Date()
+                          .getFullYear()
+                          .toString()
+                          .substring(2)}]\\d)$`
+                      ),
+                      message: `Build Year between 1950 and ${new Date().getFullYear()}.`,
                     },
                   })}
                   onChange={(e) => {
@@ -554,24 +540,26 @@ export default function () {
                   },
                   validate: {
                     notZero: (value) => value !== "0" || "Price is not zero",
-                    // greaterThan5000: (value) => parseFloat(value) >= 5000 || "Price must be greater than 5000.",
+                    greaterThan5000: (value) =>
+                      parseFloat(value) >= 5000 ||
+                      "Price must be greater than 5000.",
                     lessThan10000000: (value) =>
                       parseFloat(value) <= 10000000 ||
                       "Price must be less than 1,00,00,000.",
-                    priceBasedOnProperty: (value) => {
+                    priceBasedOnProperty: (value, price) => {
                       if (propertyFor === "Sell") {
-                        return parseFloat(value) >= 100000 &&
-                          parseFloat(value) <= 10000000
+                        return parseFloat(value, price) >= 100000 &&
+                          parseFloat(value, price) <= 10000000
                           ? true
                           : "Price must be greater than 1,00,000 and less than 1,00,00,000 for Selling.";
                       } else if (propertyFor === "Rent") {
-                        return parseFloat(value) >= 5000 &&
-                          parseFloat(value) <= 100000
+                        return parseFloat(value, price) >= 5000 &&
+                          parseFloat(value, price) <= 100000
                           ? true
                           : "Price must be greater than 5,000 and less than 1,00,000 for Renting.";
                       } else if (propertyFor === "PG") {
-                        return parseFloat(value) >= 5000 &&
-                          parseFloat(value) <= 20000
+                        return parseFloat(value, price) >= 5000 &&
+                          parseFloat(value, price) <= 20000
                           ? true
                           : "Price must be greater than 5,000 and less than 20,000 for PG.";
                       }
@@ -615,4 +603,4 @@ export default function () {
       </div>
     </div>
   );
-};
+}

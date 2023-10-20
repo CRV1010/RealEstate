@@ -30,14 +30,13 @@ const UpdateUser = () => {
     formData.append("image", images);
 
     //to insert the image in my images folder and get te images names to store in database
-    const result = await
-      axios.post(
-        "http://localhost:5000/upload-imageProfile", //this is api call here
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+    const result = await axios.post(
+      "http://localhost:5000/upload-imageProfile", //this is api call here
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
 
     console.log("Image Uploaded...");
     const image = result.data;
@@ -50,7 +49,7 @@ const UpdateUser = () => {
           email,
           phone,
           dob,
-          image
+          image,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -86,9 +85,9 @@ const UpdateUser = () => {
                 type="file"
                 onChange={(e) => setImages(e.target.files[0])}
                 name="image"
-              // {...register("image", {
-              //   required: "Please upload your image"
-              // })}
+                // {...register("image", {
+                //   required: "Please upload your image"
+                // })}
               />
               <p className="text-sm text-red-500">{errors.image?.message}</p>
             </div>
@@ -177,7 +176,7 @@ const UpdateUser = () => {
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 value={dob}
                 {...register("dob", {
-                  required: "Please add your date of birth"
+                  required: "Please add your date of birth",
                 })}
                 onChange={(e) => {
                   setDob(e.target.value);
@@ -187,7 +186,7 @@ const UpdateUser = () => {
             </div>
             <button
               className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            // onClick={clickHandler}
+              // onClick={clickHandler}
             >
               Update
             </button>
