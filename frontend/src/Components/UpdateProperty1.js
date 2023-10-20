@@ -571,17 +571,21 @@ export default function () {
                     value: true,
                     required: "Build In year is required",
                     pattern: {
-                      value: /^\d{4}$/,
-                      message: "Year in 4 digit only as format specified",
+                      value: /^(19[5-9]\d|20[0-1]\d|202[0-3])$/,
+                      message: "Build Year between 1950-2023.",
                     },
-                    validate: (value) => {
-                      const year = parseInt(value, 10);
-                      const ctyear = new Date().getFullYear();
-                      if (year <= ctyear) {
-                        return true;
-                      }
-                      return "Built in year must be less then the current year.";
-                    },
+                    // pattern: {
+                    //   value: /^\d{4}$/,
+                    //   message: "Year in 4 digit only as format specified",
+                    // },
+                    // validate: (value) => {
+                    //   const year = parseInt(value, 10);
+                    //   const ctyear = new Date().getFullYear();
+                    //   if (year <= ctyear) {
+                    //     return true;
+                    //   }
+                    //   return "Built in year must be less then the current year.";
+                    // },
                   })}
                   onChange={(e) => {
                     setBuild(e.target.value);
