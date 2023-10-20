@@ -108,12 +108,12 @@ const SearchMap = () => {
     }, []);
 
     // Redirect to login if not authenticated
-    useEffect(() => {
-        const auth = localStorage.getItem('user');
-        if (!auth) {
-            navigate('/login');
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     const auth = localStorage.getItem('user');
+    //     if (!auth) {
+    //         navigate('/login');
+    //     }
+    // }, [navigate]);
 
     return (
         <Flex

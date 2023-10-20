@@ -40,7 +40,7 @@ export default function () {
 
     useEffect(() => {
         const auth = localStorage.getItem("user");
-        console.log("inside use")
+        // console.log("inside use")
         if (!auth) {
             navigate("/login");
         }
