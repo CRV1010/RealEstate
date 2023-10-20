@@ -207,7 +207,8 @@ export default function () {
             <i className="fas fa-photo-film text-imgPropIcon"></i> &ensp;
             <h2 id="centerHeading"> Property Images </h2>
           </div>
-          <br /> <br />
+          <br /> 
+          <br />
           <div className="information">
             <h1 id="markLabel"> --- View Your Images --- </h1> <br />
             <div id="imgList">
@@ -229,7 +230,8 @@ export default function () {
                 </div>
               ))}
             </div>
-            <br /> <br />
+            <br /> 
+            <br />
             <div id="formData">
               <label htmlFor="">Upload Images:<span className="red">*</span> &nbsp; </label>
               <input
