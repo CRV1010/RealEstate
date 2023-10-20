@@ -12,7 +12,7 @@ export default function () {
 
   const [pd, setPd] = useState({});
   const [city, setCity] = useState([]);
-
+  const [build, setBuild] = useState("");
   const StateId =
     stateData.find((state) => state.state_name === pd.State)?.state_id || ""; // return state_id
   const CityId =
@@ -48,6 +48,7 @@ export default function () {
       setPincode(pd.pincode);
       setArea(pd.area);
       setPrice(pd.price);
+      setBuild(pd.build);
     }
   }, [pd, StateId, CityId]);
 
@@ -102,7 +103,7 @@ export default function () {
 
     document.getElementById("type").value = pd.type;
     document.getElementById("rooms").value = pd.rooms;
-
+    document.getElementById("build").value = pd.build;
     localStorage.setItem("propDetails", JSON.stringify(pd));
   };
 
@@ -121,6 +122,7 @@ export default function () {
     let rooms = document.getElementById("rooms").value; // return name as value
     let seller = JSON.parse(localStorage.getItem("user")) || {};
     let sellerId = seller._id;
+    let build = document.getElementById("build").value;
 
     if (
       selectedValue !== "" &&
@@ -132,7 +134,8 @@ export default function () {
       pincode !== "" &&
       area !== "" &&
       price !== "" &&
-      rooms !== ""
+      rooms !== "" &&
+      build !== ""
     ) {
       // we should convert _id's to _name's for storing local storge bcoz we get _id's.
       const selectedStateName =
@@ -153,6 +156,7 @@ export default function () {
           area,
           price,
           rooms,
+          build,
           sellerId,
         })
       );
@@ -179,7 +183,8 @@ export default function () {
       pincode === "" ||
       area === "" ||
       price === "" ||
-      rooms === ""
+      rooms === "" ||
+      build === ""
     ) {
       toast.warning("Attention! Information not Sufficient...", {
         position: "top-right",
@@ -550,6 +555,40 @@ export default function () {
                 </select>
               </div>
               <p className="text-sm text-red-500">{errors.rooms?.message}</p>
+            </div>
+            <div>
+              <div>
+                <label>Build In (Year):* &ensp;</label>
+                <input
+                  className="sellField"
+                  id="build"
+                  name="build"
+                  type="text"
+                  placeholder="Enter Year in YYYY Format"
+                  style={{ width: "40%" }}
+                  value={build}
+                  {...register("build", {
+                    value: true,
+                    required: "Build In year is required",
+                    pattern: {
+                      value: /^\d{4}$/,
+                      message: "Year in 4 digit only as format specified",
+                    },
+                    validate: (value) => {
+                      const year = parseInt(value, 10);
+                      const ctyear = new Date().getFullYear();
+                      if (year <= ctyear) {
+                        return true;
+                      }
+                      return "Built in year must be less then the current year.";
+                    },
+                  })}
+                  onChange={(e) => {
+                    setBuild(e.target.value);
+                  }}
+                />
+              </div>
+              <p className="text-sm text-red-500">{errors.build?.message}</p>
             </div>
             <div>
               <label>

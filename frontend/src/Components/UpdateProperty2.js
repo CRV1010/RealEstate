@@ -87,6 +87,7 @@ export default function () {
     price,
     rooms,
     sellerId,
+    build,
   } = JSON.parse(localStorage.getItem("PropertyDetails"));
 
   useEffect(() => {
@@ -161,6 +162,7 @@ export default function () {
           rooms,
           sellerId,
           imageName,
+          build,
         }),
         headers: {
           "Content-Type": "application/json",

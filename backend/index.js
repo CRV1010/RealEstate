@@ -438,6 +438,7 @@ app.post("/upload-database", async (req, res) => {
       image: req.body.imageName,
       owner: req.body.owner,
       premium: req.body.premium,
+      build: req.body.build,
     });
     res.json({ status: "ok" });
   } catch (error) {
@@ -466,6 +467,7 @@ app.put("/update-database/:id", async (req, res) => {
         image: req.body.imageName,
         modified: 1,
         owner: req.body.owner,
+        build: req.body.build,
       },
     }
   );
