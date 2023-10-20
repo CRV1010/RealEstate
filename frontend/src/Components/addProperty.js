@@ -31,6 +31,7 @@ export default function (props) {
     rooms,
     sellerId,
     owner,
+    build,
   } = propertyDetails;
 
   useEffect(() => {
@@ -114,7 +115,8 @@ export default function (props) {
         sellerId,
         imageName,
         owner,
-        premium
+        premium,
+        build,
       }),
       headers: {
         "Content-Type": "application/json",

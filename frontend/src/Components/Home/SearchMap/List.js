@@ -7,7 +7,7 @@ import { Flex, Text, Image } from "@chakra-ui/react";
 const List = ({ data, setSelectedProperty }) => {
 
     var user = localStorage.getItem("user");
-    const user_id = JSON.parse(user)._id;
+    const user_id = JSON.parse(user)?._id;
 
     return (
         <Flex

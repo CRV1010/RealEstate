@@ -64,7 +64,7 @@ const position = [22.2994, 73.2081];
 
 const Map = (props) => {
   var user = localStorage.getItem("user");
-  const user_id = JSON.parse(user)._id;
+  const user_id = JSON.parse(user)?._id;
 
   const { coordinates, database, selectedProperty } = props;
   // console.log(selectedProperty);

@@ -17,6 +17,7 @@ export default function () {
   const [pincode, setPincode] = useState("");
   const [area, setArea] = useState("");
   const [price, setPrice] = useState("");
+  const [build, setBuild] = useState("");
 
   const handleState = (e) => {
     const getStateId = e.target.value;
@@ -66,20 +67,55 @@ export default function () {
     let seller = JSON.parse(localStorage.getItem("user")) || {};
     let sellerId = seller._id;
     let owner = seller.username;
+    let build = document.getElementById("build").value;
 
 
-    if (selectedValue !== '' && type !== '' && State !== '' && City !== '' && society !== '' && zone !== '' && pincode !== '' && area !== '' && price !== '' && rooms !== '') {
-      const selectedStateName = stateData.find((state) => state.state_id === State)?.state_name || '';
-      const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
+    // if (selectedValue !== '' && type !== '' && State !== '' && City !== '' && society !== '' && zone !== '' && pincode !== '' && area !== '' && price !== '' && rooms !== '') {
+    //   const selectedStateName = stateData.find((state) => state.state_id === State)?.state_name || '';
+    //   const selectedCityName = city.find((getcity) => getcity.city_id === City)?.city_name || '';
 
-      localStorage.setItem('PropertyDetails',
+    //   localStorage.setItem('PropertyDetails',
+    //     JSON.stringify({
+    //       selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId, owner,bu
+    //     })
+    //   );
+    if (
+      selectedValue !== "" &&
+      type !== "" &&
+      State !== "" &&
+      City !== "" &&
+      society !== "" &&
+      zone !== "" &&
+      pincode !== "" &&
+      area !== "" &&
+      price !== "" &&
+      rooms !== "" &&
+      build !== ""
+    ) {
+      const selectedStateName =
+        stateData.find((state) => state.state_id === State)?.state_name || "";
+      const selectedCityName =
+        city.find((getcity) => getcity.city_id === City)?.city_name || "";
+      localStorage.setItem(
+        "PropertyDetails",
         JSON.stringify({
-          selectedValue, type, State: selectedStateName, City: selectedCityName, society, zone, pincode, area, price, rooms, sellerId, owner
+          selectedValue,
+          type,
+          State: selectedStateName,
+          City: selectedCityName,
+          society,
+          zone,
+          pincode,
+          area,
+          price,
+          rooms,
+          build,
+          sellerId,
+          owner,
         })
       );
-
-      setDisable(false)
-      toast.success('Congratulations! Information Stored...', {
+      setDisable(false);
+      toast.success("Congratulations! Information Stored...", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -90,9 +126,20 @@ export default function () {
         progress: undefined,
         theme: "light",
       });
-    }
-    else if (selectedValue === '' || type === '' || State === '' || City === '' || society === '' || zone === '' || pincode === '' || area === '' || price === '' || rooms === '') {
-      toast.warning('Attention! Information not Sufficient...', {
+    } else if (
+      selectedValue === "" ||
+      type === "" ||
+      State === "" ||
+      City === "" ||
+      society === "" ||
+      zone === "" ||
+      pincode === "" ||
+      area === "" ||
+      price === "" ||
+      rooms === "" ||
+      build === ""
+    ) {
+      toast.warning("Attention! Information not Sufficient...", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -103,9 +150,8 @@ export default function () {
         progress: undefined,
         theme: "light",
       });
-    }
-    else {
-      toast.error('Oops! Information Crashed...', {
+    } else {
+      toast.error("Oops! Information Crashed...", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -454,6 +500,39 @@ export default function () {
                 </select>
               </div>
               <p className="text-sm text-red-500">{errors.rooms?.message}</p>
+            </div>
+            <div>
+              <div>
+                <label>Build In (Year):* &ensp;</label>
+                <input
+                  className="sellField"
+                  id="build"
+                  name="build"
+                  type="text"
+                  placeholder="Enter Year in YYYY Format"
+                  style={{ width: "40%" }}
+                  value={build}
+                  {...register("build", {
+                    required: "Build In year is required",
+                    pattern: {
+                      value: /^\d{4}$/,
+                      message: "Year in 4 digit only as format specified",
+                    },
+                    validate: (value) => {
+                      const year = parseInt(value, 10);
+                      const ctyear = new Date().getFullYear();
+                      if (year <= ctyear) {
+                        return true;
+                      }
+                      return "Built in year must be less then the current year.";
+                    },
+                  })}
+                  onChange={(e) => {
+                    setBuild(e.target.value);
+                  }}
+                />
+              </div>
+              <p className="text-sm text-red-500">{errors.build?.message}</p>
             </div>
             <div>
               <label>
