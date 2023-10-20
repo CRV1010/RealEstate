@@ -546,20 +546,20 @@ export default function () {
                     lessThan10000000: (value) =>
                       parseFloat(value) <= 10000000 ||
                       "Price must be less than 1,00,00,000.",
-                    priceBasedOnProperty: (value, price) => {
+                    priceBasedOnProperty: (value) => {
                       if (propertyFor === "Sell") {
-                        return parseFloat(value, price) >= 100000 &&
-                          parseFloat(value, price) <= 10000000
+                        return parseFloat(value) >= 100000 &&
+                          parseFloat(value) <= 10000000
                           ? true
                           : "Price must be greater than 1,00,000 and less than 1,00,00,000 for Selling.";
                       } else if (propertyFor === "Rent") {
-                        return parseFloat(value, price) >= 5000 &&
-                          parseFloat(value, price) <= 100000
+                        return parseFloat(value) >= 5000 &&
+                          parseFloat(value) <= 100000
                           ? true
                           : "Price must be greater than 5,000 and less than 1,00,000 for Renting.";
                       } else if (propertyFor === "PG") {
-                        return parseFloat(value, price) >= 5000 &&
-                          parseFloat(value, price) <= 20000
+                        return parseFloat(value) >= 5000 &&
+                          parseFloat(value) <= 20000
                           ? true
                           : "Price must be greater than 5,000 and less than 20,000 for PG.";
                       }
