@@ -571,6 +571,18 @@ export default function () {
                       ),
                       message: `Build Year between 1950 and ${new Date().getFullYear()}.`,
                     },
+                    // pattern: {
+                    //   value: /^\d{4}$/,
+                    //   message: "Year in 4 digit only as format specified",
+                    // },
+                    // validate: (value) => {
+                    //   const year = parseInt(value, 10);
+                    //   const ctyear = new Date().getFullYear();
+                    //   if (year <= ctyear) {
+                    //     return true;
+                    //   }
+                    //   return "Built in year must be less then the current year.";
+                    // },
                   })}
                   onChange={(e) => {
                     setBuild(e.target.value);
