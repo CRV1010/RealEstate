@@ -12,12 +12,11 @@ export default function () {
 
   const [pd, setPd] = useState({});
   const [city, setCity] = useState([]);
-  const [build, setBuild] = useState("");
+
   const StateId =
     stateData.find((state) => state.state_name === pd.State)?.state_id || ""; // return state_id
   const CityId =
     city.find((getcity) => getcity.city_name === pd.City)?.city_id || "";
-  console.log(CityId);
 
   const [stateid, setStateid] = useState("");
   const [cityid, setCityid] = useState("");
@@ -27,6 +26,7 @@ export default function () {
   const [zone, setZone] = useState(pd.zone);
   const [pincode, setPincode] = useState(pd.pincode);
   const [area, setArea] = useState(pd.area);
+  const [build, setBuild] = useState("");
   const [price, setPrice] = useState(pd.price);
 
   const navigate = useNavigate();
@@ -470,17 +470,10 @@ export default function () {
                 {...register("pincode", {
                   value: true,
                   required: "Pincode is required",
-                  maxLength: {
-                    value: 6,
-                    message: "Pincode no. exceed only 6 digits",
-                  },
                   pattern: {
-                    value: /^\d+(?:[.,]\d+)*$/,
-                    message: "Pincode contains digits only",
-                  },
-                  pattern: {
-                    value: /^[1-9]{1}[0-9]{2}\s{0,1}[0-9]{3}$/,
-                    message: "Pincode is not valid",
+                    value: /^(^\d{6}$)|(^[1-9][0-9]{2}\s?[0-9]{3}$)/,
+                    message:
+                      "Pincode must be 6 digits or follow the 3-3 format (e.g., 123456 or 123 456).",
                   },
                 })}
                 onChange={(e) => {
@@ -510,13 +503,10 @@ export default function () {
                   value: true,
                   required: "Plot/Land Area is required",
                   pattern: {
-                    value: /^\d+(?:[.,]\d+)*$/,
-                    message: "Area contains digits only",
-                  },
-                  validate: {
-                    notZero: (value) => value !== "0" || "Area is not zero",
-                    // greaterThan50: (value) => parseFloat(value) > 50 || "Area must be greater than 50 sqmtr",
-                    // lessThan10000: (value) => parseFloat(value) < 10000 || "Area must be less than 10000 sqmtr",
+                    value:
+                      /^(5[1-9]\d{0,3}|[1-9]\d{0,3}|10000)$|^\d+(?:[.,]\d+)*$/,
+                    message:
+                      "Area must be greater than 50 and less than 10,000 and contain digits only",
                   },
                 })}
                 onChange={(e) => {
@@ -558,7 +548,9 @@ export default function () {
             </div>
             <div>
               <div>
-                <label>Build In (Year):* &ensp;</label>
+                <label>
+                  Build In (Year):<span className="red">*</span> &ensp;
+                </label>
                 <input
                   className="sellField"
                   id="build"
@@ -571,16 +563,13 @@ export default function () {
                     value: true,
                     required: "Build In year is required",
                     pattern: {
-                      value: /^\d{4}$/,
-                      message: "Year in 4 digit only as format specified",
-                    },
-                    validate: (value) => {
-                      const year = parseInt(value, 10);
-                      const ctyear = new Date().getFullYear();
-                      if (year <= ctyear) {
-                        return true;
-                      }
-                      return "Built in year must be less then the current year.";
+                      value: new RegExp(
+                        `^(19[5-9]\\d|20[0-2]\\d|202[0-3]|20[0-${new Date()
+                          .getFullYear()
+                          .toString()
+                          .substring(2)}]\\d)$`
+                      ),
+                      message: `Build Year between 1950 and ${new Date().getFullYear()}.`,
                     },
                   })}
                   onChange={(e) => {
@@ -603,33 +592,34 @@ export default function () {
                 style={{ width: "40%" }}
                 value={price}
                 {...register("price", {
-                  value: true,
+                  value: { price },
                   required: "Expected Price is required",
                   pattern: {
-                    value: /^\d+(?:[.,]\d+)*$/,
-                    message: "Price contains digits only",
+                    value: /^(?!0+$)\d+(?:[.,]\d+)*$/,
+                    message:
+                      "Price must be a non-zero number and contain digits only.",
                   },
                   validate: {
-                    notZero: (value) => value !== "0" || "Price is not zero",
-                    // greaterThan5000: (value) => parseFloat(value) >= 5000 || "Price must be greater than 5000.",
-                    // lessThan10000000: (value) => parseFloat(value) <= 10000000 || "Price must be less than 1,00,00,000.",
                     priceBasedOnProperty: (value) => {
+                      // console.log(value);
+
                       if (propertyFor === "Sell") {
-                        return parseFloat(value) >= 100000 &&
-                          parseFloat(value) <= 10000000
+                        return parseFloat(value.price) >= 100000 &&
+                          parseFloat(value.price) <= 10000000
                           ? true
                           : "Price must be greater than 1,00,000 and less than 1,00,00,000 for Selling.";
                       } else if (propertyFor === "Rent") {
-                        return parseFloat(value) >= 5000 &&
-                          parseFloat(value) <= 100000
+                        return parseFloat(value.price) >= 5000 &&
+                          parseFloat(value.price) <= 100000
                           ? true
                           : "Price must be greater than 5,000 and less than 1,00,000 for Renting.";
                       } else if (propertyFor === "PG") {
-                        return parseFloat(value) >= 5000 &&
-                          parseFloat(value) <= 20000
+                        return parseFloat(value.price) >= 5000 &&
+                          parseFloat(value.price) <= 20000
                           ? true
                           : "Price must be greater than 5,000 and less than 20,000 for PG.";
                       }
+                      return "Invalid price error message.";
                     },
                   },
                 })}
@@ -637,7 +627,9 @@ export default function () {
                   setPrice(e.target.value);
                 }}
               />
-              <p className="text-sm text-red-500">{errors.price?.message}</p>
+              <p className="text-sm text-red-500">
+                {errors.price && errors.price.message}
+              </p>
             </div>
             <br />
           </div>
