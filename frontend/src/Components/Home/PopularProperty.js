@@ -93,7 +93,7 @@ const PopularProperty = () => {
                                 <span
                                   style={{
                                     color: "#b4fee7",
-                                    "font-weight": "600",
+                                    "fontWeight": "600",
                                   }}
                                 >
                                   {ArrayOfObjects.likes &&

@@ -55,7 +55,7 @@ const Searchbar = () => {
                     <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border-solid border-2 hover:border-blue-600 rounded-3xl">
                         <section className="w-full h-7 flex items-center">
                             <span className="w-10 h-full flex items-center">
-                                <i class="fa-solid fa-magnifying-glass ml-2.5 text-blue-800" aria-hidden="true"></i>
+                                <i className="fa-solid fa-magnifying-glass ml-2.5 text-blue-800" aria-hidden="true"></i>
                             </span>
                             <input
                                 type="text"

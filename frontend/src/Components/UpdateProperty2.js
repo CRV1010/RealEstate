@@ -229,7 +229,7 @@ export default function () {
             </div>
             <br /> <br />
             <div id="formData">
-              <label htmlFor="">Upload Images:* &nbsp; </label>
+              <label htmlFor="">Upload Images:<span className="red">*</span> &nbsp; </label>
               <input
                 accept="image/*"
                 type="file"

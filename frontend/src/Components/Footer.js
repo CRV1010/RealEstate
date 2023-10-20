@@ -5,51 +5,51 @@ const Footer = () => {
   return (
     <footer className="text-gray-600 body-font mt-10">
 
-      <hr class="border-1 border-gray-400 bg-gray-400" />
+      <hr className="border-1 border-gray-400 bg-gray-400" />
 
-      <div class="container px-5 py-10 mx-auto md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-        <div class="container mx-auto flex flex-wrap flex-col md:flex-row justify-center items-center">
-          <div class="flex flex-wrap text-xl flex-row align-center list-none">
-            <li class="ml-5">
-              <a href="./about" class="text-gray-600 hover:text-blue-800">About</a>
+      <div className="container px-5 py-10 mx-auto md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+        <div className="container mx-auto flex flex-wrap flex-col md:flex-row justify-center items-center">
+          <div className="flex flex-wrap text-xl flex-row align-center list-none">
+            <li className="ml-5">
+              <a href="./about" className="text-gray-600 hover:text-blue-800">About</a>
             </li>
-            <li class="ml-5">
-              <a href="./contact" class="text-gray-600 hover:text-blue-800">Contact</a>
+            <li className="ml-5">
+              <a href="./contact" className="text-gray-600 hover:text-blue-800">Contact</a>
             </li>
-            <li class="ml-5">
-              <a href="#" class="text-gray-600 hover:text-blue-800">Research</a>
+            <li className="ml-5">
+              <a href="#" className="text-gray-600 hover:text-blue-800">Research</a>
             </li>
-            <li class="ml-5">
-              <a href="#" class="text-gray-600 hover:text-blue-800">Help</a>
+            <li className="ml-5">
+              <a href="#" className="text-gray-600 hover:text-blue-800">Help</a>
             </li>
-            <li class="ml-5">
-              <a href="./searchbar" class="text-gray-600 hover:text-blue-800">Map</a>
+            <li className="ml-5">
+              <a href="./searchbar" className="text-gray-600 hover:text-blue-800">Map</a>
             </li>
-            <li class="ml-5">
-              <a href="./sell" class="text-gray-600 hover:text-blue-800">Sell</a>
+            <li className="ml-5">
+              <a href="./sell" className="text-gray-600 hover:text-blue-800">Sell</a>
             </li>
-            <li class="ml-5">
-              <a href="./explore" class="text-gray-600 hover:text-blue-800">Explore</a>
+            <li className="ml-5">
+              <a href="./explore" className="text-gray-600 hover:text-blue-800">Explore</a>
             </li>
-            <li class="ml-5">
-              <a href="#" class="text-gray-600 hover:text-blue-800">Help</a>
+            <li className="ml-5">
+              <a href="#" className="text-gray-600 hover:text-blue-800">Help</a>
             </li>
           </div>
         </div>
       </div>
 
 
-      <hr class="border-1 border-gray-400 bg-gray-400" />
+      <hr className="border-1 border-gray-400 bg-gray-400" />
 
       <div className="items-center justify-center flex flex-wrap flex-row sm:flex-row mx-32 my-5">
-        <p lassName="text-center text-black-100 text-sm">Our Group is committed to ensuring digital accessibility for individuals with disabilities. We are
+        <p className="text-center text-black-100 text-sm">Our Group is committed to ensuring digital accessibility for individuals with disabilities. We are
           continuously working to improve the accessibility of our web experience for everyone, and we welcome
           feedback and accommodation requests. If you wish to report an issue or seek an accommodation, please
           <a href="./contact" className="text-blue-900"> let us know.</a>
         </p>
       </div>
 
-      <hr class="border-1 border-gray-400 bg-gray-400" />
+      <hr className="border-1 border-gray-400 bg-gray-400" />
 
       <div className="mt-4 bg-white-100">
         <div className="container mx-auto items-center justify-center flex flex-wrap flex-col sm:flex-row">
