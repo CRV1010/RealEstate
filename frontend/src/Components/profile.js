@@ -11,8 +11,7 @@ export default function (props) {
   const navigate = useNavigate();
 
   const [UserDetails, setUserDetails] = useState();
-  const [propertyDetails, setPropertyDetails] = useState();
-  const [database, setDatabase] = useState();
+  const [propertyDetails, setPropertyDetails] = useState([]);
 
   useEffect(() => {
     getUserData();
@@ -84,7 +83,7 @@ export default function (props) {
     });
     var data = await result.json();
     let pd = data[0];
-    
+
     console.log("data", data);
     console.log("md", pd.modified);
 
@@ -101,7 +100,7 @@ export default function (props) {
         theme: "light",
       });
     } else {
-      console.log("chid",id);
+      console.log("chid", id);
       navigate(`/updateProperty1/${id}`);
     }
   };
@@ -121,7 +120,13 @@ export default function (props) {
     });
     let data = await result.json();
 
-    setDatabase(data);
+    let temp = []
+    temp = propertyDetails.map((item)=> {
+        if(item._id == imageId)  return data;
+        return item;
+    })
+
+    setPropertyDetails(temp);
 
     toast.success("Thank You! For Your Interest...", {
       position: "top-right",
@@ -217,13 +222,13 @@ export default function (props) {
                               {ArrayOfObjects.price}{" "}
                             </h2>
 
-                              <Link
-                                to="/sellPropInfo"
-                                onClick={() => getNewPro(ArrayOfObjects._id)}
-                                key={ArrayOfObjects._id}
-                              >
-                                <div className="card_image_explore">
-                                  {ArrayOfObjects.image &&
+                            <Link
+                              to="/sellPropInfo"
+                              onClick={() => getNewPro(ArrayOfObjects._id)}
+                              key={ArrayOfObjects._id}
+                            >
+                              <div className="card_image_explore">
+                                {ArrayOfObjects.image &&
 
                                   ArrayOfObjects.image.length > 0 ? (
                                   <img
@@ -232,7 +237,7 @@ export default function (props) {
                                     alt="not fetched"
                                   />
                                 ) : (
-                                  ""
+                                  "Sorry No Data"
                                 )}
                               </div>
                             </Link>
@@ -260,7 +265,7 @@ export default function (props) {
                                     ) : (
                                       <i
                                         className="fa-regular fa-heart"
-                                        style={{ color: "red" }}
+                                        style={{ color: "red" }} value={ArrayOfObjects._id}
                                       ></i>
                                     )}
                                     &nbsp;
