@@ -126,7 +126,9 @@ export default function () {
                 </li>
               );
             })
-            : ""}
+            : (
+              <h1>No Property Availabe with given requirements</h1>
+            )}
         </ul>
       </div>
       <div className="text-center">

@@ -61,10 +61,11 @@ const UpdateUser = () => {
       if (data.token) {
         localStorage.setItem("user", JSON.stringify(data.result));
         localStorage.setItem("token", JSON.stringify(data.token));
-        navigate("/profile");
+        window.location.href = "/profile";
+        // navigate("/profile");
       }
     } else {
-      alert("You can't keep an empty field");
+      alert("You can't keep an field empty");
     }
   };
 

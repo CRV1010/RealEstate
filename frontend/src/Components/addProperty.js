@@ -134,7 +134,8 @@ export default function (props) {
       progress: undefined,
       theme: "light",
     });
-    navigate("/explore")
+    window.location.href = "/explore";
+    // navigate("/explore")
   };
 
   const deleteImage = (e) => {

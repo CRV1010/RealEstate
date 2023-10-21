@@ -173,7 +173,7 @@ export default function () {
     if (data) {
       toast.success("Property Updated Successfully...", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 4000,
         hideProgressBar: false,
         closeOnClick: true,
         rtl: false,
@@ -186,8 +186,8 @@ export default function () {
     console.log("Data updated Successfully...");
     setImages([]);
     setImageURLs([]);
-    // window.location.href = "/profile";
-    navigate("/profile");
+    window.location.href = "/profile";
+    // navigate("/profile");
   };
 
   const deleteImage = (e) => {
