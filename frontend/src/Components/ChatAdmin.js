@@ -313,6 +313,11 @@ const ChatAdmin = () => {
             text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                 value={msg}
                 placeholder="Type a message..."
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    sendMessage();
+                  }
+                }}
                 onChange={(e) => {
                   setMsg(e.target.value);
                 }}
