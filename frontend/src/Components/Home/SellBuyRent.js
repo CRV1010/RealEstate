@@ -317,7 +317,7 @@ const SellBuyRent = () => {
                           htmlFor="state"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          State :
+                          State :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -351,7 +351,7 @@ const SellBuyRent = () => {
                           htmlFor="cities"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          City :
+                          City :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -385,7 +385,7 @@ const SellBuyRent = () => {
                           htmlFor="area"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Area :
+                          Area :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -445,7 +445,7 @@ const SellBuyRent = () => {
                           htmlFor="propertyType"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Property Type :
+                          Property Type :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -470,7 +470,7 @@ const SellBuyRent = () => {
                           htmlFor="types"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          House Type :
+                          House Type :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -524,7 +524,7 @@ const SellBuyRent = () => {
                           htmlFor="budget"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Budget :
+                          Budget :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -602,7 +602,7 @@ const SellBuyRent = () => {
                           htmlFor="rentState"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          State :
+                          State :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -635,7 +635,7 @@ const SellBuyRent = () => {
                           htmlFor="rentCities"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          City :
+                          City :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -668,7 +668,7 @@ const SellBuyRent = () => {
                           htmlFor="rentArea"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Area :
+                          Area :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -727,7 +727,7 @@ const SellBuyRent = () => {
                           htmlFor="rentPropertyType"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Property Type :
+                          Property Type :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -751,7 +751,7 @@ const SellBuyRent = () => {
                           htmlFor="rentTypes"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          House Type :
+                          House Type :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
@@ -804,7 +804,7 @@ const SellBuyRent = () => {
                           htmlFor="rentBudget"
                           className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                          Budget :
+                          Budget :<span className="red text-base">*</span>
                         </label>
                         <div className="mt-2">
                           <select
