@@ -59,14 +59,14 @@ export default function () {
         var data = await result.json();
         var id = localStorage.getItem('pressCard');
 
-        var temp1 = data.filter(item => item?._id == id)
+        var temp1 = data.filter(item => item?._id === id)
         console.log("curr",temp1[0]);
         setDatabase(temp1[0])
         setIsPremium(temp1[0].premium)
     
 
         var zone = temp1[0].zone;
-        var temp2 = data.filter(item => item.zone == zone && item?._id !== id)
+        var temp2 = data.filter(item => item.zone === zone && item?._id !== id)
 
         setZoneData(temp2);
 
@@ -99,9 +99,11 @@ export default function () {
         setDOB(temp1[0].dob);
         setPhoto(temp1[0]);
     }
+
     function fallbackImage() {
       document.getElementById("myImage").src = { ProfileImg };
     }
+
     //add like
     var user = localStorage.getItem("user");
     const user_id = JSON.parse(user)?._id;

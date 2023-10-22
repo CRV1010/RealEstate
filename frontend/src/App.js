@@ -15,7 +15,7 @@ import AddProperty from "./Components/addProperty";
 import Explore from "./Components/explore";
 
 import Carousel from "./Components/Home/Carousel";
-import Searchbar from "./Components/Home/Searchbar";
+// import Searchbar from "./Components/Home/Searchbar";
 import SearchMap from "./Components/Home/SearchMap";
 import SellBuyRent from "./Components/Home/SellBuyRent";
 import PopularProperty from "./Components/Home/PopularProperty";
@@ -31,8 +31,8 @@ import UpdateProperty2 from "./Components/UpdateProperty2";
 import OtherProperty2 from "./Components/OtherProperty2";
 import UpdateUser from "./Components/UpdateUser";
 import AdminPage from "./Components/AdminPage";
-import AdminUsers from "./Components/AdminUsers";
-import AdminProperty from "./Components/AdminProperty";
+// import AdminUsers from "./Components/AdminUsers";
+// import AdminProperty from "./Components/AdminProperty";
 import Premium from "./Components/Premium";
 import SellPropInfo from "./Components/sellPropInfo";
 
@@ -97,7 +97,6 @@ function App() {
                 </>
               }
             />
-            {/* <Route path="/home" element={<Carousel />} /> */}
             <Route
               path="/contact"
               element={
@@ -161,7 +160,15 @@ function App() {
                 </>
               }
             />
-            <Route path="/searchProperty" element={<SearchedProperty />} />
+            <Route
+              path="/searchProperty"
+              element={
+                <>
+                  <SearchedProperty />
+                  <Footer />
+                </>
+              }
+            />
             <Route
               path="/profile"
               element={
@@ -227,7 +234,6 @@ function App() {
             />
             {/* <Route path="/adminuser" element={<AdminUsers />} />
             <Route path="/adminProperty" element={<AdminProperty />} /> */}
-
             <Route
               path="/forgotpass/"
               element={

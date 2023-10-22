@@ -1,64 +1,71 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./explore.css";
-import OtherProperty from "./OtherProperty";
-// import "./Profile.css";
 
 export default function () {
-    const navigate = useNavigate();
-    useEffect(() => {
-      const auth = localStorage.getItem("user");
-      if (!auth) {
-        navigate("/login");
-      }
-    }, []);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (!auth) {
+      navigate("/login");
+    }
+  }, []);
+
   const [database, setdatabase] = useState([]);
-    var Data;
-    var propertyFor = (localStorage.getItem("propertyFor"));
-    console.log(propertyFor);
-    // var propertyFor = "Sell";
-    var type;
-    var State;
-    var City;
-    var zone;
-    var rooms;
-    var price;
-    if(propertyFor=='Sell'){
-      Data = JSON.parse(localStorage.getItem("CombinedData"));
-      
-      State = Data.state;
-      City = Data.cities;
-      type = Data.property;
-      zone = Data.area;
-      var rtype = Data.type;
-      rooms = parseInt(rtype.substring(0,1));
-      var pri = localStorage.getItem("Budget");
-      price = parseInt(pri.substring(10));
-      console.log(rooms,price);
-    }
-    else{
-      Data = JSON.parse(localStorage.getItem("RentCombinedData"));
-      State = Data.rentState;
-      City = Data.rentCities;
-      type = Data.rentProperty;
-      zone = Data.rentArea;
-      var rtype = Data.rentType;
-      rooms = parseInt(rtype.substring(0, 1));
-      var pri = localStorage.getItem("RentBudget");
-      price = parseInt(pri.substring(7));
-      console.log(rooms, price);
-      // console.log("rent");
-    }
-    
-    
+  var Data;
+  var propertyFor = localStorage.getItem("propertyFor");
+  console.log(propertyFor);
+  // var propertyFor = "Sell";
+  var type;
+  var State;
+  var City;
+  var zone;
+  var rooms;
+  var price;
+  
+  if (propertyFor === "Sell") {
+    Data = JSON.parse(localStorage.getItem("CombinedData"));
+
+    State = Data.state;
+    City = Data.cities;
+    type = Data.property;
+    zone = Data.area;
+    var rtype = Data.type;
+    rooms = parseInt(rtype.substring(0, 1));
+    var pri = localStorage.getItem("Budget");
+    price = parseInt(pri.substring(10));
+    // console.log(rooms,price);
+  } else {
+    Data = JSON.parse(localStorage.getItem("RentCombinedData"));
+    State = Data.rentState;
+    City = Data.rentCities;
+    type = Data.rentProperty;
+    zone = Data.rentArea;
+    rtype = Data.rentType;
+    rooms = parseInt(rtype.substring(0, 1));
+    pri = localStorage.getItem("RentBudget");
+    price = parseInt(pri.substring(7));
+    console.log(rooms, price);
+    // console.log("rent");
+  }
+
   useEffect(() => {
     getData();
   }, []);
-  
+
   async function getData() {
     const result = await fetch("http://localhost:5000/search-property", {
       method: "post",
-      body: JSON.stringify({propertyFor, type, State, City,zone,rooms,price}),
+      body: JSON.stringify({
+        propertyFor,
+        type,
+        State,
+        City,
+        zone,
+        rooms,
+        price,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -67,11 +74,11 @@ export default function () {
     setdatabase(data);
   }
 
-  const nextPage = async () =>{
-      navigate("/otherproperty")
-      // <OtherProperty
-      //   propertyFor={propertyFor} type={type} State={State} City={City} zone={zone} price={price}
-      // />;
+  const nextPage = async () => {
+    navigate("/otherproperty");
+    // <OtherProperty
+    //   propertyFor={propertyFor} type={type} State={State} City={City} zone={zone} price={price}
+    // />;
     // const result = await fetch("http://localhost:5000/search-property-two", {
     //   method: "post",
     //   body: JSON.stringify({propertyFor, type, State, City,zone,price}),
@@ -81,7 +88,7 @@ export default function () {
     // });
     // var data = await result.json();
     // setdatabase(data);
-  }
+  };
 
   return (
     <>
@@ -89,9 +96,8 @@ export default function () {
       <div className="mainExplore" style={{ maxWidth: "80%" }}>
         <ul className="cardsExplore">
           {database ? (
-            
-          database.map((ArrayOfObjects, index) => {
-              const imageNames = ArrayOfObjects.image[0];
+            database.map((ArrayOfObjects, index) => {
+              // const imageNames = ArrayOfObjects.image[0];
               return (
                 <li className="cards_item_explore" key={ArrayOfObjects._id}>
                   <div className="card" tabindex="0">
@@ -144,7 +150,7 @@ export default function () {
               );
             })
           ) : (
-              <li>No Property Availabe with given requirements</li>
+            <li>No Property Availabe with given requirements</li>
           )}
         </ul>
       </div>

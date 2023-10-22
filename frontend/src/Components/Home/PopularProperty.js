@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PopularProperty = () => {
     const [database, setDatabase] = useState([])
@@ -14,7 +14,7 @@ const PopularProperty = () => {
         },
         });
         var data = await result.json();
-        console.log("pre property",data);
+        // console.log("pre property",data);
         setDatabase(data);
     }
 
@@ -34,7 +34,7 @@ const PopularProperty = () => {
           <div className="flex flex-nowrap overflow-x-scroll overflow-y-hidden">
             {database ? (
               database.map((ArrayOfObjects, index) => {
-                const imageNames = ArrayOfObjects.image[0];
+                // const imageNames = ArrayOfObjects.image[0];
                 const keyId = `${ArrayOfObjects._id}`;
 
                 return (
@@ -77,7 +77,7 @@ const PopularProperty = () => {
                               <button value={ArrayOfObjects._id} disabled>
                                 {ArrayOfObjects.likes &&
                                 ArrayOfObjects.likes.some(
-                                  (objectId) => objectId == user_id
+                                  (objectId) => objectId === user_id
                                 ) ? (
                                   <i
                                     className="fa-solid fa-heart"

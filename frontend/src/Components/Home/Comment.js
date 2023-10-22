@@ -49,7 +49,7 @@ const Comment = () => {
       myCommentData.push([data1?.image, data1?.username, data[i].comment, data[i].uid, data[i]._id]);
 
     }
-    console.log(myCommentData);
+    // console.log(myCommentData);
     setComment(myCommentData);
     // console.log(comment);
   }

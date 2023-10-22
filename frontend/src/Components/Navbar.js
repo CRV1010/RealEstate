@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  // console.log(user);
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
@@ -42,7 +42,7 @@ const Navbar = () => {
             <span>
               {" "}
               {(() => {
-                console.log("uid", user?._id);
+                // console.log("uid", user?._id);
                 if (user?._id === "650b0d9532d958c9727bea89") {
                   console.log("Admin side");
                   return (
@@ -68,7 +68,7 @@ const Navbar = () => {
                 Profile
               </Link>
               {(() => {
-                console.log("uid", user?._id);
+                // console.log("uid", user?._id);
                 if (user?._id === "650b0d9532d958c9727bea89") {
                   console.log("chats admin");
                   return (
