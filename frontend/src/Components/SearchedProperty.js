@@ -34,8 +34,8 @@ export default function () {
     var rtype = Data.type;
     rooms = parseInt(rtype.substring(0, 1));
     var pri = localStorage.getItem("Budget");
-    price = parseInt(pri.substring(10));
-    // console.log(rooms,price);
+    let x = pri.indexOf("-");
+    price = parseInt(pri.substring(x + 1));
   } else {
     Data = JSON.parse(localStorage.getItem("RentCombinedData"));
     State = Data.rentState;
@@ -45,9 +45,8 @@ export default function () {
     rtype = Data.rentType;
     rooms = parseInt(rtype.substring(0, 1));
     pri = localStorage.getItem("RentBudget");
-    price = parseInt(pri.substring(7));
-    console.log(rooms, price);
-    // console.log("rent");
+    let x = pri.indexOf('-')
+    price = parseInt(pri.substring(x+1));
   }
 
   useEffect(() => {
