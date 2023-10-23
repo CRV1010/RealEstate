@@ -32,6 +32,7 @@ const Header = (props) => {
     setSelectedPropertyType,
     selectedHouseType,
     setSelectedHouseType,
+    setStateCityPincode,
     setSave,
     setReset,
   } = props;
@@ -67,7 +68,7 @@ const Header = (props) => {
     fetch(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(JSON.parse(result));
+        // console.log(JSON.parse(result));
         setListPlace(JSON.parse(result));
       })
       .catch((err) => console.log("err:", err));
@@ -150,6 +151,7 @@ const Header = (props) => {
                     className="w-full h-full font-medium md:pl-2 focus:outline-none"
                     value={searchText}
                     onChange={(e) => {
+                      setStateCityPincode(e.target.value);
                       setSearchText(e.target.value);
                     }}
                     onKeyDown={handleEnterKeyPress}
