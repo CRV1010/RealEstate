@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Flex } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import Header from "./SearchMap/Header";
@@ -23,6 +23,8 @@ const SearchMap = () => {
 
   const [filteredProperty, setFilteredProperty] = useState([]);
 
+  const [stateCityPincode, setStateCityPincode] = useState("");
+  console.log(stateCityPincode);
   const [propertyFor, setPropertyFor] = useState("");
   const [price, setPrice] = useState([0, 0]);
   const [propertyType, setPropertyType] = useState("");
@@ -36,8 +38,9 @@ const SearchMap = () => {
   const [selectedHouseType, setSelectedHouseType] = useState("House Type");
 
   const [database, setDatabase] = useState([]);
+  console.log(database);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [showFilteredProperties, setShowFilteredProperties] = useState(false);
 
@@ -75,6 +78,9 @@ const SearchMap = () => {
   useEffect(() => {
     const filteredData = database.filter(
       (data) =>
+        (data.State === stateCityPincode ||
+          data.City === stateCityPincode ||
+          data.pincode === Number.parseInt(stateCityPincode)) &&
         (propertyFor === "" || data.propertyFor === propertyFor) &&
         (propertyType === "" || data.type === propertyType) &&
         (houseType === "" || data.rooms === houseType) &&
@@ -83,7 +89,7 @@ const SearchMap = () => {
     );
 
     setFilteredProperty(filteredData);
-  }, [propertyFor, propertyType, houseType, price, database]);
+  }, [stateCityPincode, propertyFor, propertyType, houseType, price, database]);
 
   // Fetch data when the component mounts
   useEffect(() => {
@@ -113,53 +119,59 @@ const SearchMap = () => {
   // }, [navigate]);
 
   return (
-    <Flex
-      backgroundColor={"lightblue"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      width={"99vw"}
-      height={"100vh"}
-      maxWidth={"100vw"}
-      maxHeight={"100vh"}
-      position={"relative"}
-    >
-      <Header
-        coordinates={coordinates}
-        setCoordinates={setCoordinates}
-        propertyType={propertyType}
-        setPropertyType={setPropertyType}
-        price={price}
-        setPrice={setPrice}
-        propertyFor={propertyFor}
-        setPropertyFor={setPropertyFor}
-        houseType={houseType}
-        setHouseType={setHouseType}
-        selectedPropertyFor={selectedPropertyFor}
-        setSelectedPropertyFor={setSelectedPropertyFor}
-        selectedPrice={selectedPrice}
-        setSelectedPrice={setSelectedPrice}
-        selectedPropertyType={selectedPropertyType}
-        setSelectedPropertyType={setSelectedPropertyType}
-        selectedHouseType={selectedHouseType}
-        setSelectedHouseType={setSelectedHouseType}
-        setSave={setSave}
-        setReset={setReset}
-      />
+    <>
+      <Flex
+        backgroundColor={"lightblue"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        width={"99vw"}
+        height={"100vh"}
+        maxWidth={"100vw"}
+        maxHeight={"100vh"}
+        position={"relative"}
+      >
+        <Header
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+          propertyType={propertyType}
+          setPropertyType={setPropertyType}
+          price={price}
+          setPrice={setPrice}
+          propertyFor={propertyFor}
+          setPropertyFor={setPropertyFor}
+          houseType={houseType}
+          setHouseType={setHouseType}
+          selectedPropertyFor={selectedPropertyFor}
+          setSelectedPropertyFor={setSelectedPropertyFor}
+          selectedPrice={selectedPrice}
+          setSelectedPrice={setSelectedPrice}
+          selectedPropertyType={selectedPropertyType}
+          setSelectedPropertyType={setSelectedPropertyType}
+          selectedHouseType={selectedHouseType}
+          setSelectedHouseType={setSelectedHouseType}
+          setStateCityPincode={setStateCityPincode}
+          setSave={setSave}
+          setReset={setReset}
+        />
 
-      <PropertyList
-        database={database}
-        showFilteredProperties={showFilteredProperties}
-        filteredProperty={filteredProperty}
-        setSelectedProperty={setSelectedProperty}
-      />
+        <PropertyList
+          database={database}
+          showFilteredProperties={showFilteredProperties}
+          filteredProperty={filteredProperty}
+          setSelectedProperty={setSelectedProperty}
+        />
 
-      <Map
-        database={filtersApplied ? filteredProperty : database}
-        coordinates={coordinates}
-        setCoordinates={setCoordinates}
-        selectedProperty={selectedProperty}
-      />
-    </Flex>
+        <Map
+          database={filtersApplied ? filteredProperty : database}
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+          selectedProperty={selectedProperty}
+        />
+      </Flex>
+      <br />
+      <br />
+      <br />
+    </>
   );
 };
 
