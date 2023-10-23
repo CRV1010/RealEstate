@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Flex,
@@ -72,6 +72,8 @@ const Header = (props) => {
       })
       .catch((err) => console.log("err:", err));
   };
+
+  const searchInputRef = useRef(null);
 
   const handleEnterKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -151,11 +153,12 @@ const Header = (props) => {
                       setSearchText(e.target.value);
                     }}
                     onKeyDown={handleEnterKeyPress}
+                    ref={searchInputRef}
                   />
                   <Button
                     className="w-1/4 md:w-1/5 p-4 m-0 h-full bg-blue-800 flex justify-center items-center rounded-2xl text-white font-medium ease-in-out"
                     onClick={buttonClick}
-                    onKeyDown={handleEnterKeyPress}
+                    // onKeyDown={handleEnterKeyPress}
                   >
                     Search
                   </Button>
