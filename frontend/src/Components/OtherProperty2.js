@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./explore.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import "./Profile.css";
 
 export default function () {
@@ -66,10 +68,29 @@ export default function () {
       }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     var data = await result.json();
-    setdatabase(data);
+    if (!data) {
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      setdatabase(data);
+    }
   }
 //   const nextPage = async () => {
 //     navigate("/otherproperty2");
@@ -139,6 +160,18 @@ export default function () {
           )}
         </ul>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       {/* <div className="text-center">
         <button
           onClick={nextPage}

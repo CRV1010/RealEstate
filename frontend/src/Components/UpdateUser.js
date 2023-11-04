@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateUser = () => {
   const params = useParams();
@@ -53,17 +55,38 @@ const UpdateUser = () => {
         }),
         headers: {
           "Content-Type": "application/json",
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
 
       data = await data.json();
-      console.log(data);
-      if (data.token) {
-        localStorage.setItem("user", JSON.stringify(data.result));
-        localStorage.setItem("token", JSON.stringify(data.token));
-        window.location.href = "/profile";
-        // navigate("/profile");
+      if(!data){
+         toast.error("Your Token has expired... login again", {
+           position: "top-right",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           rtl: false,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+           theme: "light",
+         });
+         setTimeout(() => {
+           localStorage.clear();
+           navigate("/login");
+         }, 7000);
       }
+      else{
+        console.log(data);
+        if (data.token) {
+          localStorage.setItem("user", JSON.stringify(data.result));
+          localStorage.setItem("token", JSON.stringify(data.token));
+          window.location.href = "/profile";
+          // navigate("/profile");
+        }
+      }
+      
     } else {
       alert("You can't keep an field empty");
     }
@@ -194,6 +217,18 @@ const UpdateUser = () => {
           </form>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </section>
   );
 };

@@ -24,10 +24,30 @@ export default function (props) {
       body: JSON.stringify({ _id }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     var data = await result.json();
+    if (!data) {
+       console.log("token expire");
+       toast.error("Your Token has expired... login again", {
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         rtl: false,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
+       setTimeout(() => {
+         localStorage.clear();
+         navigate("/login");
+       }, 7000);
+     } else {
     setUserDetails(data);
+     }
     // console.log("ud",UserDetails);
   }
 
@@ -37,10 +57,30 @@ export default function (props) {
       body: JSON.stringify({ sellerId: _id }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     var data = await result.json();
+    if (!data) {
+      //  console.log("token expire");
+      //  toast.error("Your Token has expired... login again", {
+      //    position: "top-right",
+      //    autoClose: 5000,
+      //    hideProgressBar: false,
+      //    closeOnClick: true,
+      //    rtl: false,
+      //    pauseOnHover: true,
+      //    draggable: true,
+      //    progress: undefined,
+      //    theme: "light",
+      //  });
+       setTimeout(() => {
+         localStorage.clear();
+         navigate("/login");
+       }, 7000);
+     } else {
     setPropertyDetails(data);
+     }
     // console.log(data);
   }
 
@@ -58,15 +98,33 @@ export default function (props) {
     });
     let data = await fetch(`http://localhost:5000/property/${id}`, {
       method: "delete",
-      // headers: {
-      //   authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-      // }
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      }
     });
     data = await data.json();
     if (data) {
       // alert("Record Deleted")
       getPropertyData();
     }
+    else{
+       console.log("token expire");
+       toast.error("Your Token has expired... login again", {
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         rtl: false,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
+       setTimeout(() => {
+         localStorage.clear();
+         navigate("/login");
+       }, 7000);
+     } 
   };
 
   const getNewPro = (keyId) => {
@@ -79,15 +137,33 @@ export default function (props) {
       body: JSON.stringify({ _id: id }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     var data = await result.json();
-    let pd = data[0];
-
-    console.log("data", data);
-    console.log("md", pd.modified);
-
-    if (pd.modified == 1) {
+    if (!data) {
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    }else{
+      let pd = data[0];
+      
+      console.log("data", data);
+      console.log("md", pd.modified);
+      
+      if (pd.modified == 1) {
       toast.warning("You have Reached max limit of Updation...", {
         position: "top-right",
         autoClose: 5000,
@@ -103,6 +179,7 @@ export default function (props) {
       console.log("chid", id);
       navigate(`/updateProperty1/${id}`);
     }
+  }
   };
 
   //add like

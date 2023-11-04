@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import Swiper from 'swiper';
@@ -7,14 +7,12 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import '../Home/swiper.css';
 
-
-
 const Comment = () => {
   const [comment, setComment] = useState([])
   const [modal1Open, setModal1Open] = useState(false);
   let user = JSON.parse(localStorage.getItem("user"))
   const [userName, setUserName] = useState(user?.username);
-
+  const navigate = useNavigate();
   const [userComment, setUserComment] = useState("");
 
   const openModal = (propertyFor) => {
@@ -37,16 +35,37 @@ const Comment = () => {
     var myCommentData = [];
     for (let i = 0; i < data.length; i++) {
       // console.log(data[i].uid);
-      const result1 = await fetch("http://localhost:5000/getUserDetails", {
+      const result1 = await fetch("http://localhost:5000/getUserDetail", {
         method: "post",
         body: JSON.stringify({ _id: data[i].uid }),
         headers: {
           "Content-Type": "application/json",
+          // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
       var data1 = await result1.json();
       // console.log(data1);
-      myCommentData.push([data1?.image, data1?.username, data[i].comment, data[i].uid, data[i]._id]);
+      if(!data1){
+        console.log("token expire");
+        // toast.error("Your Token has expired... login again", {
+        //   position: "top-right",
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   rtl: false,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
+        // setTimeout(() => {
+        //   localStorage.clear();
+        //   navigate("/login");
+        // }, 7000);
+      }
+      else{
+        myCommentData.push([data1?.image, data1?.username, data[i].comment, data[i].uid, data[i]._id]);
+      }
 
     }
     // console.log(myCommentData);

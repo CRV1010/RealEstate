@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import avtar from "../Images/avtar.png";
 import { io } from "socket.io-client";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ChatAdmin = () => {
   const navigate = useNavigate();
@@ -24,6 +26,9 @@ const ChatAdmin = () => {
           }),
           headers: {
             "Content-Type": "application/json",
+            authorization: `bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
           },
         });
         let result = await res.json();
@@ -43,10 +48,47 @@ const ChatAdmin = () => {
             }),
             headers: {
               "Content-Type": "application/json",
+              authorization: `bearer ${JSON.parse(
+                localStorage.getItem("token")
+              )}`,
             },
           });
           const resData = await res.json();
+          if(!resData){
+            toast.error("Your Token has expired... login again", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              rtl: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setTimeout(() => {
+              localStorage.clear();
+              navigate("/login");
+            }, 7000);
+          }
         }
+        // else{
+        //   toast.error("Your Token has expired... login again", {
+        //     position: "top-right",
+        //     autoClose: 5000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     rtl: false,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     progress: undefined,
+        //     theme: "light",
+        //   });
+        //   setTimeout(() => {
+        //     localStorage.clear();
+        //     navigate("/login");
+        //   }, 7000);
+        // }
       }
     }
     return () => {};
@@ -102,22 +144,34 @@ const ChatAdmin = () => {
     });
     return () => {};
   }, [socket]);
+
   const fetchConversations = async () => {
     const userId = JSON.parse(localStorage.getItem("user"));
     // const uid = JSON.parse(userId._id)
     console.log("my Uid",userId._id);
-    const res = await fetch(`http://localhost:5000/conversations/${userId?._id}`,
+    const res = await fetch(
+      `http://localhost:5000/conversations/${userId?._id}`,
       {
         method: "GET",
         header: {
           "Content-Type": "application/json",
+          // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       }
     );
     const resData = await res.json();
     // console.log(resData)
-    setConversations(resData);
+    // if(!resData){
+    //    setTimeout(() => {
+    //      localStorage.clear();
+    //      navigate("/login");
+    //    }, 3000);
+    // }
+    // else{
+      setConversations(resData);
+    // }
   };
+
   useEffect(() => {
     fetchConversations();
   }, []);
@@ -131,14 +185,25 @@ const ChatAdmin = () => {
         method: "GET",
         header: {
           "Content-Type": "application/json",
+          // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       }
     );
     const resData = await res.json();
+    // if(!resData){
+    //   setTimeout(() => {
+    //     localStorage.clear();
+    //     navigate("/login");
+    //   }, 3000);
+    // }
+    // else{
+      
     let rid = users?.id;
     setReceiver(rid);
 
     setMessages({ messages: resData, receiver: users });
+    // }
+      
   };
 
   const sendMessage = async (e) => {
@@ -164,6 +229,7 @@ const ChatAdmin = () => {
       }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     const resData = await res.json();
@@ -171,6 +237,23 @@ const ChatAdmin = () => {
     if (resData) {
       setMsg("");
       console.log(resData);
+    }
+    else{
+        toast.error("Your Token has expired... login again", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 3000);
     }
   };
 
@@ -349,6 +432,18 @@ const ChatAdmin = () => {
           )}
         </div>
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
     </div>
   );
 };

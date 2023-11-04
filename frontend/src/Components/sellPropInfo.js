@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useNavigationType } from "react-router-dom";
 import './sellPropInfo.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -53,27 +53,53 @@ export default function () {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
+                authorization: `bearer ${JSON.parse(
+              localStorage.getItem("token"))}`
             }
         })
 
         var data = await result.json();
-        var id = localStorage.getItem('pressCard');
+        if(!data){
+          toast.error("Your Token has expired... login again", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => {
+            localStorage.clear();
+            navigate("/login");
+          }, 7000);
+        }
+        else{
+              var id = localStorage.getItem("pressCard");
 
-        var temp1 = data.filter(item => item?._id === id)
-        console.log("curr",temp1[0]);
-        setDatabase(temp1[0])
-        setIsPremium(temp1[0].premium)
-    
+              var temp1 = data.filter((item) => item?._id === id);
+              console.log("curr", temp1[0]);
+              setDatabase(temp1[0]);
+              setIsPremium(temp1[0].premium);
 
-        var zone = temp1[0].zone;
-        var temp2 = data.filter(item => item.zone === zone && item?._id !== id)
+              var zone = temp1[0].zone;
+              var temp2 = data.filter(
+                (item) => item.zone === zone && item?._id !== id
+              );
 
-        setZoneData(temp2);
+              setZoneData(temp2);
 
-        var budget = temp1[0].price;
-        var temp3 = data.filter(item => item.price >= budget - 100000 && item.price <= budget + 100000 && item._id !== id)
-        setBudgetData(temp3);
-
+              var budget = temp1[0].price;
+              var temp3 = data.filter(
+                (item) =>
+                  item.price >= budget - 100000 &&
+                  item.price <= budget + 100000 &&
+                  item._id !== id
+              );
+              setBudgetData(temp3);
+        }
         
     }
 
@@ -84,20 +110,44 @@ export default function () {
 
     async function getSeller() {
         const result = await fetch("http://localhost:5000/get-seller", {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        })
-
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
+          },
+        });
         var data = await result.json();
-        console.log(data)
-        var temp1 = data.filter(item => item._id === sid)
-        setSeller(temp1[0].username)
+        console.log("token",data);
+        if(!data){
+          console.log("Something went Wrong");
+          toast.error("Your Token has expired... login again", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(()=>{  
+            localStorage.clear();
+            navigate("/login");
+          },7000)
+        }
+        else{
+        console.log(data);
+        var temp1 = data.filter((item) => item._id === sid);
+        setSeller(temp1[0].username);
         setPhone(temp1[0].phone);
         setEmail(temp1[0].email);
         setDOB(temp1[0].dob);
         setPhoto(temp1[0]);
+        }
+       
     }
 
     function fallbackImage() {

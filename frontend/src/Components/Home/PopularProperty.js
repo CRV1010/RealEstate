@@ -1,21 +1,47 @@
 import React,{useState,useEffect} from "react";
-import { Link } from "react-router-dom";
+import {useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PopularProperty = () => {
     const [database, setDatabase] = useState([])
     var user = JSON.parse(localStorage.getItem("user"));
     const user_id = user?._id;
+    const navigate = useNavigate()
     const advertisment = async () =>{
-        const result = await fetch(`http://localhost:5000/getPropertyDetails`, {
-        method: "post",
-        body: JSON.stringify({ premium : 1 }),
-        headers: {
+        const result = await fetch(`http://localhost:5000/getPropertyDetail`, {
+          method: "post",
+          body: JSON.stringify({ premium: 1 }),
+          headers: {
             "Content-Type": "application/json",
-        },
+            // authorization: `bearer ${JSON.parse(
+            //   localStorage.getItem("token")
+            // )}`,
+          },
         });
         var data = await result.json();
+        console.log("ad",data);
+        if (!data && user) {
+          toast.error("Your Token has expired... login again", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => {
+            localStorage.clear();
+            navigate("/login");
+          }, 7000);
+        }
+        else{
+          setDatabase(data);
+        }
         // console.log("pre property",data);
-        setDatabase(data);
     }
 
     useEffect(()=>{
@@ -73,7 +99,6 @@ const PopularProperty = () => {
                             <strong> Property Type: </strong>
                             {ArrayOfObjects.type}{" "}
                             <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                              
                               <button value={ArrayOfObjects._id} disabled>
                                 {ArrayOfObjects.likes &&
                                 ArrayOfObjects.likes.some(
@@ -93,7 +118,7 @@ const PopularProperty = () => {
                                 <span
                                   style={{
                                     color: "#b4fee7",
-                                    "fontWeight": "600",
+                                    fontWeight: "600",
                                   }}
                                 >
                                   {ArrayOfObjects.likes &&
@@ -112,10 +137,20 @@ const PopularProperty = () => {
             ) : (
               <div>No Property</div>
             )}
-            
-            
           </div>
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </section>
     );
 };

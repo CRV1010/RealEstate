@@ -180,6 +180,7 @@ const Login = () => {
                         body: JSON.stringify({
                           username: name,
                           email: gmail,
+                          image: "avtar.png",
                         }),
                         headers: {
                           "Content-Type": "application/json",

@@ -56,7 +56,7 @@ export default function () {
     });
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     console.log("name");
 
     var imageNames = prodetail.image;
@@ -166,6 +166,7 @@ export default function () {
         }),
         headers: {
           "Content-Type": "application/json",
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       }
     );
@@ -182,11 +183,28 @@ export default function () {
         progress: undefined,
         theme: "light",
       });
+       console.log("Data updated Successfully...");
+       setImages([]);
+       setImageURLs([]);
+       window.location.href = "/profile";
     }
-    console.log("Data updated Successfully...");
-    setImages([]);
-    setImageURLs([]);
-    window.location.href = "/profile";
+   else{
+    toast.error("Your Token has expired... login again", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      rtl: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    setTimeout(() => {
+      localStorage.clear();
+      navigate("/login");
+    }, 7000);
+   }
     // navigate("/profile");
   };
 

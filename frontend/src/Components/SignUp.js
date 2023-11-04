@@ -223,6 +223,7 @@ const SignUp = () => {
                 <GoogleLogin
                   onSuccess={async (credentialResponse) => {
                     const decode = jwt_decode(credentialResponse.credential);
+                    console.log("gl",decode);
                     let name = decode.name;
                     let gmail = decode.email;
                     console.log(name, gmail);
@@ -249,6 +250,7 @@ const SignUp = () => {
                         body: JSON.stringify({
                           username: name,
                           email: gmail,
+                          image: 'avtar.png'
                         }),
                         headers: {
                           "Content-Type": "application/json",

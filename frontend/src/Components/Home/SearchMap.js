@@ -95,7 +95,7 @@ const SearchMap = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/get-data");
+        const response = await fetch("http://localhost:5000/getData");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

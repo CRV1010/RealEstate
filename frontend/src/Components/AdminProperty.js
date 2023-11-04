@@ -58,9 +58,9 @@ const AdminProperty = () => {
            console.log("delete Id",id);
          let dataprop = await fetch(`http://localhost:5000/property/${id}`, {
            method: "delete",
-           // headers: {
-           //   authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-           // }
+           headers: {
+             authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+           }
          });
          dataprop = await dataprop.json();
          if (dataprop) {

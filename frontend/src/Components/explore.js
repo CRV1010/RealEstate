@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./explore.css";
 
 export default function () {
@@ -24,10 +26,33 @@ export default function () {
       method: "get",
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     var data = await result.json();
-    setdatabase(data);
+    console.log(data);
+    if(!data){
+      console.log("token expire")
+          toast.error("Your Token has expired... login again", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => {
+            localStorage.clear();
+            navigate("/login");
+          }, 7000);
+        }
+        else{
+          console.log('in data')
+            setdatabase(data);
+        }
   }
 
   const searchHandle = async (event) => {
@@ -36,13 +61,31 @@ export default function () {
       let data = await fetch(`http://localhost:5000/search/${key}`, {
         headers: {
           mode: "no-cors",
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
+      data = await data.json();
       if (data) {
-        data = await data.json();
+     
         setdatabase(data);
       } else {
         console.log("I dont no ke");
+        console.log("token expire");
+        toast.error("Your Token has expired... login again", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setTimeout(() => {
+          localStorage.clear();
+          navigate("/login");
+        }, 7000);
       }
     } else {
       getData();
@@ -65,7 +108,7 @@ export default function () {
             />
           </div>
           <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Button
+            Search
           </button>
         </div>
         <ul className="cardsExplore">
@@ -166,6 +209,18 @@ export default function () {
             : ""}
         </ul>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

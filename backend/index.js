@@ -193,10 +193,12 @@ app.post("/login", async (req, res) => {
         res.send({ result: "Wrong Password" });
       }
       result.password = undefined;
-      jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+      jwt.sign({ result }, jwtKey, { expiresIn: 120 }, (err, token) => {
         if (err) {
+          console.log("Token Expired");
           res.send("Token Expired or something went wrong");
         } else {
+          console.log("Token given");
           res.send({ result, token });
         }
       });
@@ -215,7 +217,7 @@ app.post("/google-check", async (req, res) => {
   if (result) {
     // console.log("hi");
     result = result.toObject();
-    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+    jwt.sign({ result }, jwtKey, { expiresIn: 120 }, (err, token) => {
       if (err) {
         res.send("Token Expired or something went wrong");
       } else {
@@ -231,7 +233,7 @@ app.post("/google-login", async (req, res) => {
   let data = new user(req.body);
   let result = await data.save();
   result = result.toObject();
-  jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+  jwt.sign({ result }, jwtKey, { expiresIn: 120 }, (err, token) => {
     if (err) {
       res.send("Token Expired or something went wrong");
     } else {
@@ -240,7 +242,7 @@ app.post("/google-login", async (req, res) => {
   });
 });
 
-app.post("/conversations", async (req, res) => {
+app.post("/conversations", verifyToken, async (req, res) => {
   try {
     let { senderId, receiverId } = req.body;
     console.log("ids", senderId, receiverId);
@@ -295,7 +297,7 @@ app.get("/conversations/:userId", async (req, res) => {
   }
 });
 
-app.post("/messages", async (req, res) => {
+app.post("/messages", verifyToken, async (req, res) => {
   try {
     // console.log("body:", req.body);
     const { conversationId, senderId, message, receiverId = "" } = req.body;
@@ -371,7 +373,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now();
-    cb(null,uniqueSuffix + file.originalname);
+    cb(null, uniqueSuffix + file.originalname);
   },
 });
 
@@ -399,7 +401,7 @@ app.post("/upload-imageProfile", upload.single("image"), async (req, res) => {
   res.send(image);
 });
 
-app.put("/updateUser/:id", async (req, res) => {
+app.put("/updateUser/:id",verifyToken, async (req, res) => {
   let data = await user.updateOne(
     { _id: req.params.id },
     {
@@ -421,7 +423,7 @@ app.put("/updateUser/:id", async (req, res) => {
 });
 
 //code for storing the basix text data for selling the property
-app.post("/upload-database", async (req, res) => {
+app.post("/upload-database",verifyToken, async (req, res) => {
   try {
     await Image.create({
       propertyFor: req.body.selectedValue,
@@ -446,7 +448,7 @@ app.post("/upload-database", async (req, res) => {
   }
 });
 
-app.put("/update-database/:id", async (req, res) => {
+app.put("/update-database/:id",verifyToken, async (req, res) => {
   console.log(req.params.id);
   console.log(req.body.imageName);
   let data = await Image.updateOne(
@@ -479,7 +481,17 @@ app.put("/update-database/:id", async (req, res) => {
 });
 
 //CODE FOR GETTING THE IMAGES FROM THE DATABASE
-app.get("/get-data", async (req, res) => {
+app.get("/get-data", verifyToken, async (req, res) => {
+  try {
+    Image.find({}).then((object) => {
+      res.send(object);
+    });
+  } catch (error) {
+    res.json({ staus: error });
+  }
+});
+
+app.get("/getData", async (req, res) => {
   try {
     Image.find({}).then((object) => {
       res.send(object);
@@ -490,7 +502,7 @@ app.get("/get-data", async (req, res) => {
 });
 
 //to get the user information like username , email , phone
-app.post("/getUserDetails", async (req, res) => {
+app.post("/getUserDetails", verifyToken, async (req, res) => {
   console.log(req.body);
   let result = await user.findOne(req.body);
   username = result.username;
@@ -501,19 +513,32 @@ app.post("/getUserDetails", async (req, res) => {
   res.send({ username, email, phone, dob, image });
 });
 
+app.post("/getUserDetail", async (req, res) => {
+  console.log(req.body);
+  let result = await user.findOne(req.body);
+  username = result.username;
+  email = result.email;
+  phone = result.phone;
+  dob = result.dob;
+  image = result.image;
+  res.send({ username, email, phone, dob, image });
+});
 //to get the details of user's property
-app.post("/getPropertyDetails", async (req, res) => {
+app.post("/getPropertyDetails", verifyToken, async (req, res) => {
   let propertys = await Image.find(req.body);
   res.send(propertys);
 });
-
-app.delete("/property/:id", async (req, res) => {
+app.post("/getPropertyDetail", async (req, res) => {
+  let propertys = await Image.find(req.body);
+  res.send(propertys);
+});
+app.delete("/property/:id", verifyToken, async (req, res) => {
   console.log(req.params.id, "deleteing with id");
   let data = await Image.deleteOne({ _id: req.params.id });
   res.send(data);
 });
 
-app.delete("/user-property-delete/:id", async (req, res) => {
+app.delete("/user-property-delete/:id", verifyToken, async (req, res) => {
   console.log("Deleteing property using seller Id", req.params.id);
 
   let data;
@@ -526,7 +551,7 @@ app.delete("/user-property-delete/:id", async (req, res) => {
   res.send(data);
 });
 
-app.post("/search-property", async (req, res) => {
+app.post("/search-property",verifyToken, async (req, res) => {
   try {
     const { propertyFor, type, State, City, zone, rooms, price } = req.body;
     let data = await Image.find({
@@ -548,7 +573,7 @@ app.post("/search-property", async (req, res) => {
   }
 });
 
-app.post("/search-property-two", async (req, res) => {
+app.post("/search-property-two", verifyToken, async (req, res) => {
   try {
     const { propertyFor, type, State, City, zone, rooms, price } = req.body;
     console.log(type, rooms, price);
@@ -574,7 +599,7 @@ app.post("/search-property-two", async (req, res) => {
   }
 });
 
-app.post("/search-property-three", async (req, res) => {
+app.post("/search-property-three", verifyToken, async (req, res) => {
   try {
     const { propertyFor, type, State, City, zone, rooms, price } = req.body;
     console.log(type, rooms, price);
@@ -600,7 +625,7 @@ app.post("/search-property-three", async (req, res) => {
   }
 });
 
-app.get("/search/:key", async (req, res) => {
+app.get("/search/:key", verifyToken, async (req, res) => {
   // console.log("hello");
   try {
     var regex = new RegExp(
@@ -641,22 +666,27 @@ app.delete("/commentDelete/:id", async (req, res) => {
   res.send(data);
 });
 
-app.get("/getAllUsers", async (req, res) => {
+app.delete("/delComments/:id", verifyToken, async (req, res) => {
+  let data = await comments.deleteMany({ uid: req.params.id });
+  res.send(data);
+});
+
+app.get("/getAllUsers", verifyToken, async (req, res) => {
   let result = await user.find({});
 
   result.forEach((data) => {
     data.password = undefined;
   });
-
+  console.log("admin token", result);
   res.send(result);
 });
 
-app.delete("/delete-user/:id", async (req, res) => {
+app.delete("/delete-user/:id", verifyToken, async (req, res) => {
   let data = await user.deleteOne({ _id: req.params.id });
   res.send(data);
 });
 
-app.delete("/conversations/:id", async (req, res) => {
+app.delete("/conversations/:id", verifyToken, async (req, res) => {
   // var myquery = { _id: { $in: req.params.idArr } };
   let data = await conversation.deleteOne({ _id: req.params.id });
   res.send(data);
@@ -729,9 +759,10 @@ app.put("/like", async (req, res) => {
 });
 
 // Code for fetching seller in explore details page
-app.get("/get-seller", async (req, res) => {
+app.get("/get-seller", verifyToken, async (req, res) => {
   try {
     user.find({}).then((object) => {
+      console.log("sender", object);
       res.send(object);
     });
   } catch (error) {
@@ -745,7 +776,7 @@ function verifyToken(req, res, next) {
     token = token.split(" ")[1];
     jwt.verify(token, jwtKey, (err, valid) => {
       if (err) {
-        res.send({ result: "error in token" });
+        res.send(false);
       } else {
         next();
       }

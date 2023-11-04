@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./explore.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import "./Profile.css";
 
 export default function () {
@@ -55,13 +57,40 @@ export default function () {
   async function getData() {
     const result = await fetch("http://localhost:5000/search-property-two", {
       method: "post",
-      body: JSON.stringify({ propertyFor, type, State, City, zone, rooms, price }),
+      body: JSON.stringify({
+        propertyFor,
+        type,
+        State,
+        City,
+        zone,
+        rooms,
+        price,
+      }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     var data = await result.json();
-    setdatabase(data);
+    if (!data) {
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      setdatabase(data);
+    }
   }
   const nextPage = async () => {
     navigate("/otherproperty2")
@@ -72,8 +101,8 @@ export default function () {
       <h1 id="headingExplore"> Properties you may like </h1>
       <div className="mainExplore" style={{ maxWidth: "80%" }}>
         <ul className="cardsExplore">
-          {database
-            ? database.map((ArrayOfObjects, index) => {
+          {database ? (
+            database.map((ArrayOfObjects, index) => {
               const imageNames = ArrayOfObjects.image[0];
               return (
                 <li className="cards_item_explore" key={ArrayOfObjects._id}>
@@ -85,7 +114,7 @@ export default function () {
                     </h2>
                     <div className="card_image_explore">
                       {ArrayOfObjects.image &&
-                        ArrayOfObjects.image.length > 0 ? (
+                      ArrayOfObjects.image.length > 0 ? (
                         <img
                           src={require(`../Images/${ArrayOfObjects.image[0]}`)}
                           key={ArrayOfObjects.image[0]}
@@ -105,8 +134,8 @@ export default function () {
                         </p>
                         <p>
                           {" "}
-                          <strong>Location: </strong> {ArrayOfObjects.society}
-                          , {ArrayOfObjects.zone}, {ArrayOfObjects.City},{" "}
+                          <strong>Location: </strong> {ArrayOfObjects.society},{" "}
+                          {ArrayOfObjects.zone}, {ArrayOfObjects.City},{" "}
                           {ArrayOfObjects.State}.{" "}
                         </p>
                         <p>
@@ -116,8 +145,8 @@ export default function () {
                         <br />
                         <p className="facility_explore">
                           {" "}
-                          <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
-                          BHK <br /> <strong>Land Area: </strong>{" "}
+                          <strong>Facility: </strong> {ArrayOfObjects.rooms} BHK{" "}
+                          <br /> <strong>Land Area: </strong>{" "}
                           {ArrayOfObjects.area}{" "}
                         </p>
                       </div>
@@ -126,9 +155,9 @@ export default function () {
                 </li>
               );
             })
-            : (
-              <h1>No Property Availabe with given requirements</h1>
-            )}
+          ) : (
+            <h1>No Property Availabe with given requirements</h1>
+          )}
         </ul>
       </div>
       <div className="text-center">
@@ -140,6 +169,18 @@ export default function () {
           More Properties{" "}
         </button>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

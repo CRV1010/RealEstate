@@ -99,7 +99,7 @@ export default function (props) {
     const imageName = result.data;
 
     //inserting information to database
-    const data = await fetch("http://localhost:5000/upload-database", {
+    var data = await fetch("http://localhost:5000/upload-database", {
       method: "post",
       body: JSON.stringify({
         selectedValue,
@@ -120,8 +120,29 @@ export default function (props) {
       }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
+    data = await data.json();
+    if (!data) {
+       console.log("token expire");
+       toast.error("Your Token has expired... login again", {
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         rtl: false,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
+       setTimeout(() => {
+         localStorage.clear();
+         navigate("/login");
+       }, 7000);
+     } 
+     else {
     console.log("Data Inserted Successfully...");
     toast.success("Your Property is added for Sell", {
       position: "top-right",
@@ -135,6 +156,7 @@ export default function (props) {
       theme: "light",
     });
     window.location.href = "/explore";
+    }
     // navigate("/explore")
   };
 

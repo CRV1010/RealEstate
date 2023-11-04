@@ -12,6 +12,9 @@ const AdminUsers = () => {
            method: "get",
            headers: {
              "Content-Type": "application/json",
+             authorization: `bearer ${JSON.parse(
+               localStorage.getItem("token")
+             )}`,
            },
          });
          var data = await result.json();
@@ -35,15 +38,15 @@ const AdminUsers = () => {
         });
         // Delete Conversations
 
-        const res = await fetch(
-          `http://localhost:5000/conversations/${id}`,
-          {
-            method: "GET",
-            header: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(`http://localhost:5000/conversations/${id}`, {
+          method: "GET",
+          header: {
+            "Content-Type": "application/json",
+            authorization: `bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
+          },
+        });
         const resData = await res.json();
         console.log(resData);
         resData.map(async (conversationId)=>{
@@ -52,9 +55,9 @@ const AdminUsers = () => {
               `http://localhost:5000/conversations/${conversationId?.conversationId}`,
               {
                 method: "delete",
-                // headers: {
-                //   authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-                // }
+                headers: {
+                  authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                }
               }
             );
         })
@@ -66,9 +69,9 @@ const AdminUsers = () => {
           `http://localhost:5000/user-property-delete/${id}`,
           {
             method: "delete",
-            // headers: {
-            //   authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-            // }
+            headers: {
+              authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+            }
           }
         );
         data = await data.json();
@@ -77,9 +80,9 @@ const AdminUsers = () => {
         // deleting user
         let deluser = await fetch(`http://localhost:5000/delete-user/${id}`, {
           method: "delete",
-          // headers: {
-          //   authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-          // }
+          headers: {
+            authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+          }
         });
         deluser = await deluser.json();
         console.log(deluser);

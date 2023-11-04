@@ -20,7 +20,7 @@ const SellBuyRent = () => {
   } = useForm();
 
   async function getData() {
-    const result = await fetch("http://localhost:5000/get-data", {
+    const result = await fetch("http://localhost:5000/getData", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
