@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 
 const ChangePassword = () => {
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [show, setShow] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     register,
@@ -39,14 +41,33 @@ const ChangePassword = () => {
           alert("Password has changed succesfully click ok to login");
           navigate("/login");
         } else {
-          alert("Changing password is failed");
+          toast.error("Oops! Changing password is failed...", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       } else {
-        alert("Password don't match");
+        toast.warning("Attention! Password don't match...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
-    }
-    else {
-      console.log("Password sholud be filled")
+    } else {
+      console.log("Password sholud be filled");
     }
   };
 
@@ -82,14 +103,18 @@ const ChangePassword = () => {
                       },
                       maxLength: {
                         value: 10,
-                        message: "Password cannot exceed more than 10 characters",
+                        message:
+                          "Password cannot exceed more than 10 characters",
                       },
                     })}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
                   />
-                  <div className="mr-3 mt-1 toggle-button" onClick={() => setShow(!show)}>
+                  <div
+                    className="mr-3 mt-1 toggle-button"
+                    onClick={() => setShow(!show)}
+                  >
                     {show ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                   </div>
                 </div>
@@ -118,25 +143,44 @@ const ChangePassword = () => {
                       },
                       maxLength: {
                         value: 10,
-                        message: "Password cannot exceed more than 10 characters",
+                        message:
+                          "Password cannot exceed more than 10 characters",
                       },
                     })}
                     onChange={(e) => {
                       setConfirmPassword(e.target.value);
                     }}
                   />
-                  <div className="mr-3 mt-1 toggle-button" onClick={() => setVisible(!visible)}>
+                  <div
+                    className="mr-3 mt-1 toggle-button"
+                    onClick={() => setVisible(!visible)}
+                  >
                     {visible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                   </div>
                 </div>
-                <p class="text-sm text-red-500">{errors.confirmPassword?.message}</p>
+                <p class="text-sm text-red-500">
+                  {errors.confirmPassword?.message}
+                </p>
               </div>
               <button
                 className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              // onClick={clickHandler}
+                // onClick={clickHandler}
               >
                 Confirm Password
               </button>
+
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
             </form>
           </div>
         </div>

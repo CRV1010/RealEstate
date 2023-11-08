@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import jwt_decode from "jwt-decode";
 import { useForm } from "react-hook-form";
 
@@ -43,11 +45,20 @@ const Login = () => {
         navigate("/home");
         console.log(data);
       } else {
-        alert("Please provide correct details");
+        toast.warning("Attention! Please provide correct information...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
-    }
-    else {
-      alert("can't left field empty")
+    } else {
+      alert("can't left field empty");
     }
   };
 
@@ -60,7 +71,10 @@ const Login = () => {
           </h2>
           <form onSubmit={handleSubmit(clickHandler)}>
             <div className="relative mb-4">
-              <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="email"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Email :<span className="red text-lg">*</span>
               </label>
               <input
@@ -85,7 +99,10 @@ const Login = () => {
             </div>
 
             <div className="relative mb-4">
-              <label htmlFor="password" className="flex leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="password"
+                className="flex leading-7 text-sm text-gray-600"
+              >
                 Password :<span className="red text-lg">*</span>
               </label>
               <div className="flex w-full bg-white rounded border border-gray-300 hover:border-indigo-500 hover:ring-2 hover:ring-indigo-200 outline-none px-3 transition-colors duration-200">
@@ -111,7 +128,10 @@ const Login = () => {
                     setPassword(e.target.value);
                   }}
                 />
-                <div className="mr-3 mt-1 toggle-button" onClick={() => setVisible(!visible)}>
+                <div
+                  className="mr-3 mt-1 toggle-button"
+                  onClick={() => setVisible(!visible)}
+                >
                   {visible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                 </div>
               </div>
@@ -125,13 +145,11 @@ const Login = () => {
             </p>
             <button
               className="text-white bg-indigo-500 border-0 py-2 mt-4 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            // onClick={clickHandler}
+              // onClick={clickHandler}
             >
               Login
             </button>
           </form>
-
-
 
           <p className="mt-3 inline-flex items-center justify-center">
             {" "}
@@ -149,7 +167,6 @@ const Login = () => {
 
           <div className="mx-auto text-lg">
             <GoogleOAuthProvider clientId="851512856123-qb0a10uhcbtoemkhq7ma6i34lr79s0r4.apps.googleusercontent.com">
-
               <div className="mx-auto text-lg">
                 <GoogleLogin
                   onSuccess={async (credentialResponse) => {
@@ -204,6 +221,19 @@ const Login = () => {
               </div>
             </GoogleOAuthProvider>
           </div>
+
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </div>
       </div>
     </section>

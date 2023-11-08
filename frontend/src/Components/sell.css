@@ -1,4 +1,4 @@
-.red{
+.red {
     content: '*';
     color: red
 }
@@ -7,7 +7,12 @@
     @apply min-h-full bg-cover;
 }
 
-#mainDiv, #sellForm, .sellField, #type, #rooms, .sellText {
+#mainDiv,
+#sellForm,
+.sellField,
+#type,
+#rooms,
+.sellText {
     @apply text-base text-[#eee] m-0 p-0;
     outline: none;
     font-family: Roboto, Arial, sans-serif;
@@ -15,9 +20,11 @@
 
 #mainDiv {
     background-image: url("./../Images/Background_sell.jpg");
+    opacity: 25
 }
 
-#leftHeading, #rightHeading {
+#leftHeading,
+#rightHeading {
     @apply uppercase font-black text-[1.7em];
 }
 
@@ -42,7 +49,8 @@
     background: rgba(0, 0, 0, 0.6);
 }
 
-.left-part, #sellForm {
+.left-part,
+#sellForm {
     @apply p-[25px];
 }
 
@@ -62,7 +70,9 @@
     @apply flex flex-col text-xl;
 }
 
-.sellField, #type, #rooms {
+.sellField,
+#type,
+#rooms {
     @apply ml-[5px] mr-[20px] mt-[20px] mb-[20px] p-[5px] border-b-[#eee] border-[none] border-b border-solid;
     background: transparent;
 }
@@ -71,16 +81,19 @@
     @apply text-[#eee];
 }
 
-#propOpt:focus, #room:focus {
+#propOpt:focus,
+#room:focus {
     @apply border-[none];
 }
 
-#propOpt, #room {
+#propOpt,
+#room {
     @apply border-[none] p-[3px];
     background: black;
 }
 
-.btn-item, #btn {
+.btn-item,
+#btn {
     @apply no-underline text-xl font-medium text-white mt-5 px-5 py-2.5 rounded-[5px] border-[none];
     background: #26a9e0;
 }
@@ -89,15 +102,19 @@
     @apply no-underline text-xl font-medium text-white mt-5 px-5 py-2.5 rounded-[5px] border-[none];
 }
 
-.btn-item, #saveBtn {
+.btn-item,
+#saveBtn {
     @apply inline-block mt-5 mb-0;
 }
 
-#btn, #saveBtn {
+#btn,
+#saveBtn {
     @apply w-full;
 }
 
-.con:hover, .btn-item:hover, #saveBtn:hover {
+.con:hover,
+.btn-item:hover,
+#saveBtn:hover {
     @apply bg-[#70ccb2] transition-all duration-[0.4s] ease-[ease-in];
 }
 
@@ -110,7 +127,8 @@
         @apply flex-row h-[calc(100%_-_50px)];
     }
 
-    .left-part, #sellForm {
+    .left-part,
+    #sellForm {
         @apply flex-1 h-auto;
     }
 }

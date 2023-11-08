@@ -24,7 +24,7 @@ const SearchMap = () => {
   const [filteredProperty, setFilteredProperty] = useState([]);
 
   const [stateCityPincode, setStateCityPincode] = useState("");
-  console.log(stateCityPincode);
+  // console.log(stateCityPincode);
   const [propertyFor, setPropertyFor] = useState("");
   const [price, setPrice] = useState([0, 0]);
   const [propertyType, setPropertyType] = useState("");
@@ -38,7 +38,7 @@ const SearchMap = () => {
   const [selectedHouseType, setSelectedHouseType] = useState("House Type");
 
   const [database, setDatabase] = useState([]);
-  console.log(database);
+  // console.log(database);
 
   // const navigate = useNavigate();
 
@@ -76,17 +76,22 @@ const SearchMap = () => {
   };
 
   useEffect(() => {
-    const filteredData = database.filter(
-      (data) =>
-        (data.State === stateCityPincode ||
-          data.City === stateCityPincode ||
+    const filteredData = database.filter((data) => {
+      const lowercaseState = data.State.toLowerCase();
+      const lowercaseCity = data.City.toLowerCase();
+
+      return (
+        (stateCityPincode === "" ||
+          lowercaseState === stateCityPincode.toLowerCase() ||
+          lowercaseCity === stateCityPincode.toLowerCase() ||
           data.pincode === Number.parseInt(stateCityPincode)) &&
         (propertyFor === "" || data.propertyFor === propertyFor) &&
         (propertyType === "" || data.type === propertyType) &&
         (houseType === "" || data.rooms === houseType) &&
         (price[0] === 0 || data.price >= price[0]) &&
         (price[1] === 0 || data.price <= price[1])
-    );
+      );
+    });
 
     setFilteredProperty(filteredData);
   }, [stateCityPincode, propertyFor, propertyType, houseType, price, database]);

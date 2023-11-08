@@ -182,7 +182,8 @@ const Map = (props) => {
                   ref={(ref) => (data.ref = ref)}
                 >
                   <Popup>
-                    {selectedProperty && selectedProperty._id === data._id && (
+                    {(selectedProperty && selectedProperty._id === data._id) ||
+                    !selectedProperty ? (
                       <>
                         <Flex
                           width={"330px"}
@@ -273,7 +274,7 @@ const Map = (props) => {
                               ml={1}
                               mt={2}
                             >
-                              <IoLocation fontSize={50} color="blue" />
+                              <IoLocation fontSize={40} color="blue" />
                               <div className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
                                 {data.society +
                                   ", " +
@@ -289,7 +290,7 @@ const Map = (props) => {
                           </div>
                         </Link>
                       </>
-                    )}
+                    ) : null}
                     {!selectedProperty ||
                       (selectedProperty._id !== data._id && (
                         <>
@@ -382,7 +383,7 @@ const Map = (props) => {
                                 ml={1}
                                 mt={2}
                               >
-                                <IoLocation fontSize={50} color="blue" />
+                                <IoLocation fontSize={40} color="blue" />
                                 <div className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
                                   {data.society +
                                     ", " +
