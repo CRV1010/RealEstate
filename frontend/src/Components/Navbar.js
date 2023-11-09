@@ -17,13 +17,13 @@ const Navbar = () => {
           <img
             src="deal.gif"
             alt=""
-            className="ml-4 w-11 h-11 text-indigo-900 bg-white-500"
+            className="ml-4 w-12 h-12 text-indigo-900 bg-white-500"
           />
           <Link to="/home">
-            <span className="ml-3 text-2xl">Real Estate</span>
+            <span className="ml-3 text-3xl">Real Estate</span>
           </Link>
         </Link>
-        <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <nav className="md:ml-auto flex flex-wrap items-center text-lg justify-center">
           <Link className="mr-5 hover:text-gray-900 font-semibold" to="/home">
             Home
           </Link>
@@ -85,7 +85,7 @@ const Navbar = () => {
                       className="mr-5 hover:text-gray-900 font-semibold"
                       to="/chatadmin"
                     >
-                      Chat with Admin
+                      Chats
                     </Link>
                   );
                 }

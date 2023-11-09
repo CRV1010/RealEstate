@@ -1,3 +1,6 @@
+/* *{
+    border:1px solid red;
+} */
 .sellProHead {
     @apply text-[35px] font-semibold text-[brown];
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
@@ -45,14 +48,15 @@
 }
 
 .proFacility {
-    @apply inline-block w-full text-[1.2em];
+    @apply inline-block w-full text-[1.2em] rounded-[5px];
+    background-color: rgba(66, 66, 199, 0.484);
 }
 
 .proFacItem {
-    @apply inline-block w-[29%] m-[2%] px-[3%] py-[2%] hover:bg-[lightgray] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in];
+    @apply inline-block w-[29%] m-[2%] px-[2.5%] py-[2%] bg-[gray] rounded-[5px] hover:scale-[1.05] hover:bg-[] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in];
 }
 
-.pfiBg{
+.pfiBg {
     background-color: rgb(243, 241, 241);
 }
 
@@ -61,14 +65,15 @@
 }
 
 .special {
-    @apply text-[1.1em] indent-[5em] mt-[2%];
+    @apply text-[1.1em] indent-[5em] mt-[5%];
+    font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .stickyDiv {
-    @apply text-center sticky mt-[15%] mb-[5%] mx-[5%] p-[5%] rounded-xl border-[3px] border-dotted border-[blue] top-[5em] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out];
+    @apply text-center sticky mt-[15%] mb-[5%] mx-[5%] p-[5%] rounded-xl border-[3px] border-dashed border-[blue] top-[5em] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out];
 }
 
-.stickyHover:hover{
+.stickyHover:hover {
     background-color: rgb(243, 172, 146);
 }
 
@@ -78,19 +83,19 @@
 }
 
 .sellerName {
-    @apply text-[1.4em] font-semibold text-center text-[white] w-[90%] uppercase mt-[1.2em] mb-[0.5em] mx-auto px-[1.2em] py-[0.4em] rounded-xl;
+    @apply text-[1.1em] font-semibold text-center text-[white] w-[90%] uppercase mt-[1.2em] mb-[0.5em] mx-auto px-[1.2em] py-[0.4em] rounded-xl;
     font-family: Georgia, "Times New Roman", Times, serif;
     background-color: rgb(65, 63, 196);
 }
 
 .chatSeller {
-    @apply text-[1em] font-semibold  w-[90%] uppercase mx-auto my-[1.2em] px-[1.2em] py-[0.4em] rounded-xl border-[3px] border-solid;
+    @apply text-[1em] font-semibold w-[90%] uppercase mx-auto my-[1.2em] px-[1.2em] py-[0.4em] rounded-xl border-[3px] border-solid;
     font-family: Georgia, "Times New Roman", Times, serif;
     border-color: rgb(8, 129, 8);
     color: rgb(8, 129, 8);
 }
 
-.chatSeller:hover{
+.chatSeller:hover {
     background-color: rgb(8, 129, 8);
     color: white;
     transition: all 0.5s ease-out
@@ -98,4 +103,44 @@
 
 .likes {
     @apply text-[1.1em];
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-wrapper .terms-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-wrapper .terms-label .label-text {
+    margin-left: 10px;
+    font-size: large;
+}
+
+.checkbox-wrapper .checkbox-svg {
+    width: 30px;
+    height: 30px;
+}
+
+.checkbox-wrapper .checkbox-box {
+    fill: rgba(207, 205, 205, 0.425);
+    stroke: #8c00ff;
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    transition: stroke-dashoffset 0.6s ease-in;
+}
+
+.checkbox-wrapper .checkbox-tick {
+    stroke: #8c00ff;
+    stroke-dasharray: 172;
+    stroke-dashoffset: 172;
+    transition: stroke-dashoffset 0.6s ease-in;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked+.terms-label .checkbox-box,
+.checkbox-wrapper input[type="checkbox"]:checked+.terms-label .checkbox-tick {
+    stroke-dashoffset: 0;
 }

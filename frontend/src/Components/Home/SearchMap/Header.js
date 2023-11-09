@@ -43,6 +43,8 @@ const Header = (props) => {
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
+  const [placeholder, setPlaceholder] = useState("Find the Location");
+
   // const [selectedPropertyFor, setSelectedPropertyFor] = useState("Property For");
   // const [selectedPrice, setSelectedPrice] = useState("Choose Price");
   // const [selectedPropertyType, setSelectedPropertyType] = useState("Property Type");
@@ -120,7 +122,7 @@ const Header = (props) => {
 
   return (
     <Flex
-      className="w-full text-black-600 body-font bg-red-200"
+      className="w-full text-black-600 border-1 border-gray-400 body-font border border-indigo-200 bg-white"
       position="absolute"
       top={0}
       left={0}
@@ -128,13 +130,13 @@ const Header = (props) => {
       px={4}
       py={0}
       zIndex={30}
-      style={{ height: "50px" }}
+      style={{ height: "54px" }}
     >
       <Flex className="container flex flex-wrap flex-col md:flex-row items-center">
         <Flex>
           <InputGroup width="30vw" shadow="lg" className="mr-5">
             <div className="w-full" height={"38px"}>
-              <div className="w-full ml-1 bg-white p-3 rounded-3xl border border-indigo-900 hover:border-indigo-900 hover:ring-2 hover:ring-indigo-400">
+              <div className="w-full ml-1 bg-white p-3 rounded-3xl border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400">
                 <section className="w-full h-6 flex items-center">
                   <span className="w-10 h-full flex items-center">
                     <i
@@ -145,7 +147,7 @@ const Header = (props) => {
                   <Input
                     type="text"
                     name="search"
-                    placeholder="Find the Location"
+                    placeholder={placeholder}
                     autoComplete="off"
                     aria-label="Search talk"
                     className="w-full h-full font-medium md:pl-2 focus:outline-none"
@@ -219,7 +221,7 @@ const Header = (props) => {
               ml={0}
               shadow="lg"
               cursor="pointer"
-              className="border border-indigo-900 hover:border-indigo-900 hover:ring-2 hover:ring-indigo-400 hover:bg-cyan-100"
+              className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
               style={{ height: "48px" }}
               // hover={{bg: 'yellow.200'}}
             >
@@ -319,7 +321,7 @@ const Header = (props) => {
               ml={10}
               shadow="lg"
               cursor="pointer"
-              className="border border-indigo-900 hover:border-indigo-900 hover:ring-2 hover:ring-indigo-400 hover:bg-cyan-100"
+              className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
               style={{ height: "48px" }}
             >
               <Menu>
@@ -575,7 +577,7 @@ const Header = (props) => {
               ml={10}
               shadow="lg"
               cursor="pointer"
-              className="border border-indigo-900 hover:border-indigo-900 hover:ring-2 hover:ring-indigo-400 hover:bg-cyan-100"
+              className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
               style={{ height: "48px" }}
             >
               <Menu>
@@ -712,7 +714,7 @@ const Header = (props) => {
               ml={10}
               shadow="lg"
               cursor="pointer"
-              className="border border-indigo-900 hover:border-indigo-900 hover:ring-2 hover:ring-indigo-400 hover:bg-cyan-100"
+              className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
               style={{ height: "48px" }}
             >
               <Menu>
@@ -859,7 +861,11 @@ const Header = (props) => {
               <Button
                 colorScheme="blue"
                 className="text-white mx-3"
-                onClick={setReset}
+                onClick={() => {
+                  setReset();
+                  setSearchText("");
+                  setPlaceholder("Find the Location");
+                }}
               >
                 Reset
               </Button>

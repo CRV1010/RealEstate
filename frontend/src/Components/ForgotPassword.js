@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ForgotPassword = () => {
   const params = useParams();
@@ -36,7 +38,17 @@ const ForgotPassword = () => {
         localStorage.setItem("email", JSON.stringify(email));
         navigate("/confirmotp");
       } else {
-        alert("Please provide correct email");
+        toast.warning("Attention! Please provide correct email id...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } else {
       console.log("Incorrect email");
@@ -81,6 +93,19 @@ const ForgotPassword = () => {
               >
                 Get OTP
               </button>
+
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
             </form>
           </div>
         </div>

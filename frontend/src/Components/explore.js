@@ -144,7 +144,7 @@ export default function () {
 
                         <div className="card_content_explore">
                           <div className="card_text_explore">
-                            {console.log(ArrayOfObjects)}
+                            {/* {console.log(ArrayOfObjects)} */}
                             <button value={ArrayOfObjects._id} disabled>
                               {ArrayOfObjects.likes &&
                               ArrayOfObjects.likes.some(

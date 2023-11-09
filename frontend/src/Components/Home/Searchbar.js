@@ -90,12 +90,9 @@ const Searchbar = () => {
 
   return (
     <>
-      <Flex
-        className="flex justify-center items-center hover:opacity-90 opacity-60"
-        zIndex={100}
-      >
-        <div className="w-full h-full mt-40 ml-40 flex flex-col">
-          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border-solid border-2 hover:border-blue-600 rounded-3xl">
+      <Flex className="flex justify-center items-center" zIndex={100}>
+        <div className="w-full h-full mt-40 ml-40 flex flex-col hover:opacity-90 opacity-60">
+          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border-solid border-2 border-blue-400 hover:border-blue-600 hover:ring-1 hover:ring-blue-400 rounded-3xl">
             <section className="w-full h-7 flex items-center">
               <span className="w-10 h-full flex items-center">
                 <i

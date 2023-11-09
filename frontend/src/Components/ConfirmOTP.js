@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 
 const ConfirmOTP = () => {
-     const params = useParams();
-     const [otp_user, setOtp_user] = useState("")
-    const navigate = useNavigate();
-     const {
-       register,
-       handleSubmit,
-       formState: { errors },
-     } = useForm();
+  const params = useParams();
+  const [otp_user, setOtp_user] = useState("");
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    const clickHandler = () => {
-      if(otp_user!==""){
-        const otp = localStorage.getItem("otp");
-        if (otp === otp_user) {
-          navigate("/changepass");
-        } else {
-          alert("Wrong otp");
-        }
+  const clickHandler = () => {
+    if (otp_user !== "") {
+      const otp = localStorage.getItem("otp");
+      if (otp === otp_user) {
+        navigate("/changepass");
+      } else {
+        toast.warning("Attention! Please provide correct Otp...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
-      else{
-        console.log("Otp is not a valid")
-      }
+    } else {
+      console.log("Otp is not a valid");
     }
+  };
 
   return (
     <div>
@@ -77,12 +88,25 @@ const ConfirmOTP = () => {
               >
                 Confirm OTP
               </button>
+
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
             </form>
           </div>
         </div>
       </section>
     </div>
   );
-}
+};
 
-export default ConfirmOTP
+export default ConfirmOTP;

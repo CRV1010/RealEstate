@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const ContactUs = () => {
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
-  const [message, setMessage] = useState("")
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const {
     register,
@@ -23,16 +23,14 @@ const ContactUs = () => {
 
     data = await data.json();
     if (data) {
-      alert(data.result)
+      alert(data.result);
       setUsername("");
       setEmail("");
       setMessage("");
+    } else {
+      alert("error in sending message");
     }
-    else {
-      alert("error in sending message")
-    }
-
-  }
+  };
   return (
     <div className=" antialiased bg-white-100 m-5">
       <div className="flex w-full min-h-screen justify-center items-center">
@@ -72,17 +70,17 @@ const ContactUs = () => {
               </div>
             </div>
             <div className="flex space-x-4 text-lg">
-              <a href="#">
+              <a href="https://www.facebook.com">
                 <ion-icon name="logo-facebook"></ion-icon>
               </a>
-              <a href="#">
+              <a href="https://www.twitter.com">
                 <ion-icon name="logo-twitter"></ion-icon>
               </a>
-              <a href="#">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-              <a href="#">
+              <a href="https://www.instagram.com">
                 <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+              <a href="https://www.linkedin.com">
+                <ion-icon name="logo-linkedin"></ion-icon>
               </a>
             </div>
           </div>
