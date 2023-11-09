@@ -193,7 +193,7 @@ app.post("/login", async (req, res) => {
         res.send({ result: "Wrong Password" });
       }
       result.password = undefined;
-      jwt.sign({ result }, jwtKey, { expiresIn: 120 }, (err, token) => {
+      jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
         if (err) {
           console.log("Token Expired");
           res.send("Token Expired or something went wrong");
@@ -217,7 +217,7 @@ app.post("/google-check", async (req, res) => {
   if (result) {
     // console.log("hi");
     result = result.toObject();
-    jwt.sign({ result }, jwtKey, { expiresIn: 120 }, (err, token) => {
+    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
       if (err) {
         res.send("Token Expired or something went wrong");
       } else {
@@ -233,7 +233,7 @@ app.post("/google-login", async (req, res) => {
   let data = new user(req.body);
   let result = await data.save();
   result = result.toObject();
-  jwt.sign({ result }, jwtKey, { expiresIn: 120 }, (err, token) => {
+  jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
     if (err) {
       res.send("Token Expired or something went wrong");
     } else {
@@ -401,7 +401,7 @@ app.post("/upload-imageProfile", upload.single("image"), async (req, res) => {
   res.send(image);
 });
 
-app.put("/updateUser/:id",verifyToken, async (req, res) => {
+app.put("/updateUser/:id", verifyToken, async (req, res) => {
   let data = await user.updateOne(
     { _id: req.params.id },
     {
@@ -423,7 +423,7 @@ app.put("/updateUser/:id",verifyToken, async (req, res) => {
 });
 
 //code for storing the basix text data for selling the property
-app.post("/upload-database",verifyToken, async (req, res) => {
+app.post("/upload-database", verifyToken, async (req, res) => {
   try {
     await Image.create({
       propertyFor: req.body.selectedValue,
@@ -448,7 +448,7 @@ app.post("/upload-database",verifyToken, async (req, res) => {
   }
 });
 
-app.put("/update-database/:id",verifyToken, async (req, res) => {
+app.put("/update-database/:id", verifyToken, async (req, res) => {
   console.log(req.params.id);
   console.log(req.body.imageName);
   let data = await Image.updateOne(
@@ -551,7 +551,7 @@ app.delete("/user-property-delete/:id", verifyToken, async (req, res) => {
   res.send(data);
 });
 
-app.post("/search-property",verifyToken, async (req, res) => {
+app.post("/search-property", verifyToken, async (req, res) => {
   try {
     const { propertyFor, type, State, City, zone, rooms, price } = req.body;
     let data = await Image.find({

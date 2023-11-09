@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link, useNavigationType } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./sellPropInfo.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
