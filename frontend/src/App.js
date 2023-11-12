@@ -25,6 +25,7 @@ import Footer from "./Components/Footer";
 
 import SearchedProperty from "./Components/SearchedProperty";
 import Profile from "./Components/profile";
+// import Compare from "./Components/Compare";
 import OtherProperty from "./Components/OtherProperty";
 import UpdateProperty1 from "./Components/UpdateProperty1";
 import UpdateProperty2 from "./Components/UpdateProperty2";
@@ -232,6 +233,15 @@ function App() {
                 </>
               }
             />
+            {/* <Route
+              path="/compare"
+              element={
+                <>
+                  <Compare />
+                  <Footer />
+                </>
+              }
+            /> */}
             {/* <Route path="/adminuser" element={<AdminUsers />} />
             <Route path="/adminProperty" element={<AdminProperty />} /> */}
             <Route

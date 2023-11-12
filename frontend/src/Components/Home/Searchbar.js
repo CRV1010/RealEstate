@@ -92,11 +92,11 @@ const Searchbar = () => {
     <>
       <Flex className="flex justify-center items-center" zIndex={100}>
         <div className="w-full h-full mt-40 ml-40 flex flex-col hover:opacity-90 opacity-60">
-          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border-solid border-2 border-blue-400 hover:border-blue-600 hover:ring-1 hover:ring-blue-400 rounded-3xl">
+          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border-solid border-2 ring-blue-400 ring-2 hover:ring-blue-600 rounded-lg drop-shadow-3xl md:drop-shadow-xl">
             <section className="w-full h-7 flex items-center">
               <span className="w-10 h-full flex items-center">
                 <i
-                  className="fa-solid fa-magnifying-glass ml-2.5 text-blue-800"
+                  className="fa-solid fa-magnifying-glass ml-2 text-blue-800"
                   aria-hidden="true"
                 ></i>
               </span>
@@ -105,15 +105,15 @@ const Searchbar = () => {
                 name="search"
                 placeholder="Search Address, City & Pincode....."
                 autoComplete="on"
-                aria-label="Serch talk"
-                className="w-full h-full ml-1 font-medium md:pl-2 focus:outline-none"
+                aria-label="Search talk"
+                className="w-full h-full font-medium md:pl-2 focus:outline-none"
                 onChange={(e) => {
                   setSearchText(e.target.value);
                 }}
                 onKeyDown={handleEnterKeyPress}
               />
               <button
-                className="w-27 p-2 h-full bg-blue-800 flex justify-center items-center rounded-2xl text-white font-medium"
+                className="w-25 p-4 h-full bg-blue-700 flex justify-center items-center rounded-lg text-white font-medium"
                 onClick={buttonClick}
                 onKeyDown={handleEnterKeyPress}
               >

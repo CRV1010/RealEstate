@@ -15,6 +15,7 @@ export default function () {
       navigate("/login");
     }
   }, []);
+
   const [database, setdatabase] = useState([]);
 
   useEffect(() => {
@@ -30,29 +31,28 @@ export default function () {
       },
     });
     var data = await result.json();
-    console.log(data);
-    if(!data){
-      console.log("token expire")
-          toast.error("Your Token has expired... login again", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            rtl: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setTimeout(() => {
-            localStorage.clear();
-            navigate("/login");
-          }, 7000);
-        }
-        else{
-          console.log('in data')
-            setdatabase(data);
-        }
+    // console.log(data);
+    if (!data) {
+      console.log("token expire");
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      // console.log('in data')
+      setdatabase(data);
+    }
   }
 
   const searchHandle = async (event) => {
@@ -66,10 +66,9 @@ export default function () {
       });
       data = await data.json();
       if (data) {
-     
         setdatabase(data);
       } else {
-        console.log("I dont no ke");
+        // console.log("I dont no ke");
         console.log("token expire");
         toast.error("Your Token has expired... login again", {
           position: "top-right",

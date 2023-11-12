@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -63,6 +63,7 @@ const LocationMarker = () => {
 const position = [22.2994, 73.2081];
 
 const Map = (props) => {
+  const mapRef = useRef(null); // Create a mapRef using useRef
   var user = localStorage.getItem("user");
   const user_id = JSON.parse(user)?._id;
 
@@ -129,14 +130,26 @@ const Map = (props) => {
       if (marker) {
         // Check if the marker exists and open its popup
         marker.ref.openPopup();
+
+        // Calculate the offset to accommodate the popup
+        const popupOffset = [0, -marker.ref._icon.clientHeight / 2];
+
+        // Center the map on the selected property and adjust the zoom
+        const map = mapRef.current;
+        map.flyTo([marker.lat, marker.lon], 12, {
+          animate: true,
+          offset: popupOffset,
+        });
       }
     }
   }, [selectedProperty, markerPosition]);
 
   return (
     <Box className="h-screen w-2/3 z-20 mt-20 relative align">
+      <br />
       <MapContainer
-        className="h-screen w-full absolute mt-3"
+        ref={mapRef} // Ref for the map container
+        className="h-screen w-full absolute -mt-3"
         center={position}
         zoom={13}
         scrollWheelZoom={false}
@@ -185,129 +198,23 @@ const Map = (props) => {
                     {(selectedProperty && selectedProperty._id === data._id) ||
                     !selectedProperty ? (
                       <>
-                        <Flex
-                          width={"330px"}
-                          height={"180px"}
-                          direction={"column"}
-                          position="relative"
-                          mt={5}
-                        >
-                          {/* Carousel */}
-                          <Carousel
-                            autoPlay={true}
-                            interval={4000}
-                            infiniteLoop={true}
-                            width={"305px"}
-                            height={"180px"}
-                            rounded="lg"
-                            showArrows={true}
-                            showThumbs={false}
-                          >
-                            {data.image &&
-                              data.image.map((imageName, index) => (
-                                <Flex objectFit={"cover"} key={index}>
-                                  <Image
-                                    width={"305px"}
-                                    height={"180px"}
-                                    rounded="10px"
-                                    mt={1}
-                                    src={require(`../../../Images/${imageName}`)}
-                                    alt={`Image ${index}`}
-                                  />
-                                </Flex>
-                              ))}
-                          </Carousel>
-                        </Flex>
-                        <Link
-                          to="/sellPropInfo"
-                          onClick={() =>
-                            localStorage.setItem("pressCard", keyId)
-                          }
-                          key={data._id}
-                        >
-                          <button value={data._id} disabled className="mt-2">
-                            {data.likes &&
-                            data.likes.some(
-                              (objectId) => objectId === user_id
-                            ) ? (
-                              <i
-                                className="fa-solid fa-heart"
-                                style={{ color: "red", fontSize: 22 }}
-                              ></i>
-                            ) : (
-                              <i
-                                className="fa-regular fa-heart"
-                                style={{ color: "red", fontSize: 22 }}
-                              ></i>
-                            )}
-                            &nbsp;
-                            <span
-                              style={{ color: "red", fontWeight: "600" }}
-                              className="font-sans font-medium ml-1"
-                            >
-                              {data.likes && data.likes.length}{" "}
-                              {data.likes &&
-                              (data.likes.length === 0 ||
-                                data.likes.length === 1)
-                                ? "like"
-                                : "likes"}
-                            </span>
-                          </button>
-
-                          <div className="text-black">
-                            <div className="font-sans font-medium text-lg font-weight:900">
-                              Rs. {data.price}/-
-                            </div>
-
-                            <div className="font-sans font-medium text-sm">
-                              <strong>{data.rooms}</strong> BHK |{" "}
-                              <strong>{data.area}</strong> m<sup>2</sup> |{" "}
-                              <strong>{data.type}</strong> for{" "}
-                              <strong>{data.propertyFor}</strong>
-                            </div>
-
-                            <div className="font-sans font-medium text-base"></div>
-
-                            <Flex
-                              alignItems={"center"}
-                              width={"full"}
-                              ml={1}
-                              mt={2}
-                            >
-                              <IoLocation fontSize={40} color="blue" />
-                              <div className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
-                                {data.society +
-                                  ", " +
-                                  data.zone +
-                                  ", " +
-                                  data.City +
-                                  ", " +
-                                  data.State +
-                                  ", " +
-                                  data.pincode}
-                              </div>
-                            </Flex>
-                          </div>
-                        </Link>
-                      </>
-                    ) : null}
-                    {!selectedProperty ||
-                      (selectedProperty._id !== data._id && (
-                        <>
+                        <div className="mt-5">
                           <Flex
-                            width={"330px"}
-                            height={"180px"}
+                            width={"290px"}
+                            height={"160px"}
                             direction={"column"}
                             position="relative"
-                            mt={5}
+                            mt={15}
+                            mb={5}
+                            mx={5}
                           >
                             {/* Carousel */}
                             <Carousel
                               autoPlay={true}
                               interval={4000}
                               infiniteLoop={true}
-                              width={"305px"}
-                              height={"180px"}
+                              width={"290px"}
+                              height={"160px"}
                               rounded="lg"
                               showArrows={true}
                               showThumbs={false}
@@ -316,8 +223,8 @@ const Map = (props) => {
                                 data.image.map((imageName, index) => (
                                   <Flex objectFit={"cover"} key={index}>
                                     <Image
-                                      width={"305px"}
-                                      height={"180px"}
+                                      width={"290px"}
+                                      height={"160px"}
                                       rounded="10px"
                                       mt={1}
                                       src={require(`../../../Images/${imageName}`)}
@@ -334,45 +241,52 @@ const Map = (props) => {
                             }
                             key={data._id}
                           >
-                            <button value={data._id} disabled className="mt-2">
-                              {data.likes &&
-                              data.likes.some(
-                                (objectId) => objectId === user_id
-                              ) ? (
-                                <i
-                                  className="fa-solid fa-heart"
-                                  style={{ color: "red", fontSize: 22 }}
-                                ></i>
-                              ) : (
-                                <i
-                                  className="fa-regular fa-heart"
-                                  style={{ color: "red", fontSize: 22 }}
-                                ></i>
-                              )}
-                              &nbsp;
-                              <span
-                                style={{ color: "red", fontWeight: "600" }}
-                                className="font-sans font-medium ml-1"
+                            <div className="flex justify-between ml-1 items-center">
+                              <button
+                                value={data._id}
+                                disabled
+                                className="mt-2"
                               >
-                                {data.likes && data.likes.length}{" "}
                                 {data.likes &&
-                                (data.likes.length === 0 ||
-                                  data.likes.length === 1)
-                                  ? "like"
-                                  : "likes"}
-                              </span>
-                            </button>
-
-                            <div className="text-black">
-                              <div className="font-sans font-medium text-lg font-weight:900">
+                                data.likes.some(
+                                  (objectId) => objectId === user_id
+                                ) ? (
+                                  <i
+                                    className="fa-solid fa-heart"
+                                    style={{ color: "red", fontSize: 18 }}
+                                  ></i>
+                                ) : (
+                                  <i
+                                    className="fa-regular fa-heart"
+                                    style={{ color: "red", fontSize: 18 }}
+                                  ></i>
+                                )}
+                                &nbsp;
+                                <span
+                                  style={{ color: "red", fontWeight: "600" }}
+                                  className="font-sans font-medium ml-1"
+                                >
+                                  {data.likes && data.likes.length}{" "}
+                                  {data.likes &&
+                                  (data.likes.length === 0 ||
+                                    data.likes.length === 1)
+                                    ? "like"
+                                    : "likes"}
+                                </span>
+                              </button>
+                              <div className="font-sans mt-1 mr-4 font-medium text-lg font-weight:900">
                                 Rs. {data.price}/-
                               </div>
+                            </div>
 
+                            <div className="text-black ml-1">
                               <div className="font-sans font-medium text-sm">
-                                <strong>{data.rooms}</strong> BHK |{" "}
-                                <strong>{data.area}</strong> m<sup>2</sup> |{" "}
-                                <strong>{data.type}</strong> for{" "}
-                                <strong>{data.propertyFor}</strong>
+                                <div>
+                                  <strong>{data.rooms}</strong> BHK |{" "}
+                                  <strong>{data.area}</strong> m<sup>2</sup> |{" "}
+                                  <strong>{data.type}</strong> for{" "}
+                                  <strong>{data.propertyFor}</strong>
+                                </div>
                               </div>
 
                               <div className="font-sans font-medium text-base"></div>
@@ -383,21 +297,128 @@ const Map = (props) => {
                                 ml={1}
                                 mt={2}
                               >
-                                <IoLocation fontSize={40} color="blue" />
-                                <div className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
-                                  {data.society +
-                                    ", " +
-                                    data.zone +
-                                    ", " +
-                                    data.City +
-                                    ", " +
-                                    data.State +
-                                    ", " +
-                                    data.pincode}
-                                </div>
+                                <IoLocation fontSize={35} color="blue" />
+                                <Flex className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
+                                  {data.society}, {data.zone}, {data.City},{" "}
+                                  {data.State}, {data.pincode}
+                                </Flex>
                               </Flex>
                             </div>
                           </Link>
+                        </div>
+                      </>
+                    ) : null}
+                    {!selectedProperty ||
+                      (selectedProperty._id !== data._id && (
+                        <>
+                          <div className="mt-5">
+                            <Flex
+                              width={"290px"}
+                              height={"160px"}
+                              direction={"column"}
+                              position="relative"
+                              mt={15}
+                              mb={5}
+                              mx={5}
+                            >
+                              {/* Carousel */}
+                              <Carousel
+                                autoPlay={true}
+                                interval={4000}
+                                infiniteLoop={true}
+                                width={"290px"}
+                                height={"160px"}
+                                rounded="lg"
+                                showArrows={true}
+                                showThumbs={false}
+                              >
+                                {data.image &&
+                                  data.image.map((imageName, index) => (
+                                    <Flex objectFit={"cover"} key={index}>
+                                      <Image
+                                        width={"290px"}
+                                        height={"160px"}
+                                        rounded="10px"
+                                        mt={1}
+                                        src={require(`../../../Images/${imageName}`)}
+                                        alt={`Image ${index}`}
+                                      />
+                                    </Flex>
+                                  ))}
+                              </Carousel>
+                            </Flex>
+                            <Link
+                              to="/sellPropInfo"
+                              onClick={() =>
+                                localStorage.setItem("pressCard", keyId)
+                              }
+                              key={data._id}
+                            >
+                              <div className="flex justify-between ml-1 items-center">
+                                <button
+                                  value={data._id}
+                                  disabled
+                                  className="mt-2"
+                                >
+                                  {data.likes &&
+                                  data.likes.some(
+                                    (objectId) => objectId === user_id
+                                  ) ? (
+                                    <i
+                                      className="fa-solid fa-heart"
+                                      style={{ color: "red", fontSize: 18 }}
+                                    ></i>
+                                  ) : (
+                                    <i
+                                      className="fa-regular fa-heart"
+                                      style={{ color: "red", fontSize: 18 }}
+                                    ></i>
+                                  )}
+                                  &nbsp;
+                                  <span
+                                    style={{ color: "red", fontWeight: "600" }}
+                                    className="font-sans font-medium ml-1"
+                                  >
+                                    {data.likes && data.likes.length}{" "}
+                                    {data.likes &&
+                                    (data.likes.length === 0 ||
+                                      data.likes.length === 1)
+                                      ? "like"
+                                      : "likes"}
+                                  </span>
+                                </button>
+                                <div className="font-sans mt-1 mr-4 font-medium text-lg font-weight:900">
+                                  Rs. {data.price}/-
+                                </div>
+                              </div>
+
+                              <div className="text-black ml-1">
+                                <div className="font-sans font-medium text-sm">
+                                  <div>
+                                    <strong>{data.rooms}</strong> BHK |{" "}
+                                    <strong>{data.area}</strong> m<sup>2</sup> |{" "}
+                                    <strong>{data.type}</strong> for{" "}
+                                    <strong>{data.propertyFor}</strong>
+                                  </div>
+                                </div>
+
+                                <div className="font-sans font-medium text-base"></div>
+
+                                <Flex
+                                  alignItems={"center"}
+                                  width={"full"}
+                                  ml={1}
+                                  mt={2}
+                                >
+                                  <IoLocation fontSize={35} color="blue" />
+                                  <Flex className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
+                                    {data.society}, {data.zone}, {data.City},{" "}
+                                    {data.State}, {data.pincode}
+                                  </Flex>
+                                </Flex>
+                              </div>
+                            </Link>
+                          </div>
                         </>
                       ))}
                   </Popup>

@@ -29,25 +29,25 @@ export default function (props) {
     });
     var data = await result.json();
     if (!data) {
-       console.log("token expire");
-       toast.error("Your Token has expired... login again", {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         rtl: false,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
-       setTimeout(() => {
-         localStorage.clear();
-         navigate("/login");
-       }, 7000);
-     } else {
-    setUserDetails(data);
-     }
+      console.log("token expire");
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      setUserDetails(data);
+    }
     // console.log("ud",UserDetails);
   }
 
@@ -74,13 +74,13 @@ export default function (props) {
       //    progress: undefined,
       //    theme: "light",
       //  });
-       setTimeout(() => {
-         localStorage.clear();
-         navigate("/login");
-       }, 7000);
-     } else {
-    setPropertyDetails(data);
-     }
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      setPropertyDetails(data);
+    }
     // console.log(data);
   }
 
@@ -100,31 +100,30 @@ export default function (props) {
       method: "delete",
       headers: {
         authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-      }
+      },
     });
     data = await data.json();
     if (data) {
       // alert("Record Deleted")
       getPropertyData();
+    } else {
+      console.log("token expire");
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
     }
-    else{
-       console.log("token expire");
-       toast.error("Your Token has expired... login again", {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         rtl: false,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
-       setTimeout(() => {
-         localStorage.clear();
-         navigate("/login");
-       }, 7000);
-     } 
   };
 
   const getNewPro = (keyId) => {
@@ -157,29 +156,29 @@ export default function (props) {
         localStorage.clear();
         navigate("/login");
       }, 7000);
-    }else{
+    } else {
       let pd = data[0];
-      
+
       console.log("data", data);
       console.log("md", pd.modified);
-      
+
       if (pd.modified == 1) {
-      toast.warning("You have Reached max limit of Updation...", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else {
-      console.log("chid", id);
-      navigate(`/updateProperty1/${id}`);
+        toast.warning("You have Reached max limit of Updation...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log("chid", id);
+        navigate(`/updateProperty1/${id}`);
+      }
     }
-  }
   };
 
   //add like
@@ -197,11 +196,11 @@ export default function (props) {
     });
     let data = await result.json();
 
-    let temp = []
-    temp = propertyDetails.map((item)=> {
-        if(item._id == imageId)  return data;
-        return item;
-    })
+    let temp = [];
+    temp = propertyDetails.map((item) => {
+      if (item._id == imageId) return data;
+      return item;
+    });
 
     setPropertyDetails(temp);
 
@@ -285,135 +284,138 @@ export default function (props) {
                 >
                   {propertyDetails
                     ? propertyDetails.map((ArrayOfObjects, index) => {
-                      const imageNames = ArrayOfObjects.image[0];
-                      const keyId = `${ArrayOfObjects._id}`;
-                      return (
-                        <li
-                          className="cards_item_explore"
-                          key={ArrayOfObjects._id}
-                        >
-                          <div className="card" tabindex="0">
-                            <h2 className="card_title_explore">
-                              {" "}
-                              {ArrayOfObjects.propertyFor} &#x2022; &#8377;
-                              {ArrayOfObjects.price}{" "}
-                            </h2>
+                        const imageNames = ArrayOfObjects.image[0];
+                        const keyId = `${ArrayOfObjects._id}`;
+                        return (
+                          <li
+                            className="cards_item_explore"
+                            key={ArrayOfObjects._id}
+                          >
+                            <div className="card" tabindex="0">
+                              <h2 className="card_title_explore">
+                                {" "}
+                                {ArrayOfObjects.propertyFor} &#x2022; &#8377;
+                                {ArrayOfObjects.price}{" "}
+                              </h2>
 
-                            <Link
-                              to="/sellPropInfo"
-                              onClick={() => getNewPro(ArrayOfObjects._id)}
-                              key={ArrayOfObjects._id}
-                            >
-                              <div className="card_image_explore">
-                                {ArrayOfObjects.image &&
-
+                              <Link
+                                to="/sellPropInfo"
+                                onClick={() => getNewPro(ArrayOfObjects._id)}
+                                key={ArrayOfObjects._id}
+                              >
+                                <div className="card_image_explore">
+                                  {ArrayOfObjects.image &&
                                   ArrayOfObjects.image.length > 0 ? (
-                                  <img
-                                    src={require(`../Images/${ArrayOfObjects.image[0]}`)}
-                                    key={ArrayOfObjects.image[0]}
-                                    alt="not fetched"
-                                  />
-                                ) : (
-                                  "Sorry No Data"
-                                )}
-                              </div>
-                            </Link>
-                            <div className="card_content_explore">
-                              <div className="card_text_explore">
-                                <div className="likes">
-                                  <button
-                                    onClick={Increse_Likes}
-                                    value={ArrayOfObjects._id}
-                                    disabled={
-                                      ArrayOfObjects.likes &&
-                                      ArrayOfObjects.likes.some(
-                                        (objectId) => objectId == user_id
-                                      )
-                                    }
-                                  >
-                                    {ArrayOfObjects.likes &&
+                                    <img
+                                      src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                                      key={ArrayOfObjects.image[0]}
+                                      alt="not fetched"
+                                    />
+                                  ) : (
+                                    "Sorry No Data"
+                                  )}
+                                </div>
+                              </Link>
+                              <div className="card_content_explore">
+                                <div className="card_text_explore">
+                                  <div className="likes">
+                                    <button
+                                      onClick={Increse_Likes}
+                                      value={ArrayOfObjects._id}
+                                      disabled={
+                                        ArrayOfObjects.likes &&
+                                        ArrayOfObjects.likes.some(
+                                          (objectId) => objectId == user_id
+                                        )
+                                      }
+                                    >
+                                      {ArrayOfObjects.likes &&
                                       ArrayOfObjects.likes.some(
                                         (objectId) => objectId == user_id
                                       ) ? (
-                                      <i
-                                        className="fa-solid fa-heart"
-                                        style={{ color: "red" }}
-                                      ></i>
-                                    ) : (
-                                      <i
-                                        className="fa-regular fa-heart"
-                                        style={{ color: "red" }} value={ArrayOfObjects._id}
-                                      ></i>
-                                    )}
-                                    &nbsp;
-                                    <span
+                                        <i
+                                          className="fa-solid fa-heart"
+                                          style={{ color: "red" }}
+                                        ></i>
+                                      ) : (
+                                        <i
+                                          className="fa-regular fa-heart"
+                                          style={{ color: "red" }}
+                                          value={ArrayOfObjects._id}
+                                        ></i>
+                                      )}
+                                      &nbsp;
+                                      <span
+                                        style={{
+                                          color: "#b4fee7",
+                                          "font-weight": "600",
+                                        }}
+                                      >
+                                        {ArrayOfObjects.likes &&
+                                          ArrayOfObjects.likes.length}{" "}
+                                      </span>{" "}
+                                      Interested
+                                    </button>
+                                  </div>
+                                  <p>
+                                    {" "}
+                                    <strong> Property Type: </strong>
+                                    {ArrayOfObjects.type}{" "}
+                                  </p>
+                                  <p>
+                                    {" "}
+                                    <strong>Location: </strong>{" "}
+                                    {ArrayOfObjects.society},{" "}
+                                    {ArrayOfObjects.zone}, {ArrayOfObjects.City}
+                                    , {ArrayOfObjects.State}.{" "}
+                                  </p>
+                                  <p>
+                                    {" "}
+                                    <strong>Pincode: </strong>{" "}
+                                    {ArrayOfObjects.pincode}{" "}
+                                  </p>{" "}
+                                  <br />
+                                  <p className="facility_explore">
+                                    {" "}
+                                    <strong>Facility: </strong>{" "}
+                                    {ArrayOfObjects.rooms} BHK <br />{" "}
+                                    <strong>Land Area: </strong>{" "}
+                                    {ArrayOfObjects.area}
+                                    <span>
+                                      {" "}
+                                      m<sup>2</sup>
+                                    </span>{" "}
+                                  </p>
+                                  <div id="propertyBtn">
+                                    <button
+                                      onClick={() =>
+                                        updateProperty(ArrayOfObjects._id)
+                                      }
+                                      className="profilePropertyBtn"
                                       style={{
-                                        color: "#b4fee7",
-                                        "font-weight": "600",
+                                        backgroundColor: "green",
                                       }}
                                     >
-                                      {ArrayOfObjects.likes &&
-                                        ArrayOfObjects.likes.length}{" "}
-                                    </span>{" "}
-                                    Interested
-                                  </button>
-                                </div>
-                                <p>
-                                  {" "}
-                                  <strong> Property Type: </strong>
-                                  {ArrayOfObjects.type}{" "}
-                                </p>
-                                <p>
-                                  {" "}
-                                  <strong>Location: </strong>{" "}
-                                  {ArrayOfObjects.society},{" "}
-                                  {ArrayOfObjects.zone}, {ArrayOfObjects.City}
-                                  , {ArrayOfObjects.State}.{" "}
-                                </p>
-                                <p>
-                                  {" "}
-                                  <strong>Pincode: </strong>{" "}
-                                  {ArrayOfObjects.pincode}{" "}
-                                </p>{" "}
-                                <br />
-                                <p className="facility_explore">
-                                  {" "}
-                                  <strong>Facility: </strong>{" "}
-                                  {ArrayOfObjects.rooms} BHK <br />{" "}
-                                  <strong>Land Area: </strong>{" "}
-                                  {ArrayOfObjects.area}
-                                  <span> m<sup>2</sup></span>{" "}
-                                </p>
-                                <div id="propertyBtn">
-                                  <button
-                                    onClick={() =>
-                                      updateProperty(ArrayOfObjects._id)
-                                    }
-                                    className="profilePropertyBtn"
-                                    style={{
-                                      backgroundColor: "green",
-                                    }}
-                                  >
-                                    {" "}
-                                    Update{" "}
-                                  </button>
-                                  <button
-                                    onClick={() =>
-                                      deleteProperty(ArrayOfObjects._id)
-                                    }
-                                    className="profilePropertyBtn"
-                                    style={{ backgroundColor: "red" }}
-                                  >
-                                    {" "}
-                                    Delete{" "}
-                                  </button>
+                                      {" "}
+                                      Update{" "}
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        deleteProperty(ArrayOfObjects._id)
+                                      }
+                                      className="profilePropertyBtn"
+                                      style={{ backgroundColor: "red" }}
+                                    >
+                                      {" "}
+                                      Delete{" "}
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </li>
-                      );
-                    })
+                          </li>
+                        );
+                      })
                     : ""}
                 </ul>
               </div>
