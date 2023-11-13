@@ -4,14 +4,19 @@
 }
 
 #headingExplore{
-    font-size: 2.5rem;
+    font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    color: brown;
-    text-transform: uppercase;
-    margin: 2% ;
+    /* color: brown; */
+    /* color: #603f8b; */
+    /* text-transform: uppercase; */
+    margin: 1% 2%;
+}
+
+#bottomBorder{
+    margin-left: 39.3%;
 }
 
 .cardsExplore {
@@ -50,6 +55,7 @@
     position: relative;
     overflow: hidden;
     background-color: #603f8b;
+    /* background-color: rgb(110, 44, 157); */
     border-radius: 5px 25px 5px 50px;
     transition: transform 0.1s linear;
 }
@@ -59,7 +65,7 @@
 }
 
 .card:focus, .card:hover {
-    transform: scale(1.01);
+    transform: scale(1.03);
     box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.2);
 }
 

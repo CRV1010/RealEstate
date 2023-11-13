@@ -29,25 +29,25 @@ export default function (props) {
     });
     var data = await result.json();
     if (!data) {
-       console.log("token expire");
-       toast.error("Your Token has expired... login again", {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         rtl: false,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
-       setTimeout(() => {
-         localStorage.clear();
-         navigate("/login");
-       }, 7000);
-     } else {
-    setUserDetails(data);
-     }
+      console.log("token expire");
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      setUserDetails(data);
+    }
     // console.log("ud",UserDetails);
   }
 
@@ -74,13 +74,13 @@ export default function (props) {
       //    progress: undefined,
       //    theme: "light",
       //  });
-       setTimeout(() => {
-         localStorage.clear();
-         navigate("/login");
-       }, 7000);
-     } else {
-    setPropertyDetails(data);
-     }
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      setPropertyDetails(data);
+    }
     // console.log(data);
   }
 
@@ -107,24 +107,24 @@ export default function (props) {
       // alert("Record Deleted")
       getPropertyData();
     }
-    else{
-       console.log("token expire");
-       toast.error("Your Token has expired... login again", {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         rtl: false,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
-       setTimeout(() => {
-         localStorage.clear();
-         navigate("/login");
-       }, 7000);
-     } 
+    else {
+      console.log("token expire");
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    }
   };
 
   const getNewPro = (keyId) => {
@@ -157,29 +157,29 @@ export default function (props) {
         localStorage.clear();
         navigate("/login");
       }, 7000);
-    }else{
+    } else {
       let pd = data[0];
-      
+
       console.log("data", data);
       console.log("md", pd.modified);
-      
+
       if (pd.modified == 1) {
-      toast.warning("You have Reached max limit of Updation...", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else {
-      console.log("chid", id);
-      navigate(`/updateProperty1/${id}`);
+        toast.warning("You have Reached max limit of Updation...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log("chid", id);
+        navigate(`/updateProperty1/${id}`);
+      }
     }
-  }
   };
 
   //add like
@@ -198,9 +198,9 @@ export default function (props) {
     let data = await result.json();
 
     let temp = []
-    temp = propertyDetails.map((item)=> {
-        if(item._id == imageId)  return data;
-        return item;
+    temp = propertyDetails.map((item) => {
+      if (item._id == imageId) return data;
+      return item;
     })
 
     setPropertyDetails(temp);
@@ -229,200 +229,214 @@ export default function (props) {
 
   return (
     <>
-      <div>
-        {UserDetails ? (
-          <div className="mainProfile">
-            <div className="left-section lsbackground">
-              <img
-                src={require(`../Images/${UserDetails?.image}`)}
-                onerror="fallbackImage()"
-                // alt={ProfileImg}
-                alt=""
-                className="roundImg roundImageHover"
-              />
-              <h1 id="proUName" className="proUNameTextColor">
-                <strong>{UserDetails.username}</strong>
-              </h1>
-              <h2 id="proField" className="proFieldHover">
-                <strong>
-                  Email:{" "}
-                  <input
-                    type="text"
-                    value={UserDetails.email}
-                    id="proEmail"
-                    disabled
-                  />
-                </strong>
-              </h2>
-              <h2 id="proField" className="proFieldHover">
-                <strong>Phone: {UserDetails.phone}</strong>
-              </h2>
-              <h2 id="proField" className="proFieldHover">
-                <strong>Brithdate: {UserDetails?.dob?.substring(0, 10)}</strong>
-              </h2>
-              <div id="proUpdate">
-                <button id="proUpdateBtn" onClick={userUpdate}>
-                  {" "}
-                  Update{" "}
-                </button>
+      <div className="py-6" style={{
+        background: "linear-gradient(to bottom, rgb(129, 143, 147) 200px,rgb(228, 229, 229)  0)",
+      }}>
+        <div>
+          {UserDetails ? (
+            <div className="mainProfile shadow-2xl">
+              <div className="left-section lsbackground py-8 h-96" >
+                <img
+                  src={require(`../Images/${UserDetails?.image}`)}
+                  onerror="fallbackImage()"
+                  // alt={ProfileImg}
+                  alt=""
+                  className="roundImg roundImageHover"
+                />
+                <h1 id="proUName" className="proUNameTextColor">
+                  <strong>{UserDetails.username}</strong>
+                </h1>
+                <div className="  mx-40 h-1 w-20 mb-3 bg-indigo-700 rounded"></div>
+                <h2 id="proField" className="proFieldHover">
+                  <strong>
+                    Email:{" "}
+                    <input
+                      type="text"
+                      value={UserDetails.email}
+                      id="proEmail"
+                      disabled
+                    />
+                  </strong>
+                </h2>
+                <h2 id="proField" className="proFieldHover">
+                  <strong>Phone: {UserDetails.phone}</strong>
+                </h2>
+                <h2 id="proField" className="proFieldHover">
+                  <strong>Brithdate: {UserDetails?.dob?.substring(0, 10)}</strong>
+                </h2>
+                <div id="proUpdate">
+                  <button id="proUpdateBtn" onClick={userUpdate}>
+                    {" "}
+                    Update{" "}
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="right-section">
-              <h1 id="proHeading">
+              <div className="right-section py-4">
+                <div className="my-4">
+                  <h1 id="proHeading" className="sm:text-3xl text-2xl font-medium title-font mb-3 text-gray-900">Your Properties To Sell{" "}</h1>
+                  <div id="profileHeadingBorder" className="mx-auto h-1 w-20 bg-indigo-500 rounded"></div>
+                </div>
+                {/* <h1 id="proHeading">
                 {" "}
-                <i className="fa fa-star"></i> Your Properties To Sell{" "}
+                <i className="fa fa-star"></i> 
+                Your Properties To Sell{" "}
                 <i className="fa fa-star"></i>{" "}
-              </h1>
-              <div className="mainExplore" style={{ maxWidth: "80%" }}>
-                <ul
-                  className="cardsExplore"
-                  style={{
-                    "grid-template-columns":
-                      "repeat(auto-fill, minmax(calc(50% - 3rem), 1fr))",
-                    gap: "3rem",
-                  }}
-                >
-                  {propertyDetails
-                    ? propertyDetails.map((ArrayOfObjects, index) => {
-                      const imageNames = ArrayOfObjects.image[0];
-                      const keyId = `${ArrayOfObjects._id}`;
-                      return (
-                        <li
-                          className="cards_item_explore"
-                          key={ArrayOfObjects._id}
-                        >
-                          <div className="card" tabindex="0">
-                            <h2 className="card_title_explore">
-                              {" "}
-                              {ArrayOfObjects.propertyFor} &#x2022; &#8377;
-                              {ArrayOfObjects.price}{" "}
-                            </h2>
-
-                            <Link
-                              to="/sellPropInfo"
-                              onClick={() => getNewPro(ArrayOfObjects._id)}
+              </h1> */}
+                <div className="overflow-y-auto " style={{ maxHeight: "570px" }}>
+                  <div className="mainExplore" style={{ maxWidth: "75%" }}>
+                    <ul
+                      className="cardsExplore"
+                      style={{
+                        "grid-template-columns":
+                          "repeat(auto-fill, minmax(calc(50% - 3rem), 1fr))",
+                        gap: "3rem",
+                      }}
+                    >
+                      {propertyDetails
+                        ? propertyDetails.map((ArrayOfObjects, index) => {
+                          const imageNames = ArrayOfObjects.image[0];
+                          const keyId = `${ArrayOfObjects._id}`;
+                          return (
+                            <li
+                              className="cards_item_explore"
                               key={ArrayOfObjects._id}
                             >
-                              <div className="card_image_explore">
-                                {ArrayOfObjects.image &&
+                              <div className="card" tabindex="0">
+                                <h2 className="card_title_explore">
+                                  {" "}
+                                  {ArrayOfObjects.propertyFor} &#x2022; &#8377;
+                                  {ArrayOfObjects.price}{" "}
+                                </h2>
 
-                                  ArrayOfObjects.image.length > 0 ? (
-                                  <img
-                                    src={require(`../Images/${ArrayOfObjects.image[0]}`)}
-                                    key={ArrayOfObjects.image[0]}
-                                    alt="not fetched"
-                                  />
-                                ) : (
-                                  "Sorry No Data"
-                                )}
-                              </div>
-                            </Link>
-                            <div className="card_content_explore">
-                              <div className="card_text_explore">
-                                <div className="likes">
-                                  <button
-                                    onClick={Increse_Likes}
-                                    value={ArrayOfObjects._id}
-                                    disabled={
-                                      ArrayOfObjects.likes &&
-                                      ArrayOfObjects.likes.some(
-                                        (objectId) => objectId == user_id
-                                      )
-                                    }
-                                  >
-                                    {ArrayOfObjects.likes &&
-                                      ArrayOfObjects.likes.some(
-                                        (objectId) => objectId == user_id
-                                      ) ? (
-                                      <i
-                                        className="fa-solid fa-heart"
-                                        style={{ color: "red" }}
-                                      ></i>
+                                <Link
+                                  to="/sellPropInfo"
+                                  onClick={() => getNewPro(ArrayOfObjects._id)}
+                                  key={ArrayOfObjects._id}
+                                >
+                                  <div className="card_image_explore">
+                                    {ArrayOfObjects.image &&
+
+                                      ArrayOfObjects.image.length > 0 ? (
+                                      <img
+                                        src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                                        key={ArrayOfObjects.image[0]}
+                                        alt="not fetched"
+                                      />
                                     ) : (
-                                      <i
-                                        className="fa-regular fa-heart"
-                                        style={{ color: "red" }} value={ArrayOfObjects._id}
-                                      ></i>
+                                      "Sorry No Data"
                                     )}
-                                    &nbsp;
-                                    <span
-                                      style={{
-                                        color: "#b4fee7",
-                                        "font-weight": "600",
-                                      }}
-                                    >
-                                      {ArrayOfObjects.likes &&
-                                        ArrayOfObjects.likes.length}{" "}
-                                    </span>{" "}
-                                    Interested
-                                  </button>
-                                </div>
-                                <p>
-                                  {" "}
-                                  <strong> Property Type: </strong>
-                                  {ArrayOfObjects.type}{" "}
-                                </p>
-                                <p>
-                                  {" "}
-                                  <strong>Location: </strong>{" "}
-                                  {ArrayOfObjects.society},{" "}
-                                  {ArrayOfObjects.zone}, {ArrayOfObjects.City}
-                                  , {ArrayOfObjects.State}.{" "}
-                                </p>
-                                <p>
-                                  {" "}
-                                  <strong>Pincode: </strong>{" "}
-                                  {ArrayOfObjects.pincode}{" "}
-                                </p>{" "}
-                                <br />
-                                <p className="facility_explore">
-                                  {" "}
-                                  <strong>Facility: </strong>{" "}
-                                  {ArrayOfObjects.rooms} BHK <br />{" "}
-                                  <strong>Land Area: </strong>{" "}
-                                  {ArrayOfObjects.area}
-                                  <span> m<sup>2</sup></span>{" "}
-                                </p>
-                                <div id="propertyBtn">
-                                  <button
-                                    onClick={() =>
-                                      updateProperty(ArrayOfObjects._id)
-                                    }
-                                    className="profilePropertyBtn"
-                                    style={{
-                                      backgroundColor: "green",
-                                    }}
-                                  >
-                                    {" "}
-                                    Update{" "}
-                                  </button>
-                                  <button
-                                    onClick={() =>
-                                      deleteProperty(ArrayOfObjects._id)
-                                    }
-                                    className="profilePropertyBtn"
-                                    style={{ backgroundColor: "red" }}
-                                  >
-                                    {" "}
-                                    Delete{" "}
-                                  </button>
+                                  </div>
+                                </Link>
+                                <div className="card_content_explore">
+                                  <div className="card_text_explore">
+                                    <div className="likes">
+                                      <button
+                                        onClick={Increse_Likes}
+                                        value={ArrayOfObjects._id}
+                                        disabled={
+                                          ArrayOfObjects.likes &&
+                                          ArrayOfObjects.likes.some(
+                                            (objectId) => objectId == user_id
+                                          )
+                                        }
+                                      >
+                                        {ArrayOfObjects.likes &&
+                                          ArrayOfObjects.likes.some(
+                                            (objectId) => objectId == user_id
+                                          ) ? (
+                                          <i
+                                            className="fa-solid fa-heart"
+                                            style={{ color: "red" }}
+                                          ></i>
+                                        ) : (
+                                          <i
+                                            className="fa-regular fa-heart"
+                                            style={{ color: "red" }} value={ArrayOfObjects._id}
+                                          ></i>
+                                        )}
+                                        &nbsp;
+                                        <span
+                                          style={{
+                                            color: "#b4fee7",
+                                            "font-weight": "600",
+                                          }}
+                                        >
+                                          {ArrayOfObjects.likes &&
+                                            ArrayOfObjects.likes.length}{" "}
+                                        </span>{" "}
+                                        Interested
+                                      </button>
+                                    </div>
+                                    <p>
+                                      {" "}
+                                      <strong> Property Type: </strong>
+                                      {ArrayOfObjects.type}{" "}
+                                    </p>
+                                    <p>
+                                      {" "}
+                                      <strong>Location: </strong>{" "}
+                                      {ArrayOfObjects.society},{" "}
+                                      {ArrayOfObjects.zone}, {ArrayOfObjects.City}
+                                      , {ArrayOfObjects.State}.{" "}
+                                    </p>
+                                    <p>
+                                      {" "}
+                                      <strong>Pincode: </strong>{" "}
+                                      {ArrayOfObjects.pincode}{" "}
+                                    </p>{" "}
+                                    <br />
+                                    <p className="facility_explore">
+                                      {" "}
+                                      <strong>Facility: </strong>{" "}
+                                      {ArrayOfObjects.rooms} BHK <br />{" "}
+                                      <strong>Land Area: </strong>{" "}
+                                      {ArrayOfObjects.area}
+                                      <span> m<sup>2</sup></span>{" "}
+                                    </p>
+                                    <div id="propertyBtn">
+                                      <button
+                                        onClick={() =>
+                                          updateProperty(ArrayOfObjects._id)
+                                        }
+                                        className="profilePropertyBtn"
+                                        style={{
+                                          backgroundColor: "green",
+                                        }}
+                                      >
+                                        {" "}
+                                        Update{" "}
+                                      </button>
+                                      <button
+                                        onClick={() =>
+                                          deleteProperty(ArrayOfObjects._id)
+                                        }
+                                        className="profilePropertyBtn"
+                                        style={{ backgroundColor: "red" }}
+                                      >
+                                        {" "}
+                                        Delete{" "}
+                                      </button>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                        </li>
-                      );
-                    })
-                    : ""}
-                </ul>
+                            </li>
+                          );
+                        })
+                        : ""}
+                    </ul>
+                  </div>
+                </div>
+
               </div>
             </div>
-          </div>
-        ) : (
-          <div> Sorry ! Data is not Fetched... </div>
-        )}
+          ) : (
+            <div> Sorry ! Data is not Fetched... </div>
+          )}
+        </div>
       </div>
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

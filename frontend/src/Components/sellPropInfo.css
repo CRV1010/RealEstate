@@ -2,7 +2,7 @@
     border:1px solid red;
 } */
 .sellProHead {
-    @apply text-[35px] font-semibold text-[brown];
+    @apply text-[35px] font-semibold ;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -70,12 +70,12 @@
 }
 
 .stickyDiv {
-    @apply text-center sticky mt-[15%] mb-[5%] mx-[5%] p-[5%] rounded-xl border-[3px] border-dashed border-[blue] top-[5em] hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out];
+    @apply text-center sticky  mb-[5%] mx-[5%] p-[5%] rounded-xl  top-[5em] border shadow-xl hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out];
 }
 
-.stickyHover:hover {
+/* .stickyHover:hover {
     background-color: rgb(243, 172, 146);
-}
+} */
 
 .contactSeller {
     @apply text-[1.5em] font-semibold;

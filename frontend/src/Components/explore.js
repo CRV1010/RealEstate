@@ -31,28 +31,28 @@ export default function () {
     });
     var data = await result.json();
     console.log(data);
-    if(!data){
+    if (!data) {
       console.log("token expire")
-          toast.error("Your Token has expired... login again", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            rtl: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setTimeout(() => {
-            localStorage.clear();
-            navigate("/login");
-          }, 7000);
-        }
-        else{
-          console.log('in data')
-            setdatabase(data);
-        }
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    }
+    else {
+      console.log('in data')
+      setdatabase(data);
+    }
   }
 
   const searchHandle = async (event) => {
@@ -66,7 +66,7 @@ export default function () {
       });
       data = await data.json();
       if (data) {
-     
+
         setdatabase(data);
       } else {
         console.log("I dont no ke");
@@ -94,8 +94,13 @@ export default function () {
 
   return (
     <>
-      <h1 id="headingExplore"> Properties for Explore </h1>
-      <div className="mainExplore" style={{ maxWidth: "80%" }}>
+      <div className=" text-center my-10">
+        <h1 id="headingExplore" className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Properties For Explore </h1>
+        <div id="bottomBorder" className="mx-auto h-1 w-28 bg-indigo-500 rounded"></div>
+      </div>
+      {/* <h2 id="headingExplore"> Properties for Explore </h2>
+      <div className="h-1 w-20 bg-indigo-500 rounded"></div> */}
+      <div className="mainExplore" style={{ maxWidth: "75%" }}>
         <div class="flex w-full justify-center my-7 items-end">
           <div class="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
             <input
@@ -114,98 +119,98 @@ export default function () {
         <ul className="cardsExplore">
           {database
             ? database.map((ArrayOfObjects, index) => {
-                const imageNames = ArrayOfObjects?.image[0];
-                const keyId = `${ArrayOfObjects._id}`;
-                return (
-                  <Link
-                    to="/sellPropInfo"
-                    onClick={() => localStorage.setItem("pressCard", keyId)}
-                    key={ArrayOfObjects._id}
-                  >
-                    <li className="cards_item_explore" key={ArrayOfObjects._id}>
-                      <div className="card" tabindex="0">
-                        <h2 className="card_title_explore">
-                          {" "}
-                          {ArrayOfObjects.propertyFor} &#x2022; &#8377;
-                          {ArrayOfObjects.price}{" "}
-                        </h2>
-                        <div className="card_image_explore">
-                          {ArrayOfObjects.image &&
+              const imageNames = ArrayOfObjects?.image[0];
+              const keyId = `${ArrayOfObjects._id}`;
+              return (
+                <Link
+                  to="/sellPropInfo"
+                  onClick={() => localStorage.setItem("pressCard", keyId)}
+                  key={ArrayOfObjects._id}
+                >
+                  <li className="cards_item_explore" key={ArrayOfObjects._id}>
+                    <div className="card" tabindex="0">
+                      <h2 className="card_title_explore">
+                        {" "}
+                        {ArrayOfObjects.propertyFor} &#x2022; &#8377;
+                        {ArrayOfObjects.price}{" "}
+                      </h2>
+                      <div className="card_image_explore">
+                        {ArrayOfObjects.image &&
                           ArrayOfObjects.image.length > 0 ? (
-                            <img
-                              src={require(`../Images/${ArrayOfObjects.image[0]}`)}
-                              key={ArrayOfObjects.image[0]}
-                              alt="not fetched"
-                            />
-                          ) : (
-                            ""
-                          )}
-                        </div>
+                          <img
+                            src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                            key={ArrayOfObjects.image[0]}
+                            alt="not fetched"
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </div>
 
-                        <div className="card_content_explore">
-                          <div className="card_text_explore">
-                            {/* {console.log(ArrayOfObjects)} */}
-                            <button value={ArrayOfObjects._id} disabled>
-                              {ArrayOfObjects.likes &&
+                      <div className="card_content_explore">
+                        <div className="card_text_explore">
+                          {/* {console.log(ArrayOfObjects)} */}
+                          <button value={ArrayOfObjects._id} disabled>
+                            {ArrayOfObjects.likes &&
                               ArrayOfObjects.likes.some(
                                 (objectId) => objectId == user_id
                               ) ? (
-                                <i
-                                  className="fa-solid fa-heart"
-                                  style={{ color: "red" }}
-                                ></i>
-                              ) : (
-                                <i
-                                  className="fa-regular fa-heart"
-                                  style={{ color: "red" }}
-                                ></i>
-                              )}
-                              &nbsp;
-                              <span
-                                style={{
-                                  color: "#b4fee7",
-                                  "font-weight": "600",
-                                }}
-                              >
-                                {ArrayOfObjects.likes &&
-                                  ArrayOfObjects.likes.length}{" "}
-                              </span>
-                              Interested
-                            </button>
-                            <p>
+                              <i
+                                className="fa-solid fa-heart"
+                                style={{ color: "red" }}
+                              ></i>
+                            ) : (
+                              <i
+                                className="fa-regular fa-heart"
+                                style={{ color: "red" }}
+                              ></i>
+                            )}
+                            &nbsp;
+                            <span
+                              style={{
+                                color: "#b4fee7",
+                                "font-weight": "600",
+                              }}
+                            >
+                              {ArrayOfObjects.likes &&
+                                ArrayOfObjects.likes.length}{" "}
+                            </span>
+                            Interested
+                          </button>
+                          <p>
+                            {" "}
+                            <strong> Property Type: </strong>
+                            {ArrayOfObjects.type}{" "}
+                          </p>
+                          <p>
+                            {" "}
+                            <strong>Location: </strong>{" "}
+                            {ArrayOfObjects.society}, {ArrayOfObjects.zone},{" "}
+                            {ArrayOfObjects.City}, {ArrayOfObjects.State}.{" "}
+                          </p>
+                          <p>
+                            {" "}
+                            <strong>Pincode: </strong>{" "}
+                            {ArrayOfObjects.pincode}{" "}
+                          </p>{" "}
+                          <br />
+                          <p className="facility_explore">
+                            {" "}
+                            <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
+                            BHK <br /> <strong>Land Area: </strong>{" "}
+                            {ArrayOfObjects.area}
+                            <span>
                               {" "}
-                              <strong> Property Type: </strong>
-                              {ArrayOfObjects.type}{" "}
-                            </p>
-                            <p>
-                              {" "}
-                              <strong>Location: </strong>{" "}
-                              {ArrayOfObjects.society}, {ArrayOfObjects.zone},{" "}
-                              {ArrayOfObjects.City}, {ArrayOfObjects.State}.{" "}
-                            </p>
-                            <p>
-                              {" "}
-                              <strong>Pincode: </strong>{" "}
-                              {ArrayOfObjects.pincode}{" "}
-                            </p>{" "}
-                            <br />
-                            <p className="facility_explore">
-                              {" "}
-                              <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
-                              BHK <br /> <strong>Land Area: </strong>{" "}
-                              {ArrayOfObjects.area}
-                              <span>
-                                {" "}
-                                m<sup>2</sup>
-                              </span>{" "}
-                            </p>
-                          </div>
+                              m<sup>2</sup>
+                            </span>{" "}
+                          </p>
                         </div>
                       </div>
-                    </li>
-                  </Link>
-                );
-              })
+                    </div>
+                  </li>
+                </Link>
+              );
+            })
             : ""}
         </ul>
       </div>
