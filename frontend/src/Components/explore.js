@@ -15,6 +15,7 @@ export default function () {
       navigate("/login");
     }
   }, []);
+
   const [database, setdatabase] = useState([]);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function () {
       },
     });
     var data = await result.json();
+
     console.log(data);
     if (!data) {
       console.log("token expire")
@@ -66,10 +68,9 @@ export default function () {
       });
       data = await data.json();
       if (data) {
-
         setdatabase(data);
       } else {
-        console.log("I dont no ke");
+        // console.log("I dont no ke");
         console.log("token expire");
         toast.error("Your Token has expired... login again", {
           position: "top-right",

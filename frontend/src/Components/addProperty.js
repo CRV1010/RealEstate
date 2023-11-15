@@ -9,8 +9,8 @@ export default function (props) {
   //hooks
   const location = useLocation();
   const totalAmount = location.state ? location.state.totalAmount : null;
-  const premium = (localStorage.getItem("premium"));
-  console.log("prem",premium);
+  const premium = localStorage.getItem("premium");
+  console.log("prem", premium);
 
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
@@ -125,37 +125,36 @@ export default function (props) {
     });
     data = await data.json();
     if (!data) {
-       console.log("token expire");
-       toast.error("Your Token has expired... login again", {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         rtl: false,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
-       setTimeout(() => {
-         localStorage.clear();
-         navigate("/login");
-       }, 7000);
-     } 
-     else {
-    console.log("Data Inserted Successfully...");
-    toast.success("Your Property is added for Sell", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      rtl: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-    window.location.href = "/explore";
+      console.log("token expire");
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      console.log("Data Inserted Successfully...");
+      toast.success("Your Property is added for Sell", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      window.location.href = "/explore";
     }
     // navigate("/explore")
   };
@@ -201,7 +200,9 @@ export default function (props) {
             </div>
             <br /> <br />
             <div id="formData">
-              <label htmlFor="">Upload Images:<span className="red">*</span> &nbsp; </label>
+              <label htmlFor="">
+                Upload Images:<span className="red">*</span> &nbsp;{" "}
+              </label>
               <input
                 accept="image/*"
                 type="file"

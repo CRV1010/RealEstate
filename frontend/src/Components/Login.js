@@ -38,12 +38,12 @@ const Login = () => {
       });
 
       data = await data.json();
-      console.log(data);
+      // console.log(data);
       if (data.token) {
         localStorage.setItem("user", JSON.stringify(data.result));
         localStorage.setItem("token", JSON.stringify(data.token));
         navigate("/home");
-        console.log(data);
+        // console.log(data);
       } else {
         toast.warning("Attention! Please provide correct information...", {
           position: "top-right",

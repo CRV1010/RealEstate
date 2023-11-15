@@ -20,7 +20,7 @@ const PopularProperty = () => {
           },
         });
         var data = await result.json();
-        console.log("ad",data);
+        // console.log("ad",data);
         if (!data && user) {
           toast.error("Your Token has expired... login again", {
             position: "top-right",

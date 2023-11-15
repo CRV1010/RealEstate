@@ -100,14 +100,13 @@ export default function (props) {
       method: "delete",
       headers: {
         authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-      }
+      },
     });
     data = await data.json();
     if (data) {
       // alert("Record Deleted")
       getPropertyData();
-    }
-    else {
+    } else {
       console.log("token expire");
       toast.error("Your Token has expired... login again", {
         position: "top-right",
