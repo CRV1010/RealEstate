@@ -7,7 +7,7 @@ const Footer = () => {
 
       <hr className="border-1 border-gray-400 bg-gray-400" />
 
-      <div className="container px-5 py-10 mx-auto md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+      <div className="container px-5 py-5 mx-auto md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="container mx-auto flex flex-wrap flex-col md:flex-row justify-center items-center">
           <div className="flex flex-wrap text-xl flex-row align-center list-none">
             <li className="ml-5">

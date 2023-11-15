@@ -216,13 +216,17 @@ export default function () {
                   <input type="hidden" value={(sid = database.sellerId)} />
                   <div className="flex justify-between items-center">
                     <div>
-                      <h1 className="sellProHead"> Property Image: </h1>
-                      <hr
+                      {/* <h1 className="sellProHead text-black"> Property Image: </h1> */}
+                      {/* <hr
                         className="underLine underLineBG"
                         style={{ width: "45%" }}
-                      />{" "}
+                      />{" "} */}
+                      <div className=" text-center">
+                        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Property Image:</h1>
+                        <div className="h-1 w-28 bg-indigo-500 rounded"></div>
+                      </div>
                     </div>
-                    <div className="checkbox-wrapper mt-3 mr-10">
+                    {/* <div className="checkbox-wrapper mt-3 mr-10">
                       <input
                         id="terms-checkbox-37"
                         name="checkbox"
@@ -256,43 +260,44 @@ export default function () {
                         </svg>
                         <span className="label-text">Compare Property</span>
                       </label>
-                    </div>
+                    </div> */}
                   </div>
                   <br />
                   <Slider {...settings}>
                     {database.image && database.image.length > 0
                       ? database.image.map((imageName) => {
-                          return (
-                            <div className="w-full h-screen">
-                              <h3
-                                className="proType"
-                                style={{
-                                  backgroundColor: "rgb(181, 220, 142)",
-                                }}
-                              >
+                        return (
+                          <div className="w-full" style={{ height: "50px" }}>
+                            <h3
+                              className="proType"
+                              style={{
+                                backgroundColor: "rgb(181, 220, 142)",
+                              }}
+                            >
+                              {" "}
+                              <span style={{ color: "green" }}>
                                 {" "}
-                                <span style={{ color: "green" }}>
-                                  {" "}
-                                  &#x2022;{" "}
-                                </span>
-                                {database.propertyFor}{" "}
-                              </h3>
-                              <img
-                                src={require(`../Images/${imageName}`)}
-                                key={imageName}
-                                alt="Sorry"
-                                className="proImg  w-full h-full rounded-lg"
-                              />
-                            </div>
-                          );
-                        })
+                                &#x2022;{" "}
+                              </span>
+                              {database.propertyFor}{" "}
+                            </h3>
+                            <img
+                              src={require(`../Images/${imageName}`)}
+                              key={imageName}
+                              alt="Sorry"
+                              className="proImg  w-full  rounded-lg h-96 cursor-pointer"
+                            />
+                          </div>
+                        );
+                      })
                       : ""}
                   </Slider>
-                  <div className="proAuthdetails">
+                  <div className="proAuthdetails flex">
                     <div className="proDetail">
                       <h1 className="proPrice">
                         {" "}
-                        &#8377;&nbsp;{database.price}{" "}
+                        <span className=" text-red-500"> ₹ </span>
+                        {database.price}{" "}
                       </h1>
                       <p className="proAddress">
                         {" "}
@@ -316,9 +321,9 @@ export default function () {
                           }
                         >
                           {database.likes &&
-                          database.likes.some(
-                            (objectId) => objectId === user_id
-                          ) ? (
+                            database.likes.some(
+                              (objectId) => objectId === user_id
+                            ) ? (
                             <i
                               className="fa-solid fa-heart hover:scale-125"
                               style={{ color: "red", fontSize: "20px" }}
@@ -374,8 +379,12 @@ export default function () {
                       </div>{" "}
                       <br /> <br /> <br />
                       <div>
-                        <h1 className="sellProHead"> Properties Make Best: </h1>
-                        <hr className="underLine underLineBG" />
+                        <div>
+                          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Properties Make Best:</h1>
+                          <div className="h-1 w-28 bg-indigo-500 rounded"></div>
+                        </div>
+                        {/* <h1 className="sellProHead"> Properties Make Best: </h1>
+                        <hr className="underLine underLineBG" /> */}
                         <p className="special">
                           {" "}
                           Gorgeous {database.rooms} bedroom townhome loaded with
@@ -436,7 +445,7 @@ export default function () {
                                           </h2>
                                           <div className="card_image_explore">
                                             {ArrayOfObjects.image &&
-                                            ArrayOfObjects.image.length > 0 ? (
+                                              ArrayOfObjects.image.length > 0 ? (
                                               <img
                                                 src={require(`../Images/${ArrayOfObjects.image[0]}`)}
                                                 key={ArrayOfObjects.image[0]}
@@ -464,10 +473,10 @@ export default function () {
                                                   }
                                                 >
                                                   {database.likes &&
-                                                  database.likes.some(
-                                                    (objectId) =>
-                                                      objectId === user_id
-                                                  ) ? (
+                                                    database.likes.some(
+                                                      (objectId) =>
+                                                        objectId === user_id
+                                                    ) ? (
                                                     <i
                                                       className="fa-solid fa-heart"
                                                       style={{ color: "red" }}
@@ -542,7 +551,7 @@ export default function () {
                           ""
                         ) : (
                           <>
-                            <div className="w-full mb-6">
+                            {/* <div className="w-full mb-6">
                               <h1 className="sellProHead">
                                 {" "}
                                 Get House On Your Budget:{" "}
@@ -551,6 +560,10 @@ export default function () {
                                 className="underLine underLineBG"
                                 style={{ width: "30%" }}
                               />
+                            </div> */}
+                            <div>
+                              <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Get House On Your Budget:</h1>
+                              <div className="h-1 w-28 bg-indigo-500 rounded"></div>
                             </div>
                             <div className="flex flex-nowrap overflow-x-scroll overflow-y-hidden">
                               {budgetData.map((ArrayOfObjects, index) => {
@@ -573,7 +586,7 @@ export default function () {
                                           </h2>
                                           <div className="card_image_explore">
                                             {ArrayOfObjects.image &&
-                                            ArrayOfObjects.image.length > 0 ? (
+                                              ArrayOfObjects.image.length > 0 ? (
                                               <img
                                                 src={require(`../Images/${ArrayOfObjects.image[0]}`)}
                                                 key={ArrayOfObjects.image[0]}
@@ -601,10 +614,10 @@ export default function () {
                                                   }
                                                 >
                                                   {database.likes &&
-                                                  database.likes.some(
-                                                    (objectId) =>
-                                                      objectId === user_id
-                                                  ) ? (
+                                                    database.likes.some(
+                                                      (objectId) =>
+                                                        objectId === user_id
+                                                    ) ? (
                                                     <i
                                                       className="fa-solid fa-heart"
                                                       style={{ color: "red" }}
@@ -676,20 +689,21 @@ export default function () {
                       )}
                     </div>
 
-                    <div className="authDetails">
-                      <div className="stickyDiv stickyHover">
+                    <div className="authDetails py-0 my-0" >
+                      <div className="stickyDiv stickyHover bg-gray-200" >
                         <h1
-                          className="contactSeller"
-                          style={{ color: "rgb(234, 26, 7)" }}
+                          className="contactSeller text-red-500"
+                          
                         >
                           {" "}
                           KNOW YOUR SELLER{" "}
                         </h1>
-                        <hr
-                          style={{ backgroundColor: "green", height: "4px" }}
-                        />
+                        {/* <hr
+                          style={{ backgroundColor: "green", height: "2px" }}
+                        /> */}
+                        <div className=" h-px w-68 bg-gray-400 rounded"></div>
                         <input
-                          className="sellerName"
+                          className="sellerName cursor-pointer"
                           onClick={() => {
                             openModal("Sell");
                           }}
@@ -719,7 +733,7 @@ export default function () {
                                     <div className="sm:col-span-3">
                                       <label
                                         htmlFor="name"
-                                        className="block text-sm font-medium text-indigo-400 leading-6 text-gray-900"
+                                        className="block text-sm font-medium text-indigo-500 leading-6 text-gray-900"
                                         style={{
                                           fontSize: "1.5em",
                                           textTransform: "uppercase",
@@ -743,7 +757,7 @@ export default function () {
                                     <div className="sm:col-span-3">
                                       <label
                                         htmlFor="email"
-                                        className="block text-sm text-indigo-400 font-medium leading-6 text-gray-900"
+                                        className="block text-sm text-indigo-500 font-medium leading-6 text-gray-900"
                                         style={{
                                           fontSize: "1.5em",
                                           textTransform: "uppercase",
@@ -767,7 +781,7 @@ export default function () {
                                     <div className="sm:col-span-3">
                                       <label
                                         htmlFor="phone"
-                                        className="block text-sm text-indigo-400 font-medium leading-6 text-gray-900"
+                                        className="block text-sm text-indigo-500 font-medium leading-6 text-gray-900"
                                         style={{
                                           fontSize: "1.5em",
                                           textTransform: "uppercase",

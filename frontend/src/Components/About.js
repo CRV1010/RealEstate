@@ -52,9 +52,9 @@ function About() {
           <div id="focusContainer">
             <div className="container cards">
               <div className="row">
-                <div className="col-md-6">
-                  <div className="card" id="card">
-                    <div className="card-body">
+                <div className="col-md-6 ">
+                  <div className="card " id="card">
+                    <div className="card-body ">
                       <h2 className="card-title">
                         <strong style={{ fontSize: "30px" }}> Vision </strong>
                       </h2>

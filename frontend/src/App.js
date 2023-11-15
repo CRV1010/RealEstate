@@ -174,7 +174,7 @@ function App() {
               element={
                 <>
                   <Profile />
-                  <Footer />
+                  
                 </>
               }
             />
@@ -257,7 +257,6 @@ function App() {
               element={
                 <>
                   <ChatAdmin />
-                  <Footer />
                 </>
               }
             />
