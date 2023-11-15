@@ -91,12 +91,13 @@ const Searchbar = () => {
   return (
     <>
       <Flex className="flex justify-center items-center" zIndex={100}>
-        <div className="w-full h-full mt-40 ml-40 flex flex-col hover:opacity-90 opacity-60">
-          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border-solid border-2 ring-blue-400 ring-2 hover:ring-blue-600 rounded-lg drop-shadow-3xl md:drop-shadow-xl">
-            <section className="w-full h-7 flex items-center">
+
+        <div className="w-full h-full mt-40 px-16 flex flex-col z-50 hover:opacity-90 ">
+          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border border-gray-200 hover:border-blue-500  rounded-lg drop-shadow-4xl md:drop-shadow-2xl ">
+            <section className="w-full h-9 flex items-center">
               <span className="w-10 h-full flex items-center">
                 <i
-                  className="fa-solid fa-magnifying-glass ml-2 text-blue-800"
+                  className="fa-solid text-lg fa-magnifying-glass ml-2  text-cyan-800"
                   aria-hidden="true"
                 ></i>
               </span>
@@ -113,7 +114,7 @@ const Searchbar = () => {
                 onKeyDown={handleEnterKeyPress}
               />
               <button
-                className="w-25 p-4 h-full bg-blue-700 flex justify-center items-center rounded-lg text-white font-medium"
+                className="w-25 px-7 py-5 h-full bg-cyan-800 flex justify-center items-center rounded-lg text-white font-medium"
                 onClick={buttonClick}
                 onKeyDown={handleEnterKeyPress}
               >

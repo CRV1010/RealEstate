@@ -264,7 +264,7 @@ const ChatAdmin = () => {
 
   return (
     <div
-      className="py-6 px-20 h-[660px] rounded-xl"
+      className="py-6 px-20 h-[672px] rounded-xl"
       style={{
         background: "linear-gradient(to bottom, #5B9A8B 200px, #D8D9DA 0)",
       }}

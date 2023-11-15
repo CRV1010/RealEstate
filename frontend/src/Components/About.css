@@ -58,7 +58,8 @@
 }
 
 #vmSection {
-    background-color: rgb(121, 186, 239);
+    /* background-color: rgb(121, 186, 239); */
+    background-color: rgb(159, 173, 177);;
     padding-bottom: 6%;
 }
 
@@ -74,6 +75,7 @@
     margin-left: 20%;
     margin-right: 0%;
 }
+
 
 .card-text {
     font-size: 18px;
@@ -127,7 +129,7 @@
 }
 
 #team {
-    margin: 5%;
+    /* margin: 5%; */
     text-align: center;
     font-family: monospace;
     font-size: 3em;

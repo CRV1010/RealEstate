@@ -39,19 +39,20 @@ function About() {
         </div>
       </div>
 
-      <div id="vmSection" className="container-fluid">
-        <h1 id="vm">
-          <strong style={{ "margin-left": "500px" }}> Vision & Mission </strong>
-        </h1>
-        <div id="focusContainer">
-          <div className="container cards">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="card" id="card">
-                  <div className="card-body">
-                    <div className="flex flex-inline">
-                      <i className="fa fa-paper-plane" id="icon"></i>{" "}
-                      <h2 className="card-title ml-5">
+        <div id="vmSection" className="container-fluid">
+          <h1 id="vm">
+            <strong style={{ "margin-left": "500px" }}>
+              {" "}
+              Vision & Mission{" "}
+            </strong>
+          </h1>
+          <div id="focusContainer">
+            <div className="container cards">
+              <div className="row">
+                <div className="col-md-6 ">
+                  <div className="card " id="card">
+                    <div className="card-body ">
+                      <h2 className="card-title">
                         <strong style={{ fontSize: "30px" }}> Vision </strong>
                       </h2>
                       <br />
