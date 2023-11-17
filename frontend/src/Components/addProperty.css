@@ -59,7 +59,7 @@
 }
 
 #sellPropBtn {
-    @apply no-underline text-xl font-medium text-white inline-block w-full mx-[5px] my-0 px-5 py-2.5 rounded-[5px] border-[none];
+    @apply no-underline text-xl font-medium text-white inline-block w-full mx-0 my-0 px-5 py-2.5 rounded-[5px] border-[none];
     background: #26a9e0;
 }
 

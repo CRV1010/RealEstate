@@ -122,20 +122,20 @@ const Header = (props) => {
 
   return (
     <Flex
-      className="w-full text-black-600 border-1 border-gray-400 body-font border border-indigo-200 bg-white"
-      position="absolute"
-      top={0}
+      className="text-black-600 border-1 border-gray-400 body-font border border-indigo-200 bg-white"
+      position={"fixed"}
+      top={70}
       left={0}
-      width="full"
+      width={"100%"}
       px={4}
       py={0}
-      zIndex={30}
-      style={{ height: "54px" }}
+      zIndex={70}
+      style={{ height: "52px" }}
     >
       <Flex className="container flex flex-wrap flex-col md:flex-row items-center">
         <Flex>
-          <InputGroup width="30vw" shadow="lg" className="mr-5">
-            <div className="w-full" height={"38px"}>
+          <InputGroup width="29vw" shadow="lg" className="mr-5">
+            <div className="w-full" height={"37px"}>
               <div className="w-full ml-1 bg-white p-3 rounded-3xl border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400">
                 <section className="w-full h-6 flex items-center">
                   <span className="w-10 h-full flex items-center">
@@ -831,7 +831,7 @@ const Header = (props) => {
               ml={10}
               shadow="lg"
               cursor="pointer"
-              className="border border-white-900 hover:border-white-900 hover:ring-2 hover:ring-indigo-500"
+              className="border border-white-900 hover:border-white-900 hover:ring-1 hover:ring-indigo-500"
               style={{ height: "48px" }}
             >
               <Button
@@ -855,7 +855,7 @@ const Header = (props) => {
               ml={10}
               shadow="lg"
               cursor="pointer"
-              className="border border-white-900 hover:border-white-900 hover:ring-2 hover:ring-indigo-500"
+              className="border border-white-900 hover:border-white-900 hover:ring-1 hover:ring-indigo-500"
               style={{ height: "48px" }}
             >
               <Button

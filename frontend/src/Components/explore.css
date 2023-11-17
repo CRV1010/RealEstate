@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 
-#headingExplore{
+#headingExplore {
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -15,7 +15,7 @@
     margin: 1% 2%;
 }
 
-#bottomBorder{
+#bottomBorder {
     margin-left: 39.3%;
 }
 
@@ -31,7 +31,7 @@
 
 .cards_item_explore {
     display: flex;
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
     margin: 5% 0%;
 }
@@ -60,18 +60,20 @@
     transition: transform 0.1s linear;
 }
 
-.card_text_explore:focus, .card:focus {
+.card_text_explore:focus,
+.card:focus {
     outline: 3px dashed #4a10f9;
 }
 
-.card:focus, .card:hover {
+.card:focus,
+.card:hover {
     transform: scale(1.03);
     box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.2);
 }
 
 .card_content_explore {
     padding: 0.5rem 1rem 1rem;
-    color:  #efefef;
+    color: #efefef;
 }
 
 .card_title_explore {
@@ -100,7 +102,8 @@
     }
 }
 
-.card:focus .card_title_explore, .card:hover .card_title_explore {
+.card:focus .card_title_explore,
+.card:hover .card_title_explore {
     animation: 0.5s ease-in 0s fly-in 1 both;
 }
 
@@ -185,4 +188,3 @@
         font-size: 1.325rem;
     }
 }
-

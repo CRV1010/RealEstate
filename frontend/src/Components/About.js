@@ -11,16 +11,7 @@ function About() {
   return (
     <div className="bg-slate-100">
       <div id="poster">
-        <div id="poster-welcome">
-          {/* <h1 id="poster-heading">
-              <strong> Welcome to our Home Marketplace !!! </strong>
-            </h1>
-            <p id="poster-text">
-              We help people to get home. Whether selling, buying or renting.
-              Our customers can get into their next home with speed, certainty
-              and ease...
-            </p> */}
-        </div>
+        <div id="poster-welcome"></div>
       </div>
 
       <div>
@@ -46,53 +37,57 @@ function About() {
         <div id="focusContainer">
           <div className="container cards">
             <div className="row">
-              <div className="col-md-6 ">
-                <div className="card " id="card">
-                  <div className="card-body ">
-                    <h2 className="card-title">
-                      <strong style={{ fontSize: "30px" }}> Vision </strong>
-                    </h2>
+              <div className="col-md-6">
+                <div className="card" id="card">
+                  <div className="card-body">
+                    <div className="flex flex-inline">
+                      <i className="fa fa-paper-plane" id="icon"></i>{" "}
+                      <h2 className="card-title ml-5">
+                        <strong style={{ fontSize: "30px" }}> Vision </strong>
+                      </h2>
+                      <br />
+                    </div>
                     <br />
+                    <p className="card-text">
+                      To revolutionize the Real Estate industry by creating a
+                      platform that empowers individuals and businesses to make
+                      informed property decisions with ease and happily. We
+                      envision a future where finding the perfect home or
+                      investment property is an effortless, transparent, and
+                      delightful experience for everyone. Our commitment to
+                      innovation, integrity, expertise and customer-centricity
+                      will redefine the way people buy, sell, rent and invest in
+                      real estate, fostering vibrant communities and enabling
+                      dreams of homeownership and financial growth with backup.
+                    </p>
                   </div>
-                  <br />
-                  <p className="card-text">
-                    To revolutionize the Real Estate industry by creating a
-                    platform that empowers individuals and businesses to make
-                    informed property decisions with ease and happily. We
-                    envision a future where finding the perfect home or
-                    investment property is an effortless, transparent, and
-                    delightful experience for everyone. Our commitment to
-                    innovation, integrity, expertise and customer-centricity
-                    will redefine the way people buy, sell, rent and invest in
-                    real estate, fostering vibrant communities and enabling
-                    dreams of homeownership and financial growth with backup.
-                  </p>
                 </div>
               </div>
-            </div>
-            <br />
-            <div className="col-md-6">
-              <div className="card" id="card">
-                <div className="card-body">
-                  <div className="flex flex-inline">
-                    <i className="fa fa-house-signal" id="icon"></i>
-                    <h2 className="card-title ml-5">
-                      <strong style={{ fontSize: "30px" }}> Mission </strong>
-                    </h2>{" "}
+              <br />
+              <div className="col-md-6">
+                <div className="card" id="card">
+                  <div className="card-body">
+                    <div className="flex flex-inline">
+                      <i className="fa fa-house-signal" id="icon"></i>
+                      <h2 className="card-title ml-5">
+                        <strong style={{ fontSize: "30px" }}> Mission </strong>
+                      </h2>{" "}
+                      <br />
+                    </div>
                     <br />
+                    <p className="card-text">
+                      Our mission is to provide unparalleled real estate
+                      services driven by integrity, expertise, and a relentless
+                      commitment to our clients' success. We prioritize
+                      transparency and trust in every transaction, offering
+                      personalized solutions backed by industry-leading
+                      knowledge. We aim to be a trusted partner in your property
+                      journey. Beyond transactions, we actively engage in
+                      community initiatives, support local causes, and advocate
+                      for sustainable development. Our success is synonymous
+                      with the satisfaction of our clients.
+                    </p>
                   </div>
-                  <br />
-                  <p className="card-text">
-                    Our mission is to provide unparalleled real estate services
-                    driven by integrity, expertise, and a relentless commitment
-                    to our clients' success. We prioritize transparency and
-                    trust in every transaction, offering personalized solutions
-                    backed by industry-leading knowledge. We aim to be a trusted
-                    partner in your property journey. Beyond transactions, we
-                    actively engage in community initiatives, support local
-                    causes, and advocate for sustainable development. Our
-                    success is synonymous with the satisfaction of our clients.
-                  </p>
                 </div>
               </div>
             </div>
