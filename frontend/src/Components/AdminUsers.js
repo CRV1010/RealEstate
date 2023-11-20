@@ -1,95 +1,90 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AdminUsers = () => {
-    const [userlist, setUserlist] = useState([])
-    useEffect(() => {
-      getAllUsers();
-    }, []);
-    const getAllUsers = async () =>{
-         const result = await fetch("http://localhost:5000/getAllUsers", {
-           method: "get",
-           headers: {
-             "Content-Type": "application/json",
-             authorization: `bearer ${JSON.parse(
-               localStorage.getItem("token")
-             )}`,
-           },
-         });
-         var data = await result.json();
-         
-         setUserlist(data);
-         console.log(data);
-    }
+  const [userlist, setUserlist] = useState([]);
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+  const getAllUsers = async () => {
+    const result = await fetch("http://localhost:5000/getAllUsers", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
+    var data = await result.json();
 
-    const DeleteUser = async(id) =>{
-    
-        toast.error("You are Deleting User,his Conversations and all its property...", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          rtl: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        // Delete Conversations
+    setUserlist(data);
+    console.log(data);
+  };
 
-        const res = await fetch(`http://localhost:5000/conversations/${id}`, {
-          method: "GET",
-          header: {
-            "Content-Type": "application/json",
+  const DeleteUser = async (id) => {
+    toast.error(
+      "You are Deleting User,his Conversations and all its property...",
+      {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
+    // Delete Conversations
+
+    const res = await fetch(`http://localhost:5000/conversations/${id}`, {
+      method: "GET",
+      header: {
+        "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
+    const resData = await res.json();
+    console.log(resData);
+    resData.map(async (conversationId) => {
+      console.log("conId", conversationId?.conversationId);
+      let data = await fetch(
+        `http://localhost:5000/conversations/${conversationId?.conversationId}`,
+        {
+          method: "delete",
+          headers: {
             authorization: `bearer ${JSON.parse(
               localStorage.getItem("token")
             )}`,
           },
-        });
-        const resData = await res.json();
-        console.log(resData);
-        resData.map(async (conversationId)=>{
-            console.log("conId",conversationId?.conversationId);
-            let data = await fetch(
-              `http://localhost:5000/conversations/${conversationId?.conversationId}`,
-              {
-                method: "delete",
-                headers: {
-                  authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-                }
-              }
-            );
-        })
+        }
+      );
+    });
 
+    // delete Property
+    console.log(id);
+    let data = await fetch(`http://localhost:5000/user-property-delete/${id}`, {
+      method: "delete",
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
+    data = await data.json();
+    console.log(data);
 
-        // delete Property
-        console.log(id);
-        let data = await fetch(
-          `http://localhost:5000/user-property-delete/${id}`,
-          {
-            method: "delete",
-            headers: {
-              authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-            }
-          }
-        );
-        data = await data.json();
-        console.log(data);
-       
-        // deleting user
-        let deluser = await fetch(`http://localhost:5000/delete-user/${id}`, {
-          method: "delete",
-          headers: {
-            authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-          }
-        });
-        deluser = await deluser.json();
-        console.log(deluser);
+    // deleting user
+    let deluser = await fetch(`http://localhost:5000/delete-user/${id}`, {
+      method: "delete",
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
+    deluser = await deluser.json();
+    console.log(deluser);
 
-        getAllUsers();
-    }
-    
+    getAllUsers();
+  };
 
   return (
     <div>
@@ -167,6 +162,6 @@ const AdminUsers = () => {
       </table>
     </div>
   );
-}
+};
 
-export default AdminUsers
+export default AdminUsers;

@@ -129,7 +129,7 @@ const SearchMap = () => {
         backgroundColor={"lightblue"}
         justifyContent={"center"}
         alignItems={"center"}
-        width={"99vw"}
+        width={"98vw"}
         height={"100vh"}
         maxWidth={"100vw"}
         maxHeight={"100vh"}

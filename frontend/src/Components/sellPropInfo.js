@@ -110,7 +110,7 @@ export default function () {
       },
     });
     var data = await result.json();
-    console.log("token", data);
+    // console.log("token", data);
     if (!data) {
       console.log("Something went Wrong");
       toast.error("Your Token has expired... login again", {
@@ -129,7 +129,7 @@ export default function () {
         navigate("/login");
       }, 7000);
     } else {
-      console.log(data);
+      // console.log(data);
       var temp1 = data.filter((item) => item._id === sid);
       setSeller(temp1[0].username);
       setPhone(temp1[0].phone);
@@ -157,12 +157,7 @@ export default function () {
     });
     let data = await result.json();
 
-    // let temp = [];
-    // temp = database.map(item => {
-    //     if (item._id === data._id) return data;
-    //     return item;
-    // })
-    console.log("sell page like", data);
+    // console.log("sell page like", data);
     setDatabase(data);
 
     toast.success("Thank You! For Your Interest...", {
@@ -190,7 +185,7 @@ export default function () {
       },
     });
     let result = await res.json();
-    console.log(result);
+    // console.log(result);
     navigate("/chatadmin");
   };
 
@@ -216,80 +211,42 @@ export default function () {
                   <input type="hidden" value={(sid = database.sellerId)} />
                   <div className="flex justify-between items-center">
                     <div>
-                      {/* <h1 className="sellProHead text-black"> Property Image: </h1> */}
-                      {/* <hr
-                        className="underLine underLineBG"
-                        style={{ width: "45%" }}
-                      />{" "} */}
                       <div className=" text-center">
-                        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Property Image:</h1>
+                        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
+                          Property Image:
+                        </h1>
                         <div className="h-1 w-28 bg-indigo-500 rounded"></div>
                       </div>
                     </div>
-                    {/* <div className="checkbox-wrapper mt-3 mr-10">
-                      <input
-                        id="terms-checkbox-37"
-                        name="checkbox"
-                        type="checkbox"
-                      />
-                      <label
-                        className="terms-label"
-                        htmlFor="terms-checkbox-37"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 200 200"
-                          className="checkbox-svg"
-                        >
-                          <mask fill="white" id="path-1-inside-1_476_5-37">
-                            <rect height="200" width="200"></rect>
-                          </mask>
-                          <rect
-                            mask="url(#path-1-inside-1_476_5-37)"
-                            strokeWidth="40"
-                            className="checkbox-box"
-                            height="200"
-                            width="200"
-                          ></rect>
-                          <path
-                            strokeWidth="15"
-                            d="M52 111.018L76.9867 136L149 64"
-                            className="checkbox-tick"
-                          ></path>
-                        </svg>
-                        <span className="label-text">Compare Property</span>
-                      </label>
-                    </div> */}
                   </div>
                   <br />
                   <Slider {...settings}>
                     {database.image && database.image.length > 0
                       ? database.image.map((imageName) => {
-                        return (
-                          <div className="w-full" style={{ height: "50px" }}>
-                            <h3
-                              className="proType"
-                              style={{
-                                backgroundColor: "rgb(181, 220, 142)",
-                              }}
-                            >
-                              {" "}
-                              <span style={{ color: "green" }}>
+                          return (
+                            <div className="w-full" style={{ height: "50px" }}>
+                              <h3
+                                className="proType"
+                                style={{
+                                  backgroundColor: "rgb(181, 220, 142)",
+                                }}
+                              >
                                 {" "}
-                                &#x2022;{" "}
-                              </span>
-                              {database.propertyFor}{" "}
-                            </h3>
-                            <img
-                              src={require(`../Images/${imageName}`)}
-                              key={imageName}
-                              alt="Sorry"
-                              className="proImg  w-full  rounded-lg h-96 cursor-pointer"
-                            />
-                          </div>
-                        );
-                      })
+                                <span style={{ color: "green" }}>
+                                  {" "}
+                                  &#x2022;{" "}
+                                </span>
+                                {database.propertyFor}{" "}
+                              </h3>
+                              <img
+                                src={require(`../Images/${imageName}`)}
+                                key={imageName}
+                                alt="Sorry"
+                                className="proImg  w-full  rounded-lg h-96 cursor-pointer"
+                              />
+                            </div>
+                          );
+                        })
                       : ""}
                   </Slider>
                   <div className="proAuthdetails flex">
@@ -321,9 +278,9 @@ export default function () {
                           }
                         >
                           {database.likes &&
-                            database.likes.some(
-                              (objectId) => objectId === user_id
-                            ) ? (
+                          database.likes.some(
+                            (objectId) => objectId === user_id
+                          ) ? (
                             <i
                               className="fa-solid fa-heart hover:scale-125"
                               style={{ color: "red", fontSize: "20px" }}
@@ -380,7 +337,9 @@ export default function () {
                       <br /> <br /> <br />
                       <div>
                         <div>
-                          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Properties Make Best:</h1>
+                          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
+                            Properties Make Best:
+                          </h1>
                           <div className="h-1 w-28 bg-indigo-500 rounded"></div>
                         </div>
                         {/* <h1 className="sellProHead"> Properties Make Best: </h1>
@@ -426,10 +385,12 @@ export default function () {
                             </div>
                             <div className="flex flex-nowrap overflow-x-scroll overflow-y-hidden">
                               {zoneData.map((ArrayOfObjects, index) => {
-                                // const imageNames = ArrayOfObjects.image[0];
                                 const keyId = `${ArrayOfObjects._id}`;
                                 return (
-                                  <div className="p-4 flex-none w-96 ">
+                                  <div
+                                    className="p-4 flex-none"
+                                    style={{ maxWidth: "40%" }}
+                                  >
                                     <Link
                                       to="/sellPropInfo"
                                       onClick={() => getNewPro(keyId)}
@@ -445,7 +406,7 @@ export default function () {
                                           </h2>
                                           <div className="card_image_explore">
                                             {ArrayOfObjects.image &&
-                                              ArrayOfObjects.image.length > 0 ? (
+                                            ArrayOfObjects.image.length > 0 ? (
                                               <img
                                                 src={require(`../Images/${ArrayOfObjects.image[0]}`)}
                                                 key={ArrayOfObjects.image[0]}
@@ -473,10 +434,10 @@ export default function () {
                                                   }
                                                 >
                                                   {database.likes &&
-                                                    database.likes.some(
-                                                      (objectId) =>
-                                                        objectId === user_id
-                                                    ) ? (
+                                                  database.likes.some(
+                                                    (objectId) =>
+                                                      objectId === user_id
+                                                  ) ? (
                                                     <i
                                                       className="fa-solid fa-heart"
                                                       style={{ color: "red" }}
@@ -551,26 +512,20 @@ export default function () {
                           ""
                         ) : (
                           <>
-                            {/* <div className="w-full mb-6">
-                              <h1 className="sellProHead">
-                                {" "}
-                                Get House On Your Budget:{" "}
-                              </h1>
-                              <hr
-                                className="underLine underLineBG"
-                                style={{ width: "30%" }}
-                              />
-                            </div> */}
                             <div>
-                              <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Get House On Your Budget:</h1>
+                              <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
+                                Get House On Your Budget:
+                              </h1>
                               <div className="h-1 w-28 bg-indigo-500 rounded"></div>
                             </div>
                             <div className="flex flex-nowrap overflow-x-scroll overflow-y-hidden">
                               {budgetData.map((ArrayOfObjects, index) => {
-                                // const imageNames = ArrayOfObjects.image[0];
                                 const keyId = `${ArrayOfObjects._id}`;
                                 return (
-                                  <div className="p-4 flex-none w-96 ">
+                                  <div
+                                    className="p-4 flex-none"
+                                    style={{ maxWidth: "40%" }}
+                                  >
                                     <Link
                                       to="/sellPropInfo"
                                       onClick={() => getNewPro(keyId)}
@@ -586,7 +541,7 @@ export default function () {
                                           </h2>
                                           <div className="card_image_explore">
                                             {ArrayOfObjects.image &&
-                                              ArrayOfObjects.image.length > 0 ? (
+                                            ArrayOfObjects.image.length > 0 ? (
                                               <img
                                                 src={require(`../Images/${ArrayOfObjects.image[0]}`)}
                                                 key={ArrayOfObjects.image[0]}
@@ -614,10 +569,10 @@ export default function () {
                                                   }
                                                 >
                                                   {database.likes &&
-                                                    database.likes.some(
-                                                      (objectId) =>
-                                                        objectId === user_id
-                                                    ) ? (
+                                                  database.likes.some(
+                                                    (objectId) =>
+                                                      objectId === user_id
+                                                  ) ? (
                                                     <i
                                                       className="fa-solid fa-heart"
                                                       style={{ color: "red" }}
@@ -689,19 +644,13 @@ export default function () {
                       )}
                     </div>
 
-                    <div className="authDetails py-0 my-0" >
-                      <div className="stickyDiv stickyHover bg-gray-200" >
-                        <h1
-                          className="contactSeller text-red-500"
-                          
-                        >
+                    <div className="authDetails py-0 my-6">
+                      <div className="stickyDiv stickyHover bg-gray-200">
+                        <h1 className="contactSeller text-red-500">
                           {" "}
                           KNOW YOUR SELLER{" "}
                         </h1>
-                        {/* <hr
-                          style={{ backgroundColor: "green", height: "2px" }}
-                        /> */}
-                        <div className=" h-px w-68 bg-gray-400 rounded"></div>
+                        <div className="h-px w-68 bg-gray-400 rounded"></div>
                         <input
                           className="sellerName cursor-pointer"
                           onClick={() => {

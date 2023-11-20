@@ -22,17 +22,18 @@ const PropertyList = (props) => {
   return (
     <ChakraProvider>
       <Flex
+        position={"fixed"}
         direction={"column"}
         bg={"whiteAlpha.900"}
-        width={"37vw"}
-        height="full"
+        width={"36%"}
+        height={"81%"}
         left={0}
-        mt={20}
-        zIndex={20}
+        top={115}
+        zIndex={60}
         overflow="Hidden"
         px={2}
       >
-        <Flex flex={1} overflowY={"scroll"} mt={5} direction={"column"}>
+        <Flex flex={1} overflowY={"scroll"} mt={3} direction={"column"}>
           {propertiesToDisplay.length === 0 ? (
             <Flex fontSize={"20px"} ml={"60px"} mt={"60px"}>
               Your choice property is not here.
@@ -199,28 +200,32 @@ const PropertyList = (props) => {
                     </Flex>
                   </Flex>
                   <Flex alignItems={"center"} width={"full"} ml={1}>
-                    <IoLocation
-                      height={10}
-                      width={10}
-                      // fontSize={30}
-                      color="red"
-                    />
-                    <Text
-                      fontSize={"sm"}
-                      fontWeight={"500"}
-                      color={"black.500"}
-                      ml={1}
-                    >
-                      {data.society +
-                        ", " +
-                        data.zone +
-                        ", " +
-                        data.City +
-                        ", " +
-                        data.State +
-                        ", " +
-                        data.pincode}
-                    </Text>
+                    <Flex>
+                      <IoLocation
+                        height={25}
+                        width={25}
+                        // fontSize={30}
+                        color="blue"
+                      />
+                    </Flex>
+                    <Flex>
+                      <Text
+                        fontSize={"sm"}
+                        fontWeight={"500"}
+                        color={"black.500"}
+                        ml={1}
+                      >
+                        {data.society +
+                          ", " +
+                          data.zone +
+                          ", " +
+                          data.City +
+                          ", " +
+                          data.State +
+                          ", " +
+                          data.pincode}
+                      </Text>
+                    </Flex>
                   </Flex>
                 </Flex>
               </>

@@ -1,15 +1,14 @@
 .mainProfile {
     @apply flex w-[88%] min-h-[75vh] h-auto mx-[6%] ;
-    /* background-color: rgb(197, 215, 229); */
     background-color: rgb(218, 219, 219);
 }
 
 .left-section {
-    @apply w-[30%] pb-[7%] h-[70%];
+    @apply w-[35%] pb-[9%] h-[70%];
 }
 
 .right-section {
-    @apply w-[70%] w-[70%] h-[300px];
+    @apply w-[65%] h-[70%];
     /* background-color: rgb(197, 215, 229); */
 }
 
@@ -75,7 +74,7 @@
 
 
 .profilePropertyBtn {
-    @apply text-[white] text-[1.2em] mt-[5%] px-[8%] py-[2%] rounded-[12%];
+    @apply text-[white] text-[1.2em] mt-[5%] px-[6%] py-[2%] rounded-[12%];
 }
 
 #propertyBtn {

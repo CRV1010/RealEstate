@@ -145,7 +145,13 @@ const Map = (props) => {
   }, [selectedProperty, markerPosition]);
 
   return (
-    <Box className="h-screen w-2/3 z-20 mt-20 relative align">
+    <Box
+      className="h-screen z-60 align-left"
+      right={0}
+      position={"fixed"}
+      top={110}
+      width={"64%"}
+    >
       <br />
       <MapContainer
         ref={mapRef} // Ref for the map container
@@ -297,7 +303,9 @@ const Map = (props) => {
                                 ml={1}
                                 mt={2}
                               >
-                                <IoLocation fontSize={35} color="blue" />
+                                <Flex>
+                                  <IoLocation fontSize={25} color="blue" />
+                                </Flex>
                                 <Flex className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
                                   {data.society}, {data.zone}, {data.City},{" "}
                                   {data.State}, {data.pincode}
@@ -410,7 +418,9 @@ const Map = (props) => {
                                   ml={1}
                                   mt={2}
                                 >
-                                  <IoLocation fontSize={35} color="blue" />
+                                  <Flex>
+                                    <IoLocation fontSize={25} color="blue" />
+                                  </Flex>
                                   <Flex className="ml-2 font-sans font-medium text-sm tracking-wide hover:decoration-red-200">
                                     {data.society}, {data.zone}, {data.City},{" "}
                                     {data.State}, {data.pincode}
