@@ -93,39 +93,38 @@ export default function () {
     });
 
     var data = await result.json();
-     if(!data){
-          console.log("Something went Wrong");
-          toast.error("Your Token has expired... login again", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            rtl: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setTimeout(()=>{  
-            localStorage.clear();
-            navigate("/login");
-          },7000)
-        }
-        else{
-          let pd = data[0];
-          setPd(pd);
+    if (!data) {
+      console.log("Something went Wrong");
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
+    } else {
+      let pd = data[0];
+      setPd(pd);
 
-          if (pd.propertyFor === "Sell")
-            document.getElementById("sellFor1").checked = pd.propertyFor;
-          else if (pd.propertyFor === "Rent")
-            document.getElementById("sellFor2").checked = pd.propertyFor;
-          else document.getElementById("sellFor3").checked = pd.propertyFor;
+      if (pd.propertyFor === "Sell")
+        document.getElementById("sellFor1").checked = pd.propertyFor;
+      else if (pd.propertyFor === "Rent")
+        document.getElementById("sellFor2").checked = pd.propertyFor;
+      else document.getElementById("sellFor3").checked = pd.propertyFor;
 
-          document.getElementById("type").value = pd.type;
-          document.getElementById("rooms").value = pd.rooms;
-          document.getElementById("build").value = pd.build;
-          localStorage.setItem("propDetails", JSON.stringify(pd));
-        }
+      document.getElementById("type").value = pd.type;
+      document.getElementById("rooms").value = pd.rooms;
+      document.getElementById("build").value = pd.build;
+      localStorage.setItem("propDetails", JSON.stringify(pd));
+    }
   };
 
   const clickHandler = async (e) => {

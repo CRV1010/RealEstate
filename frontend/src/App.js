@@ -76,7 +76,7 @@ function App() {
               element={
                 <>
                   <SearchMap />
-                  <Footer />
+                  {/* <Footer /> */}
                 </>
               }
             />

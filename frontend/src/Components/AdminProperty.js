@@ -3,27 +3,27 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AdminProperty = () => {
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //   const auth = localStorage.getItem("user");
-    //   if (!auth) {
-    //     navigate("/login");
-    //   }
-    // }, []);
-    const [database, setdatabase] = useState([]);
-   
-    useEffect(() => {
-      getData();
-    }, []);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   const auth = localStorage.getItem("user");
+  //   if (!auth) {
+  //     navigate("/login");
+  //   }
+  // }, []);
+  const [database, setdatabase] = useState([]);
 
-    async function getData () {
-      const result = await fetch("http://localhost:5000/get-data", {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      var data = await result.json();
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    const result = await fetch("http://localhost:5000/get-data", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    var data = await result.json();
     //   var i=0;
     //   var resu = await data.map(async(d)=>{
     //     const uname = await fetch("http://localhost:5000/getUserDetails", {
@@ -36,38 +36,35 @@ const AdminProperty = () => {
     //     var userdetail = await uname.json();
     //     d = {...d,"owner":userdetail.username}
     //   })
-      console.log(data);
-      setdatabase(data);
+    console.log(data);
+    setdatabase(data);
+  }
+
+  const DeleteProperty = async (id) => {
+    toast.error("You are Deleting property...", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      rtl: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    console.log("delete Id", id);
+    let dataprop = await fetch(`http://localhost:5000/property/${id}`, {
+      method: "delete",
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
+    });
+    dataprop = await dataprop.json();
+    if (dataprop) {
+      // alert("Record Deleted")
+      getData();
     }
-    
-    const DeleteProperty = async (id) =>{
-         toast.error(
-           "You are Deleting property...",
-           {
-             position: "top-right",
-             autoClose: 5000,
-             hideProgressBar: false,
-             closeOnClick: true,
-             rtl: false,
-             pauseOnHover: true,
-             draggable: true,
-             progress: undefined,
-             theme: "light",
-           }
-         );
-           console.log("delete Id",id);
-         let dataprop = await fetch(`http://localhost:5000/property/${id}`, {
-           method: "delete",
-           headers: {
-             authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-           }
-         });
-         dataprop = await dataprop.json();
-         if (dataprop) {
-           // alert("Record Deleted")
-           getData();
-         }
-    }
+  };
 
   return (
     <div>

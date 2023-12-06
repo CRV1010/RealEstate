@@ -90,10 +90,9 @@ const Searchbar = () => {
 
   return (
     <>
-      <Flex className="flex justify-center items-center" zIndex={100}>
-
-        <div className="w-full h-full mt-40 px-16 flex flex-col z-50 hover:opacity-90 ">
-          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border border-gray-200 hover:border-blue-500  rounded-lg drop-shadow-4xl md:drop-shadow-2xl ">
+      <Flex className="flex justify-center items-center">
+        <div className="w-full h-full px-12 flex flex-col z-40">
+          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border border-gray-200 hover:border-blue-500 rounded-lg drop-shadow-4xl md:drop-shadow-2xl ">
             <section className="w-full h-9 flex items-center">
               <span className="w-10 h-full flex items-center">
                 <i
@@ -149,7 +148,7 @@ const Searchbar = () => {
                         <img
                           src="./locicon.png"
                           alt="Placeholder"
-                          style={{ width: 20, height: 20 }}
+                          style={{ width: 22, height: 22 }}
                         />
                       </ListItemIcon>
                       <ListItemText primary={item?.display_name} />

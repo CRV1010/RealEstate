@@ -3,14 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import Swiper from 'swiper';
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
-import '../Home/swiper.css';
+import Swiper from "swiper/bundle";
+import "swiper/css/bundle";
+import "../Home/swiper.css";
 
 const Comment = () => {
-  const [comment, setComment] = useState([])
+  const [comment, setComment] = useState([]);
   const [modal1Open, setModal1Open] = useState(false);
-  let user = JSON.parse(localStorage.getItem("user"))
+  let user = JSON.parse(localStorage.getItem("user"));
   const [userName, setUserName] = useState(user?.username);
   const navigate = useNavigate();
   const [userComment, setUserComment] = useState("");
@@ -29,8 +29,8 @@ const Comment = () => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
     var data = await result.json();
     var myCommentData = [];
     for (let i = 0; i < data.length; i++) {
@@ -45,7 +45,7 @@ const Comment = () => {
       });
       var data1 = await result1.json();
       // console.log(data1);
-      if(!data1){
+      if (!data1) {
         console.log("token expire");
         // toast.error("Your Token has expired... login again", {
         //   position: "top-right",
@@ -62,16 +62,20 @@ const Comment = () => {
         //   localStorage.clear();
         //   navigate("/login");
         // }, 7000);
+      } else {
+        myCommentData.push([
+          data1?.image,
+          data1?.username,
+          data[i].comment,
+          data[i].uid,
+          data[i]._id,
+        ]);
       }
-      else{
-        myCommentData.push([data1?.image, data1?.username, data[i].comment, data[i].uid, data[i]._id]);
-      }
-
     }
     // console.log(myCommentData);
     setComment(myCommentData);
     // console.log(comment);
-  }
+  };
 
   useEffect(() => {
     getComments();
@@ -96,14 +100,12 @@ const Comment = () => {
       pagination: {
         el: ".swiper-pagination",
       },
-
     });
 
     return () => {
       swiper.destroy(); // Clean up Swiper when component is unmounted
     };
   }, []);
-
 
   const saveComment = async () => {
     const result = await fetch("http://localhost:5000/comment", {
@@ -113,7 +115,7 @@ const Comment = () => {
         "Content-Type": "application/json",
       },
     });
-    
+
     toast.success("Your Comment is added...", {
       position: "top-right",
       autoClose: 2000,
@@ -127,7 +129,7 @@ const Comment = () => {
     });
     getComments();
     setModal1Open(false);
-  }
+  };
 
   const deleteComment = async (id) => {
     toast.warning("You are Deleting Comment...", {
@@ -148,12 +150,9 @@ const Comment = () => {
     if (data) {
       getComments();
     }
-  }
-
-
+  };
 
   return (
-
     <section>
       <div className="container px-5 py-6 mx-auto">
         <div className="lg:w-1/2 w-full mb-6">
@@ -165,7 +164,7 @@ const Comment = () => {
       </div>
       <div>
         {comment ? (
-          <div className="swiper mySwiper" >
+          <div className="swiper mySwiper">
             <div className="swiper-wrapper">
               {comment.map((commentDetails) => {
                 return (
@@ -212,7 +211,6 @@ const Comment = () => {
         )}
       </div>
 
-
       <div className="p-2 w-full">
         {user ? (
           <button
@@ -223,11 +221,9 @@ const Comment = () => {
           >
             Add Comment
           </button>
-        )
-          : (
-            <div></div>
-          )
-        }
+        ) : (
+          <div></div>
+        )}
         {modal1Open && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div className="bg-white  rounded-lg w-1/3">
@@ -245,7 +241,6 @@ const Comment = () => {
               <div className="justify-center px-20 py-6">
                 <div className="mb-4">
                   <div className="sm:col-span-3">
-
                     <label
                       for="name"
                       className="leading-7 font-medium text-sm text-gray-900"
@@ -305,8 +300,7 @@ const Comment = () => {
         pauseOnHover
         theme="light"
       />
-
-    </section >
+    </section>
   );
 };
 
