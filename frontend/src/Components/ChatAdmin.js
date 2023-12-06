@@ -72,23 +72,6 @@ const ChatAdmin = () => {
             }, 7000);
           }
         }
-        // else{
-        //   toast.error("Your Token has expired... login again", {
-        //     position: "top-right",
-        //     autoClose: 5000,
-        //     hideProgressBar: false,
-        //     closeOnClick: true,
-        //     rtl: false,
-        //     pauseOnHover: true,
-        //     draggable: true,
-        //     progress: undefined,
-        //     theme: "light",
-        //   });
-        //   setTimeout(() => {
-        //     localStorage.clear();
-        //     navigate("/login");
-        //   }, 7000);
-        // }
       }
     }
     return () => {};
@@ -107,8 +90,6 @@ const ChatAdmin = () => {
   const [cid, setCid] = useState("");
   const [socket, setSocket] = useState(null);
   const messageRef = useRef(null);
-
-  // console.log(messages, "msgs");
 
   useEffect(() => {
     setSocket(io("http://localhost:5555"));
@@ -202,8 +183,6 @@ const ChatAdmin = () => {
     setReceiver(rid);
 
     setMessages({ messages: resData, receiver: users });
-    // }
-      
   };
 
   const sendMessage = async (e) => {
@@ -286,13 +265,10 @@ const ChatAdmin = () => {
               <h1 className="text-xl text-center">{user?.username}</h1>
             </div>
           </div>
-          {/* <hr /> */}
           <div className="px-5 bg-white ">
-            {/* <div>Messages</div> */}
             <div className="py-0 my-0 ">
               {conversations.length > 0 ? (
                 conversations.map(({ users, conversationId }) => {
-                  // console.log(users, conversationId);
                   return (
                     <div
                       className="flex  item-center py-4  border-b border-b-gray-300  cursor-pointer"

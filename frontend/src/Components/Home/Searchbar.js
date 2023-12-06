@@ -91,8 +91,8 @@ const Searchbar = () => {
   return (
     <>
       <Flex className="flex justify-center items-center">
-        <div className="w-full h-full px-12 flex flex-col z-40">
-          <div className="w-2/3 md:w-8/12 xl:w-1/2 bg-white p-2 border border-gray-200 hover:border-blue-500 rounded-lg drop-shadow-4xl md:drop-shadow-2xl ">
+        <div className="w-full h-full px-4 md:px-12 flex flex-col z-40"> 
+          <div className="w-full bg-white p-2 border border-gray-200 hover:border-blue-500 rounded-lg md:w-8/12 lg:w-1/2 drop-shadow-4xl md:drop-shadow-2xl">
             <section className="w-full h-9 flex items-center">
               <span className="w-10 h-full flex items-center">
                 <i

@@ -32,9 +32,9 @@ export default function () {
     });
     var data = await result.json();
 
-    console.log(data);
+    // console.log(data);
     if (!data) {
-      console.log("token expire");
+      // console.log("token expire");
       toast.error("Your Token has expired... login again", {
         position: "top-right",
         autoClose: 5000,
@@ -51,7 +51,7 @@ export default function () {
         navigate("/login");
       }, 7000);
     } else {
-      console.log("in data");
+      // console.log("in data");
       setdatabase(data);
     }
   }
@@ -106,8 +106,6 @@ export default function () {
           className="mx-auto h-1 w-28 bg-indigo-500 rounded"
         ></div>
       </div>
-      {/* <h2 id="headingExplore"> Properties for Explore </h2>
-      <div className="h-1 w-20 bg-indigo-500 rounded"></div> */}
       <div className="mainExplore" style={{ maxWidth: "85%" }}>
         <div class="flex w-full justify-center my-7 items-end">
           <div class="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">

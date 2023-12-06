@@ -220,35 +220,39 @@ export default function () {
                     </div>
                   </div>
                   <br />
-                  <Slider {...settings}>
+                  <Slider {...settings} style={{ height: "550px" }}>
                     {database.image && database.image.length > 0
                       ? database.image.map((imageName) => {
                           return (
-                            <div className="w-full" style={{ height: "50px" }}>
+                            <div
+                              className="w-full"
+                              key={imageName}
+                              style={{ height: "550px" }}
+                            >
                               <h3
                                 className="proType"
                                 style={{
                                   backgroundColor: "rgb(181, 220, 142)",
                                 }}
                               >
-                                {" "}
                                 <span style={{ color: "green" }}>
                                   {" "}
                                   &#x2022;{" "}
                                 </span>
-                                {database.propertyFor}{" "}
+                                {database.propertyFor}
                               </h3>
                               <img
                                 src={require(`../Images/${imageName}`)}
                                 key={imageName}
                                 alt="Sorry"
-                                className="proImg  w-full  rounded-lg h-96 cursor-pointer"
+                                className="proImg w-full rounded-lg object-cover cursor-pointer"
                               />
                             </div>
                           );
                         })
                       : ""}
                   </Slider>
+
                   <div className="proAuthdetails flex">
                     <div className="proDetail">
                       <h1 className="proPrice">

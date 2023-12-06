@@ -34,8 +34,8 @@ const Carousel = () => {
               </div>
             </div>
           </div>
-          <div className="absolute justify-center items-center w-11/12 mt-52 mb-0 px-4">
-            <div className="absolute w-11/12 mr-5">
+          <div className="absolute justify-center w-11/12 items-center mt-52 mb-0 px-4">
+            <div className="absolute w-full mr-5">
               <Searchbar />
             </div>
             <div className="mt-12 px-12 py-4">
