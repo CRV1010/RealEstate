@@ -173,7 +173,7 @@ const Login = () => {
                     const decode = jwt_decode(credentialResponse.credential);
                     let name = decode.name;
                     let gmail = decode.email;
-                    console.log(name, gmail);
+                    // console.log(name, gmail);
 
                     let data = await fetch(
                       "http://localhost:5000/google-check",
@@ -189,7 +189,7 @@ const Login = () => {
                       }
                     );
 
-                    console.log("result :", data);
+                    // console.log("result :", data);
                     data = await data.json();
                     if (!data) {
                       data = await fetch("http://localhost:5000/google-login", {
@@ -206,7 +206,7 @@ const Login = () => {
 
                       data = await data.json();
                     }
-                    console.log(data);
+                    // console.log(data);
                     if (data.token) {
                       localStorage.setItem("user", JSON.stringify(data.result));
                       localStorage.setItem("token", JSON.stringify(data.token));

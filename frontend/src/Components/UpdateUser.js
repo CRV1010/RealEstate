@@ -44,7 +44,13 @@ const UpdateUser = () => {
     console.log("Image Uploaded...");
     const image = result.data;
 
-    if (username !== "" && email !== "" && phone !== "" && dob !== "") {
+    if (
+      image !== "" &&
+      username !== "" &&
+      email !== "" &&
+      phone !== "" &&
+      dob !== ""
+    ) {
       let data = await fetch(`http://localhost:5000/updateUser/${id}`, {
         method: "put",
         body: JSON.stringify({
@@ -61,24 +67,23 @@ const UpdateUser = () => {
       });
 
       data = await data.json();
-      if(!data){
-         toast.error("Your Token has expired... login again", {
-           position: "top-right",
-           autoClose: 5000,
-           hideProgressBar: false,
-           closeOnClick: true,
-           rtl: false,
-           pauseOnHover: true,
-           draggable: true,
-           progress: undefined,
-           theme: "light",
-         });
-         setTimeout(() => {
-           localStorage.clear();
-           navigate("/login");
-         }, 7000);
-      }
-      else{
+      if (!data) {
+        toast.error("Your Token has expired... login again", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setTimeout(() => {
+          localStorage.clear();
+          navigate("/login");
+        }, 7000);
+      } else {
         console.log(data);
         if (data.token) {
           localStorage.setItem("user", JSON.stringify(data.result));
@@ -87,7 +92,6 @@ const UpdateUser = () => {
           // navigate("/profile");
         }
       }
-      
     } else {
       alert("You can't keep an field empty");
     }
@@ -102,8 +106,8 @@ const UpdateUser = () => {
           </h2>
           <form onSubmit={handleSubmit(clickHandler)}>
             <div className="relative mb-4">
-              <label htmlFor="" className="leading-7 text-sm text-gray-600">
-                Upload your Image*: &nbsp;{" "}
+              <label htmlFor="image" className="leading-7 text-sm text-gray-600">
+                Upload your Image:<span className="red text-lg">*</span> &nbsp;{" "}
               </label>
               <input
                 accept="image/*"
@@ -120,8 +124,8 @@ const UpdateUser = () => {
               <p className="text-sm text-red-500">{errors.image?.message}</p>
             </div>
             <div className="relative mb-4">
-              <label for="name" className="leading-7 text-sm text-gray-600">
-                Username
+              <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+                Username:<span className="red text-lg">*</span>
               </label>
               <input
                 type="text"
@@ -140,8 +144,8 @@ const UpdateUser = () => {
             </div>
 
             <div className="relative mb-4">
-              <label for="email" className="leading-7 text-sm text-gray-600">
-                Email
+              <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+                Email:<span className="red text-lg">*</span>
               </label>
               <input
                 type="email"
@@ -165,8 +169,8 @@ const UpdateUser = () => {
             </div>
 
             <div className="relative mb-4">
-              <label for="phone" className="leading-7 text-sm text-gray-600">
-                Phone No.
+              <label htmlFor="phone" className="leading-7 text-sm text-gray-600">
+                Phone No.:<span className="red text-lg">*</span>
               </label>
               <input
                 type="number"
@@ -194,8 +198,8 @@ const UpdateUser = () => {
             </div>
 
             <div className="relative mb-4">
-              <label for="dob" className="leading-7 text-sm text-gray-600">
-                Brithdate
+              <label htmlFor="dob" className="leading-7 text-sm text-gray-600">
+                Brithdate:<span className="red text-lg">*</span>
               </label>
               <input
                 type="date"
@@ -213,10 +217,7 @@ const UpdateUser = () => {
               />
               <p class="text-sm text-red-500">{errors.dob?.message}</p>
             </div>
-            <button
-              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              // onClick={clickHandler}
-            >
+            <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
               Update
             </button>
           </form>

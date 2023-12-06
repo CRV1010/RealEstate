@@ -1,8 +1,9 @@
 /* *{
     border:1px solid red;
 } */
+
 .sellProHead {
-    @apply text-[35px] font-semibold ;
+    @apply text-[35px] font-semibold;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -15,7 +16,7 @@
 }
 
 .proImg {
-    @apply w-screen;
+    @apply w-screen h-[550px];
 }
 
 .proType {
@@ -70,7 +71,7 @@
 }
 
 .stickyDiv {
-    @apply text-center sticky  mb-[5%] mx-[5%] p-[5%] rounded-xl  top-[5em] border shadow-xl hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out];
+    @apply text-center sticky mb-[5%] mx-[5%] p-[5%] rounded-xl top-[5em] border shadow-xl hover:transition-all hover:duration-[0.5s] hover:ease-[ease-in-out];
 }
 
 /* .stickyHover:hover {
