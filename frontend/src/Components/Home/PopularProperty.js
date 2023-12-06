@@ -74,7 +74,7 @@ const PopularProperty = () => {
                       ArrayOfObjects.image.length > 0 ? (
                         <img
                           className="lg:h-48 md:h-36 w-full object-cover object-center"
-                          // src={require(`../../Images/${ArrayOfObjects.image[0]}`)}
+                          src={require(`../../Images/${ArrayOfObjects.image[0]}`)}
                           key={ArrayOfObjects.image[0]}
                           alt="not fetched"
                         />
