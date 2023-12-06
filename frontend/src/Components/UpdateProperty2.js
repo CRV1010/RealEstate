@@ -99,9 +99,7 @@ export default function () {
       console.log(blob);
 
       if (prodetail.image.includes(image.name)) {
-        newImageUrls.push(
-          require(`../Images/${image.name}`)
-        );
+        newImageUrls.push(require(`../Images/${image.name}`));
       } else {
         newImageUrls.push(URL.createObjectURL(blob));
       }
@@ -131,7 +129,6 @@ export default function () {
     images.map((image) => {
       formData.append("image", image);
     });
-
     //to insert the image in my images folder and get te images names to store in database
     const result = await axios.post(
       "http://localhost:5000/upload-image", //this is api call here
@@ -141,7 +138,6 @@ export default function () {
       }
     );
 
-    console.log("Image Uploaded...");
     const imageName = result.data;
     console.log("img name", imageName);
     //Updating information to database
@@ -183,28 +179,27 @@ export default function () {
         progress: undefined,
         theme: "light",
       });
-       console.log("Data updated Successfully...");
-       setImages([]);
-       setImageURLs([]);
-       window.location.href = "/profile";
+      console.log("Data updated Successfully...");
+      setImages([]);
+      setImageURLs([]);
+      window.location.href = "/profile";
+    } else {
+      toast.error("Your Token has expired... login again", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        localStorage.clear();
+        navigate("/login");
+      }, 7000);
     }
-   else{
-    toast.error("Your Token has expired... login again", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      rtl: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-    setTimeout(() => {
-      localStorage.clear();
-      navigate("/login");
-    }, 7000);
-   }
     // navigate("/profile");
   };
 
@@ -225,7 +220,7 @@ export default function () {
             <i className="fas fa-photo-film text-imgPropIcon"></i> &ensp;
             <h2 id="centerHeading"> Property Images </h2>
           </div>
-          <br /> 
+          <br />
           <br />
           <div className="information">
             <h1 id="markLabel"> --- View Your Images --- </h1> <br />
@@ -248,10 +243,12 @@ export default function () {
                 </div>
               ))}
             </div>
-            <br /> 
+            <br />
             <br />
             <div id="formData">
-              <label htmlFor="">Upload Images:<span className="red">*</span> &nbsp; </label>
+              <label htmlFor="">
+                Upload Images:<span className="red">*</span> &nbsp;{" "}
+              </label>
               <input
                 accept="image/*"
                 type="file"

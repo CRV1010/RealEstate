@@ -366,16 +366,40 @@ const multer = require("multer");
 
 //image Schema i am importing
 const Image = require("./db/image");
+const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../frontend/src/Images/");
+     const directoryPath = "../frontend/src/Images/";
+
+     // Asynchronously check if the file exists
+     fs.access(directoryPath + file.originalname, fs.constants.F_OK, (err) => {
+       if (err) {
+         cb(null,directoryPath);
+       } else {
+         cb(null, directoryPath + "ErrorImages/");
+       }
+     });
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + file.originalname);
+    const directoryPath = "../frontend/src/Images/";
+
+    // Asynchronously check if the file exists
+    fs.access(directoryPath + file.originalname, fs.constants.F_OK, (err) => {
+      if (err) {
+        // File doesn't exist, proceed with saving the file
+        console.log(`File ${file.originalname}`);
+        cb(null, file.originalname);
+      } else {
+        // File already exists
+        console.log("Already exists. Skipping...");
+        // Skip saving the file without an error
+        cb(null, file.originalname);
+      }
+    });
   },
 });
+
 
 const upload = multer({ storage: storage });
 
@@ -387,7 +411,7 @@ app.post("/upload-image", upload.array("image"), async (req, res) => {
   const temp = req.files;
 
   const imageName = [];
-
+  console.log("Inside upload image")
   temp.map((element) => {
     imageName.push(element.filename);
   });
