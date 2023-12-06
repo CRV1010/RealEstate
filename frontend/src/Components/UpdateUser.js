@@ -27,7 +27,8 @@ const UpdateUser = () => {
 
   const clickHandler = async (e) => {
     // e.preventDefault(); //this can be useful when: Clicking on a "Submit" button, prevent it from submitting a form.
-    console.log(images);
+    
+    console.log("iamgs",images);
     const formData = new FormData();
     formData.append("image", images);
 
@@ -111,11 +112,14 @@ const UpdateUser = () => {
               <input
                 accept="image/*"
                 type="file"
-                onChange={(e) => setImages(e.target.files[0])}
                 name="image"
                 {...register("image", {
                   required: "Please upload your image",
                 })}
+                onChange={(e) => {
+                  console.log("adding image", e.target.files[0]);
+                  setImages(e.target.files[0]);
+                }}
               />
               <p className="text-sm text-red-500">{errors.image?.message}</p>
             </div>
@@ -132,6 +136,7 @@ const UpdateUser = () => {
                 value={username}
                 {...register("name", { required: "Username is required" })}
                 onChange={(e) => {
+                  console.log(e.target.value);
                   setUsername(e.target.value);
                 }}
               />
