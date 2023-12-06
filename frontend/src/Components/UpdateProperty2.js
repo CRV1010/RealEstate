@@ -129,7 +129,6 @@ export default function () {
     images.map((image) => {
       formData.append("image", image);
     });
-
     //to insert the image in my images folder and get te images names to store in database
     const result = await axios.post(
       "http://localhost:5000/upload-image", //this is api call here
@@ -139,7 +138,6 @@ export default function () {
       }
     );
 
-    console.log("Image Uploaded...");
     const imageName = result.data;
     console.log("img name", imageName);
     //Updating information to database
