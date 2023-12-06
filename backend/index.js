@@ -370,16 +370,16 @@ const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-     const directoryPath = "../frontend/src/Images/";
+    const directoryPath = "../frontend/src/Images/";
 
-     // Asynchronously check if the file exists
-     fs.access(directoryPath + file.originalname, fs.constants.F_OK, (err) => {
-       if (err) {
-         cb(null,directoryPath);
-       } else {
-         cb(null, directoryPath + "ErrorImages/");
-       }
-     });
+    // Asynchronously check if the file exists
+    fs.access(directoryPath + file.originalname, fs.constants.F_OK, (err) => {
+      if (err) {
+        cb(null, directoryPath);
+      } else {
+        cb(null, directoryPath + "ErrorImages/");
+      }
+    });
   },
   filename: function (req, file, cb) {
     const directoryPath = "../frontend/src/Images/";
@@ -400,7 +400,6 @@ const storage = multer.diskStorage({
   },
 });
 
-
 const upload = multer({ storage: storage });
 
 //getting all file(images) information
@@ -411,7 +410,7 @@ app.post("/upload-image", upload.array("image"), async (req, res) => {
   const temp = req.files;
 
   const imageName = [];
-  console.log("Inside upload image")
+  console.log("Inside upload image");
   temp.map((element) => {
     imageName.push(element.filename);
   });
@@ -421,6 +420,7 @@ app.post("/upload-image", upload.array("image"), async (req, res) => {
 
 app.post("/upload-imageProfile", upload.single("image"), async (req, res) => {
   // const temp = req.files;
+  console.log("file :", req.file.filename);
   const image = req.file.filename;
   res.send(image);
 });
