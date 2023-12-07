@@ -131,14 +131,13 @@ app.post("/otp_auth", async (req, res) => {
 app.post("/signup", async (req, res) => {
   console.log("in singnup");
   if (req.body.email) {
-      em = req.body.email;
-      let result = await user.findOne({ email: em });
-      if(result){
-        res.send(false)
-      }
-      console.log(result);
-   }
-   else{
+    em = req.body.email;
+    let result = await user.findOne({ email: em });
+    if (result) {
+      res.send(false);
+    }
+    console.log(result);
+  } else {
     const salt = await bcrypt.genSalt(10);
     let pa = await bcrypt.hash(req.body.password, salt);
     req.body.password = pa;
@@ -168,7 +167,7 @@ app.post("/signup", async (req, res) => {
         console.log("Email Sent Succesfully");
       }
     });
-   }
+  }
 });
 
 app.put("/update_password/:email", async (req, res) => {
@@ -367,6 +366,11 @@ app.post("/user-contact", async (req, res) => {
   } else {
     res.send(false);
   }
+});
+
+app.get("/user-message", async (req, res) => {
+  let data = await userMsg.find({});
+  res.send(data);
 });
 
 //   CODE FOR STORING THE IMAGE OF SELLER

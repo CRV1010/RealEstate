@@ -7,6 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function () {
   const navigate = useNavigate();
+  var user = localStorage.getItem("user");
+  const user_id = JSON.parse(user)._id;
+
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (!auth) {
@@ -92,9 +95,6 @@ export default function () {
       setdatabase(data);
     }
   }
-//   const nextPage = async () => {
-//     navigate("/otherproperty2");
-//   };
 
   return (
     <>
@@ -103,56 +103,95 @@ export default function () {
         <ul className="cardsExplore">
           {database ? (
             database.map((ArrayOfObjects, index) => {
-              const imageNames = ArrayOfObjects.image[0];
+              const imageNames = ArrayOfObjects?.image[0];
+              const keyId = `${ArrayOfObjects._id}`;
               return (
-                <li className="cards_item_explore" key={ArrayOfObjects._id}>
-                  <div className="card" tabindex="0">
-                    <h2 className="card_title_explore">
-                      {" "}
-                      {ArrayOfObjects.propertyFor} &#x2022; &#8377;
-                      {ArrayOfObjects.price}{" "}
-                    </h2>
-                    <div className="card_image_explore">
-                      {ArrayOfObjects.image &&
-                      ArrayOfObjects.image.length > 0 ? (
-                        <img
-                          src={require(`../Images/${ArrayOfObjects.image[0]}`)}
-                          key={ArrayOfObjects.image[0]}
-                          alt="not fetched"
-                        />
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                <Link
+                  to="/sellPropInfo"
+                  onClick={() => localStorage.setItem("pressCard", keyId)}
+                  key={ArrayOfObjects._id}
+                >
+                  <li className="cards_item_explore" key={ArrayOfObjects._id}>
+                    <div className="card" tabindex="0">
+                      <h2 className="card_title_explore">
+                        {" "}
+                        {ArrayOfObjects.propertyFor} &#x2022; &#8377;
+                        {ArrayOfObjects.price}{" "}
+                      </h2>
+                      <div className="card_image_explore">
+                        {ArrayOfObjects.image &&
+                        ArrayOfObjects.image.length > 0 ? (
+                          <img
+                            src={require(`../Images/${ArrayOfObjects.image[0]}`)}
+                            key={ArrayOfObjects.image[0]}
+                            alt="not fetched"
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </div>
 
-                    <div className="card_content_explore">
-                      <div className="card_text_explore">
-                        <p>
-                          {" "}
-                          <strong> Property Type: </strong>
-                          {ArrayOfObjects.type}{" "}
-                        </p>
-                        <p>
-                          {" "}
-                          <strong>Location: </strong> {ArrayOfObjects.society},{" "}
-                          {ArrayOfObjects.zone}, {ArrayOfObjects.City},{" "}
-                          {ArrayOfObjects.State}.{" "}
-                        </p>
-                        <p>
-                          {" "}
-                          <strong>Pincode: </strong> {ArrayOfObjects.pincode}{" "}
-                        </p>{" "}
-                        <br />
-                        <p className="facility_explore">
-                          {" "}
-                          <strong>Facility: </strong> {ArrayOfObjects.rooms} BHK{" "}
-                          <br /> <strong>Land Area: </strong>{" "}
-                          {ArrayOfObjects.area}{" "}
-                        </p>
+                      <div className="card_content_explore">
+                        <div className="card_text_explore">
+                          {/* {console.log(ArrayOfObjects)} */}
+                          <button value={ArrayOfObjects._id} disabled>
+                            {ArrayOfObjects.likes &&
+                            ArrayOfObjects.likes.some(
+                              (objectId) => objectId === user_id
+                            ) ? (
+                              <i
+                                className="fa-solid fa-heart"
+                                style={{ color: "red" }}
+                              ></i>
+                            ) : (
+                              <i
+                                className="fa-regular fa-heart"
+                                style={{ color: "red" }}
+                              ></i>
+                            )}
+                            &nbsp;
+                            <span
+                              style={{
+                                color: "#b4fee7",
+                                "font-weight": "600",
+                              }}
+                            >
+                              {ArrayOfObjects.likes &&
+                                ArrayOfObjects.likes.length}{" "}
+                            </span>
+                            Interested
+                          </button>
+                          <p>
+                            {" "}
+                            <strong> Property Type: </strong>
+                            {ArrayOfObjects.type}{" "}
+                          </p>
+                          <p>
+                            {" "}
+                            <strong>Location: </strong> {ArrayOfObjects.society}
+                            , {ArrayOfObjects.zone}, {ArrayOfObjects.City},{" "}
+                            {ArrayOfObjects.State}.{" "}
+                          </p>
+                          <p>
+                            {" "}
+                            <strong>Pincode: </strong> {ArrayOfObjects.pincode}{" "}
+                          </p>{" "}
+                          <br />
+                          <p className="facility_explore">
+                            {" "}
+                            <strong>Facility: </strong> {ArrayOfObjects.rooms}{" "}
+                            BHK <br /> <strong>Land Area: </strong>{" "}
+                            {ArrayOfObjects.area}
+                            <span>
+                              {" "}
+                              m<sup>2</sup>
+                            </span>{" "}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                </Link>
               );
             })
           ) : (
