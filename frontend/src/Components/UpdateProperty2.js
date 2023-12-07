@@ -11,6 +11,7 @@ export default function () {
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
   var prodetail = JSON.parse(localStorage.getItem("propDetails"));
+  const NormalorPremium = prodetail.premium;
   var imags = [];
 
   const navigate = useNavigate();
@@ -110,15 +111,37 @@ export default function () {
   }, [images]);
 
   //functions
+  // const onImageChange = (e) => {
+  //   setImages([...images, e.target.files[0]]);
+  //   console.log("tar", e.target.files[0]);
+  //   images.forEach((img) => {
+  //     console.log("My", img);
+  //   });
+  //   console.log("y", images.length);
+  //   if (images.length >= 0) setProp(false);
+  //   else setProp(true);
+  // };
+
   const onImageChange = (e) => {
-    setImages([...images, e.target.files[0]]);
-    console.log("tar", e.target.files[0]);
-    images.forEach((img) => {
-      console.log("My", img);
-    });
-    console.log("y", images.length);
-    if (images.length >= 0) setProp(false);
-    else setProp(true);
+    if (
+      (NormalorPremium == 0 && images.length < 3) ||
+      (NormalorPremium == 1 && images.length < 5)
+    ) {
+      setImages([...images, e.target.files[0]]);
+      console.log("tar", e.target.files[0]);
+      images.forEach((img) => {
+        console.log("My", img);
+      });
+      console.log("y", images.length);
+      if (images.length >= 0) setProp(false);
+      else setProp(true);
+    } else {
+      if (NormalorPremium == 0) {
+        alert("You Have Maximum image limit is 3");
+      } else {
+        alert("You Have maximum limit is 5");
+      }
+    }
   };
 
   const onaddImages = async (e) => {

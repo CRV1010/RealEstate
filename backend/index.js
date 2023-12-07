@@ -98,7 +98,7 @@ const transporter = nodemailer.createTransport({
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
     user: "sscrpmsu@gmail.com",
-    pass: "gtmmmnbhrhncobub",
+    pass: "lhzducpccuugqtgl",
   },
 });
 
@@ -130,35 +130,45 @@ app.post("/otp_auth", async (req, res) => {
 
 app.post("/signup", async (req, res) => {
   console.log("in singnup");
-  const salt = await bcrypt.genSalt(10);
-  let pa = await bcrypt.hash(req.body.password, salt);
-  req.body.password = pa;
-  let data = new user(req.body);
-  let result = await data.save();
-  result = result.toObject();
-  delete result.password;
-  jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
-    if (err) {
-      res.send("Token Expired or something went wrong");
-    } else {
-      res.send({ result, token });
-    }
-  });
+  if (req.body.email) {
+      em = req.body.email;
+      let result = await user.findOne({ email: em });
+      if(result){
+        res.send(false)
+      }
+      console.log(result);
+   }
+   else{
+    const salt = await bcrypt.genSalt(10);
+    let pa = await bcrypt.hash(req.body.password, salt);
+    req.body.password = pa;
+    let data = new user(req.body);
+    let result = await data.save();
+    result = result.toObject();
+    delete result.password;
+    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+      if (err) {
+        res.send("Token Expired or something went wrong");
+      } else {
+        res.send({ result, token });
+      }
+    });
 
-  var mailOptions = {
-    from: "sscrpmsu@gmail.com",
-    to: req.body.email,
-    subject: "Real Estate Account Register",
-    text: `Thank you ${req.body.username} for registering with us`,
-  };
+    var mailOptions = {
+      from: "sscrpmsu@gmail.com",
+      to: req.body.email,
+      subject: "Real Estate Account Register",
+      text: `Thank you ${req.body.username} for registering with us`,
+    };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email Sent Succesfully");
-    }
-  });
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email Sent Succesfully");
+      }
+    });
+   }
 });
 
 app.put("/update_password/:email", async (req, res) => {

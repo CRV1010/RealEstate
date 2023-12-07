@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { useForm } from "react-hook-form";
 
@@ -30,20 +32,20 @@ const SignUp = () => {
 
   const clickHandler = async () => {
     if (username !== "" && email !== "" && phone !== "" && password !== "") {
-      let data = await fetch("http://localhost:5000/google-check", {
-        method: "post",
-        body: JSON.stringify({
-          username,
-          email,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      data = await data.json();
+      // let data = await fetch("http://localhost:5000/google-check", {
+      //   method: "post",
+      //   body: JSON.stringify({
+      //     username,
+      //     email,
+      //   }),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+      // data = await data.json();
       var image = "avtar.png";
-      if (!data) {
-        data = await fetch("http://localhost:5000/signup", {
+      // if (!data) {
+        let data = await fetch("http://localhost:5000/signup", {
           method: "post",
           body: JSON.stringify({
             username,
@@ -56,21 +58,33 @@ const SignUp = () => {
             "Content-Type": "application/json",
           },
         });
-      }
+      // }
 
-      data = await data.json();
-      console.log(data);
-      if (data.token) {
+      data = await data?.json();
+      console.log("data",data);
+      if (data?.token) {
         localStorage.setItem("user", JSON.stringify(data.result));
         localStorage.setItem("token", JSON.stringify(data.token));
         navigate("/home");
         console.log(data);
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
       }
-
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setPhone("");
+      else{
+        toast.error("Your email has been already used...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
 
     } else {
       alert("You can't keep an empty field");
@@ -164,7 +178,10 @@ const SignUp = () => {
             </div>
 
             <div className="relative mb-4">
-              <label htmlFor="password" className="flex leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="password"
+                className="flex leading-7 text-sm text-gray-600"
+              >
                 Password :<span className="red text-lg">*</span>
               </label>
               <div className="flex w-full bg-white rounded border border-gray-300 hover:border-indigo-500 hover:ring-2 hover:ring-indigo-200 outline-none px-3 transition-colors duration-200">
@@ -190,7 +207,10 @@ const SignUp = () => {
                     setPassword(e.target.value);
                   }}
                 />
-                <div className="mr-3 mt-1 toggle-button" onClick={() => setVisible(!visible)}>
+                <div
+                  className="mr-3 mt-1 toggle-button"
+                  onClick={() => setVisible(!visible)}
+                >
                   {visible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                 </div>
               </div>
@@ -199,7 +219,7 @@ const SignUp = () => {
 
             <button
               className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            // onClick={clickHandler}
+              // onClick={clickHandler}
             >
               Sign Up
             </button>
@@ -223,7 +243,7 @@ const SignUp = () => {
                 <GoogleLogin
                   onSuccess={async (credentialResponse) => {
                     const decode = jwt_decode(credentialResponse.credential);
-                    console.log("gl",decode);
+                    console.log("gl", decode);
                     let name = decode.name;
                     let gmail = decode.email;
                     console.log(name, gmail);
@@ -250,7 +270,7 @@ const SignUp = () => {
                         body: JSON.stringify({
                           username: name,
                           email: gmail,
-                          image: 'avtar.png'
+                          image: "avtar.png",
                         }),
                         headers: {
                           "Content-Type": "application/json",
@@ -276,6 +296,18 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </section>
   );
 };
