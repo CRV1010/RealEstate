@@ -19,6 +19,7 @@ const io = require("socket.io")(5555, {
 });
 
 let global_otp;
+const expireTime = "1h";
 
 const generateOTP = () => {
   const otp = otpGenerator.generate(6, {
@@ -40,16 +41,16 @@ app.use(nocache());
 // socket io
 let userslist = [];
 io.on("connection", (socket) => {
-  console.log("User Connected", socket.id);
+  // console.log("User Connected", socket.id);
 
   socket.on("addUser", (userId) => {
     console.log("usd", userId, userslist);
     const userExists = userslist.find((userli) => userli.userId === userId);
-    console.log("exists:", userExists);
+    // console.log("exists:", userExists);
 
     if (!userExists) {
       const userli = { userId, socketId: socket.id };
-      console.log(userli);
+      // console.log(userli);
       userslist.push(userli);
       io.emit("getUsers", userslist);
     }
@@ -61,7 +62,7 @@ io.on("connection", (socket) => {
       const receiver = userslist.find((user) => user.userId === receiverId);
       const sender = userslist.find((user) => user.userId === senderId);
       const senderUser = await user.findById(senderId);
-      console.log(receiver);
+      // console.log(receiver);
       try {
         if (receiver) {
           console.log("chirag bro");
@@ -131,29 +132,27 @@ app.post("/otp_auth", async (req, res) => {
 app.post("/signup", async (req, res) => {
   console.log("in singnup");
   if (req.body.email) {
-      em = req.body.email;
-      let result = await user.findOne({ email: em });
-      if(result){
-        res.send(false)
-      }
-      console.log(result);
-   }
-   else{
-    const salt = await bcrypt.genSalt(10);
-    let pa = await bcrypt.hash(req.body.password, salt);
-    req.body.password = pa;
-    let data = new user(req.body);
-    let result = await data.save();
-    result = result.toObject();
-    delete result.password;
-    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
-      if (err) {
-        res.send("Token Expired or something went wrong");
-      } else {
-        res.send({ result, token });
-      }
-    });
-
+    em = req.body.email;
+    let result = await user.findOne({ email: em });
+    console.log("re", result);
+    if (result) {
+      res.send(false);
+    } else {
+      const salt = await bcrypt.genSalt(10);
+      let pa = await bcrypt.hash(req.body.password, salt);
+      req.body.password = pa;
+      let data = new user(req.body);
+      let result = await data.save();
+      result = result.toObject();
+      delete result.password;
+      jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
+        if (err) {
+          res.send("Token Expired or something went wrong");
+        } else {
+          res.send({ result, token });
+        }
+      });
+    }
     var mailOptions = {
       from: "sscrpmsu@gmail.com",
       to: req.body.email,
@@ -168,7 +167,7 @@ app.post("/signup", async (req, res) => {
         console.log("Email Sent Succesfully");
       }
     });
-   }
+  }
 });
 
 app.put("/update_password/:email", async (req, res) => {
@@ -203,7 +202,7 @@ app.post("/login", async (req, res) => {
         res.send({ result: "Wrong Password" });
       }
       result.password = undefined;
-      jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+      jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
         if (err) {
           console.log("Token Expired");
           res.send("Token Expired or something went wrong");
@@ -227,7 +226,7 @@ app.post("/google-check", async (req, res) => {
   if (result) {
     // console.log("hi");
     result = result.toObject();
-    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+    jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
       if (err) {
         res.send("Token Expired or something went wrong");
       } else {
@@ -243,7 +242,7 @@ app.post("/google-login", async (req, res) => {
   let data = new user(req.body);
   let result = await data.save();
   result = result.toObject();
-  jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+  jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
     if (err) {
       res.send("Token Expired or something went wrong");
     } else {
@@ -367,6 +366,11 @@ app.post("/user-contact", async (req, res) => {
   } else {
     res.send(false);
   }
+});
+
+app.get("/user-message", async (req, res) => {
+  let data = await userMsg.find({});
+  res.send(data);
 });
 
 //   CODE FOR STORING THE IMAGE OF SELLER

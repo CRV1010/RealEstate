@@ -90,14 +90,14 @@ const PopularProperty = () => {
                           Price : {ArrayOfObjects.price}
                         </h1>
                         <p className="leading-relaxed mb-3">
-                          <strong>Location: </strong> {ArrayOfObjects.society},{" "}
+                          <strong>Location : </strong> {ArrayOfObjects.society},{" "}
                           {ArrayOfObjects.zone}, {ArrayOfObjects.City},{" "}
                           {ArrayOfObjects.State}.{" "}
                         </p>
                         <div className="flex items-center flex-wrap ">
-                          <strong> Property Type: </strong>
+                          <strong> Property Type : &nbsp;</strong>
                           {ArrayOfObjects.type}{" "}
-                          <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                          <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-3 border-r-2 border-gray-200">
                             <button value={ArrayOfObjects._id} disabled>
                               {ArrayOfObjects.likes &&
                               ArrayOfObjects.likes.some(

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Swiper from 'swiper';
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 import "../Home/swiper.css";
@@ -14,6 +14,12 @@ const Comment = () => {
   const [userName, setUserName] = useState(user?.username);
   const navigate = useNavigate();
   const [userComment, setUserComment] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const openModal = (propertyFor) => {
     localStorage.setItem("propertyFor", propertyFor);
@@ -34,34 +40,16 @@ const Comment = () => {
     var data = await result.json();
     var myCommentData = [];
     for (let i = 0; i < data.length; i++) {
-      // console.log(data[i].uid);
       const result1 = await fetch("http://localhost:5000/getUserDetail", {
         method: "post",
         body: JSON.stringify({ _id: data[i].uid }),
         headers: {
           "Content-Type": "application/json",
-          // authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
       var data1 = await result1.json();
-      // console.log(data1);
       if (!data1) {
         console.log("token expire");
-        // toast.error("Your Token has expired... login again", {
-        //   position: "top-right",
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   rtl: false,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
-        // setTimeout(() => {
-        //   localStorage.clear();
-        //   navigate("/login");
-        // }, 7000);
       } else {
         myCommentData.push([
           data1?.image,
@@ -72,9 +60,7 @@ const Comment = () => {
         ]);
       }
     }
-    // console.log(myCommentData);
     setComment(myCommentData);
-    // console.log(comment);
   };
 
   useEffect(() => {
@@ -107,7 +93,7 @@ const Comment = () => {
     };
   }, []);
 
-  const saveComment = async () => {
+  const clickHandler = async () => {
     const result = await fetch("http://localhost:5000/comment", {
       method: "post",
       body: JSON.stringify({ uid: user._id, comment: userComment }),
@@ -225,79 +211,78 @@ const Comment = () => {
           <div></div>
         )}
         {modal1Open && (
-          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="bg-white  rounded-lg w-3/5">
-              <div className="mb-4 py-2  flex bg-indigo-400 rounded">
-                <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
-                  Review
-                </span>
-                <button
-                  onClick={closeModal1}
-                  className="text-white font-bold text-xl px-3"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="px-5 py-7 sm:py-15 mx-auto flex flex-wrap items-center justify-center">
-
-                <div className="lg:w-2/6 md:w-2/6 bg-gray-100 items-center mx-5 justify-center rounded-lg flex flex-col w-full mt-10 md:mt-0">
-                  <img alt="ecommerce" class="w-full object-cover object-center rounded scale-110" src="../loginSignup/comment3.png" />
+          <form onSubmit={handleSubmit(clickHandler)}>
+            <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+              <div className="bg-white  rounded-lg w-1/3">
+                <div className="mb-4 py-2  flex bg-indigo-400 rounded">
+                  <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
+                    Review
+                  </span>
+                  <button
+                    onClick={closeModal1}
+                    className="text-white font-bold text-xl px-3"
+                  >
+                    ✕
+                  </button>
                 </div>
-
-                <div className="lg:w-2/6 md:w-2/6 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
-                  <div className="justify-center py-6">
-                    <div className="mb-4">
-                      <div className="sm:col-span-3">
-                        <label
-                          for="name"
-                          className="leading-7 font-medium text-sm text-gray-900"
-                        >
-                          Name
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={userName}
-                          onChange={(e) => setUserName(e.target.value)}
-                          autoFocus
-                          className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                        ></input>
-                      </div>
-                    </div>
-                    <div className="mb-4">
-                      <div className="sm:col-span-3">
-                        <label
-                          for="message"
-                          className="leading-7 font-medium text-sm text-gray-900"
-                        >
-                          Comment
-                        </label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          value={userComment}
-                          onChange={(e) => setUserComment(e.target.value)}
-                          className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                        ></textarea>
-                      </div>
+                <div className="justify-center px-20 py-6">
+                  <div className="mb-4">
+                    <div className="sm:col-span-3">
+                      <label
+                        for="name"
+                        className="leading-7 font-medium text-sm text-gray-900"
+                      >
+                        User Name : <span className="red">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={userName}
+                        {...register("username", {
+                          required: "Username is required",
+                        })}
+                        onChange={(e) => setUserName(e.target.value)}
+                        autoFocus
+                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                      <p className="text-sm text-red-500">
+                        {errors.username?.message}
+                      </p>
                     </div>
                   </div>
-                  <div className=" pb-6">
-                    <button
-                      onClick={saveComment}
-                      className="bg-indigo-500 text-white font-semibold px-5 mr-6 py-2 rounded hover:bg-indigo-700"
-                    >
-                      Post Comment
-                    </button>
+                  <div className="mb-4">
+                    <div className="sm:col-span-3">
+                      <label
+                        for="message"
+                        className="leading-7 font-medium text-sm text-gray-900"
+                      >
+                        Comment : <span className="red">*</span>
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={userComment}
+                        {...register("message", {
+                          required: "Please enter your comment!",
+                        })}
+                        onChange={(e) => setUserComment(e.target.value)}
+                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                      />
+                      <p className="text-sm text-red-500">
+                        {errors.message?.message}
+                      </p>
+                    </div>
                   </div>
                 </div>
-
+                <div className="px-20 pb-6">
+                  <button className="bg-indigo-500 text-white font-semibold px-5 mr-6 py-2 rounded hover:bg-indigo-700">
+                    Post Comment
+                  </button>
+                </div>
               </div>
-
-
             </div>
-          </div>
+          </form>
         )}
       </div>
       <ToastContainer
