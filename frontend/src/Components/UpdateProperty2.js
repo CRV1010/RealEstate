@@ -137,9 +137,29 @@ export default function () {
       else setProp(true);
     } else {
       if (NormalorPremium == 0) {
-        alert("You Have Maximum image limit is 3");
+        toast.success("You Have Reach the Maximum Image Limit is 3...", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
-        alert("You Have maximum limit is 5");
+        toast.success("You Have Reach the Maximum Image Limit is 5...", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          rtl: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     }
   };
@@ -207,7 +227,7 @@ export default function () {
       setImageURLs([]);
       window.location.href = "/profile";
     } else {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -270,7 +290,7 @@ export default function () {
             <br />
             <div id="formData">
               <label htmlFor="">
-                Upload Images:<span className="red">*</span> &nbsp;{" "}
+                Upload Images:&nbsp;<span className="red">*</span> &nbsp;{" "}
               </label>
               <input
                 accept="image/*"

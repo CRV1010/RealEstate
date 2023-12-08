@@ -188,7 +188,7 @@ export default function () {
             <div>
               <div>
                 <label id="radio">
-                  Property For :<span className="red">*</span>
+                  Property For:&nbsp;<span className="red">*</span>
                 </label>{" "}
                 &emsp;
                 <label id="radio">
@@ -254,7 +254,7 @@ export default function () {
               <div>
                 <label>
                   {" "}
-                  Type of Property :<span className="red">*</span>{" "}
+                  Type of Property:&nbsp;<span className="red">*</span>{" "}
                 </label>
                 <select
                   id="type"
@@ -290,7 +290,7 @@ export default function () {
             <div>
               <div className="text-dark">
                 <label className="form-label">
-                  State :<span className="red">*</span> &ensp;
+                  State:&nbsp;<span className="red">*</span> &ensp;
                 </label>
                 <select
                   name="State"
@@ -322,7 +322,7 @@ export default function () {
             <div>
               <div className="text-dark">
                 <label className="form-label">
-                  City :<span className="red">*</span> &ensp;
+                  City:&nbsp;<span className="red">*</span> &ensp;
                 </label>
                 <select
                   name="City"
@@ -353,7 +353,7 @@ export default function () {
             </div>
             <div>
               <label>
-                Area/Street No. :<span className="red">*</span> &ensp;
+                Area/Street No.:&nbsp;<span className="red">*</span> &ensp;
               </label>
               <input
                 type="text"
@@ -373,7 +373,7 @@ export default function () {
             </div>
             <div>
               <label>
-                Flat no./Apartment/Society :<span className="red">*</span>{" "}
+                Flat no./Apartment/Society:&nbsp;<span className="red">*</span>{" "}
                 &ensp;
               </label>
               <input
@@ -396,7 +396,7 @@ export default function () {
             <div>
               <label>
                 {" "}
-                Pincode :<span className="red">*</span> &ensp;{" "}
+                Pincode:&nbsp;<span className="red">*</span> &ensp;{" "}
               </label>
               <input
                 type="text"
@@ -425,7 +425,7 @@ export default function () {
             <div>
               <label>
                 {" "}
-                Plot/Land Area (in m<sup>2</sup>) :
+                Plot/Land Area (in m<sup>2</sup>):&nbsp;
                 <span className="red">*</span> &ensp;{" "}
               </label>
               <input
@@ -461,7 +461,7 @@ export default function () {
             <div>
               <div>
                 <label>
-                  No. of Bedrooms(BHK) :<span className="red">*</span> &ensp;
+                  No. of Bedrooms(BHK):&nbsp;<span className="red">*</span> &ensp;
                 </label>
                 <select
                   id="rooms"
@@ -491,7 +491,7 @@ export default function () {
             <div>
               <div>
                 <label>
-                  Build In (Year):<span className="red">*</span> &ensp;
+                  Build In (Year):&nbsp;<span className="red">*</span> &ensp;
                 </label>
                 <input
                   className="sellField"
@@ -522,7 +522,7 @@ export default function () {
             </div>
             <div>
               <label>
-                Expected Price (&#8377;) :<span className="red">*</span> &ensp;
+                Expected Price (&#8377;):&nbsp;<span className="red">*</span> &ensp;
               </label>
               <input
                 type="text"

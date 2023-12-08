@@ -134,7 +134,7 @@ const PopularProperty = () => {
               );
             })
           ) : (
-            <div>No Property</div>
+            <div>We don't have any Popular Property.</div>
           )}
         </div>
       </div>

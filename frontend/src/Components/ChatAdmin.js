@@ -55,7 +55,7 @@ const ChatAdmin = () => {
           });
           const resData = await res.json();
           if(!resData){
-            toast.error("Your Token has expired... login again", {
+            toast.error("Your Token has expired... Login again", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -218,7 +218,7 @@ const ChatAdmin = () => {
       console.log(resData);
     }
     else{
-        toast.error("Your Token has expired... login again", {
+        toast.error("Your Token has expired... Login again", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

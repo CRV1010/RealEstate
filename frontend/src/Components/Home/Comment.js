@@ -193,7 +193,7 @@ const Comment = () => {
             </div>
           </div>
         ) : (
-          <div> Sorry ! No Comment </div>
+          <div> Apologize to No Comments Yet Post </div>
         )}
       </div>
 

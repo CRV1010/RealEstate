@@ -41,7 +41,7 @@ const ContactUs = () => {
       setEmail("");
       setMessage("");
     } else {
-      alert("error in sending message");
+      alert("Error in sending message");
     }
   };
   return (
@@ -65,7 +65,7 @@ const ContactUs = () => {
                   name="call"
                   className="text-teal-300 text-xl"
                 ></ion-icon>
-                <span>+(123) 456 7890</span>
+                <span>+(91) 856 165 1936</span>
               </div>
               <div className="inline-flex space-x-2 items-center">
                 <ion-icon
@@ -111,7 +111,7 @@ const ContactUs = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="Your name"
+                    placeholder="Enter Your name"
                     value={username}
                     {...register("username", {
                       required: "Your name is required",
@@ -142,7 +142,7 @@ const ContactUs = () => {
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
-                    placeholder="Your Email Address"
+                    placeholder="Enter Your Email Address"
                     className="ring ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-teal-300"
                   />
                   <p className="text-sm text-red-500">
@@ -154,7 +154,7 @@ const ContactUs = () => {
                     Message : <span className="red">*</span>
                   </label>
                   <textarea
-                    placeholder="Message"
+                    placeholder="Write Your Message Here..."
                     rows="4"
                     value={message}
                     {...register("message", {

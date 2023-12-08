@@ -30,7 +30,7 @@ export default function (props) {
     var data = await result.json();
     if (!data) {
       console.log("token expire");
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -85,7 +85,7 @@ export default function (props) {
   }
 
   const deleteProperty = async (id) => {
-    toast.success("You are Deleting Property...", {
+    toast.success("Property Deleted Successfully...", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -108,7 +108,7 @@ export default function (props) {
       getPropertyData();
     } else {
       console.log("token expire");
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -141,7 +141,7 @@ export default function (props) {
     });
     var data = await result.json();
     if (!data) {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -163,7 +163,7 @@ export default function (props) {
       console.log("md", pd.modified);
 
       if (pd.modified == 1) {
-        toast.warning("You have Reached max limit of Updation...", {
+        toast.warning("Apologies to Say You Reach Maximum Limit of Updation...", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -266,7 +266,7 @@ export default function (props) {
                 </h2>
                 <h2 id="proField" className="proFieldHover">
                   <strong>
-                    Brithdate: {UserDetails?.dob?.substring(0, 10)}
+                    Birthdate: {UserDetails?.dob?.substring(0, 10)}
                   </strong>
                 </h2>
                 <div id="proUpdate">
@@ -449,7 +449,7 @@ export default function (props) {
               </div>
             </div>
           ) : (
-            <div> Sorry ! Data is not Fetched... </div>
+            <div> Keep wait! Data Fetching is in Processing... </div>
           )}
         </div>
       </div>
