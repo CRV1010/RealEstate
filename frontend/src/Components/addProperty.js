@@ -45,7 +45,7 @@ export default function (props) {
   //functions
   const onImageChange = (e) => {
     if (totalAmount == 999 && images.length == 3) {
-      toast.warning("Sorry You Have Max Limit of images is 3", {
+      toast.warning("Pro version support only 3 Image. You can't add it more.", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -58,7 +58,7 @@ export default function (props) {
       });
       // alert("Sorry You Have Max Limit of images is 3");
     } else if (totalAmount == 1999 && images.length == 5) {
-      toast.warning("Sorry You Have Max Limit of images is 5", {
+      toast.warning("Premium version support only 5 Image. You can't add it more.", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -126,7 +126,7 @@ export default function (props) {
     data = await data.json();
     if (!data) {
       console.log("token expire");
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -143,7 +143,7 @@ export default function (props) {
       }, 7000);
     } else {
       console.log("Data Inserted Successfully...");
-      toast.success("Your Property is added for Sell", {
+      toast.success("Congratulation! Your Property is added for Selling...", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,

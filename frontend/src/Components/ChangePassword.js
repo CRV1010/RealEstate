@@ -34,12 +34,26 @@ const ChangePassword = () => {
           }
         );
 
+        function successNoty() {
+          toast.success("Password change successfully. You may proceed for login...", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }); 
+        }
+
         data = await data.json();
         console.log(data);
         if (data) {
-          localStorage.clear();
-          alert("Password has changed succesfully click ok to login");
           navigate("/login");
+          localStorage.clear();
+          setTimeout(successNoty, 1000);
         } else {
           toast.error("Oops! Changing password is failed...", {
             position: "top-right",
@@ -54,7 +68,7 @@ const ChangePassword = () => {
           });
         }
       } else {
-        toast.warning("Attention! Password don't match...", {
+        toast.warning("Attention! Password didn't match...", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -67,7 +81,17 @@ const ChangePassword = () => {
         });
       }
     } else {
-      console.log("Password sholud be filled");
+      toast.error("Error: Password must be filled...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -166,7 +190,7 @@ const ChangePassword = () => {
                 className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                 // onClick={clickHandler}
               >
-                Confirm Password
+                Update Password
               </button>
 
               <ToastContainer

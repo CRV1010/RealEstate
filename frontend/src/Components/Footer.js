@@ -150,7 +150,7 @@ const Footer = () => {
               className="text-gray-600 ml-1"
               target="_blank"
             >
-              @knyttneve
+              @sscrp
             </a>
           </p>
         </div>

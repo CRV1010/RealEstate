@@ -87,7 +87,7 @@ const AdminPage = () => {
         }
       );
       if (!data) {
-        toast.error("Your Token has expired... login again", {
+        toast.error("Your Token has expired... Login again.", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -105,9 +105,7 @@ const AdminPage = () => {
       }
     });
 
-    toast.error(
-      "You are Deleting User,his Conversations ,comments and all its property...",
-      {
+    toast.success("Successfully deleted User, his Conversations, Comments and all its property...",{
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -129,7 +127,7 @@ const AdminPage = () => {
     });
     data = await data.json();
     if (!data) {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -157,7 +155,7 @@ const AdminPage = () => {
     });
     let commentDel = await delcomment.json();
     if (!commentDel) {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -183,7 +181,7 @@ const AdminPage = () => {
     });
     deluser = await deluser.json();
     if (!data) {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -217,7 +215,7 @@ const AdminPage = () => {
     console.log(data);
     if (!data) {
       console.log("token expire");
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -248,7 +246,7 @@ const AdminPage = () => {
     });
     dataprop = await dataprop.json();
     if (dataprop) {
-      toast.error("You are Deleting property...", {
+      toast.success("Successfully deleted property...", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -261,7 +259,7 @@ const AdminPage = () => {
       });
       getData();
     } else {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

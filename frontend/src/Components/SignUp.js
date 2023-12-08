@@ -87,7 +87,17 @@ const SignUp = () => {
       }
 
     } else {
-      alert("You can't keep an empty field");
+      toast.error("Please fill all the required field...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -102,7 +112,7 @@ const SignUp = () => {
           <form onSubmit={handleSubmit(clickHandler)}>
             <div className="relative mb-4">
               <label for="name" className="leading-7 text-sm text-gray-600">
-                Username :<span className="red text-lg">*</span>
+                Username:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
                 type="text"
@@ -121,7 +131,7 @@ const SignUp = () => {
 
             <div className="relative mb-4">
               <label for="email" className="leading-7 text-sm text-gray-600">
-                Email :<span className="red text-lg">*</span>
+                Email:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
                 type="email"
@@ -146,7 +156,7 @@ const SignUp = () => {
 
             <div className="relative mb-4">
               <label for="phone" className="leading-7 text-sm text-gray-600">
-                Phone No. :<span className="red text-lg">*</span>
+                Phone No.:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
                 type="text"
@@ -182,7 +192,7 @@ const SignUp = () => {
                 htmlFor="password"
                 className="flex leading-7 text-sm text-gray-600"
               >
-                Password :<span className="red text-lg">*</span>
+                Password:&nbsp;<span className="red text-lg">*</span>
               </label>
               <div className="flex w-full bg-white rounded border border-gray-300 hover:border-indigo-500 hover:ring-2 hover:ring-indigo-200 outline-none px-3 transition-colors duration-200">
                 <input
@@ -288,7 +298,17 @@ const SignUp = () => {
                   }}
                   onError={() => {
                     console.log("Login Failed");
-                    alert("something went wrong");
+                    toast.error("Something went wrong...", {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      rtl: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
                   }}
                 />
               </div>

@@ -22,7 +22,7 @@ const AdminMsg = () => {
   return (
     <div class="flex">
       {userMessage ?
-       (userMessage?.map((usermsg, index) => {
+        (userMessage?.map((usermsg, index) => {
             return (
               <div
                 key={index}

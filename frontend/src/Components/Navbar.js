@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -15,6 +15,7 @@ const Navbar = () => {
   };
 
   const logout = () => {
+    setShowDropdown(false)
     localStorage.clear();
     navigate("/signup");
   };
@@ -105,25 +106,31 @@ const Navbar = () => {
                   height={48}
                   className="rounded-full"
                 />
-                {showDropdown && (
-                  <div className="dropdown-menu absolute bg-white rounded-md shadow-md mt-2">
-                    <div className="dropdown-item py-1 px-4">
-                      <Link className="font-semibold" to="/profile">
-                        Profile
-                      </Link>
-                    </div>
-                    <hr />
-                    <div className="dropdown-item py-2 px-4">
-                      <Link
-                        className="font-semibold"
-                        onClick={logout}
-                        to="/signup"
-                      >
-                        Logout
-                      </Link>
-                    </div>
-                  </div>
-                )}
+                <div
+                  className="dropdown-menu absolute bg-white rounded-md shadow-md"
+                  onMouseEnter={handleMouseEnter} // Keep dropdown visible when hovering over it
+                  onMouseLeave={handleMouseLeave} // Hide dropdown when leaving the parent container
+                >
+                  {showDropdown && (
+                    <>
+                      <div className="dropdown-item py-1 px-4">
+                        <Link className="font-semibold" to="/profile">
+                          Profile
+                        </Link>
+                      </div>
+                      <hr />
+                      <div className="dropdown-item py-2 px-4">
+                        <Link
+                          className="font-semibold"
+                          onClick={logout}
+                          to="/signup"
+                        >
+                          Logout
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             </>
           ) : (

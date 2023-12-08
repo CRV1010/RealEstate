@@ -35,7 +35,7 @@ export default function () {
     // console.log(data);
     if (!data) {
       // console.log("token expire");
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -71,7 +71,7 @@ export default function () {
       } else {
         // console.log("I dont no ke");
         console.log("token expire");
-        toast.error("Your Token has expired... login again", {
+        toast.error("Your Token has expired... Login again", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

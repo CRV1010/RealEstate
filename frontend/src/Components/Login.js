@@ -58,7 +58,17 @@ const Login = () => {
         });
       }
     } else {
-      alert("can't left field empty");
+      toast.warning("Please fill all the field...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -215,7 +225,17 @@ const Login = () => {
                   }}
                   onError={() => {
                     console.log("Login Failed");
-                    alert("something went wrong");
+                    toast.error("Something went wrong...", {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      rtl: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
                   }}
                 />
               </div>

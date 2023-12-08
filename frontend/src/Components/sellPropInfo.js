@@ -57,7 +57,7 @@ export default function () {
 
     var data = await result.json();
     if (!data) {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -113,7 +113,7 @@ export default function () {
     // console.log("token", data);
     if (!data) {
       console.log("Something went Wrong");
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

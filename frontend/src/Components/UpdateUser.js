@@ -68,7 +68,7 @@ const UpdateUser = () => {
 
       data = await data.json();
       if (!data) {
-        toast.error("Your Token has expired... login again", {
+        toast.error("Your Token has expired... Login again", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -107,7 +107,7 @@ const UpdateUser = () => {
           <form onSubmit={handleSubmit(clickHandler)}>
             <div className="relative mb-4">
               <label htmlFor="image" className="leading-7 text-sm text-gray-600">
-                Upload your Image:<span className="red text-lg">*</span> &nbsp;{" "}
+                Upload your Image:&nbsp;<span className="red text-lg">*</span> &nbsp;{" "}
               </label>
               <input
                 accept="image/*"
@@ -125,7 +125,7 @@ const UpdateUser = () => {
             </div>
             <div className="relative mb-4">
               <label htmlFor="name" className="leading-7 text-sm text-gray-600">
-                Username:<span className="red text-lg">*</span>
+                Username:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
                 type="text"
@@ -145,7 +145,7 @@ const UpdateUser = () => {
 
             <div className="relative mb-4">
               <label htmlFor="email" className="leading-7 text-sm text-gray-600">
-                Email:<span className="red text-lg">*</span>
+                Email:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
                 type="email"
@@ -170,7 +170,7 @@ const UpdateUser = () => {
 
             <div className="relative mb-4">
               <label htmlFor="phone" className="leading-7 text-sm text-gray-600">
-                Phone No.:<span className="red text-lg">*</span>
+                Phone No.:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
                 type="number"
@@ -199,7 +199,7 @@ const UpdateUser = () => {
 
             <div className="relative mb-4">
               <label htmlFor="dob" className="leading-7 text-sm text-gray-600">
-                Brithdate:<span className="red text-lg">*</span>
+                Brithdate:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
                 type="date"
