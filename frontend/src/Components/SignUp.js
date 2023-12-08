@@ -45,23 +45,23 @@ const SignUp = () => {
       // data = await data.json();
       var image = "avtar.png";
       // if (!data) {
-        let data = await fetch("http://localhost:5000/signup", {
-          method: "post",
-          body: JSON.stringify({
-            username,
-            email,
-            phone,
-            password,
-            image
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+      let data = await fetch("http://localhost:5000/signup", {
+        method: "post",
+        body: JSON.stringify({
+          username,
+          email,
+          phone,
+          password,
+          image
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       // }
 
       data = await data?.json();
-      console.log("data",data);
+      console.log("data", data);
       if (data?.token) {
         localStorage.setItem("user", JSON.stringify(data.result));
         localStorage.setItem("token", JSON.stringify(data.token));
@@ -72,7 +72,7 @@ const SignUp = () => {
         setPassword("");
         setPhone("");
       }
-      else{
+      else {
         toast.error("Your email has been already used...", {
           position: "top-right",
           autoClose: 5000,
@@ -93,9 +93,15 @@ const SignUp = () => {
 
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 md:py-24 sm:py-15 mx-auto flex flex-wrap items-center">
-        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:mx-auto w-full mt-10 md:mt-0">
-          <h2 className="text-gray-900 text-lg font-medium title-font text-2xl mb-5 text-center">
+      <div className="container px-5 md:py-24 sm:py-15 mx-auto flex flex-wrap items-center justify-center">
+
+
+        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 items-center mr-5 justify-center rounded-lg flex flex-col w-full mt-10 md:mt-0">
+          <img alt="ecommerce" class="w-full object-cover object-center rounded" src="../loginSignup/signup1.jpg" />
+        </div>
+
+        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg flex flex-col p-8 w-full mt-10 md:mt-0">
+          <h2 className="text-gray-900 font-medium title-font text-2xl mb-5 text-center">
             Sign Up
           </h2>
 
@@ -219,7 +225,7 @@ const SignUp = () => {
 
             <button
               className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              // onClick={clickHandler}
+            // onClick={clickHandler}
             >
               Sign Up
             </button>

@@ -63,10 +63,15 @@ const Login = () => {
   };
 
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container px-5 md:py-24 sm:py-15 mx-auto flex flex-wrap items-center">
-        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md: mx-auto w-full mt-10 md:mt-0">
-          <h2 className="text-gray-900 text-lg font-medium  text-2xl title-font mb-5 text-center">
+    <section className="text-gray-600 body-font ">
+      <div className="container px-5 md:py-24 sm:py-15 mx-auto flex flex-wrap items-center justify-center">
+
+        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 items-center mr-5 justify-center rounded-lg flex flex-col w-full mt-10 md:mt-0">
+          <img alt="ecommerce" class="w-full object-cover object-center rounded" src="../loginSignup/login7.jpg" />
+        </div>
+
+        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
+          <h2 className="text-gray-900 font-medium  text-2xl title-font mb-5 text-center">
             Login
           </h2>
           <form onSubmit={handleSubmit(clickHandler)}>
@@ -145,7 +150,7 @@ const Login = () => {
             </p>
             <button
               className="text-white bg-indigo-500 border-0 py-2 mt-4 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              // onClick={clickHandler}
+            // onClick={clickHandler}
             >
               Login
             </button>
@@ -235,6 +240,7 @@ const Login = () => {
             theme="light"
           />
         </div>
+
       </div>
     </section>
   );

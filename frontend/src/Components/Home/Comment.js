@@ -226,7 +226,7 @@ const Comment = () => {
         )}
         {modal1Open && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="bg-white  rounded-lg w-1/3">
+            <div className="bg-white  rounded-lg w-3/5">
               <div className="mb-4 py-2  flex bg-indigo-400 rounded">
                 <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
                   Review
@@ -238,52 +238,64 @@ const Comment = () => {
                   ✕
                 </button>
               </div>
-              <div className="justify-center px-20 py-6">
-                <div className="mb-4">
-                  <div className="sm:col-span-3">
-                    <label
-                      for="name"
-                      className="leading-7 font-medium text-sm text-gray-900"
+              <div className="px-5 py-7 sm:py-15 mx-auto flex flex-wrap items-center justify-center">
+
+                <div className="lg:w-2/6 md:w-2/6 bg-gray-100 items-center mx-5 justify-center rounded-lg flex flex-col w-full mt-10 md:mt-0">
+                  <img alt="ecommerce" class="w-full object-cover object-center rounded scale-110" src="../loginSignup/comment3.png" />
+                </div>
+
+                <div className="lg:w-2/6 md:w-2/6 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
+                  <div className="justify-center py-6">
+                    <div className="mb-4">
+                      <div className="sm:col-span-3">
+                        <label
+                          for="name"
+                          className="leading-7 font-medium text-sm text-gray-900"
+                        >
+                          Name
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={userName}
+                          onChange={(e) => setUserName(e.target.value)}
+                          autoFocus
+                          className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <div className="sm:col-span-3">
+                        <label
+                          for="message"
+                          className="leading-7 font-medium text-sm text-gray-900"
+                        >
+                          Comment
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          value={userComment}
+                          onChange={(e) => setUserComment(e.target.value)}
+                          className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div className=" pb-6">
+                    <button
+                      onClick={saveComment}
+                      className="bg-indigo-500 text-white font-semibold px-5 mr-6 py-2 rounded hover:bg-indigo-700"
                     >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={userName}
-                      onChange={(e) => setUserName(e.target.value)}
-                      autoFocus
-                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                    ></input>
+                      Post Comment
+                    </button>
                   </div>
                 </div>
-                <div className="mb-4">
-                  <div className="sm:col-span-3">
-                    <label
-                      for="message"
-                      className="leading-7 font-medium text-sm text-gray-900"
-                    >
-                      Comment
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={userComment}
-                      onChange={(e) => setUserComment(e.target.value)}
-                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                    ></textarea>
-                  </div>
-                </div>
+
               </div>
-              <div className="px-20 pb-6">
-                <button
-                  onClick={saveComment}
-                  className="bg-indigo-500 text-white font-semibold px-5 mr-6 py-2 rounded hover:bg-indigo-700"
-                >
-                  Post Comment
-                </button>
-              </div>
+
+
             </div>
           </div>
         )}
