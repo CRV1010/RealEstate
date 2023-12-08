@@ -35,7 +35,6 @@ import AdminPage from "./Components/AdminPage";
 // import AdminProperty from "./Components/AdminProperty";
 import Premium from "./Components/Premium";
 import SellPropInfo from "./Components/sellPropInfo";
-import AdminMsg from "./Components/AdminMsg";
 
 function App() {
   return (
@@ -231,9 +230,6 @@ function App() {
                 </>
               }
             />
-            <Route path="/adminMsg" element={<AdminMsg />} />
-            {/* <Route path="/adminuser" element={<AdminUsers />} />
-            <Route path="/adminProperty" element={<AdminProperty />} /> */}
             <Route
               path="/forgotpass/"
               element={

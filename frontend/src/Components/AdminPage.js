@@ -38,7 +38,22 @@ const AdminPage = () => {
   useEffect(() => {
     getAllUsers();
     getData();
+    getMessages();
   }, []);
+
+  const [userMessage, setUserMessage] = useState([]);
+
+  const getMessages = async () => {
+    console.log("fetching msg");
+    const result = await fetch("http://localhost:5000/user-message", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let data = await result.json();
+    setUserMessage(data);
+  };
 
   // Admin User
   const getAllUsers = async () => {
@@ -363,7 +378,7 @@ const AdminPage = () => {
                             {userlist?.length > 0 ? (
                               userlist?.map((userdetail, index) =>
                                 userdetail?._id !==
-                                  "650b0d9532d958c9727bea89" ? (
+                                "650b0d9532d958c9727bea89" ? (
                                   <tr key={index}>
                                     <td className="border border-slate-300">
                                       {index}
@@ -518,7 +533,7 @@ const AdminPage = () => {
                                   </td>
                                   <td className="border border-slate-300 ">
                                     {ArrayOfObjects.image &&
-                                      ArrayOfObjects.image.length > 0 ? (
+                                    ArrayOfObjects.image.length > 0 ? (
                                       <img
                                         src={require(`../Images/${ArrayOfObjects.image[0]}`)}
                                         key={ArrayOfObjects.image[0]}
@@ -649,7 +664,7 @@ const AdminPage = () => {
                 />
                 <div class="p-6">
                   <h2 class="tracking-widest text-center text-lg title-font font-medium text-gray-400 mb-1">
-                    {database.length}
+                    {userMessage.length}
                   </h2>
                   <h1 class="title-font text-lg text-center font-semibold text-gray-900 mb-3 hover:text-indigo-500 hover:text-xl">
                     Contact Us Messages
@@ -678,48 +693,25 @@ const AdminPage = () => {
                         <section class="text-gray-600 body-font  overflow-y-scroll  block h-[400px]">
                           <div class="container px-5 py-10 mx-auto">
                             <div class="flex flex-wrap -m-4">
-                              <div class="p-4 lg:w-1/3">
-                                <div class=" bg-gray-100 hover:border-indigo-400 hover:scale-105 border shadow-xl bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center h-auto relative">
-                                  <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-1">Ruchir</h1>
-                                  <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-8">ruchirgparmar@gmail.com</h2>
-                                  <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                                </div>
-                              </div>
-
-
-                              <div class="p-4 lg:w-1/3">
-                                <div class=" bg-gray-100 hover:border-indigo-400 hover:scale-105 border shadow-xl bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center h-auto relative">
-                                  <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-1">Ruchir</h1>
-                                  <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-8">ruchirgparmar@gmail.com</h2>
-                                  <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                                </div>
-                              </div>
-
-                              <div class="p-4 lg:w-1/3">
-                                <div class=" bg-gray-100 hover:border-indigo-400 hover:scale-105 border shadow-xl bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center h-auto relative">
-                                  <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-1">Ruchir</h1>
-                                  <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-8">ruchirgparmar@gmail.com</h2>
-                                  <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                                </div>
-                              </div>
-
-                              <div class="p-4 lg:w-1/3">
-                                <div class=" bg-gray-100 hover:border-indigo-400 hover:scale-105 border shadow-xl bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center h-auto relative">
-                                  <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-1">Ruchir</h1>
-                                  <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-8">ruchirgparmar@gmail.com</h2>
-                                  <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                                </div>
-                              </div>
-
-                              <div class="p-4 lg:w-1/3">
-                                <div class=" bg-gray-100 hover:border-indigo-400 hover:scale-105 border shadow-xl bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center h-auto relative">
-                                  <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-1">Ruchir</h1>
-                                  <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-8">ruchirgparmar@gmail.com</h2>
-                                  <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                                </div>
-                              </div>
-
-                            
+                              {userMessage
+                                ? userMessage?.map((usermsg, index) => {
+                                    return (  
+                                      <div key={index} class="p-4 lg:w-1/3">
+                                        <div class=" bg-gray-100 hover:border-indigo-400 hover:scale-105 border shadow-xl bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center h-auto relative">
+                                          <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-1">
+                                            {usermsg?.username}
+                                          </h1>
+                                          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-8">
+                                            {usermsg?.email}
+                                          </h2>
+                                          <p class="leading-relaxed mb-3">
+                                            {usermsg?.message}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    );
+                                  })
+                                : ""}
                             </div>
                           </div>
                         </section>
