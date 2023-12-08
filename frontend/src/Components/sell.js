@@ -572,7 +572,6 @@ export default function () {
               />
               <p className="text-sm text-red-500">{errors.price?.message}</p>
             </div>
-            <br />
           </div>
 
           <button id="saveBtn">Save</button>

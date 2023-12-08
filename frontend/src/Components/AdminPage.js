@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 const AdminPage = () => {
   const [modalAdminUser, setModalAdminUser] = useState(false);
   const [modalAdminProperty, setModalAdminProperty] = useState(false);
+  const [modalAdminContactUs, setModalAdminContactUs] = useState(false);
   const [userlist, setUserlist] = useState([]);
   const [database, setdatabase] = useState([]);
   const navigate = useNavigate();
@@ -25,10 +26,34 @@ const AdminPage = () => {
     setModalAdminProperty(false);
   };
 
+
+  const openModal3 = () => {
+    setModalAdminContactUs(true);
+  };
+
+  const closeModal3 = () => {
+    setModalAdminContactUs(false);
+  };
+
   useEffect(() => {
     getAllUsers();
     getData();
+    getMessages();
   }, []);
+
+  const [userMessage, setUserMessage] = useState([]);
+
+  const getMessages = async () => {
+    console.log("fetching msg");
+    const result = await fetch("http://localhost:5000/user-message", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let data = await result.json();
+    setUserMessage(data);
+  };
 
   // Admin User
   const getAllUsers = async () => {
@@ -615,6 +640,79 @@ const AdminPage = () => {
           )} */}
                           </tbody>
                         </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div class="p-4 md:w-1/3">
+            <button
+              onClick={() => {
+                openModal3();
+              }}
+            >
+              <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:border-indigo-300 hover:shadow-xl hover:scale-105">
+                <img
+                  class=" w-full object-cover object-center"
+                  src="../Admin/AdminContactUs2.jpg"
+                  alt="blog"
+                />
+                <div class="p-6">
+                  <h2 class="tracking-widest text-center text-lg title-font font-medium text-gray-400 mb-1">
+                    {userMessage.length}
+                  </h2>
+                  <h1 class="title-font text-lg text-center font-semibold text-gray-900 mb-3 hover:text-indigo-500 hover:text-xl">
+                    Contact Us Messages
+                  </h1>
+                </div>
+              </div>
+            </button>
+            {modalAdminContactUs && (
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                <div className="bg-white  rounded-lg w-auto">
+                  <div className="mb-4 py-3  flex bg-indigo-400 rounded">
+                    <span className="text-2xl text-white flex px-12 justify-center font-medium flex-grow">
+                      User Messages{modalAdminContactUs}
+                    </span>
+                    <button
+                      onClick={closeModal3}
+                      className="text-white font-bold text-xl px-3"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <div className="justify-center px-20 py-6">
+                    <div className="mb-4">
+                      <div className="sm:col-span-3 rounded-2xl ">
+                        <section class="text-gray-600 body-font  overflow-y-scroll  block h-[400px]">
+                          <div class="container px-5 py-10 mx-auto">
+                            <div class="flex flex-wrap -m-4">
+                              {userMessage
+                                ? userMessage?.map((usermsg, index) => {
+                                    return (  
+                                      <div key={index} class="p-4 lg:w-1/3">
+                                        <div class=" bg-gray-100 hover:border-indigo-400 hover:scale-105 border shadow-xl bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center h-auto relative">
+                                          <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-1">
+                                            {usermsg?.username}
+                                          </h1>
+                                          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-8">
+                                            {usermsg?.email}
+                                          </h2>
+                                          <p class="leading-relaxed mb-3">
+                                            {usermsg?.message}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    );
+                                  })
+                                : ""}
+                            </div>
+                          </div>
+                        </section>
                       </div>
                     </div>
                   </div>

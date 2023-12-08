@@ -145,7 +145,7 @@ const Footer = () => {
           <p className="text-gray-500 ml-5 text-sm text-center sm:text-center">
             © 2023 Real Estate —
             <a
-              href="https://twitter.com/knyttneve"
+              href="https://twitter.com"
               rel="noopener noreferrer"
               className="text-gray-600 ml-1"
               target="_blank"

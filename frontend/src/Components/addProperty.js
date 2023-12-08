@@ -198,7 +198,7 @@ export default function (props) {
                 </div>
               ))}
             </div>
-            <br /> <br />
+            <br />
             <div id="formData">
               <label htmlFor="">
                 Upload Images:<span className="red">*</span> &nbsp;{" "}
@@ -211,7 +211,7 @@ export default function (props) {
                 multiple
               />
             </div>
-            <br /> <br /> <br />
+            <br /> <br />
             {console.log(sellPro)}
             <button
               id="sellPropBtn"

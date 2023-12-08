@@ -111,7 +111,7 @@ function About() {
               <div className="content">
                 <h2>
                   PARTHIV DHOLAKIYA <br />
-                  <span>RESEARCH DEVELOPER</span>
+                  <span>RESEARCH DEVELOPER(HR)</span>
                 </h2>
               </div>
             </div>

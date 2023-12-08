@@ -8,7 +8,7 @@ const SellBuyRent = () => {
   const [database, setdatabase] = useState([]);
   const [city, setCity] = useState([]);
   const navigate = useNavigate();
-
+  const [uniqueCity, setUniqueCity] = useState([])
   useEffect(() => {
     getData();
   }, []);
@@ -397,7 +397,9 @@ const SellBuyRent = () => {
                               <option value="">Select Area</option>
                               {database
                                 ? database.map((propertyAreaDetail, index) => {
-                                    if (propertyAreaDetail.City === cd) {
+                                    if (
+                                      propertyAreaDetail.City === cd
+                                    ) {
                                       return (
                                         <option value={propertyAreaDetail.zone}>
                                           {propertyAreaDetail.zone}
@@ -740,7 +742,10 @@ const SellBuyRent = () => {
                               <option value="">Select Area</option>
                               {database
                                 ? database.map((propertyAreaDetail, index) => {
-                                    if (propertyAreaDetail.City === rcd) {
+                                    if (
+                                      propertyAreaDetail.City === rcd
+                                    ) {
+                                      
                                       return (
                                         <option value={propertyAreaDetail.zone}>
                                           {propertyAreaDetail.zone}

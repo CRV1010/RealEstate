@@ -25,10 +25,39 @@ const UpdateUser = () => {
     formState: { errors },
   } = useForm();
 
+  const validateBirthdate = (value) => {
+    const selectedDate = new Date(value);
+    const currentDate = new Date();
+    const minDate = new Date("1940-01-01");
+    const maxDate = new Date("2005-12-31");
+
+    if (
+      selectedDate < minDate ||
+      selectedDate > maxDate ||
+      isNaN(selectedDate)
+    ) {
+      return "Invalid date of birth";
+    }
+
+    const selectedDay = selectedDate.getDate();
+    const selectedMonth = selectedDate.getMonth() + 1; // Month is zero-based
+
+    if (
+      selectedDay < 1 ||
+      selectedDay > 31 ||
+      selectedMonth < 1 ||
+      selectedMonth > 12
+    ) {
+      return "Invalid day or month of birth";
+    }
+
+    return true;
+  };
+
   const clickHandler = async (e) => {
     // e.preventDefault(); //this can be useful when: Clicking on a "Submit" button, prevent it from submitting a form.
-    
-    console.log("iamgs",images);
+
+    console.log("iamgs", images);
     const formData = new FormData();
     formData.append("image", images);
 
@@ -106,8 +135,12 @@ const UpdateUser = () => {
           </h2>
           <form onSubmit={handleSubmit(clickHandler)}>
             <div className="relative mb-4">
-              <label htmlFor="image" className="leading-7 text-sm text-gray-600">
-                Upload your Image:&nbsp;<span className="red text-lg">*</span> &nbsp;{" "}
+              <label
+                htmlFor="image"
+                className="leading-7 text-sm text-gray-600"
+              >
+                Upload your Image:&nbsp;<span className="red text-lg">*</span>{" "}
+                &nbsp;{" "}
               </label>
               <input
                 accept="image/*"
@@ -144,7 +177,10 @@ const UpdateUser = () => {
             </div>
 
             <div className="relative mb-4">
-              <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="email"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Email:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
@@ -169,7 +205,10 @@ const UpdateUser = () => {
             </div>
 
             <div className="relative mb-4">
-              <label htmlFor="phone" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="phone"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Phone No.:&nbsp;<span className="red text-lg">*</span>
               </label>
               <input
@@ -210,6 +249,7 @@ const UpdateUser = () => {
                 value={dob}
                 {...register("dob", {
                   required: "Please add your date of birth",
+                  validate: validateBirthdate,
                 })}
                 onChange={(e) => {
                   setDob(e.target.value);
