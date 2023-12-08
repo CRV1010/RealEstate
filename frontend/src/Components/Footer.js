@@ -31,7 +31,7 @@ const Footer = () => {
             </li>
             <li className="ml-5">
               <a
-                href="./searchbar"
+                href="./searchmap"
                 className="text-gray-600 hover:text-blue-800"
               >
                 Map
