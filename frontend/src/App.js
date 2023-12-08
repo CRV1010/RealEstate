@@ -31,8 +31,6 @@ import UpdateProperty2 from "./Components/UpdateProperty2";
 import OtherProperty2 from "./Components/OtherProperty2";
 import UpdateUser from "./Components/UpdateUser";
 import AdminPage from "./Components/AdminPage";
-// import AdminUsers from "./Components/AdminUsers";
-// import AdminProperty from "./Components/AdminProperty";
 import Premium from "./Components/Premium";
 import SellPropInfo from "./Components/sellPropInfo";
 

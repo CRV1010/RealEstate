@@ -76,7 +76,7 @@ export default function () {
     });
     var data = await result.json();
     if (!data) {
-      toast.error("Your Token has expired... login again", {
+      toast.error("Your Token has expired... Login again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -98,7 +98,7 @@ export default function () {
 
   return (
     <>
-      <h1 id="headingExplore"> Properties you may also like </h1>
+      <h1 id="headingExplore"> Properties You May Also Like </h1>
       <div className="mainExplore" style={{ maxWidth: "80%" }}>
         <ul className="cardsExplore">
           {database ? (
@@ -195,7 +195,7 @@ export default function () {
               );
             })
           ) : (
-            <h1>No Property Availabe with given requirements</h1>
+            <h1>No More Properties Available Within Your Search Area Requirements.</h1>
           )}
         </ul>
       </div>

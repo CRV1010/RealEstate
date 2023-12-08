@@ -30,11 +30,9 @@ const SearchMap = () => {
   const [propertyType, setPropertyType] = useState("");
   const [houseType, setHouseType] = useState("");
 
-  const [selectedPropertyFor, setSelectedPropertyFor] =
-    useState("Property For");
+  const [selectedPropertyFor, setSelectedPropertyFor] = useState("Property For");
   const [selectedPrice, setSelectedPrice] = useState("Choose Price");
-  const [selectedPropertyType, setSelectedPropertyType] =
-    useState("Property Type");
+  const [selectedPropertyType, setSelectedPropertyType] = useState("Property Type");
   const [selectedHouseType, setSelectedHouseType] = useState("House Type");
 
   const [database, setDatabase] = useState([]);
@@ -102,7 +100,7 @@ const SearchMap = () => {
       try {
         const response = await fetch("http://localhost:5000/getData");
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Network response was bad");
         }
         const data = await response.json();
         setDatabase(data);

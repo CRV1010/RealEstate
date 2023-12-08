@@ -33,17 +33,17 @@ const Premium = () => {
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
-      <div className="container px-5 py-10 mx-auto">
+      <div className="container px-5 py-4 mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
           {/* <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">
               Pricing
             </h1> */}
           <div className=" text-center">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Pricing</h1>
-            <div className="h-1 w-20 mx-auto bg-indigo-500 rounded"></div>
+            <div className="h-1 w-20 mx-auto bg-indigo-500 rounded"></div> <br />
           </div>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">
-            Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical.
+            Choose the perfect price package that suits your needs and budget.
           </p>
         </div>
         <div className="flex flex-wrap -m-4 justify-center">
@@ -75,7 +75,7 @@ const Premium = () => {
                     <path d="M20 6L9 17l-5-5"></path>
                   </svg>
                 </span>
-                Expanded Property Listings
+                Add Unlimited Property
               </p>
               <p className="flex items-center text-gray-600 mb-2">
                 <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
@@ -91,7 +91,7 @@ const Premium = () => {
                     <path d="M20 6L9 17l-5-5"></path>
                   </svg>
                 </span>
-                More Photos and Media
+                Add Upto 3 Images
               </p>
               <p className="flex items-center text-gray-600 mb-2">
                 <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
@@ -123,7 +123,7 @@ const Premium = () => {
                     <path d="M20 6L9 17l-5-5"></path>
                   </svg>
                 </span>
-                Featured Listings
+                Show Interested People
               </p>
               <p className="flex items-center text-gray-600 mb-6">
                 <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
@@ -274,8 +274,7 @@ const Premium = () => {
                 </svg>
               </button>
               <p className="text-xs text-gray-500 mt-3">
-                Offers faster response times and possibly live chat or phone
-                support
+                Offers faster response times and possibly live chat or phone support
               </p>
             </div>
           </div>

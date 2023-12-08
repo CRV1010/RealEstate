@@ -76,7 +76,7 @@ export default function () {
     });
     var data = await result.json();
      if (!data) {
-           toast.error("Your Token has expired... login again", {
+           toast.error("Your Token has expired... Login again", {
              position: "top-right",
              autoClose: 5000,
              hideProgressBar: false,
@@ -103,7 +103,7 @@ export default function () {
 
   return (
     <>
-      <h1 id="headingExplore"> Properties that matches your requirements </h1>
+      <h1 id="headingExplore"> Properties That Matches Your Requirements </h1>
       <div className="mainExplore" style={{ maxWidth: "80%" }}>
         <ul className="cardsExplore">
           {database ? (
@@ -200,7 +200,7 @@ export default function () {
               );
             })
           ) : (
-            <li>No Property Availabe with given requirements</li>
+            <li>No Properties Available Within Your Searching Requirements.</li>
           )}
         </ul>
       </div>
@@ -210,7 +210,7 @@ export default function () {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
         >
           {" "}
-          Other Properties You May like{" "}
+          Other Properties You May Like{" "}
         </button>
       </div>
       <ToastContainer

@@ -20,7 +20,7 @@ const ConfirmOTP = () => {
       if (otp === otp_user) {
         navigate("/changepass");
       } else {
-        toast.warning("Attention! Please provide correct Otp...", {
+        toast.warning("Attention! Please provide correct OTP...", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -33,7 +33,17 @@ const ConfirmOTP = () => {
         });
       }
     } else {
-      console.log("Otp is not a valid");
+      toast.error("Oops! OTP is no more valid...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
