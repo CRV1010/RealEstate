@@ -907,6 +907,9 @@ const SellBuyRent = () => {
                               <option value="10000 - 15000">
                                 10000 - 15000
                               </option>
+                              <option value="15000 - 20000">
+                                15000 - 20000
+                              </option>
                               <option value="20000 - 25000">
                                 20000 - 25000
                               </option>
