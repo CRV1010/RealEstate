@@ -19,6 +19,7 @@ const io = require("socket.io")(5555, {
 });
 
 let global_otp;
+const expireTime = "1h";
 
 const generateOTP = () => {
   const otp = otpGenerator.generate(6, {
@@ -40,16 +41,16 @@ app.use(nocache());
 // socket io
 let userslist = [];
 io.on("connection", (socket) => {
-  console.log("User Connected", socket.id);
+  // console.log("User Connected", socket.id);
 
   socket.on("addUser", (userId) => {
     console.log("usd", userId, userslist);
     const userExists = userslist.find((userli) => userli.userId === userId);
-    console.log("exists:", userExists);
+    // console.log("exists:", userExists);
 
     if (!userExists) {
       const userli = { userId, socketId: socket.id };
-      console.log(userli);
+      // console.log(userli);
       userslist.push(userli);
       io.emit("getUsers", userslist);
     }
@@ -61,7 +62,7 @@ io.on("connection", (socket) => {
       const receiver = userslist.find((user) => user.userId === receiverId);
       const sender = userslist.find((user) => user.userId === senderId);
       const senderUser = await user.findById(senderId);
-      console.log(receiver);
+      // console.log(receiver);
       try {
         if (receiver) {
           console.log("chirag bro");
@@ -145,7 +146,7 @@ app.post("/signup", async (req, res) => {
     let result = await data.save();
     result = result.toObject();
     delete result.password;
-    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+    jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
       if (err) {
         res.send("Token Expired or something went wrong");
       } else {
@@ -202,7 +203,7 @@ app.post("/login", async (req, res) => {
         res.send({ result: "Wrong Password" });
       }
       result.password = undefined;
-      jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+      jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
         if (err) {
           console.log("Token Expired");
           res.send("Token Expired or something went wrong");
@@ -226,7 +227,7 @@ app.post("/google-check", async (req, res) => {
   if (result) {
     // console.log("hi");
     result = result.toObject();
-    jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+    jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
       if (err) {
         res.send("Token Expired or something went wrong");
       } else {
@@ -242,7 +243,7 @@ app.post("/google-login", async (req, res) => {
   let data = new user(req.body);
   let result = await data.save();
   result = result.toObject();
-  jwt.sign({ result }, jwtKey, { expiresIn: "1h" }, (err, token) => {
+  jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
     if (err) {
       res.send("Token Expired or something went wrong");
     } else {
