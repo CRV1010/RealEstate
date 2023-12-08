@@ -134,7 +134,7 @@ const Header = (props) => {
     >
       <Flex className="container flex flex-wrap flex-col md:flex-row items-center">
         <Flex>
-          <InputGroup width="29vw" shadow="lg" className="mr-5">
+          <InputGroup width="31vw" shadow="lg" className="mr-5 ml-3">
             <div className="w-full" height={"37px"}>
               <div className="w-full ml-1 bg-white p-3 rounded-3xl border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400">
                 <section className="w-full h-6 flex items-center">
@@ -218,7 +218,7 @@ const Header = (props) => {
               py={2}
               bg="white"
               rounded={30}
-              ml={0}
+              ml={5}
               shadow="lg"
               cursor="pointer"
               className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
@@ -318,7 +318,7 @@ const Header = (props) => {
               py={2}
               bg="white"
               rounded={30}
-              ml={10}
+              ml={20}
               shadow="lg"
               cursor="pointer"
               className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
@@ -574,7 +574,7 @@ const Header = (props) => {
               py={2}
               bg="white"
               rounded={30}
-              ml={10}
+              ml={20}
               shadow="lg"
               cursor="pointer"
               className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
@@ -711,7 +711,7 @@ const Header = (props) => {
               py={2}
               bg="white"
               rounded={30}
-              ml={10}
+              ml={20}
               shadow="lg"
               cursor="pointer"
               className="border border-indigo-900 hover:border-indigo-900 hover:ring-1 hover:ring-indigo-400 hover:bg-cyan-100"
@@ -828,7 +828,7 @@ const Header = (props) => {
               py={2}
               bg="blue"
               rounded={13}
-              ml={10}
+              ml={20}
               shadow="lg"
               cursor="pointer"
               className="border border-white-900 hover:border-white-900 hover:ring-1 hover:ring-indigo-500"
@@ -852,7 +852,7 @@ const Header = (props) => {
               py={2}
               bg="blue"
               rounded={13}
-              ml={10}
+              ml={20}
               shadow="lg"
               cursor="pointer"
               className="border border-white-900 hover:border-white-900 hover:ring-1 hover:ring-indigo-500"

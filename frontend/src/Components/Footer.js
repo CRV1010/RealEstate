@@ -31,7 +31,7 @@ const Footer = () => {
             </li>
             <li className="ml-5">
               <a
-                href="./searchbar"
+                href="./searchmap?lat=22.2973142&lng=73.1942567"
                 className="text-gray-600 hover:text-blue-800"
               >
                 Map
@@ -145,12 +145,12 @@ const Footer = () => {
           <p className="text-gray-500 ml-5 text-sm text-center sm:text-center">
             © 2023 Real Estate —
             <a
-              href="https://twitter.com/knyttneve"
+              href="https://twitter.com"
               rel="noopener noreferrer"
               className="text-gray-600 ml-1"
               target="_blank"
             >
-              @knyttneve
+              @realestate
             </a>
           </p>
         </div>

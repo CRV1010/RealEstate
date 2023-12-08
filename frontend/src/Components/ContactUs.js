@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUs = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  let user = JSON.parse(localStorage.getItem("user"));
+  const [username, setUsername] = useState(user?.username);
+  const [email, setEmail] = useState(user?.email);
   const [message, setMessage] = useState("");
 
   const {
@@ -23,7 +26,17 @@ const ContactUs = () => {
 
     data = await data.json();
     if (data) {
-      alert(data.result);
+      toast.success("Your Message sent successfully!!!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setUsername("");
       setEmail("");
       setMessage("");
@@ -32,7 +45,7 @@ const ContactUs = () => {
     }
   };
   return (
-    <div className=" antialiased bg-white-100 mx-5">
+    <div className="antialiased bg-white-100 mx-5 my-10">
       <div className="flex w-full min-h-screen justify-center items-center">
         <div
           className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0 bg-cyan-700 w-full max-w-4xl p-8 
@@ -94,14 +107,14 @@ const ContactUs = () => {
               >
                 <div>
                   <label htmlFor="" className="text-sm">
-                    Your Name
+                    Your Name : <span className="red">*</span>
                   </label>
                   <input
                     type="text"
                     placeholder="Your name"
                     value={username}
                     {...register("username", {
-                      required: "Username is required",
+                      required: "Your name is required",
                     })}
                     onChange={(e) => {
                       setUsername(e.target.value);
@@ -114,7 +127,7 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <label htmlFor="" className="text-sm">
-                    Your Email Address
+                    Your Email Address : <span className="red">*</span>
                   </label>
                   <input
                     type="email"
@@ -138,7 +151,7 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <label htmlFor="" className="text-sm">
-                    Message
+                    Message : <span className="red">*</span>
                   </label>
                   <textarea
                     placeholder="Message"
@@ -157,12 +170,24 @@ const ContactUs = () => {
                   </p>
                 </div>
                 <button
-                  // onClick={clickHandler}
                   className="inline-block self-end bg-cyan-700 text-white font-bold rounded-lg 
-                  px-6 py-2  uppercase text-sm"
+                  px-6 py-2 uppercase text-sm"
                 >
                   SEND MESSAGE
                 </button>
+                <ToastContainer
+                  style={{ marginTop: "50px"}}
+                  position="top-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
               </form>
             </div>
           </div>
