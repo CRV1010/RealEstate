@@ -133,11 +133,11 @@ app.post("/signup", async (req, res) => {
   if (req.body.email) {
     em = req.body.email;
     let result = await user.findOne({ email: em });
+    console.log("re",result);
     if (result) {
       res.send(false);
     }
-    console.log(result);
-  } else {
+    else {
     const salt = await bcrypt.genSalt(10);
     let pa = await bcrypt.hash(req.body.password, salt);
     req.body.password = pa;
@@ -152,7 +152,7 @@ app.post("/signup", async (req, res) => {
         res.send({ result, token });
       }
     });
-
+  }
     var mailOptions = {
       from: "sscrpmsu@gmail.com",
       to: req.body.email,
