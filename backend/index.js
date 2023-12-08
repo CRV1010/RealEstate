@@ -199,7 +199,7 @@ app.post("/login", async (req, res) => {
       var authUser = await bcrypt.compare(req.body.password, result.password);
       console.log(authUser);
       if (!authUser) {
-        res.send({ result: "Wrong Password" });
+        res.send(false);
       }
       result.password = undefined;
       jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
