@@ -134,26 +134,25 @@ app.post("/signup", async (req, res) => {
   if (req.body.email) {
     em = req.body.email;
     let result = await user.findOne({ email: em });
-    console.log("re",result);
+    console.log("re", result);
     if (result) {
       res.send(false);
+    } else {
+      const salt = await bcrypt.genSalt(10);
+      let pa = await bcrypt.hash(req.body.password, salt);
+      req.body.password = pa;
+      let data = new user(req.body);
+      let result = await data.save();
+      result = result.toObject();
+      delete result.password;
+      jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
+        if (err) {
+          res.send("Token Expired or something went wrong");
+        } else {
+          res.send({ result, token });
+        }
+      });
     }
-    else {
-    const salt = await bcrypt.genSalt(10);
-    let pa = await bcrypt.hash(req.body.password, salt);
-    req.body.password = pa;
-    let data = new user(req.body);
-    let result = await data.save();
-    result = result.toObject();
-    delete result.password;
-    jwt.sign({ result }, jwtKey, { expiresIn: expireTime }, (err, token) => {
-      if (err) {
-        res.send("Token Expired or something went wrong");
-      } else {
-        res.send({ result, token });
-      }
-    });
-  }
     var mailOptions = {
       from: "sscrpmsu@gmail.com",
       to: req.body.email,
