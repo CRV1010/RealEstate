@@ -74,10 +74,15 @@ const ChangePassword = () => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-        <div className="container px-5  md:py-24 sm:py-15 mx-auto flex flex-wrap items-center">
-          <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md: mx-auto w-full mt-10 md:mt-0">
-            <h2 className="text-gray-900 text-lg font-medium  text-2xl title-font mb-5 text-center">
-              Change Password
+        <div className="container px-5  md:py-24 sm:py-15 mx-auto flex flex-wrap items-center justify-center">
+
+        <div className="lg:w-2/6 md:w-1/2 bg-gray-100 items-center mr-5 justify-center rounded-lg flex flex-col w-full mt-10 md:mt-0">
+          <img alt="ecommerce" class="w-full object-cover object-center rounded" src="../loginSignup/confirm2.jpg" />
+        </div>
+
+          <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
+            <h2 className="text-gray-900  font-medium  text-2xl title-font mb-5 text-center">
+              Reset Password
             </h2>
             <form onSubmit={handleSubmit(clickHandler)}>
               <div className="relative mb-4">
