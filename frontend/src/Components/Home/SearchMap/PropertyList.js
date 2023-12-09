@@ -26,7 +26,7 @@ const PropertyList = (props) => {
         direction={"column"}
         bg={"whiteAlpha.900"}
         width={"36%"}
-        height={"81%"}
+        height={"85%"}
         left={0}
         top={115}
         zIndex={60}

@@ -8,7 +8,7 @@ const SellBuyRent = () => {
   const [database, setdatabase] = useState([]);
   const [city, setCity] = useState([]);
   const navigate = useNavigate();
-  const [uniqueCity, setUniqueCity] = useState([])
+  const [uniqueCity, setUniqueCity] = useState([]);
   useEffect(() => {
     getData();
   }, []);
@@ -397,9 +397,7 @@ const SellBuyRent = () => {
                               <option value="">Select Area</option>
                               {database
                                 ? database.map((propertyAreaDetail, index) => {
-                                    if (
-                                      propertyAreaDetail.City === cd
-                                    ) {
+                                    if (propertyAreaDetail.City === cd) {
                                       return (
                                         <option value={propertyAreaDetail.zone}>
                                           {propertyAreaDetail.zone}
@@ -471,7 +469,6 @@ const SellBuyRent = () => {
                                 Residential Plot
                               </option>
                               <option value="Office Space">Office Space</option>
-                              <option value="Farm House">Farm House</option>
                               <option value="Commercial plots">
                                 Commercial plots
                               </option>
@@ -489,7 +486,8 @@ const SellBuyRent = () => {
                             htmlFor="types"
                             className="block text-sm font-medium leading-6 text-gray-900"
                           >
-                            House Type:&nbsp;<span className="red text-base">*</span>
+                            House Type:&nbsp;
+                            <span className="red text-base">*</span>
                           </label>
                           <div className="mt-2">
                             <select
@@ -548,7 +546,8 @@ const SellBuyRent = () => {
                             htmlFor="budget"
                             className="block text-sm font-medium leading-6 text-gray-900"
                           >
-                            Budget:&nbsp;<span className="red text-base">*</span>
+                            Budget:&nbsp;
+                            <span className="red text-base">*</span>
                           </label>
                           <div className="mt-2">
                             <select
@@ -742,10 +741,7 @@ const SellBuyRent = () => {
                               <option value="">Select Area</option>
                               {database
                                 ? database.map((propertyAreaDetail, index) => {
-                                    if (
-                                      propertyAreaDetail.City === rcd
-                                    ) {
-                                      
+                                    if (propertyAreaDetail.City === rcd) {
                                       return (
                                         <option value={propertyAreaDetail.zone}>
                                           {propertyAreaDetail.zone}
@@ -817,7 +813,6 @@ const SellBuyRent = () => {
                                 Residential Plot
                               </option>
                               <option value="Office Space">Office Space</option>
-                              <option value="Farm House">Farm House</option>
                               <option value="Commercial plots">
                                 Commercial plots
                               </option>
@@ -835,7 +830,8 @@ const SellBuyRent = () => {
                             htmlFor="rentTypes"
                             className="block text-sm font-medium leading-6 text-gray-900"
                           >
-                            House Type:&nbsp;<span className="red text-base">*</span>
+                            House Type:&nbsp;
+                            <span className="red text-base">*</span>
                           </label>
                           <div className="mt-2">
                             <select
@@ -894,7 +890,8 @@ const SellBuyRent = () => {
                             htmlFor="rentBudget"
                             className="block text-sm font-medium leading-6 text-gray-900"
                           >
-                            Budget:&nbsp;<span className="red text-base">*</span>
+                            Budget:&nbsp;
+                            <span className="red text-base">*</span>
                           </label>
                           <div className="mt-2">
                             <select

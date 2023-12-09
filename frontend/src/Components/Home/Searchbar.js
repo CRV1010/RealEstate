@@ -38,12 +38,18 @@ const Searchbar = () => {
     setIsMenuVisible(true);
 
     fetch(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(JSON.parse(result));
-        setListPlace(JSON.parse(result));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
       })
-      .catch((err) => console.log("err:", err));
+      .then((result) => {
+        setListPlace(result);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
   };
 
   const handleEnterKeyPress = (e) => {
@@ -91,7 +97,7 @@ const Searchbar = () => {
   return (
     <>
       <Flex className="flex justify-center items-center">
-        <div className="w-full h-full px-4 md:px-12 flex flex-col z-40"> 
+        <div className="w-full h-full px-4 md:px-12 flex flex-col z-40">
           <div className="w-full bg-white p-2 border border-gray-200 hover:border-blue-500 rounded-lg md:w-8/12 lg:w-1/2 drop-shadow-4xl md:drop-shadow-2xl">
             <section className="w-full h-9 flex items-center">
               <span className="w-10 h-full flex items-center">
