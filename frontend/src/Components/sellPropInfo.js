@@ -174,6 +174,7 @@ export default function () {
   }
 
   const chatwithseller = async (id) => {
+    console.log("chat making")
     let res = await fetch("http://localhost:5000/conversations", {
       method: "POST",
       body: JSON.stringify({
@@ -182,6 +183,7 @@ export default function () {
       }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     let result = await res.json();
