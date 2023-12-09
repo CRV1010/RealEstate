@@ -88,9 +88,13 @@ export default function () {
       var budget = temp1[0].price;
       var temp3 = data.filter(
         (item) =>
+        item.propertyFor == "Sell" ?
           item.price >= budget - 100000 &&
           item.price <= budget + 100000 &&
-          item._id !== id
+          item._id !== id :
+          item.price >= budget - 10000 &&
+          item.price <= budget + 10000 &&
+          item._id !== id 
       );
       setBudgetData(temp3);
     }
