@@ -353,9 +353,6 @@ export default function () {
                   <option id="propOpt" value="Office Space">
                     Office Space
                   </option>
-                  <option id="propOpt" value="Farm House">
-                    Farm House
-                  </option>
                   <option id="propOpt" value="Commercial plots">
                     Commercial plots
                   </option>
@@ -613,7 +610,8 @@ export default function () {
             </div>
             <div>
               <label>
-                Expected Price (&#8377;):&nbsp;<span className="red">*</span> &ensp;
+                Expected Price (&#8377;):&nbsp;<span className="red">*</span>{" "}
+                &ensp;
               </label>
               <input
                 type="text"

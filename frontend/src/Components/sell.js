@@ -275,9 +275,6 @@ export default function () {
                   <option id="propOpt" value="Office Space">
                     Office Space
                   </option>
-                  <option id="propOpt" value="Farm House">
-                    Farm House
-                  </option>
                   <option id="propOpt" value="Commercial plots">
                     Commercial plots
                   </option>

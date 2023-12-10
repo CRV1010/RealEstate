@@ -79,7 +79,7 @@ const Map = (props) => {
       const updatedAddresses = await Promise.all(
         database.map(async (data) => {
           // Combine address components
-          const addressQuery = `${data.pincode}`;
+          const addressQuery = `${data.pincode}` || `${data.City}`;
           // const addressQuery = `${data.City}, ${data.State}, ${data.pincode}`;
 
           // Fetch latitude and longitude from Nominatim

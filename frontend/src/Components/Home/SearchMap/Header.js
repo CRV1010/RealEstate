@@ -667,25 +667,6 @@ const Header = (props) => {
                         py={8}
                         bg="white"
                         onClick={() => {
-                          setPropertyType("Farm House");
-                          setSelectedPropertyType("Farm House");
-                        }}
-                        className="hover:bg-blue-200 ease-in-out"
-                      >
-                        <Text fontSize={15} fontWeight={500} color="gray.700">
-                          Farm House
-                        </Text>
-                      </MenuItem>
-                      <MenuDivider />
-                      <MenuItem
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        mt={4}
-                        px={40}
-                        py={8}
-                        bg="white"
-                        onClick={() => {
                           setPropertyType("Commercial plots");
                           setSelectedPropertyType("Commercial Plot");
                         }}
